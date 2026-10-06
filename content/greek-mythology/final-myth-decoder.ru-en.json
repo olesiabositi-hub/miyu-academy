@@ -1,0 +1,396 @@
+{
+  "title": {
+    "ru": "FINAL MYTH DECODER",
+    "en": "FINAL MYTH DECODER"
+  },
+  "questions_total": 15,
+  "categories": {
+    "recognition": 5,
+    "meaning": 5,
+    "connection": 5
+  },
+  "pass_score": 12,
+  "pass_percent": 80,
+  "attempts": "unlimited",
+  "unlock_certificate_on_pass": true,
+  "save_best_score": true,
+  "save_latest_score": true,
+  "shuffle_option_order": true,
+  "questions": [
+    {
+      "id": "FMD-01",
+      "category": "recognition",
+      "module": 1,
+      "ru": {
+        "question": "Кто из этих персонажей относится к титанам?",
+        "options": [
+          "Зевс",
+          "Кронос",
+          "Аид"
+        ],
+        "answer": 1,
+        "feedback": "Кронос — титан. Зевс и Аид относятся уже к следующему поколению богов."
+      },
+      "en": {
+        "question": "Which of these characters is a Titan?",
+        "options": [
+          "Zeus",
+          "Cronus",
+          "Hades"
+        ],
+        "answer": 1,
+        "feedback": "Cronus is a Titan. Zeus and Hades belong to the next generation of gods."
+      }
+    },
+    {
+      "id": "FMD-02",
+      "category": "recognition",
+      "module": 2,
+      "ru": {
+        "question": "Кто лучше всего связан со стратегией и продуманным решением?",
+        "options": [
+          "Афина",
+          "Арес",
+          "Дионис"
+        ],
+        "answer": 0,
+        "feedback": "Афина связана со стратегией, планированием и расчётом. Арес — с яростью и силой."
+      },
+      "en": {
+        "question": "Who is most closely connected with strategy and careful planning?",
+        "options": [
+          "Athena",
+          "Ares",
+          "Dionysus"
+        ],
+        "answer": 0,
+        "feedback": "Athena is linked with strategy, planning and careful thinking. Ares is linked with rage and force."
+      }
+    },
+    {
+      "id": "FMD-03",
+      "category": "recognition",
+      "module": 3,
+      "ru": {
+        "question": "Кто охраняет вход в подземный мир?",
+        "options": [
+          "Цербер",
+          "Минотавр",
+          "Полифем"
+        ],
+        "answer": 0,
+        "feedback": "Цербер — знаменитый охранник подземного мира Аида."
+      },
+      "en": {
+        "question": "Who guards the entrance to the Underworld?",
+        "options": [
+          "Cerberus",
+          "Minotaur",
+          "Polyphemus"
+        ],
+        "answer": 0,
+        "feedback": "Cerberus is the famous guard of Hades’ Underworld."
+      }
+    },
+    {
+      "id": "FMD-04",
+      "category": "recognition",
+      "module": 4,
+      "ru": {
+        "question": "За чем Ясон и аргонавты отправились в Колхиду?",
+        "options": [
+          "За Золотым руном",
+          "За яблоком раздора",
+          "За трезубцем Посейдона"
+        ],
+        "answer": 0,
+        "feedback": "Ясон и аргонавты отправились в Колхиду за Золотым руном."
+      },
+      "en": {
+        "question": "What did Jason and the Argonauts travel to Colchis to find?",
+        "options": [
+          "The Golden Fleece",
+          "The Apple of Discord",
+          "Poseidon’s trident"
+        ],
+        "answer": 0,
+        "feedback": "Jason and the Argonauts travelled to Colchis for the Golden Fleece."
+      }
+    },
+    {
+      "id": "FMD-05",
+      "category": "recognition",
+      "module": 6,
+      "ru": {
+        "question": "Кто убивает Гектора в «Илиаде»?",
+        "options": [
+          "Ахиллес",
+          "Одиссей",
+          "Парис"
+        ],
+        "answer": 0,
+        "feedback": "Ахиллес возвращается в бой после гибели Патрокла и убивает Гектора."
+      },
+      "en": {
+        "question": "Who kills Hector in the Iliad?",
+        "options": [
+          "Achilles",
+          "Odysseus",
+          "Paris"
+        ],
+        "answer": 0,
+        "feedback": "Achilles returns to battle after Patroclus’ death and kills Hector."
+      }
+    },
+    {
+      "id": "FMD-06",
+      "category": "meaning",
+      "module": 5,
+      "ru": {
+        "question": "Что сегодня обычно означает выражение «открыть ящик Пандоры»?",
+        "options": [
+          "Запустить множество новых проблем",
+          "Получить неожиданный подарок",
+          "Найти потерянную вещь"
+        ],
+        "answer": 0,
+        "feedback": "«Открыть ящик Пандоры» — запустить цепочку новых, часто неожиданных проблем. И да: в исходной истории это был сосуд, а не коробка."
+      },
+      "en": {
+        "question": "What does “open Pandora’s box” usually mean today?",
+        "options": [
+          "Start many new problems",
+          "Receive an unexpected gift",
+          "Find a lost object"
+        ],
+        "answer": 0,
+        "feedback": "To “open Pandora’s box” means to start a chain of new, often unexpected problems. And yes: in the original story it was a jar, not a box."
+      }
+    },
+    {
+      "id": "FMD-07",
+      "category": "meaning",
+      "module": 5,
+      "ru": {
+        "question": "Какую работу лучше всего назвать «сизифовым трудом»?",
+        "options": [
+          "Работу, которая бесконечно повторяется и не даёт устойчивого результата",
+          "Очень прибыльный проект",
+          "Короткую срочную задачу"
+        ],
+        "answer": 0,
+        "feedback": "Сизифов труд — бесконечная или почти бесполезная работа, которую приходится повторять снова и снова."
+      },
+      "en": {
+        "question": "Which kind of work is best described as a “Sisyphean task”?",
+        "options": [
+          "Work that repeats endlessly without lasting progress",
+          "A very profitable project",
+          "A short urgent task"
+        ],
+        "answer": 0,
+        "feedback": "A Sisyphean task is endless or futile work that must be repeated again and again."
+      }
+    },
+    {
+      "id": "FMD-08",
+      "category": "meaning",
+      "module": 4,
+      "ru": {
+        "question": "Что означает «ахиллесова пята»?",
+        "options": [
+          "Критическое слабое место",
+          "Главное преимущество",
+          "Сложный маршрут"
+        ],
+        "answer": 0,
+        "feedback": "Ахиллесова пята — уязвимое место в целом сильной системе, человеке или плане."
+      },
+      "en": {
+        "question": "What does “Achilles’ heel” mean?",
+        "options": [
+          "A critical weak point",
+          "A main advantage",
+          "A difficult route"
+        ],
+        "answer": 0,
+        "feedback": "An Achilles’ heel is a vulnerable point in an otherwise strong person, system or plan."
+      }
+    },
+    {
+      "id": "FMD-09",
+      "category": "meaning",
+      "module": 7,
+      "ru": {
+        "question": "Что означает оказаться «между Сциллой и Харибдой»?",
+        "options": [
+          "Выбирать между двумя опасными вариантами",
+          "Очень долго путешествовать",
+          "Потерять память"
+        ],
+        "answer": 0,
+        "feedback": "Это выбор между двумя серьёзными опасностями, когда безопасного варианта нет."
+      },
+      "en": {
+        "question": "What does it mean to be “between Scylla and Charybdis”?",
+        "options": [
+          "To choose between two dangerous options",
+          "To travel for a very long time",
+          "To lose your memory"
+        ],
+        "answer": 0,
+        "feedback": "It means facing two serious dangers when there is no completely safe option."
+      }
+    },
+    {
+      "id": "FMD-10",
+      "category": "meaning",
+      "module": 7,
+      "ru": {
+        "question": "Если поездка превратилась в настоящую «одиссею», что это значит?",
+        "options": [
+          "Она стала долгим путешествием с множеством испытаний",
+          "Она закончилась очень быстро",
+          "Она проходила только по морю"
+        ],
+        "answer": 0,
+        "feedback": "Odyssey / «одиссея» — долгое путешествие, полное приключений и испытаний."
+      },
+      "en": {
+        "question": "If a trip becomes a real “odyssey”, what does that mean?",
+        "options": [
+          "It becomes a long journey full of difficulties and adventures",
+          "It ends very quickly",
+          "It takes place only at sea"
+        ],
+        "answer": 0,
+        "feedback": "An odyssey is a long journey full of adventures and difficulties."
+      }
+    },
+    {
+      "id": "FMD-11",
+      "category": "connection",
+      "module": 8,
+      "ru": {
+        "question": "Почему название Nike связано с греческой мифологией?",
+        "options": [
+          "Nike — имя богини / олицетворения победы",
+          "Nike — имя древнегреческой спортсменки",
+          "Nike — другое имя Афины"
+        ],
+        "answer": 0,
+        "feedback": "Название Nike происходит от греческой Nike — Ники, богини и олицетворения победы."
+      },
+      "en": {
+        "question": "Why is the name Nike connected with Greek mythology?",
+        "options": [
+          "Nike is the goddess/personification of victory",
+          "Nike was an ancient Greek athlete",
+          "Nike is another name for Athena"
+        ],
+        "answer": 0,
+        "feedback": "The name Nike comes from Nike, the Greek goddess and personification of victory."
+      }
+    },
+    {
+      "id": "FMD-12",
+      "category": "connection",
+      "module": 8,
+      "ru": {
+        "question": "Какой мифологический образ использует Starbucks?",
+        "options": [
+          "Сирену",
+          "Медузу",
+          "Афродиту"
+        ],
+        "answer": 0,
+        "feedback": "Starbucks использует образ двухвостой сирены."
+      },
+      "en": {
+        "question": "Which mythological figure does Starbucks use?",
+        "options": [
+          "A Siren",
+          "Medusa",
+          "Aphrodite"
+        ],
+        "answer": 0,
+        "feedback": "Starbucks uses the image of a two-tailed Siren."
+      }
+    },
+    {
+      "id": "FMD-13",
+      "category": "connection",
+      "module": 6,
+      "ru": {
+        "question": "Почему компьютерный Trojan получил такое название?",
+        "options": [
+          "Опасность скрывается внутри объекта, который выглядит безопасным или полезным",
+          "Потому что программа работает только в Трое",
+          "Потому что троянцы изобрели шифрование"
+        ],
+        "answer": 0,
+        "feedback": "Как и Троянский конь, Trojan выглядит безопасным или полезным снаружи, но скрывает опасность внутри."
+      },
+      "en": {
+        "question": "Why is a computer Trojan called a Trojan?",
+        "options": [
+          "Danger is hidden inside something that looks safe or useful",
+          "Because the program only works in Troy",
+          "Because the Trojans invented encryption"
+        ],
+        "answer": 0,
+        "feedback": "Like the Trojan Horse, a Trojan looks safe or useful from the outside but hides danger inside."
+      }
+    },
+    {
+      "id": "FMD-14",
+      "category": "connection",
+      "module": 8,
+      "ru": {
+        "question": "Что держит статуя Медеи на площади Европы в Батуми?",
+        "options": [
+          "Золотое руно",
+          "Яблоко раздора",
+          "Лук Одиссея"
+        ],
+        "answer": 0,
+        "feedback": "Медея держит Золотое руно — связь Батуми и региона с древней Колхидой и историей Ясона и аргонавтов."
+      },
+      "en": {
+        "question": "What does the statue of Medea in Europe Square in Batumi hold?",
+        "options": [
+          "The Golden Fleece",
+          "The Apple of Discord",
+          "Odysseus’ bow"
+        ],
+        "answer": 0,
+        "feedback": "Medea holds the Golden Fleece, linking Batumi and the region with ancient Colchis and the story of Jason and the Argonauts."
+      }
+    },
+    {
+      "id": "FMD-15",
+      "category": "connection",
+      "module": 8,
+      "ru": {
+        "question": "Вы видите новый IT-продукт с названием Athena. Что можно сказать без дополнительной проверки?",
+        "options": [
+          "Продукт носит имя мифологической Афины, но мотив выбора названия нужно проверять отдельно",
+          "Разработчики точно выбрали имя из-за мудрости Афины",
+          "Название не имеет никакого отношения к мифологии"
+        ],
+        "answer": 0,
+        "feedback": "Мы можем уверенно узнать мифологическое имя. Но причину, по которой создатели выбрали его, нельзя придумывать без подтверждения."
+      },
+      "en": {
+        "question": "You see a new IT product called Athena. What can you say without further checking?",
+        "options": [
+          "The product has the name of the mythological Athena, but the naming reason must be checked separately",
+          "The developers definitely chose it because Athena represents wisdom",
+          "The name has no connection with mythology"
+        ],
+        "answer": 0,
+        "feedback": "We can confidently recognise the mythological name. But we should not invent the creators’ reason without evidence."
+      }
+    }
+  ]
+}

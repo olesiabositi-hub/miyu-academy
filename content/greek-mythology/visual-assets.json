@@ -1,0 +1,1247 @@
+{
+  "project": "MIYU Academy",
+  "course_id": "greek-mythology",
+  "step": 14,
+  "status": "proposed-for-approval",
+  "asset_strategy": {
+    "heroes": 8,
+    "visual_stops": 64,
+    "total_entries": 72,
+    "principles": [
+      "Immutable master copy is never rewritten to accommodate visuals.",
+      "Text-heavy diagrams are rendered as HTML/CSS/SVG, not raster images with embedded text.",
+      "Real places use real photography; do not generate fake documentary location photos.",
+      "Historical artifacts use real open-access/public-domain museum imagery where the master asks for an authentic ancient image.",
+      "Third-party brands default to text/neutral reference; actual logos/screenshots require Step 15 approval.",
+      "Generated imagery uses one coherent MIYU editorial art direction.",
+      "Every Visual Stop has a mobile behavior and accessible alternative text.",
+      "RU and EN reuse the same visual asset where possible; localized labels remain live text."
+    ]
+  },
+  "entries": [
+    {
+      "id": "gm-m01-hero",
+      "module": 1,
+      "slot": "hero",
+      "title": "Primordial layers",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Abstract editorial composition showing primordial world → Titans → new generation of gods; stone, sky and fine-line genealogy motifs; no literal family-tree overload.",
+      "desktop": "16:9 wide hero, focal mass right/center, left side kept quiet for title.",
+      "mobile": "4:5 crop with the three layers preserved; no text baked into image.",
+      "alt": {
+        "ru": "Абстрактная композиция из трёх слоёв: первозданный мир, титаны и новое поколение богов.",
+        "en": "Abstract three-layer composition: primordial world, Titans and the new generation of gods."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m02-hero",
+      "module": 2,
+      "slot": "hero",
+      "title": "Pantheon portrait",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Contemporary editorial gallery of major Olympian archetypes using sculpture-like portrait fragments; not a literal '12 gods chart'.",
+      "desktop": "16:9 horizontal sculptural gallery with generous negative space.",
+      "mobile": "4:5 crop centered on 3–4 key bust fragments; rest conveyed by composition, not labels.",
+      "alt": {
+        "ru": "Редакционная композиция с античными скульптурными образами олимпийских богов.",
+        "en": "Editorial composition with classical sculptural representations of Olympian gods."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m03-hero",
+      "module": 3,
+      "slot": "hero",
+      "title": "Monsters arrive",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Cohesive sculptural/ceramic montage suggesting Cerberus, Medusa, Minotaur, Siren, Hydra and Cyclops without becoming fantasy-game art.",
+      "desktop": "16:9 montage, muted stone/ink treatment.",
+      "mobile": "4:5 crop preserving at least three recognizable silhouettes.",
+      "alt": {
+        "ru": "Композиция с узнаваемыми образами мифологических чудовищ.",
+        "en": "Composition with recognizable silhouettes of mythological monsters."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m04-hero",
+      "module": 4,
+      "slot": "hero",
+      "title": "Heroes and paths",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Editorial heroic collage: shield reflection, thread, Golden Fleece, sea route and spear as symbolic fragments rather than six literal portraits.",
+      "desktop": "16:9 symbolic hero montage.",
+      "mobile": "4:5 symbolic crop emphasizing shield, thread and fleece.",
+      "alt": {
+        "ru": "Символическая композиция о героях: щит, нить, Золотое руно и путь.",
+        "en": "Symbolic composition about heroes: shield, thread, Golden Fleece and journey."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m05-hero",
+      "module": 5,
+      "slot": "hero",
+      "title": "Myths in language",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Still-life style editorial composition using jar, stone, gold touch, mirror and celestial sphere.",
+      "desktop": "16:9 still-life, museum/editorial lighting.",
+      "mobile": "4:5 crop preserving jar, stone and mirror.",
+      "alt": {
+        "ru": "Натюрморт из символов Пандоры, Сизифа, Мидаса, Нарцисса и Атласа.",
+        "en": "Still life of symbols linked to Pandora, Sisyphus, Midas, Narcissus and Atlas."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m06-hero",
+      "module": 6,
+      "slot": "hero",
+      "title": "Troy",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Trojan Horse and city-wall silhouette with apple and spear motifs; serious historical-editorial mood, not cinematic battle fantasy.",
+      "desktop": "16:9, horse as dominant silhouette.",
+      "mobile": "4:5 crop retaining horse and city wall.",
+      "alt": {
+        "ru": "Силуэт Троянского коня у стен города с мотивом яблока раздора.",
+        "en": "Silhouette of the Trojan Horse by the city walls with an Apple of Discord motif."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m07-hero",
+      "module": 7,
+      "slot": "hero",
+      "title": "Odyssey at sea",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Small ancient ship crossing a wide sea with route-line geometry; distant island/home motif; no literal monster collage.",
+      "desktop": "16:9 expansive seascape with large negative space.",
+      "mobile": "4:5 crop keeping ship, route and horizon.",
+      "alt": {
+        "ru": "Корабль Одиссея в море с линией долгого пути домой.",
+        "en": "Odysseus’ ship at sea with a line tracing the long journey home."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m08-hero",
+      "module": 8,
+      "slot": "hero",
+      "title": "Mythology around us",
+      "kind": "editorial-art",
+      "production": "MIYU generated/commissioned art",
+      "concept": "Modern-world collage blending city, laptop, coffee cup, constellation lines and classical sculpture fragments without third-party logos.",
+      "desktop": "16:9 contemporary editorial collage.",
+      "mobile": "4:5 crop balancing city/tech/sky motifs.",
+      "alt": {
+        "ru": "Современный коллаж: город, технологии, небо и античные образы в одной системе.",
+        "en": "Contemporary collage combining city, technology, sky and classical imagery."
+      },
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "priority": "P1"
+    },
+    {
+      "id": "gm-m03-vs01",
+      "module": 3,
+      "slot": "vs01",
+      "title": "Recognize the six",
+      "kind": "six-image-gallery",
+      "production": "MIYU generated art set",
+      "concept": "Six consistent unlabeled portraits/silhouettes: Cerberus, Medusa, Minotaur, ancient bird-woman Siren, Hydra, Cyclops. Reused in VS13.",
+      "desktop": "3×2 gallery in expanded Visual Stop zone.",
+      "mobile": "2×3 stacked grid; same six crops.",
+      "alt": {
+        "ru": "Шесть изображений без подписей: Цербер, Медуза, Минотавр, сирена, Гидра и циклоп.",
+        "en": "Six unlabeled images: Cerberus, Medusa, Minotaur, a Siren, Hydra and a Cyclops."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs02",
+      "module": 3,
+      "slot": "vs02",
+      "title": "Cerberus close-up",
+      "kind": "illustration+diagram",
+      "production": "MIYU generated art + HTML/SVG overlay",
+      "concept": "Large Cerberus visual with three short labels and a boundary → guard → access-control mini-diagram.",
+      "desktop": "Image left, labels/diagram right.",
+      "mobile": "Image top, three labels then mini-diagram.",
+      "alt": {
+        "ru": "Трёхголовый Цербер у границы подземного мира; рядом схема контроля доступа.",
+        "en": "Three-headed Cerberus guarding the Underworld boundary, with an access-control diagram."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs03",
+      "module": 3,
+      "slot": "vs03",
+      "title": "Cerberus → Security",
+      "kind": "comparison-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Two-column myth-to-modern comparison: Cerberus guarding a boundary vs security controlling access.",
+      "desktop": "Two columns with central arrow.",
+      "mobile": "Stacked cards with downward arrow.",
+      "alt": {
+        "ru": "Сравнение: Цербер охраняет границу, security контролирует доступ.",
+        "en": "Comparison: Cerberus guards a boundary; security controls access."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs04",
+      "module": 3,
+      "slot": "vs04",
+      "title": "Antique Medusa",
+      "kind": "museum-artifact",
+      "production": "Real open-access antiquity image + HTML labels",
+      "concept": "Use a genuine ancient depiction of Medusa/Gorgoneion, not fantasy art; add the words snakes / gaze / stone as web text.",
+      "desktop": "Artifact image ~60%, labels alongside.",
+      "mobile": "Artifact image full width, labels below.",
+      "alt": {
+        "ru": "Античное изображение Медузы с тремя ассоциациями: змеи, взгляд, камень.",
+        "en": "Ancient depiction of Medusa with three associations: snakes, gaze, stone."
+      },
+      "rights_source": "Open-access/public-domain museum artifact; exact source and attribution verified in Step 15",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs05",
+      "module": 3,
+      "slot": "vs05",
+      "title": "Medusa cliffhanger",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Goal → cannot look at Medusa → ???. No answer, no button.",
+      "desktop": "Centered vertical logic chain.",
+      "mobile": "Same vertical chain, larger tap-safe spacing.",
+      "alt": {
+        "ru": "Схема задачи: победить Медузу, не глядя на неё напрямую; решение пока скрыто.",
+        "en": "Problem diagram: defeat Medusa without looking directly at her; solution intentionally hidden."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs06",
+      "module": 3,
+      "slot": "vs06",
+      "title": "Medusa then / Versace now",
+      "kind": "artifact+brand-reference",
+      "production": "Open-access artifact + controlled brand reference",
+      "concept": "Ancient Medusa on left; contemporary Versace Medusa reference on right; ≈2500 years between. Do not imply direct copying of a specific artifact.",
+      "desktop": "Side-by-side comparison.",
+      "mobile": "Stack vertically: ancient first, modern reference second.",
+      "alt": {
+        "ru": "Сравнение античного образа Медузы и современного использования образа у Versace.",
+        "en": "Comparison of an ancient Medusa image with the modern Medusa reference used by Versace."
+      },
+      "rights_source": "Ancient artifact: open access/public domain. Versace brand asset: rights review required in Step 15; fallback = typographic brand card without logo",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs07",
+      "module": 3,
+      "slot": "vs07",
+      "title": "Crete → Labyrinth → Minotaur",
+      "kind": "relationship-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Simple relationship map with Theseus teaser; no modern maze photo.",
+      "desktop": "Horizontal/vertical hybrid diagram.",
+      "mobile": "Vertical stack.",
+      "alt": {
+        "ru": "Схема: Крит → Лабиринт → Минотавр; Тесей скоро войдёт в эту историю.",
+        "en": "Diagram: Crete → Labyrinth → Minotaur, with Theseus teased as the next connection."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs08",
+      "module": 3,
+      "slot": "vs08",
+      "title": "Modern siren vs ancient Siren",
+      "kind": "comparison-art",
+      "production": "MIYU generated modern-mermaid archetype + open-access/MIYU reconstructed ancient bird-woman",
+      "concept": "Two large images: familiar mermaid-like modern image vs ancient Greek bird-woman Siren.",
+      "desktop": "Equal side-by-side panels.",
+      "mobile": "Stacked panels with NOW / ANCIENT GREECE labels.",
+      "alt": {
+        "ru": "Сравнение современного русалкоподобного образа сирены и древнегреческой женщины-птицы.",
+        "en": "Comparison of a modern mermaid-like siren with the ancient Greek bird-woman Siren."
+      },
+      "rights_source": "Prefer MIYU-owned reconstruction and/or open-access artifact; exact archaeological source verified in Step 15",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs09",
+      "module": 3,
+      "slot": "vs09",
+      "title": "Starbucks Siren reveal",
+      "kind": "brand-reference",
+      "production": "Brand asset/screenshot with Step 15 clearance",
+      "concept": "Current Starbucks siren mark, then an earlier version where two tails are more obvious; learner notices the tails.",
+      "desktop": "Current and historical marks in a controlled comparison.",
+      "mobile": "Stacked with zoomed crop if needed.",
+      "alt": {
+        "ru": "Современный и более ранний варианты образа сирены Starbucks с акцентом на два хвоста.",
+        "en": "Current and earlier Starbucks Siren marks highlighting the two tails."
+      },
+      "rights_source": "Third-party trademark/logo; Step 15 rights/brand-use decision required. Fallback = sourced screenshot/link or neutral explanatory diagram",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs10",
+      "module": 3,
+      "slot": "vs10",
+      "title": "Siren visual evolution",
+      "kind": "timeline",
+      "production": "HTML/CSS/SVG + small approved thumbnails",
+      "concept": "Ancient bird-woman → later European mermaid convergence → Starbucks two-tailed sea siren.",
+      "desktop": "Three-stage horizontal timeline.",
+      "mobile": "Three stacked stages.",
+      "alt": {
+        "ru": "Временная линия изменения образа сирены от античности до современного брендинга.",
+        "en": "Timeline showing the Siren image from antiquity to later mermaid traditions and modern branding."
+      },
+      "rights_source": "Historical thumbnails require open-access sources; brand endpoint reviewed in Step 15",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs11",
+      "module": 3,
+      "slot": "vs11",
+      "title": "Hydra task chain",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Fix form → auth breaks → DB migration + onboarding rewrite → HYDRA.",
+      "desktop": "Branching flowchart.",
+      "mobile": "Vertical flow with two child branches.",
+      "alt": {
+        "ru": "Рабочая задача разрастается в несколько новых проблем и превращается в метафорическую Гидру.",
+        "en": "A work task branches into several new problems, becoming a metaphorical Hydra."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs12",
+      "module": 3,
+      "slot": "vs12",
+      "title": "Poseidon → Polyphemus → Odysseus",
+      "kind": "teaser-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Relationship chain ending in a concealed ? to preserve the Odyssey reveal.",
+      "desktop": "Horizontal chain.",
+      "mobile": "Vertical chain.",
+      "alt": {
+        "ru": "Схема связи Посейдона, Полифема и Одиссея с финалом, скрытым знаком вопроса.",
+        "en": "Relationship chain linking Poseidon, Polyphemus and Odysseus, ending with a question mark."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m03-vs13",
+      "module": 3,
+      "slot": "vs13",
+      "title": "Recognize the six — return",
+      "kind": "six-image-gallery",
+      "production": "Reuse gm-m03-vs01 + HTML labels",
+      "concept": "Exactly the same six images as VS01, now with concise recognition labels.",
+      "desktop": "Same 3×2 grid to close the learning loop.",
+      "mobile": "Same 2×3 grid.",
+      "alt": {
+        "ru": "Те же шесть образов, теперь с подписями: Цербер, Медуза, Минотавр, сирены, Гидра, Полифем.",
+        "en": "The same six figures, now labeled: Cerberus, Medusa, Minotaur, Sirens, Hydra and Polyphemus."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs01",
+      "module": 4,
+      "slot": "vs01",
+      "title": "Six heroes / six associations",
+      "kind": "connection-map",
+      "production": "HTML/CSS/SVG + small MIYU icon set",
+      "concept": "Perseus→Medusa; Theseus→Labyrinth; Heracles→12 Labours; Jason→Golden Fleece; Achilles→vulnerability; Odysseus→journey home.",
+      "desktop": "Six-node horizontal/2-row map.",
+      "mobile": "Stacked six rows.",
+      "alt": {
+        "ru": "Шесть героев и шесть ключевых ассоциаций.",
+        "en": "Six heroes and their six key associations."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs02",
+      "module": 4,
+      "slot": "vs02",
+      "title": "Perseus solves Medusa",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG + shield illustration fragment",
+      "concept": "Need to defeat Medusa → cannot look directly → use reflection → victory.",
+      "desktop": "Vertical sequence with shield focal point.",
+      "mobile": "Same vertical sequence.",
+      "alt": {
+        "ru": "Персей побеждает Медузу, используя отражение в щите вместо прямого взгляда.",
+        "en": "Perseus defeats Medusa by using a shield reflection instead of looking directly."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs03",
+      "module": 4,
+      "slot": "vs03",
+      "title": "Theseus / thread MVP",
+      "kind": "decision-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Problem: exit Labyrinth; map no / magic no / thread yes.",
+      "desktop": "Three options in one row under problem.",
+      "mobile": "Three stacked options.",
+      "alt": {
+        "ru": "Сравнение решений для выхода из Лабиринта: карта, магия и нить Ариадны.",
+        "en": "Comparison of solutions for leaving the Labyrinth: map, magic and Ariadne’s thread."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs04",
+      "module": 4,
+      "slot": "vs04",
+      "title": "Crete → Amathous",
+      "kind": "geo-story-diagram",
+      "production": "HTML/CSS/SVG + optional small map silhouette",
+      "concept": "Labyrinth on Crete → Theseus+Ariadne → local tradition → Amathous, Cyprus.",
+      "desktop": "Route/map-line visual.",
+      "mobile": "Vertical route; no tiny map labels.",
+      "alt": {
+        "ru": "Схема, связывающая Крит, Тесея и Ариадну с локальной традицией Аматуса на Кипре.",
+        "en": "Diagram linking Crete, Theseus and Ariadne with the local Amathous tradition in Cyprus."
+      },
+      "rights_source": "Map silhouette can be MIYU-owned; geographic claims already in master; no third-party image required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs05",
+      "module": 4,
+      "slot": "vs05",
+      "title": "Heracles connects earlier monsters",
+      "kind": "connection-map",
+      "production": "HTML/CSS/SVG",
+      "concept": "Hydra and Cerberus from Module 3 converge on Heracles.",
+      "desktop": "Three-node visual with module references.",
+      "mobile": "Vertical convergence.",
+      "alt": {
+        "ru": "Гидра и Цербер из предыдущего модуля соединяются с Гераклом.",
+        "en": "Hydra and Cerberus from the previous module connect to Heracles."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs06",
+      "module": 4,
+      "slot": "vs06",
+      "title": "Medea statue in Batumi",
+      "kind": "location-photo",
+      "production": "Real photography",
+      "concept": "Large real photo of Medea statue on Europe Square; labels Medea / princess of Colchis / Golden Fleece.",
+      "desktop": "Landscape or 3:2 photo, room for text overlay outside image.",
+      "mobile": "4:5 crop preserving statue and Golden Fleece.",
+      "alt": {
+        "ru": "Статуя Медеи с Золотым руном на площади Европы в Батуми.",
+        "en": "Statue of Medea holding the Golden Fleece in Europe Square, Batumi."
+      },
+      "rights_source": "Real location photography; use MIYU-owned photo or properly licensed/open source. Do not AI-generate a fake documentary photo",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs07",
+      "module": 4,
+      "slot": "vs07",
+      "title": "Achilles: two traditions",
+      "kind": "timeline",
+      "production": "HTML/CSS/SVG",
+      "concept": "Homer → later Styx tradition → modern 'Achilles’ heel'.",
+      "desktop": "Three-stage horizontal timeline.",
+      "mobile": "Three stacked stages.",
+      "alt": {
+        "ru": "Три этапа образа Ахиллеса: Гомер, поздняя традиция со Стиксом и современное выражение.",
+        "en": "Three stages of Achilles: Homer, later Styx tradition and the modern expression."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs08",
+      "module": 4,
+      "slot": "vs08",
+      "title": "Hero problem-solving styles",
+      "kind": "comparison-grid",
+      "production": "HTML/CSS/SVG + simple icons",
+      "concept": "Six heroes contrasted by method: workaround, thread back, brute force, team/help, near invincibility, cunning.",
+      "desktop": "2×3 editorial grid.",
+      "mobile": "Six stacked rows.",
+      "alt": {
+        "ru": "Шесть героев и разные способы решать проблемы.",
+        "en": "Six heroes and their different ways of solving problems."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m04-vs09",
+      "module": 4,
+      "slot": "vs09",
+      "title": "Six heroes — return",
+      "kind": "connection-map",
+      "production": "Reuse gm-m04-vs01 + expanded labels",
+      "concept": "Return to VS01, now with an icon and one-line meaning under each hero.",
+      "desktop": "Same visual grammar as VS01.",
+      "mobile": "Same stacked order.",
+      "alt": {
+        "ru": "Повторная карта шести героев, дополненная короткими пояснениями.",
+        "en": "Return map of the six heroes, now with short explanatory labels."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs01",
+      "module": 5,
+      "slot": "vs01",
+      "title": "Expressions you already know",
+      "kind": "symbol-grid",
+      "production": "HTML/CSS/SVG + MIYU icon set",
+      "concept": "Pandora’s box / Sisyphean task / Midas touch / narcissism / carry the world on your shoulders with five simple symbols.",
+      "desktop": "Five items in one/two rows.",
+      "mobile": "Five stacked/scroll-free rows.",
+      "alt": {
+        "ru": "Пять знакомых выражений и их символы: сосуд, камень, золото, зеркало и небосвод.",
+        "en": "Five familiar expressions with symbols: jar, stone, gold, mirror and heavens."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs02",
+      "module": 5,
+      "slot": "vs02",
+      "title": "Prometheus in 10 seconds",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Prometheus → steals fire → gives to humans → Zeus angry → punishment → Heracles frees him.",
+      "desktop": "Horizontal or stepped timeline.",
+      "mobile": "Vertical flow.",
+      "alt": {
+        "ru": "Короткая цепочка истории Прометея от похищения огня до освобождения Гераклом.",
+        "en": "Short sequence of Prometheus’ story from stealing fire to release by Heracles."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs03",
+      "module": 5,
+      "slot": "vs03",
+      "title": "Pandora’s BOX?",
+      "kind": "typographic-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Large 'Pandora’s BOX?' with box crossed out and jar confirmed.",
+      "desktop": "Large centered typographic composition.",
+      "mobile": "Same, scale down typography responsively.",
+      "alt": {
+        "ru": "Сравнение: не коробка, а сосуд в древней версии истории Пандоры.",
+        "en": "Comparison: not a box but a jar in the ancient Pandora story."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs04",
+      "module": 5,
+      "slot": "vs04",
+      "title": "Sisyphus loop",
+      "kind": "micro-animation",
+      "production": "HTML/CSS/SVG animation",
+      "concept": "Push → almost top → stone falls → start again, looping gently.",
+      "desktop": "Vertical loop with subtle motion.",
+      "mobile": "Same vertical loop; reduced-motion static fallback.",
+      "alt": {
+        "ru": "Цикл Сизифа: толкать камень, почти достичь вершины, падение и начало заново.",
+        "en": "Sisyphus loop: push the stone, nearly reach the top, fall, start again."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs05",
+      "module": 5,
+      "slot": "vs05",
+      "title": "Midas requirement / edge cases",
+      "kind": "product-spec-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Requirement implemented; overlooked edge cases: food, drink, people, everything else; feature works, user unhappy.",
+      "desktop": "Product-spec style panel with two columns.",
+      "mobile": "Stack requirement → edge cases → result.",
+      "alt": {
+        "ru": "Шуточная продуктовая схема о желании Мидаса и неучтённых последствиях.",
+        "en": "Playful product-spec diagram about Midas’ wish and its overlooked consequences."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs06",
+      "module": 5,
+      "slot": "vs06",
+      "title": "Narcissus loop",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG + subtle reflective illustration",
+      "concept": "Narcissus → looks into water → reflection → Narcissus, emphasizing the self-referential loop.",
+      "desktop": "Centered vertical loop.",
+      "mobile": "Same vertical flow.",
+      "alt": {
+        "ru": "Нарцисс смотрит в воду и оказывается замкнут на собственном отражении.",
+        "en": "Narcissus looks into the water and becomes trapped by his own reflection."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs07",
+      "module": 5,
+      "slot": "vs07",
+      "title": "What does Atlas hold?",
+      "kind": "myth-correction",
+      "production": "HTML/CSS/SVG",
+      "concept": "Earth? no. Heavens/celestial sphere? yes.",
+      "desktop": "Two-option comparison.",
+      "mobile": "Stacked Earth vs heavens.",
+      "alt": {
+        "ru": "Уточнение: Атлас держит небесный свод, а не Землю.",
+        "en": "Correction: Atlas holds the heavens, not the Earth."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs08",
+      "module": 5,
+      "slot": "vs08",
+      "title": "Who holds what?",
+      "kind": "comparison-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Gaia=Earth; Uranus=Sky; Atlas holds sky; Heracles holds it briefly.",
+      "desktop": "Four columns/cards without heavy card styling.",
+      "mobile": "Four stacked rows.",
+      "alt": {
+        "ru": "Схема: Гея — Земля, Уран — Небо, Атлас держит Небо, Геракл временно помогает.",
+        "en": "Diagram: Gaia is Earth, Uranus is Sky, Atlas holds the sky, Heracles briefly takes over."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m05-vs09",
+      "module": 5,
+      "slot": "vs09",
+      "title": "Myth Decoder recap",
+      "kind": "symbol-map",
+      "production": "HTML/CSS/SVG + icon set",
+      "concept": "Pandora, Sisyphus, Midas, Narcissus, Atlas plus Prometheus with one modern meaning each.",
+      "desktop": "Six-item editorial map.",
+      "mobile": "Six stacked items.",
+      "alt": {
+        "ru": "Карта шести мифологических образов и их современных смыслов.",
+        "en": "Map of six mythological figures and their modern meanings."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs01",
+      "module": 6,
+      "slot": "vs01",
+      "title": "Trojan War in 15 seconds",
+      "kind": "timeline",
+      "production": "HTML/CSS/SVG",
+      "concept": "Apple → Paris chooses Aphrodite → Helen → Greeks to Troy → 10 years war → wooden horse → fall of Troy.",
+      "desktop": "Horizontal stepped roadmap.",
+      "mobile": "Vertical roadmap.",
+      "alt": {
+        "ru": "Краткая последовательность Троянской войны от яблока раздора до падения Трои.",
+        "en": "Brief sequence of the Trojan War from the Apple of Discord to the fall of Troy."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs02",
+      "module": 6,
+      "slot": "vs02",
+      "title": "Paris chooses",
+      "kind": "choice-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Hera=power; Athena=victory; Aphrodite=most beautiful woman; Paris chooses Aphrodite.",
+      "desktop": "Three choices side-by-side, result below.",
+      "mobile": "Three stacked choices, result last.",
+      "alt": {
+        "ru": "Выбор Париса между обещаниями Геры, Афины и Афродиты.",
+        "en": "Paris choosing between the promises of Hera, Athena and Aphrodite."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs03",
+      "module": 6,
+      "slot": "vs03",
+      "title": "Who is who in Troy",
+      "kind": "character-map",
+      "production": "HTML/CSS/SVG",
+      "concept": "Paris, Helen and Hector with concise roles.",
+      "desktop": "Three-column character strip.",
+      "mobile": "Three stacked rows.",
+      "alt": {
+        "ru": "Краткая карта персонажей Трои: Парис, Елена и Гектор.",
+        "en": "Short character map of Troy: Paris, Helen and Hector."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs04",
+      "module": 6,
+      "slot": "vs04",
+      "title": "What is actually in the Iliad?",
+      "kind": "timeline-scope",
+      "production": "HTML/CSS/SVG",
+      "concept": "Ten-year war line; Iliad highlighted as a shorter period near the end; Trojan Horse explicitly outside the Iliad.",
+      "desktop": "Wide timeline with highlighted segment.",
+      "mobile": "Vertical/compact line with separate 'not in Iliad' callout.",
+      "alt": {
+        "ru": "Линия десяти лет войны с выделенным периодом «Илиады» и Троянским конём за её пределами.",
+        "en": "Ten-year war timeline with the Iliad highlighted and the Trojan Horse shown outside it."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs05",
+      "module": 6,
+      "slot": "vs05",
+      "title": "Patroclus plan",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Achilles refuses → Patroclus wears armour → Trojans think Achilles returned → retreat.",
+      "desktop": "Vertical process with bold mistaken-identity moment.",
+      "mobile": "Same vertical process.",
+      "alt": {
+        "ru": "План с доспехами Ахиллеса: Патрокл выдаётся за вернувшегося Ахиллеса.",
+        "en": "Plan using Achilles’ armour: Patroclus is mistaken for the returning Achilles."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs06",
+      "module": 6,
+      "slot": "vs06",
+      "title": "Iliad emotional line",
+      "kind": "emotional-timeline",
+      "production": "HTML/CSS/SVG",
+      "concept": "Anger → refusal → Patroclus → Hector kills Patroclus → Achilles returns → kills Hector → Priam → body returned.",
+      "desktop": "Long horizontal/stepped emotional timeline.",
+      "mobile": "Vertical sequence with clear pacing.",
+      "alt": {
+        "ru": "Эмоциональная линия «Илиады» от гнева Ахиллеса до возвращения тела Гектора Приаму.",
+        "en": "Emotional line of the Iliad from Achilles’ anger to Hector’s body being returned to Priam."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs07",
+      "module": 6,
+      "slot": "vs07",
+      "title": "Cassandra experience",
+      "kind": "process-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Prediction → dismissed → disaster → Cassandra ellipsis.",
+      "desktop": "Three-stage diagram.",
+      "mobile": "Vertical three-stage diagram.",
+      "alt": {
+        "ru": "Схема Кассандры: предупреждение, недоверие и сбывшаяся катастрофа.",
+        "en": "Cassandra pattern: warning, disbelief and the disaster coming true."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs08",
+      "module": 6,
+      "slot": "vs08",
+      "title": "Troy security awareness",
+      "kind": "ui-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Mock security warning: unknown object from Greek Army, attachment Giant_Wooden_Horse.exe.",
+      "desktop": "Desktop security-dialog parody, clearly fictional/educational.",
+      "mobile": "Mobile alert-style layout.",
+      "alt": {
+        "ru": "Шуточное уведомление безопасности о гигантском деревянном коне от греческой армии.",
+        "en": "Playful security warning about a giant wooden horse sent by the Greek Army."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs09",
+      "module": 6,
+      "slot": "vs09",
+      "title": "Trojan Horse → cybersecurity",
+      "kind": "comparison-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Looks safe → hidden danger inside.",
+      "desktop": "Two-step visual with horse/object icon.",
+      "mobile": "Vertical two-step visual.",
+      "alt": {
+        "ru": "Метафора Trojan Horse: снаружи безопасно, внутри скрыта опасность.",
+        "en": "Trojan Horse metaphor: looks safe outside, hidden danger inside."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m06-vs10",
+      "module": 6,
+      "slot": "vs10",
+      "title": "Three Trojan metaphors still alive",
+      "kind": "three-part-recap",
+      "production": "HTML/CSS/SVG",
+      "concept": "Apple of Discord; Cassandra; Trojan Horse — one ancient story, three modern metaphors.",
+      "desktop": "Three equal columns.",
+      "mobile": "Three stacked panels.",
+      "alt": {
+        "ru": "Три живущие метафоры из Троянской истории: яблоко раздора, Кассандра и Троянский конь.",
+        "en": "Three surviving metaphors from the Trojan story: Apple of Discord, Cassandra and Trojan Horse."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs01",
+      "module": 7,
+      "slot": "vs01",
+      "title": "Odysseus career break",
+      "kind": "timeline",
+      "production": "HTML/CSS/SVG",
+      "concept": "Ithaca → 10 years war → 10 years trying to return → Ithaca; total 20 years away.",
+      "desktop": "Horizontal journey line.",
+      "mobile": "Vertical journey.",
+      "alt": {
+        "ru": "Двадцатилетний путь Одиссея: Итака, десять лет войны, десять лет возвращения, Итака.",
+        "en": "Odysseus’ twenty-year journey: Ithaca, ten years of war, ten years returning, Ithaca."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs02",
+      "module": 7,
+      "slot": "vs02",
+      "title": "Nobody incident report",
+      "kind": "incident-report-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Polyphemus says 'Nobody is killing me'; other Cyclopes leave; clever naming/social-engineering joke.",
+      "desktop": "Incident report layout.",
+      "mobile": "Stacked incident log.",
+      "alt": {
+        "ru": "Шуточный incident report о том, как имя «Никто» помогает Одиссею обмануть циклопов.",
+        "en": "Playful incident report showing how the name “Nobody” helps Odysseus fool the Cyclopes."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs03",
+      "module": 7,
+      "slot": "vs03",
+      "title": "Odysseus reveals his name",
+      "kind": "before-after-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Everything is safe until Odysseus shouts his name → Polyphemus appeals to Poseidon.",
+      "desktop": "Checklist left, escalation right.",
+      "mobile": "Vertical escalation.",
+      "alt": {
+        "ru": "Схема момента, когда Одиссей раскрывает имя и Полифем обращается к Посейдону.",
+        "en": "Diagram of the moment Odysseus reveals his name and Polyphemus appeals to Poseidon."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs04",
+      "module": 7,
+      "slot": "vs04",
+      "title": "Circe travel review",
+      "kind": "journey-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Island → house → drinks → magic → pigs, ending in a 2/5 travel-review joke.",
+      "desktop": "Horizontal travel sequence.",
+      "mobile": "Vertical sequence.",
+      "alt": {
+        "ru": "Шуточная последовательность встречи команды Одиссея с Цирцеей: остров, дом, напитки, магия, свиньи.",
+        "en": "Playful sequence of Odysseus’ crew meeting Circe: island, house, drinks, magic, pigs."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs05",
+      "module": 7,
+      "slot": "vs05",
+      "title": "Odysseus vs Sirens",
+      "kind": "strategy-comparison",
+      "production": "HTML/CSS/SVG",
+      "concept": "Crew: wax, hear nothing. Odysseus: hears Sirens but is tied to mast. Result: hears them and survives.",
+      "desktop": "Two-column strategy comparison + result.",
+      "mobile": "Stack crew strategy, Odysseus strategy, result.",
+      "alt": {
+        "ru": "Сравнение стратегий команды и Одиссея при встрече с сиренами.",
+        "en": "Comparison of the crew’s and Odysseus’ strategies for passing the Sirens."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs06",
+      "module": 7,
+      "slot": "vs06",
+      "title": "Scylla vs Charybdis",
+      "kind": "risk-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Scylla risk −6 people; ship in middle; Charybdis risk entire crew; choose less destructive option.",
+      "desktop": "Three-column risk layout.",
+      "mobile": "Vertical Scylla → ship → Charybdis, decision below.",
+      "alt": {
+        "ru": "Схема выбора между Сциллой и Харибдой: потерять шестерых или рисковать всей командой.",
+        "en": "Decision diagram between Scylla and Charybdis: lose six people or risk the entire crew."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs07",
+      "module": 7,
+      "slot": "vs07",
+      "title": "Do not eat the cattle",
+      "kind": "spec-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Simple brief 'DO NOT EAT THE CATTLE' → cattle → fire → sea → zero teammates.",
+      "desktop": "Centered vertical joke-flow.",
+      "mobile": "Same vertical flow.",
+      "alt": {
+        "ru": "Шуточная схема нарушения простого требования не трогать коров Гелиоса.",
+        "en": "Playful diagram of the crew breaking the simple instruction not to eat Helios’ cattle."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs08",
+      "module": 7,
+      "slot": "vs08",
+      "title": "Calypso offer",
+      "kind": "offer-card",
+      "production": "HTML/CSS/SVG + small island illustration",
+      "concept": "Beautiful island + immortality + goddess + eternal life; Odysseus still chooses Ithaca/home.",
+      "desktop": "Offer terms left, Odysseus choice right.",
+      "mobile": "Offer list then large home choice.",
+      "alt": {
+        "ru": "Предложение Калипсо и выбор Одиссея вернуться домой на Итаку.",
+        "en": "Calypso’s offer and Odysseus’ choice to return home to Ithaca."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs09",
+      "module": 7,
+      "slot": "vs09",
+      "title": "Penelope workflow",
+      "kind": "loop-diagram",
+      "production": "HTML/CSS/SVG micro-animation",
+      "concept": "Day weave → night unweave → day weave again; loop for three years.",
+      "desktop": "Circular/vertical loop.",
+      "mobile": "Vertical loop; reduced-motion static fallback.",
+      "alt": {
+        "ru": "Трёхлетний цикл Пенелопы: днём ткать, ночью распускать.",
+        "en": "Penelope’s three-year loop: weave by day, undo by night."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs10",
+      "module": 7,
+      "slot": "vs10",
+      "title": "Mentor word history",
+      "kind": "etymology-flow",
+      "production": "HTML/CSS/SVG",
+      "concept": "Modern mentor → Mentor in Odyssey → Athena takes his form → modern common noun.",
+      "desktop": "Horizontal etymology flow.",
+      "mobile": "Vertical etymology flow.",
+      "alt": {
+        "ru": "Схема происхождения современного слова mentor от персонажа «Одиссеи».",
+        "en": "Diagram tracing the modern word “mentor” back to the character in the Odyssey."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs11",
+      "module": 7,
+      "slot": "vs11",
+      "title": "Penelope identifies Odysseus",
+      "kind": "authentication-parody",
+      "production": "HTML/CSS/SVG",
+      "concept": "Not face/clothes/intuition; yes: shared secret of their bed; playful two-factor authentication analogy.",
+      "desktop": "Rejected methods + one accepted shared-secret method.",
+      "mobile": "Stack rejected list then accepted method.",
+      "alt": {
+        "ru": "Шуточная схема узнавания Одиссея Пенелопой по общему секрету их кровати.",
+        "en": "Playful diagram of Penelope recognizing Odysseus through the shared secret of their bed."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m07-vs12",
+      "module": 7,
+      "slot": "vs12",
+      "title": "Odysseus toolkit",
+      "kind": "attribute-map",
+      "production": "HTML/CSS/SVG + icon set",
+      "concept": "Intelligence, disguise, words, planning, adaptation, plus unnecessary boasting.",
+      "desktop": "Radial or two-row toolkit map.",
+      "mobile": "Stacked list with final humorous exception.",
+      "alt": {
+        "ru": "Набор инструментов Одиссея: ум, маскировка, слова, планирование, адаптация и хвастовство.",
+        "en": "Odysseus toolkit: intelligence, disguise, words, planning, adaptation and boasting."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs01",
+      "module": 8,
+      "slot": "vs01",
+      "title": "Names you can decode now",
+      "kind": "typographic-wall",
+      "production": "HTML/CSS",
+      "concept": "NIKE, STARBUCKS, VERSACE, PROMETHEUS, ATHENA, CASSANDRA, APOLLO, ARTEMIS, TROJAN — no explanation yet.",
+      "desktop": "Editorial word wall.",
+      "mobile": "Stacked/2-column word wall.",
+      "alt": {
+        "ru": "Набор современных названий с мифологическими связями без объяснений.",
+        "en": "A set of modern names with mythological connections, shown without explanation."
+      },
+      "rights_source": "Text-only references; no third-party logos required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs02",
+      "module": 8,
+      "slot": "vs02",
+      "title": "Nike → Νίκη → Victory",
+      "kind": "etymology-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Typographic decoding of NIKE → Greek Νίκη → trophy icon → Victory.",
+      "desktop": "Centered large type.",
+      "mobile": "Same vertical composition.",
+      "alt": {
+        "ru": "Схема: Nike → Νίκη → победа.",
+        "en": "Diagram: Nike → Νίκη → victory."
+      },
+      "rights_source": "Text-only trademark reference; no logo required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs03",
+      "module": 8,
+      "slot": "vs03",
+      "title": "A normal walk through the city",
+      "kind": "modern-myth-map",
+      "production": "HTML/CSS/SVG + generic object icons",
+      "concept": "Sneaker/Nike→victory; coffee/Starbucks→Siren; bag/Versace→Medusa. Use generic object imagery, not logo montage.",
+      "desktop": "Three-column city-life strip.",
+      "mobile": "Three stacked rows.",
+      "alt": {
+        "ru": "Три повседневных объекта связывают Nike с победой, Starbucks с сиреной и Versace с Медузой.",
+        "en": "Three everyday objects link Nike with victory, Starbucks with the Siren and Versace with Medusa."
+      },
+      "rights_source": "Prefer generic object icons + brand names as text; actual logos only if Step 15 approves",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs04",
+      "module": 8,
+      "slot": "vs04",
+      "title": "Myth Decoder rule",
+      "kind": "evidence-level-diagram",
+      "production": "HTML/CSS/SVG",
+      "concept": "Three evidence levels: creator-confirmed / name matches / meaningful association; explicitly separates what can and cannot be claimed.",
+      "desktop": "Three stacked evidence levels with muted semantic markers.",
+      "mobile": "Same stack, full-width.",
+      "alt": {
+        "ru": "Три уровня уверенности Myth Decoder: подтверждено создателем, совпадает имя, красивая смысловая связь.",
+        "en": "Three Myth Decoder evidence levels: creator-confirmed, matching name, and meaningful association."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs05",
+      "module": 8,
+      "slot": "vs05",
+      "title": "Mythology in your stack",
+      "kind": "tech-name-map",
+      "production": "HTML/CSS/SVG",
+      "concept": "Athena→AWS; Hermes→JS engine; Prometheus→monitoring; Cassandra→database; Cerberus→security products, with explicit caveat that naming motives are not always confirmed.",
+      "desktop": "Five-item technical map.",
+      "mobile": "Five stacked items.",
+      "alt": {
+        "ru": "Карта мифологических имён в современном IT: Athena, Hermes, Prometheus, Cassandra и Cerberus.",
+        "en": "Map of mythological names in modern technology: Athena, Hermes, Prometheus, Cassandra and Cerberus."
+      },
+      "rights_source": "Text/product-name references only by default; no vendor logos/screenshots required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs06",
+      "module": 8,
+      "slot": "vs06",
+      "title": "Decode the phrase",
+      "kind": "fill-the-blank",
+      "production": "HTML/CSS",
+      "concept": "Achilles’ ___ / Pandora’s ___ / Sisyphean ___ / Midas ___ / between ___ and ___. Five-second recall pause.",
+      "desktop": "Large typographic blanks.",
+      "mobile": "Stacked blanks.",
+      "alt": {
+        "ru": "Пять выражений с пропусками для быстрой самостоятельной расшифровки.",
+        "en": "Five expressions with blanks for a quick self-decoding pause."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs07",
+      "module": 8,
+      "slot": "vs07",
+      "title": "Mythological weekend from Limassol",
+      "kind": "local-route-diagram",
+      "production": "HTML/CSS/SVG + optional real location thumbnails",
+      "concept": "Amathous: Aphrodite + Theseus/Ariadne; Apollo Hylates + Kourion.",
+      "desktop": "Two-stop editorial route/map.",
+      "mobile": "Two stacked destination cards.",
+      "alt": {
+        "ru": "Маршрут выходного дня из Лимасола: Аматус и святилище Аполлона Гилата.",
+        "en": "Mythological weekend route from Limassol: Amathous and the Sanctuary of Apollo Hylates."
+      },
+      "rights_source": "If using photos, real licensed/location photography only; no AI documentary substitution",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs08",
+      "module": 8,
+      "slot": "vs08",
+      "title": "Medea in Batumi",
+      "kind": "location-photo",
+      "production": "Reuse/alternate real photography from gm-m04-vs06",
+      "concept": "Large photo of Medea statue with only Medea + Colchis→Jason→Golden Fleece and one learner question.",
+      "desktop": "Large 3:2 photo.",
+      "mobile": "4:5 crop preserving statue and fleece.",
+      "alt": {
+        "ru": "Статуя Медеи на площади Европы в Батуми с Золотым руном.",
+        "en": "Medea statue in Europe Square, Batumi, holding the Golden Fleece."
+      },
+      "rights_source": "Real location photography; reuse approved photo asset where possible",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs09",
+      "module": 8,
+      "slot": "vs09",
+      "title": "One story across the sky",
+      "kind": "constellation-story-map",
+      "production": "MIYU-owned SVG constellation/story diagram",
+      "concept": "Cassiopeia + Cepheus → Andromeda → Cetus → Perseus, using simplified constellation outlines rather than a scientific star chart.",
+      "desktop": "Wide night-sky diagram.",
+      "mobile": "Vertical constellation/story chain.",
+      "alt": {
+        "ru": "Схема одной мифологической истории, связанной с Кассиопеей, Цефеем, Андромедой, Китом и Персеем.",
+        "en": "Diagram linking Cassiopeia, Cepheus, Andromeda, Cetus and Perseus in one mythological story."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs10",
+      "module": 8,
+      "slot": "vs10",
+      "title": "Myth Decoder Level 1",
+      "kind": "interactive-question",
+      "production": "HTML/CSS",
+      "concept": "Cerberus Security scenario with A/B/C answers. Render as a special in-lesson decoder interaction, not a raster image.",
+      "desktop": "Wide interactive question block.",
+      "mobile": "Full-width stacked answers.",
+      "alt": {
+        "ru": "Задание Myth Decoder о названии Cerberus Security и границах уверенного вывода.",
+        "en": "Myth Decoder question about the name Cerberus Security and what can be concluded with confidence."
+      },
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "priority": "P0"
+    },
+    {
+      "id": "gm-m08-vs11",
+      "module": 8,
+      "slot": "vs11",
+      "title": "You at the center",
+      "kind": "final-network-map",
+      "production": "HTML/CSS/SVG + icon set",
+      "concept": "YOU in center; around it Nike, Starbucks, Versace, Athena, Prometheus, Cassandra, Hermes, Trojan, Apollo, Artemis, Pandora, Sisyphus, Achilles, Odyssey, Mentor, Amathous, Medea, Orion.",
+      "desktop": "Large radial network map, signature final Visual Stop.",
+      "mobile": "Mobile converts to center header + grouped stacked constellation of names; no tiny radial labels.",
+      "alt": {
+        "ru": "Финальная карта: ученик в центре, вокруг — мифологические имена и образы, встречавшиеся в современном мире.",
+        "en": "Final map with the learner at the center, surrounded by mythological names and images found in the modern world."
+      },
+      "rights_source": "Prefer text labels + MIYU iconography; no logo wall",
+      "priority": "P0"
+    }
+  ]
+}

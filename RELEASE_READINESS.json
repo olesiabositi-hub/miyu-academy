@@ -1,0 +1,29 @@
+{
+  "build_stage": "Step 30 final source build / release candidate",
+  "content_version": "gm-v2",
+  "content_qa": "PASS",
+  "backend_architecture": "implemented in source; requires Supabase project/env",
+  "auth": "implemented in source; requires Supabase email auth configuration",
+  "certificate": "DB issuance/verification implemented; locked master preview included",
+  "pdf": "browser Print/Save-as-PDF fallback wired; automated tagged PDF renderer remains deployment-dependent",
+  "visual_assets": {
+    "step14_slots": 72,
+    "code_only_slots": 54,
+    "pending_external_or_generated_assets": 18,
+    "production_guard": "VisualStop throws unless NEXT_PUBLIC_VISUAL_PLACEHOLDERS=1 until approved assets/components are wired."
+  },
+  "legal_launch_blockers": [
+    "controller legal name/address/jurisdiction",
+    "privacy/support contact",
+    "processor/vendor DPA and region review",
+    "final EN/RU Privacy Notice and Terms",
+    "Article 27 / DPO assessment if applicable"
+  ],
+  "deployment_blockers": [
+    "create/configure Supabase project and apply migrations",
+    "set production environment variables",
+    "replace visual placeholders with approved Step 14 production assets/components",
+    "complete rights registry for external assets",
+    "choose production PDF renderer if automatic direct PDF download is required"
+  ]
+}

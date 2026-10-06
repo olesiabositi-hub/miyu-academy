@@ -1,0 +1,90 @@
+{
+  "project": "MIYU Academy",
+  "course_id": "greek-mythology",
+  "step": 26,
+  "status": "proposed-for-approval",
+  "age_policy": {
+    "minimum_account_age": 16,
+    "child_directed": false,
+    "collect_date_of_birth": false,
+    "audit_field": "age_16_plus_confirmed_at"
+  },
+  "v1_privacy_position": {
+    "advertising": false,
+    "sale_of_personal_data": false,
+    "behavioural_ad_tracking": false,
+    "session_replay": false,
+    "marketing_email": false,
+    "optional_analytics": "non-essential, consent-capable, reversible"
+  },
+  "certificate": {
+    "visibility": "unlisted",
+    "search_indexed": false,
+    "public_directory": false,
+    "public_fields": [
+      "certificate_name",
+      "course_title",
+      "completion_date",
+      "certificate_id",
+      "status"
+    ],
+    "never_public": [
+      "email",
+      "auth_uuid",
+      "score",
+      "attempt_count",
+      "progress",
+      "analytics_identity"
+    ]
+  },
+  "retention": {
+    "account_profile_progress": {
+      "active": "while account active",
+      "target_deletion_after_verified_request_days": 30
+    },
+    "completed_final_decoder_detailed_answers": {
+      "max_months": 12
+    },
+    "security_logs": {
+      "min_days": 30,
+      "max_days": 90
+    },
+    "raw_optional_analytics": {
+      "max_months": 12
+    },
+    "support_requests": {
+      "months_after_closure": 12
+    },
+    "backups": {
+      "target_max_rotation_days": 35,
+      "fallback": "document actual provider cycle if different"
+    },
+    "certificate_record": {
+      "retention": "while learner chooses active verification",
+      "outlive_account": "only by explicit minimal-credential retention choice"
+    }
+  },
+  "launch_blockers": [
+    "controller legal name/address/jurisdiction",
+    "privacy and support contact",
+    "production domain",
+    "database/auth provider and region",
+    "hosting/CDN provider and processing locations",
+    "transactional email provider",
+    "analytics configuration/vendor",
+    "error-monitoring configuration/vendor",
+    "processor DPAs",
+    "subprocessor review",
+    "international transfer assessment",
+    "Article 27 EU representative assessment if applicable",
+    "DPO requirement assessment",
+    "final EN/RU Privacy Notice",
+    "final EN/RU Terms",
+    "16+ signup flow",
+    "analytics consent/privacy settings",
+    "deletion/export workflow",
+    "certificate privacy notice",
+    "retention verification against actual vendors",
+    "breach response owner/contact"
+  ]
+}

@@ -1,0 +1,365 @@
+{
+  "project": "MIYU Academy",
+  "course_id": "greek-mythology",
+  "step": 25,
+  "status": "proposed-for-approval",
+  "event_naming": "snake_case, past-tense for completed actions",
+  "analytics_identity": {
+    "anonymous_before_auth": true,
+    "signed_in_identity": "pseudonymous analytics_user_id; never email/name/certificate token",
+    "source_of_truth": "Supabase product tables, not analytics"
+  },
+  "global_properties": [
+    "course_id",
+    "locale",
+    "content_version",
+    "app_version",
+    "device_class",
+    "session_id"
+  ],
+  "forbidden_properties": [
+    "email",
+    "full_name",
+    "certificate_name",
+    "certificate_id",
+    "verification_token",
+    "auth_uuid",
+    "raw_answer_text",
+    "selected_option_text",
+    "free_text",
+    "exact_ip_as_product_property"
+  ],
+  "events": [
+    {
+      "event": "academy_home_viewed",
+      "category": "public",
+      "required_properties": [
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "course_overview_viewed",
+      "category": "public",
+      "required_properties": [
+        "course_id",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "course_started",
+      "category": "learning",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "content_version"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "dashboard_viewed",
+      "category": "learning",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "completed_modules_count",
+        "final_decoder_state",
+        "certificate_state"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "module_opened",
+      "category": "learning",
+      "required_properties": [
+        "course_id",
+        "module_id",
+        "module_order",
+        "locale",
+        "content_version",
+        "entry_point"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "module_resume_restored",
+      "category": "learning",
+      "required_properties": [
+        "course_id",
+        "module_id",
+        "resume_block_type",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "module_completed",
+      "category": "learning",
+      "required_properties": [
+        "course_id",
+        "module_id",
+        "module_order",
+        "locale",
+        "content_version"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server"
+    },
+    {
+      "event": "quick_check_submitted",
+      "category": "learning_interaction",
+      "required_properties": [
+        "course_id",
+        "module_id",
+        "check_id",
+        "is_correct",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "self_check_submitted",
+      "category": "learning_interaction",
+      "required_properties": [
+        "course_id",
+        "module_id",
+        "check_id",
+        "is_correct",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "language_switched",
+      "category": "navigation",
+      "required_properties": [
+        "course_id",
+        "from_locale",
+        "to_locale",
+        "route_type"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "final_decoder_unlocked",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "content_version"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server"
+    },
+    {
+      "event": "final_decoder_started",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "attempt_number",
+        "content_version"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server"
+    },
+    {
+      "event": "final_decoder_resumed",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "question_number"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "final_decoder_question_answered",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "question_id",
+        "question_number",
+        "category",
+        "locale"
+      ],
+      "optional_properties": [
+        "changed_existing_answer"
+      ],
+      "pii_allowed": false,
+      "notes": "Do not send selected option text or correctness during active attempt."
+    },
+    {
+      "event": "final_decoder_review_opened",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "answered_count",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "final_decoder_submitted",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "attempt_number",
+        "score",
+        "percent",
+        "result",
+        "locale",
+        "content_version"
+      ],
+      "optional_properties": [
+        "recognition_score",
+        "meaning_score",
+        "connection_score"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server"
+    },
+    {
+      "event": "final_decoder_retake_started",
+      "category": "assessment",
+      "required_properties": [
+        "course_id",
+        "attempt_number",
+        "passed_previously",
+        "locale"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server"
+    },
+    {
+      "event": "certificate_flow_opened",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "certificate_state"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_name_confirmed",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "locale"
+      ],
+      "pii_allowed": false,
+      "notes": "Never send the name itself."
+    },
+    {
+      "event": "certificate_issued",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "content_version"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server",
+      "notes": "Never send certificate ID or verification token."
+    },
+    {
+      "event": "certificate_viewed",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_pdf_downloaded",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "render_locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_link_copied",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "render_locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_shared",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "render_locale",
+        "share_method"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_linkedin_clicked",
+      "category": "credential",
+      "required_properties": [
+        "course_id",
+        "render_locale"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "certificate_verified",
+      "category": "credential_public",
+      "required_properties": [
+        "course_id",
+        "locale",
+        "verification_status"
+      ],
+      "pii_allowed": false,
+      "preferred_source": "server",
+      "notes": "Never send token, certificate ID, learner name, or IP into product analytics."
+    },
+    {
+      "event": "sync_error_shown",
+      "category": "reliability",
+      "required_properties": [
+        "surface",
+        "operation"
+      ],
+      "pii_allowed": false
+    },
+    {
+      "event": "sync_recovered",
+      "category": "reliability",
+      "required_properties": [
+        "surface",
+        "operation"
+      ],
+      "pii_allowed": false
+    }
+  ],
+  "core_funnels": [
+    [
+      "course_overview_viewed",
+      "course_started",
+      "module_completed x8",
+      "final_decoder_started",
+      "final_decoder_submitted(result=passed)",
+      "certificate_issued"
+    ],
+    [
+      "final_decoder_started",
+      "final_decoder_submitted",
+      "final_decoder_retake_started",
+      "final_decoder_submitted(result=passed)"
+    ],
+    [
+      "certificate_flow_opened",
+      "certificate_name_confirmed",
+      "certificate_issued",
+      "certificate_pdf_downloaded or certificate_link_copied or certificate_linkedin_clicked"
+    ]
+  ]
+}

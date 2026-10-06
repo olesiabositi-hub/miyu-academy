@@ -1,0 +1,709 @@
+{
+  "course_id": "greek-mythology",
+  "policy": "Step 15",
+  "entries": [
+    {
+      "asset_id": "gm-m01-hero",
+      "title": "Primordial layers",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m02-hero",
+      "title": "Pantheon portrait",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-hero",
+      "title": "Monsters arrive",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m04-hero",
+      "title": "Heroes and paths",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m05-hero",
+      "title": "Myths in language",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m06-hero",
+      "title": "Troy",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m07-hero",
+      "title": "Odyssey at sea",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m08-hero",
+      "title": "Mythology around us",
+      "planned_production": "MIYU generated/commissioned art",
+      "rights_source": "MIYU-owned generated/commissioned artwork",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs01",
+      "title": "Recognize the six",
+      "planned_production": "MIYU generated art set",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs02",
+      "title": "Cerberus close-up",
+      "planned_production": "MIYU generated art + HTML/SVG overlay",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs03",
+      "title": "Cerberus → Security",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m03-vs04",
+      "title": "Antique Medusa",
+      "planned_production": "Real open-access antiquity image + HTML labels",
+      "rights_source": "Open-access/public-domain museum artifact; exact source and attribution verified in Step 15",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs05",
+      "title": "Medusa cliffhanger",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m03-vs06",
+      "title": "Medusa then / Versace now",
+      "planned_production": "Open-access artifact + controlled brand reference",
+      "rights_source": "Ancient artifact: open access/public domain. Versace brand asset: rights review required in Step 15; fallback = typographic brand card without logo",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs07",
+      "title": "Crete → Labyrinth → Minotaur",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m03-vs08",
+      "title": "Modern siren vs ancient Siren",
+      "planned_production": "MIYU generated modern-mermaid archetype + open-access/MIYU reconstructed ancient bird-woman",
+      "rights_source": "Prefer MIYU-owned reconstruction and/or open-access artifact; exact archaeological source verified in Step 15",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs09",
+      "title": "Starbucks Siren reveal",
+      "planned_production": "Brand asset/screenshot with Step 15 clearance",
+      "rights_source": "Third-party trademark/logo; Step 15 rights/brand-use decision required. Fallback = sourced screenshot/link or neutral explanatory diagram",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs10",
+      "title": "Siren visual evolution",
+      "planned_production": "HTML/CSS/SVG + small approved thumbnails",
+      "rights_source": "Historical thumbnails require open-access sources; brand endpoint reviewed in Step 15",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m03-vs11",
+      "title": "Hydra task chain",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m03-vs12",
+      "title": "Poseidon → Polyphemus → Odysseus",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m03-vs13",
+      "title": "Recognize the six — return",
+      "planned_production": "Reuse gm-m03-vs01 + HTML labels",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs01",
+      "title": "Six heroes / six associations",
+      "planned_production": "HTML/CSS/SVG + small MIYU icon set",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs02",
+      "title": "Perseus solves Medusa",
+      "planned_production": "HTML/CSS/SVG + shield illustration fragment",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs03",
+      "title": "Theseus / thread MVP",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs04",
+      "title": "Crete → Amathous",
+      "planned_production": "HTML/CSS/SVG + optional small map silhouette",
+      "rights_source": "Map silhouette can be MIYU-owned; geographic claims already in master; no third-party image required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs05",
+      "title": "Heracles connects earlier monsters",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs06",
+      "title": "Medea statue in Batumi",
+      "planned_production": "Real photography",
+      "rights_source": "Real location photography; use MIYU-owned photo or properly licensed/open source. Do not AI-generate a fake documentary photo",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m04-vs07",
+      "title": "Achilles: two traditions",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs08",
+      "title": "Hero problem-solving styles",
+      "planned_production": "HTML/CSS/SVG + simple icons",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m04-vs09",
+      "title": "Six heroes — return",
+      "planned_production": "Reuse gm-m04-vs01 + expanded labels",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs01",
+      "title": "Expressions you already know",
+      "planned_production": "HTML/CSS/SVG + MIYU icon set",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs02",
+      "title": "Prometheus in 10 seconds",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs03",
+      "title": "Pandora’s BOX?",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs04",
+      "title": "Sisyphus loop",
+      "planned_production": "HTML/CSS/SVG animation",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs05",
+      "title": "Midas requirement / edge cases",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs06",
+      "title": "Narcissus loop",
+      "planned_production": "HTML/CSS/SVG + subtle reflective illustration",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs07",
+      "title": "What does Atlas hold?",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs08",
+      "title": "Who holds what?",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m05-vs09",
+      "title": "Myth Decoder recap",
+      "planned_production": "HTML/CSS/SVG + icon set",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs01",
+      "title": "Trojan War in 15 seconds",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs02",
+      "title": "Paris chooses",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs03",
+      "title": "Who is who in Troy",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs04",
+      "title": "What is actually in the Iliad?",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs05",
+      "title": "Patroclus plan",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs06",
+      "title": "Iliad emotional line",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs07",
+      "title": "Cassandra experience",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs08",
+      "title": "Troy security awareness",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs09",
+      "title": "Trojan Horse → cybersecurity",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m06-vs10",
+      "title": "Three Trojan metaphors still alive",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs01",
+      "title": "Odysseus career break",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs02",
+      "title": "Nobody incident report",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs03",
+      "title": "Odysseus reveals his name",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs04",
+      "title": "Circe travel review",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs05",
+      "title": "Odysseus vs Sirens",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs06",
+      "title": "Scylla vs Charybdis",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs07",
+      "title": "Do not eat the cattle",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs08",
+      "title": "Calypso offer",
+      "planned_production": "HTML/CSS/SVG + small island illustration",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs09",
+      "title": "Penelope workflow",
+      "planned_production": "HTML/CSS/SVG micro-animation",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs10",
+      "title": "Mentor word history",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs11",
+      "title": "Penelope identifies Odysseus",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m07-vs12",
+      "title": "Odysseus toolkit",
+      "planned_production": "HTML/CSS/SVG + icon set",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs01",
+      "title": "Names you can decode now",
+      "planned_production": "HTML/CSS",
+      "rights_source": "Text-only references; no third-party logos required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs02",
+      "title": "Nike → Νίκη → Victory",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "Text-only trademark reference; no logo required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs03",
+      "title": "A normal walk through the city",
+      "planned_production": "HTML/CSS/SVG + generic object icons",
+      "rights_source": "Prefer generic object icons + brand names as text; actual logos only if Step 15 approves",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs04",
+      "title": "Myth Decoder rule",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs05",
+      "title": "Mythology in your stack",
+      "planned_production": "HTML/CSS/SVG",
+      "rights_source": "Text/product-name references only by default; no vendor logos/screenshots required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs06",
+      "title": "Decode the phrase",
+      "planned_production": "HTML/CSS",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs07",
+      "title": "Mythological weekend from Limassol",
+      "planned_production": "HTML/CSS/SVG + optional real location thumbnails",
+      "rights_source": "If using photos, real licensed/location photography only; no AI documentary substitution",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m08-vs08",
+      "title": "Medea in Batumi",
+      "planned_production": "Reuse/alternate real photography from gm-m04-vs06",
+      "rights_source": "Real location photography; reuse approved photo asset where possible",
+      "rights_status": "pending_production_or_source_clearance",
+      "approved_for": []
+    },
+    {
+      "asset_id": "gm-m08-vs09",
+      "title": "One story across the sky",
+      "planned_production": "MIYU-owned SVG constellation/story diagram",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs10",
+      "title": "Myth Decoder Level 1",
+      "planned_production": "HTML/CSS",
+      "rights_source": "MIYU-owned / no third-party asset required",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "gm-m08-vs11",
+      "title": "You at the center",
+      "planned_production": "HTML/CSS/SVG + icon set",
+      "rights_source": "Prefer text labels + MIYU iconography; no logo wall",
+      "rights_status": "approved_internal_component",
+      "approved_for": [
+        "web"
+      ]
+    },
+    {
+      "asset_id": "miyu-certificate-master",
+      "title": "Greek Mythology Academy Certificate MASTER",
+      "planned_production": "MIYU locked approved master",
+      "rights_source": "MIYU-owned approved artwork",
+      "rights_status": "approved",
+      "approved_for": [
+        "web",
+        "pdf",
+        "credential-preview"
+      ],
+      "sha256": "393ace7536a69944db755e62d13fb12fe70c43be64a8f8af2c9b589457311dfb"
+    }
+  ],
+  "summary": {
+    "planned_visual_entries": 72,
+    "code_only_slots": 54,
+    "pending_visual_production_or_clearance": 18,
+    "locked_certificate_master": "approved"
+  }
+}

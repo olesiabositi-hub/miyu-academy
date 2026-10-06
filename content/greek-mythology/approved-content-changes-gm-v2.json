@@ -1,0 +1,9 @@
+{
+  "content_version": "gm-v2",
+  "approved_changes": [
+    "module-03.en.md: added missing VISUAL STOP 01–13 blocks without rewriting existing English prose",
+    "module-07.ru.md / module-07.en.md: canonicalized Module 8 preview title",
+    "module-08.ru.md / module-08.en.md: changed premature Course completed heading to Module completed"
+  ],
+  "unchanged": "All other master copy remains as supplied/approved."
+}

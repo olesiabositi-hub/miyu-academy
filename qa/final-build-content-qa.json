@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "content_version": "gm-v2",
+  "errors": [],
+  "master_hashes": {
+    "module-01.en.md": "8e32a14eac7f3172fd8f5c883c6b9c68c52f3c7ce1e6ae38f7d56ddd71a18565",
+    "module-01.ru.md": "126e0e6d9d53734ebebe1c20b9bd31539f5a899aede481fb5eb5992ef7d758f1",
+    "module-02.en.md": "7b472dd97ce2f7ff2447ee585519dbcb425d184dfe357398f0973aaf50120c8c",
+    "module-02.ru.md": "8e66da58e8801630dcca95ebb47631def10958745e48fb49b21545063d604d97",
+    "module-03.en.md": "3bd9043918d10ccf0e4ce09b817ec7503ea8ad4b470f4ee036c64a32fec18c78",
+    "module-03.ru.md": "4a618a847adf265d51f22d684c973441e19817bbdbc5677b2ca1ca4113d71b1a",
+    "module-04.en.md": "c2e5481a18cddbe6295669d44f6f7f0fff66480d37253e4e8c37c155db8d594b",
+    "module-04.ru.md": "c6c5da6ea47f1a075dc1ed02a94139048d4c1899ba3b72f8eb5cbe4bd2e3d003",
+    "module-05.en.md": "08bd2f2c8a2b520d042536f192f1b6cc060f3547dffba59072ee9b8149fc29ab",
+    "module-05.ru.md": "0e06befdf8e9acb0bb465ccf54f833a7177647a34d46e5b29746144ecf15946f",
+    "module-06.en.md": "0bdc023bf6855d6a6c61c00ab9b266695a1f3b5515960e054bbe44d0ddd1131b",
+    "module-06.ru.md": "f5ee2d84673c1ebcad16ceeceaf9ef54e384f7a93c89851ebe6a2a3290d0650f",
+    "module-07.en.md": "656785174c31c59d4e7c0eee0d43716332bca95db4600035628f3dd9d278de7e",
+    "module-07.ru.md": "2dbf5dc9d1ace943023e5055b10f16fb0b0b7a57c72acf1340c1837bff5d8ce1",
+    "module-08.en.md": "e7b7c8f222df84c4070557cc888d917e44ed48f565bac0cae94cb007cab0b4e1",
+    "module-08.ru.md": "8ebaf6218212be981d8029ec46aefa8413a544b17e4ebc48c58003d5cc8e154b"
+  },
+  "certificate_sha256": "ae7f125377f1c4d7bbecfa40f19e2b7ba083d25a98a7086462b7cea5e1ca6e4a"
+}
