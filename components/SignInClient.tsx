@@ -7,9 +7,13 @@ export function SignInClient({locale,returnTo}:{locale:Locale;returnTo:string}){
  const [email,setEmail]=useState("");const [age,setAge]=useState(false);const [sent,setSent]=useState(false);const [error,setError]=useState("");
  async function submit(){
   setError("");
+  const canonical=(process.env.NEXT_PUBLIC_SITE_URL??location.origin).replace(/\/$/,"");
+  if(location.origin!==canonical){
+   location.assign(`${canonical}${location.pathname}${location.search}`);
+   return;
+  }
   const supabase=createBrowserSupabase();
-  const origin=location.origin;
-  const callback=`${origin}/auth/callback?next=${encodeURIComponent(returnTo)}&locale=${locale}`;
+  const callback=`${canonical}/auth/callback?next=${encodeURIComponent(returnTo)}&locale=${locale}`;
   const {error}=await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:callback,data:{age16:true,preferred_locale:locale}}});
   if(error)setError(error.message);else setSent(true);
  }
