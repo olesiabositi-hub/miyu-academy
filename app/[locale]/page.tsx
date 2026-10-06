@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { COURSE_TITLE, isLocale } from "@/lib/course";
+import { LivingHeroArt } from "@/components/LivingHeroArt";
 
 export default async function AcademyHome({params}:{params:Promise<{locale:string}>}){
   const {locale}=await params;if(!isLocale(locale))notFound();
-  return <div className="container hero"><div className="heroGrid"><div>
+  return <div className="container hero homeHero"><div className="heroGrid"><div className="homeHeroCopy">
     <p className="eyebrow">MIYU ACADEMY</p>
     <h1>{locale==="ru"?"Учись расшифровывать мир вокруг":"Learn to decode the world around you"}</h1>
     <p className="muted">{locale==="ru"?"Культурные курсы, в которых знание начинает работать за пределами урока.":"Cultural learning designed to keep working outside the lesson."}</p>
     <Link className="btn" href={`/${locale}/courses/greek-mythology`}>{COURSE_TITLE[locale]} →</Link>
-  </div><div className="heroArt" aria-hidden="true"/></div></div>
+  </div><div className="homeHeroVisual"><LivingHeroArt/></div></div></div>
 }
 
 export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{
