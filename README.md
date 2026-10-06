@@ -126,3 +126,8 @@ The dynamic web/print renderer uses that locked image as the visual base and ove
 **Architecture/content/backend source: complete.**  
 **Content QA: PASS.**  
 **Public release: blocked only by deployment-specific visual/legal/infrastructure items listed above.**
+
+
+## Staging deployment
+
+Netlify staging is connected to the `main` branch. Environment variables are managed in Netlify.
