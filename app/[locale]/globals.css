@@ -480,3 +480,157 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
   .courseModuleCard{transition:none!important}
   .courseModuleCard:hover{transform:none}
 }
+
+
+/* Greek Mythology landing — approved visual production pass.
+   Uses only the approved course skeleton + approved production artwork. */
+.courseArtwork{display:block;width:100%;height:100%;overflow:hidden}
+.courseArtwork image{pointer-events:none}
+
+.courseLivingHero{
+  --course-parallax-y:0px;
+  --course-pointer-x:0px;
+  --course-pointer-y:0px;
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  overflow:hidden;
+  isolation:isolate;
+  border-radius:26px;
+  background:#0b182a;
+  box-shadow:0 32px 90px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.10)
+}
+.courseLivingHeroImage{
+  position:absolute;
+  inset:-2.2%;
+  background-image:url("/visuals/gm-course-sprite.webp");
+  background-repeat:no-repeat;
+  background-size:100% auto;
+  background-position:center top;
+  transform:translate3d(var(--course-pointer-x),calc(var(--course-parallax-y) + var(--course-pointer-y)),0) scale(1.025);
+  transform-origin:50% 42%;
+  animation:courseHeroBreathe 20s ease-in-out infinite alternate;
+  transition:transform .9s cubic-bezier(.2,.7,.2,1);
+  will-change:transform
+}
+.courseLivingHeroLight,.courseLivingHeroMist,.courseLivingHeroGold{
+  position:absolute;inset:-8%;pointer-events:none;will-change:transform,opacity
+}
+.courseLivingHeroLight{
+  z-index:2;
+  opacity:.23;
+  mix-blend-mode:screen;
+  background:radial-gradient(circle at 48% 42%,rgba(255,222,154,.82),transparent 18%),radial-gradient(circle at 18% 34%,rgba(255,244,219,.24),transparent 20%);
+  animation:courseLight 17s ease-in-out infinite alternate
+}
+.courseLivingHeroMist{
+  z-index:3;opacity:.20;filter:blur(18px);
+  background:radial-gradient(ellipse at 18% 72%,rgba(255,255,255,.45),transparent 28%),radial-gradient(ellipse at 78% 62%,rgba(255,255,255,.20),transparent 28%);
+  animation:courseMist 23s ease-in-out infinite alternate
+}
+.courseLivingHeroGold{
+  z-index:4;opacity:.14;
+  background:radial-gradient(circle at 54% 35%,transparent 0 25%,rgba(218,181,111,.34) 25.1% 25.25%,transparent 25.4% 34%,rgba(218,181,111,.2) 34.1% 34.2%,transparent 34.35%);
+  animation:courseGold 27s ease-in-out infinite alternate
+}
+.courseLivingHero:after{
+  content:"";position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:linear-gradient(90deg,rgba(6,16,31,.18),transparent 32%),linear-gradient(180deg,transparent 66%,rgba(6,16,31,.20));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)
+}
+@keyframes courseHeroBreathe{
+  from{transform:translate3d(var(--course-pointer-x),calc(var(--course-parallax-y) + var(--course-pointer-y)),0) scale(1.02)}
+  to{transform:translate3d(calc(var(--course-pointer-x) - 3px),calc(var(--course-parallax-y) + var(--course-pointer-y) + 2px),0) scale(1.048)}
+}
+@keyframes courseLight{from{transform:translate3d(-.5%,.5%,0);opacity:.17}to{transform:translate3d(1%,-.6%,0);opacity:.28}}
+@keyframes courseMist{from{transform:translate3d(-1%,.5%,0);opacity:.15}to{transform:translate3d(1.2%,-.5%,0);opacity:.24}}
+@keyframes courseGold{from{transform:rotate(-.15deg) scale(.995);opacity:.10}to{transform:rotate(.2deg) scale(1.015);opacity:.18}}
+
+.courseLandingVisual .courseHeroGrid{grid-template-columns:minmax(0,.82fr) minmax(560px,1.18fr);gap:38px}
+.courseLandingVisual .courseHeroArt .courseLivingHero{min-height:0}
+.courseLandingVisual .courseLandingHero{background:linear-gradient(132deg,#071426 0%,#0d1d35 63%,#172c48 100%)}
+.courseLandingVisual .courseLandingHero:after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:140px;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(6,16,31,.22))
+}
+
+.courseWhyVisual{
+  position:relative;min-height:570px;border-radius:28px;overflow:hidden;background:#0d1d35;
+  box-shadow:0 26px 70px rgba(13,29,53,.16)
+}
+.courseWhyVisual>.courseArtwork{position:absolute;inset:0}
+.courseWhyVisual:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(7,19,35,.02) 0%,rgba(7,19,35,.20) 48%,rgba(7,19,35,.92) 100%);
+  pointer-events:none
+}
+.courseWhyNotice{
+  position:absolute;z-index:3;left:28px;right:28px;bottom:24px;color:white;
+  padding-top:14px;border-top:1px solid rgba(255,255,255,.20)
+}
+.courseWhyNotice .eyebrow{color:#e0bf80}
+.courseNoticeListVisual{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.courseNoticeListVisual>div{display:grid;grid-template-columns:30px 1fr;gap:8px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.10)}
+.courseNoticeListVisual span{font-size:9px;letter-spacing:.15em;color:#d8b779}
+.courseNoticeListVisual p{margin:0;color:rgba(255,255,255,.82);font-size:12px;line-height:1.4}
+
+.courseExperience{position:relative;overflow:hidden;background:#08172a;color:white;border-block:1px solid rgba(177,139,82,.26)}
+.courseExperienceArt{position:absolute;inset:-22% -4%;opacity:.32;filter:saturate(.8) contrast(1.06)}
+.courseExperienceArt:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,23,42,.98),rgba(8,23,42,.76) 45%,rgba(8,23,42,.94))}
+.courseExperienceInner{position:relative;z-index:2}
+.courseExperience .eyebrow{color:#d8b779}
+.courseExperience h2,.courseExperience h3{color:white}
+.courseExperience .experienceHeader>p{color:rgba(255,255,255,.68)}
+.courseExperience .experienceGrid{border-color:rgba(255,255,255,.14);background:rgba(5,14,28,.30);backdrop-filter:blur(4px)}
+.courseExperience .experienceItem{background:rgba(8,23,42,.48);border-color:rgba(255,255,255,.12)}
+.courseExperience .experienceItem p{color:rgba(255,255,255,.66)}
+.courseExperience .experienceItem>span{color:#d8b779}
+
+.courseModuleCardVisual{padding:0;overflow:hidden;min-height:0;background:#fffdf9}
+.courseModuleCardVisual:nth-child(1),.courseModuleCardVisual:nth-child(6){background:#fffdf9}
+.courseModuleImage{height:155px;overflow:hidden;background:#0d1d35;border-bottom:1px solid var(--line)}
+.courseModuleImage .courseArtwork{transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .35s ease;transform:scale(1.01);filter:saturate(.92)}
+.courseModuleBody{padding:20px 21px 24px;min-height:215px}
+.courseModuleCardVisual .courseModuleCardTop>span{font-size:32px}
+.courseModuleCardVisual h3{font-size:24px;margin:26px 0 11px}
+.courseModuleCardVisual:hover .courseArtwork{transform:scale(1.045);filter:saturate(1.04)}
+.courseModuleCardVisual:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(13,29,53,.13)}
+
+.courseFinale{position:relative;overflow:hidden;isolation:isolate}
+.courseFinaleBackdrop{position:absolute;z-index:-2;inset:-15% -4%;opacity:.37;filter:saturate(.85) contrast(1.05)}
+.courseFinale:after{
+  content:"";position:absolute;z-index:-1;inset:0;
+  background:linear-gradient(90deg,rgba(5,15,29,.98) 0%,rgba(7,20,36,.91) 52%,rgba(8,23,42,.72) 100%)
+}
+.courseFinaleGrid{position:relative;z-index:2}
+.courseCertificatePreview{backdrop-filter:blur(7px);background:rgba(255,255,255,.08)}
+.courseCertificatePreview img{box-shadow:0 10px 38px rgba(0,0,0,.20)}
+
+.courseCTA{position:relative}
+.courseCTA:before{
+  content:"";display:block;width:74px;height:1px;margin:0 auto 30px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)
+}
+
+@media(max-width:1100px){
+ .courseLandingVisual .courseHeroGrid{grid-template-columns:minmax(0,.9fr) minmax(470px,1.1fr)}
+}
+@media(max-width:820px){
+ .courseLandingVisual .courseHeroGrid{grid-template-columns:1fr}
+ .courseLivingHero{border-radius:21px}
+ .courseWhyVisual{min-height:540px}
+ .courseModuleImage{height:210px}
+ .courseModuleBody{min-height:0}
+}
+@media(max-width:560px){
+ .courseLivingHero{aspect-ratio:16/10}
+ .courseWhyVisual{min-height:620px}
+ .courseNoticeListVisual{grid-template-columns:1fr}
+ .courseModuleImage{height:190px}
+}
+@media(prefers-reduced-motion:reduce){
+ .courseLivingHeroImage,.courseLivingHeroLight,.courseLivingHeroMist,.courseLivingHeroGold{animation:none!important;transition:none!important}
+ .courseLivingHeroImage{transform:none!important}
+ .courseModuleImage .courseArtwork{transition:none!important}
+ .courseModuleCardVisual:hover .courseArtwork{transform:none}
+}

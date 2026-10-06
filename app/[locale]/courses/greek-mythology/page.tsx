@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { COURSE_TITLE, isLocale } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
-import { LivingHeroArt } from "@/components/LivingHeroArt";
+import { CourseArtwork } from "@/components/CourseArtwork";
+import { CourseHeroArt } from "@/components/CourseHeroArt";
 
 const teaser = {
   "module-01": {
@@ -85,7 +86,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
    cta:"Start course"
  };
 
- return <div className="courseLanding">
+ return <div className="courseLanding courseLandingVisual">
   <section className="courseLandingHero">
     <div className="container courseHeroGrid">
       <div className="courseHeroCopy">
@@ -104,7 +105,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
           <span><strong>✓</strong>{locale==="ru"?"сертификат":"certificate"}</span>
         </div>
       </div>
-      <div className="courseHeroArt"><LivingHeroArt/></div>
+      <div className="courseHeroArt"><CourseHeroArt/></div>
     </div>
   </section>
 
@@ -114,25 +115,20 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       <h2>{copy.whyTitle}</h2>
       <p>{copy.whyBody}</p>
     </div>
-    <div className="courseDecoderCard" aria-label={copy.noticeTitle}>
-      <p className="eyebrow">{copy.noticeTitle}</p>
-      <div className="decoderConstellation" aria-hidden="true">
-        <span className="decoderWord wordNike">NIKE</span>
-        <span className="decoderWord wordAtlas">ATLAS</span>
-        <span className="decoderWord wordApollo">APOLLO</span>
-        <span className="decoderWord wordMentor">MENTOR</span>
-        <span className="decoderWord wordTrojan">TROJAN</span>
-        <span className="decoderWord wordOdyssey">ODYSSEY</span>
-        <i className="decoderRing ringOne"/><i className="decoderRing ringTwo"/>
-      </div>
-      <div className="courseNoticeList">
-        {copy.notice.map((item,i)=><div key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></div>)}
+    <div className="courseWhyVisual">
+      <CourseArtwork slot="why" label={locale==="ru"?"Мифология в языке, именах и современной культуре":"Mythology in language, names and modern culture"} />
+      <div className="courseWhyNotice">
+        <p className="eyebrow">{copy.noticeTitle}</p>
+        <div className="courseNoticeListVisual">
+          {copy.notice.map((item,i)=><div key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></div>)}
+        </div>
       </div>
     </div>
   </section>
 
   <section className="courseExperience">
-    <div className="container">
+    <div className="courseExperienceArt" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
+    <div className="container courseExperienceInner">
       <p className="eyebrow">{copy.insideEyebrow}</p>
       <div className="experienceHeader"><h2>{copy.insideTitle}</h2><p>{locale==="ru"?"Каждый модуль построен как редакционный learning experience, а не как длинная лекция.":"Each module is designed as an editorial learning experience rather than a long lecture."}</p></div>
       <div className="experienceGrid">
@@ -154,15 +150,19 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       <p>{locale==="ru"?"Не нужно знать мифологию заранее. Курс собирает карту постепенно, модуль за модулем.":"No prior mythology knowledge is needed. The course builds the map gradually, module by module."}</p>
     </div>
     <div className="courseModuleGrid">
-      {MODULES.map(m=><article className="courseModuleCard" key={m.id}>
-        <div className="courseModuleCardTop"><span>{String(m.order).padStart(2,"0")}</span><small>~{m.duration[0]===m.duration[1]?m.duration[0]:`${m.duration[0]}–${m.duration[1]}`} min</small></div>
-        <h3>{m[locale]}</h3>
-        <p>{teaser[m.id][locale]}</p>
+      {MODULES.map(m=><article className="courseModuleCard courseModuleCardVisual" key={m.id}>
+        <div className="courseModuleImage"><CourseArtwork slot={m.id}/></div>
+        <div className="courseModuleBody">
+          <div className="courseModuleCardTop"><span>{String(m.order).padStart(2,"0")}</span><small>~{m.duration[0]===m.duration[1]?m.duration[0]:`${m.duration[0]}–${m.duration[1]}`} min</small></div>
+          <h3>{m[locale]}</h3>
+          <p>{teaser[m.id][locale]}</p>
+        </div>
       </article>)}
     </div>
   </section>
 
   <section className="courseFinale">
+    <div className="courseFinaleBackdrop" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
     <div className="container courseFinaleGrid">
       <div className="courseFinaleCopy">
         <p className="eyebrow">{copy.finalEyebrow}</p>
