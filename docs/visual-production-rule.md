@@ -61,3 +61,27 @@ Future work must consist of:
 - polishing spacing, cropping, responsiveness and transitions.
 
 No alternative page concept should be introduced.
+
+
+## ABSOLUTE IMAGE GENERATION GATE
+
+**Never call an image-generation tool unless Olesia explicitly asks to generate a new image in that message.**
+
+Requests such as:
+- "implement these visuals";
+- "upload them";
+- "finish the page";
+- "make the page wow";
+- "use the approved design";
+- "polish the page";
+- "add animation";
+
+do **not** authorize any new image generation.
+
+For those requests, use only the already approved visual assets and the approved page prototype/skeleton.
+
+The two approved Greek Mythology landing-page reference mockups supplied by Olesia are the visual source of truth for composition and page mood. Do not replace them with a newly invented full-page design.
+
+If a needed production asset is missing, stop and identify the exact missing slot. Do not generate it until Olesia explicitly says to generate that asset.
+
+Image-generation credits must never be spent on autonomous experimentation, alternative layouts, speculative mockups, or reinterpretation.
