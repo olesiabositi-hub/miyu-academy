@@ -2,13 +2,13 @@
 
 Status: **APPROVED / FIXED**
 
-This rule applies to MIYU Academy homepage/editorial artwork unless it is explicitly changed later.
+This rule applies to MIYU Academy premium editorial artwork, including course landing pages and selected visual hero moments, unless explicitly changed later.
 
 ## Principle
 
-Homepage imagery should feel **alive, not animated**.
+Imagery should feel **alive, not animated**.
 
-The visual effect must remain premium, editorial, calm and cinematic. Motion should suggest light, air, depth and atmosphere — never turn the site into a game, video background or decorative animation demo.
+The visual effect must remain premium, editorial, calm and cinematic. Motion should suggest light, air, depth and atmosphere — never turn MIYU into a game, video background or decorative animation demo.
 
 ## Approved motion language
 
@@ -16,7 +16,7 @@ The visual effect must remain premium, editorial, calm and cinematic. Motion sho
 - Subtle scroll parallax: approximately **6–12 px** total movement.
 - Very small pointer-depth response on desktop: approximately **4–8 px**.
 - Slow atmospheric overlay motion for mist, light and gold geometry.
-- Core mythological figures remain visually stable; the perceived movement should mainly come from **light, clouds, depth and fine gold linework**.
+- Core figures remain visually stable; perceived movement should mainly come from **light, clouds, depth and fine gold linework**.
 - Use only transform and opacity for continuous motion wherever possible.
 
 ## Not allowed
@@ -40,13 +40,13 @@ The visual effect must remain premium, editorial, calm and cinematic. Motion sho
 - Scroll updates must be requestAnimationFrame-throttled.
 - Avoid layout-triggering animation properties.
 
-## Current implementation
+## Current use
 
-The MIYU Academy homepage hero uses the approved Module 1 visual direction with:
+The Greek Mythology course landing hero uses this motion language:
 - slow breathing image motion;
 - subtle scroll parallax;
 - restrained pointer depth;
 - drifting mist/light/gold overlays;
 - a fully static reduced-motion fallback.
 
-This direction should be reused for future homepage visual artwork so the site feels coherent.
+The general MIYU Academy catalogue homepage is intentionally deferred until the course experience is complete. The Academy homepage must not be visually defined around Greek Mythology alone.
