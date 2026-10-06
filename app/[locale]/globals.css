@@ -1095,3 +1095,108 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
 }
 
 /* MIYU production deploy sync: Greek Mythology editorial landing */
+
+/* Greek Mythology image-quality and visual-variety pass, 2026-10-06 */
+.gmHero{min-height:620px}
+.gmHeroBackdrop .courseLivingHeroImage{
+  inset:0;
+  background-size:1200px 1451px;
+  background-position:right top;
+  transform:none!important;
+  transform-origin:center;
+  animation:none!important;
+  transition:none!important;
+  filter:saturate(.93) contrast(1.04)
+}
+.gmHeroBackdrop .courseLivingHeroLight,
+.gmHeroBackdrop .courseLivingHeroMist,
+.gmHeroBackdrop .courseLivingHeroGold{inset:0}
+
+.gmWhy:before{
+  z-index:1;
+  background:
+    linear-gradient(90deg,#f6efe5 0%,rgba(246,239,229,.96) 20%,rgba(246,239,229,.36) 43%,rgba(246,239,229,.28) 58%,rgba(246,239,229,.94) 82%,#f6efe5 100%),
+    linear-gradient(180deg,rgba(246,239,229,.50),rgba(246,239,229,.18) 48%,rgba(246,239,229,.58))
+}
+.gmWhyArt{
+  z-index:0;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:min(1600px,100%);
+  opacity:1;
+  transform:translateX(-50%);
+  -webkit-mask-image:none;
+  mask-image:none
+}
+.gmWhyArt img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 46%;
+  filter:saturate(.62) contrast(.96) brightness(1.06);
+  opacity:.72
+}
+
+.gmLearningBackdrop{
+  inset:0;
+  opacity:1;
+  background:
+    radial-gradient(circle at 78% 30%,rgba(217,184,121,.14) 0 1px,transparent 2px),
+    radial-gradient(circle at 84% 62%,rgba(255,255,255,.10) 0 1px,transparent 2px),
+    radial-gradient(circle at 67% 72%,rgba(217,184,121,.10) 0 1px,transparent 2px),
+    linear-gradient(116deg,transparent 0 62%,rgba(217,184,121,.08) 62.1% 62.25%,transparent 62.4%),
+    linear-gradient(151deg,transparent 0 72%,rgba(255,255,255,.055) 72.1% 72.2%,transparent 72.35%),
+    radial-gradient(circle at 72% 48%,rgba(177,139,82,.10),transparent 26%)
+}
+.gmLearningBackdrop:after{
+  background:linear-gradient(90deg,#071729 0%,rgba(7,23,41,.76) 52%,rgba(7,23,41,.91) 100%)
+}
+
+.gmFinaleBackdrop{
+  inset:0;
+  opacity:1;
+  background:
+    radial-gradient(circle at 79% 33%,rgba(216,183,121,.12),transparent 23%),
+    radial-gradient(circle at 91% 18%,rgba(255,255,255,.055) 0 1px,transparent 2px),
+    linear-gradient(112deg,transparent 0 68%,rgba(216,183,121,.07) 68.1% 68.22%,transparent 68.35%),
+    linear-gradient(165deg,transparent 0 79%,rgba(255,255,255,.045) 79.1% 79.2%,transparent 79.35%)
+}
+.gmFinale:after{
+  background:
+    linear-gradient(90deg,rgba(4,13,25,.99) 0%,rgba(4,13,25,.94) 48%,rgba(4,13,25,.78) 100%),
+    linear-gradient(180deg,rgba(4,13,25,.04),rgba(4,13,25,.16))
+}
+
+.gmModuleImage .courseArtwork{transform:none}
+.gmModuleItem:hover .gmModuleImage .courseArtwork{transform:scale(1.015)}
+
+@media(max-width:860px){
+  .gmHero{min-height:660px}
+  .gmHeroBackdrop .courseLivingHeroImage{
+    background-size:1200px 1451px;
+    background-position:62% top
+  }
+  .gmWhyArt{
+    left:50%;
+    width:100%;
+    top:0;
+    bottom:0;
+    opacity:.82
+  }
+  .gmWhyArt img{object-position:58% 46%;opacity:.56}
+  .gmWhy:before{
+    background:
+      linear-gradient(180deg,#f6efe5 0%,rgba(246,239,229,.92) 30%,rgba(246,239,229,.44) 53%,rgba(246,239,229,.93) 79%,#f6efe5 100%),
+      linear-gradient(90deg,rgba(246,239,229,.93),rgba(246,239,229,.32),rgba(246,239,229,.88))
+  }
+}
+@media(max-width:620px){
+  .gmHero{min-height:700px}
+  .gmHeroBackdrop .courseLivingHeroImage{
+    background-size:1200px 1451px;
+    background-position:60% top
+  }
+  .gmWhyArt img{object-position:61% 46%;opacity:.46}
+}
