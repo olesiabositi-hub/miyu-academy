@@ -41,11 +41,15 @@ function firstHeadingRemoved(markdown:string){
 }
 
 function splitOpening(markdown:string){
-  const lines=markdown.split(/\r?\n/);
-  const pullIndex=lines.findIndex(line=>/^\*\*.*→.*\*\*\s*$/.test(line));
-  if(pullIndex<0)return {body:markdown,pull:""};
-  const pull=lines[pullIndex].replace(/^\*\*/,"").replace(/\*\*\s*$/,"").trim();
-  return {body:lines.filter((_,i)=>i!==pullIndex).join("\n").trim(),pull};
+  const sentenceRu="Поэтому сначала я предлагаю собрать очень простую карту.";
+  const sentenceEn="So I suggest we start by building a very simple map.";
+  const pull=markdown.includes(sentenceRu)?sentenceRu:(markdown.includes(sentenceEn)?sentenceEn:"");
+  if(!pull)return {body:markdown,pull:""};
+  return {body:markdown.replace(pull,"").replace(/\n{3,}/g,"\n\n").trim(),pull};
+}
+
+function cleanNumberedHeading(heading:string){
+  return heading.replace(/^\d+\.\s*/,"").trim();
 }
 
 function splitTitans(markdown:string){
@@ -64,8 +68,11 @@ function splitTitans(markdown:string){
     consumed--;break;
   }
   while(consumed<afterWomen.length && !afterWomen[consumed]?.trim())consumed++;
+  const introRaw=lines.slice(0,menLabel).join("\n").trim();
+  const introSplit=firstHeadingRemoved(introRaw);
   return {
-    intro:lines.slice(0,menLabel).join("\n").trim(),
+    heading:cleanNumberedHeading(introSplit.heading),
+    intro:introSplit.body,
     menLabel:lines[menLabel].trim(),men,
     womenLabel:lines[womenLabel].trim(),women,
     tail:afterWomen.slice(consumed).join("\n").trim(),
@@ -160,7 +167,7 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
     <section id="section-02" className={styles.gaiaSection}>
       <div className={styles.gaiaArt}><Art kind="gaia" locale={model.locale}/></div>
       <div className={styles.gaiaCopy}>
-        <p className={styles.marker}>{beginningSplit.heading}</p>
+        <p className={styles.marker}>01 / {cleanNumberedHeading(beginningSplit.heading)}</p>
         <Markdown>{beginningSplit.body}</Markdown>
       </div>
     </section>
@@ -170,14 +177,14 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
         <p className={styles.marker}>{ru?"БЫСТРАЯ ПРОВЕРКА":"QUICK CHECK"}</p>
         <ChoiceCheck question={q1.question} locale={model.locale} onPersist={(v)=>persistCheck(q1.id,v)}/>
       </div></div>
-      <div className={styles.quickArt}><Art kind="chaos" locale={model.locale}/></div>
+      <div className={styles.quickArt}><Art kind="middle" locale={model.locale}/></div>
     </section>
 
     <section id="section-03" className={styles.readingWide}><Markdown>{sky.markdown}</Markdown></section>
 
     <section id="section-04" className={styles.titansSection}>
       {titansSplit?<>
-        <div className={styles.titansLead}><Markdown>{titansSplit.intro}</Markdown><Markdown>{titansSplit.tail}</Markdown></div>
+        <div className={styles.titansLead}><p className={styles.marker}>02 /</p><h2>{titansSplit.heading}</h2><Markdown>{titansSplit.intro}</Markdown><Markdown>{titansSplit.tail}</Markdown></div>
         <div className={styles.titanLists}>
           <div><h3>{titansSplit.menLabel}</h3>{titansSplit.men.map(name=><p key={name}>{name}</p>)}</div>
           <div><h3>{titansSplit.womenLabel}</h3>{titansSplit.women.map(name=><p key={name}>{name}</p>)}</div>
@@ -187,12 +194,12 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
         <div id="prose-08"><Markdown>{giantQuestion.markdown}</Markdown></div>
         <div id="prose-09"><Markdown>{titanMeaning.markdown}</Markdown></div>
       </div>
-      <div className={styles.titansLandscape}><Art kind="titans" locale={model.locale}/></div>
+      <div className={styles.titansLandscape}><Art kind="chaos" locale={model.locale}/></div>
     </section>
 
     <nav className={styles.chapterTransition} aria-label={ru?"Продолжить модуль":"Continue module"}>
-      <div className={styles.chapterCount}>04 / 13</div>
-      <div className={styles.chapterTrack}><span style={{width:"31%"}}/></div>
+      <div className={styles.chapterCount}>03 / 13</div>
+      <div className={styles.chapterTrack}><span style={{width:"23%"}}/></div>
       <div className={styles.chapterNext}>{ru?"Дальше — новое поколение богов":"Next — the new generation of gods"}</div>
       <a className={styles.continueButton} href="#section-05">{ru?"Продолжить":"Continue"}<span aria-hidden="true">→</span></a>
     </nav>
@@ -207,7 +214,7 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
     </section>
 
     <section id="section-06" className={styles.readingWide}><Markdown>{cronus.markdown}</Markdown></section>
-    <figure className={styles.middleScene}><Art kind="middle" locale={model.locale}/></figure>
+    <figure className={styles.middleScene}><Art kind="titans" locale={model.locale}/></figure>
 
     <section id="section-07" className={styles.splitEditorial}>
       <div><Markdown>{brothers.markdown}</Markdown></div>
