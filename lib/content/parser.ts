@@ -57,7 +57,14 @@ function parseChoice(chunk:string,id:string):ChoiceQuestion{
       .filter(l=>!/^#{1,6}\s+/.test(l))
       .filter(l=>!/^(?:Quick check|Быстрая проверка)$/i.test(stripMd(l)))
       .join("\n");
-    const question=stripMd(pre);
+    let question=stripMd(pre);
+    // Numbered Self-check questions keep the question text in the heading
+    // itself (for example: "## 1. Who are the Titans?"). Since headings
+    // are removed from `pre`, use that heading text as the fallback.
+    if(!question){
+      const numberedHeading=firstHeading(chunk).match(/^##\s+\d+\.\s+(.+)\s*$/);
+      if(numberedHeading) question=stripMd(numberedHeading[1]);
+    }
     const feedback=stripMd(lines.slice(answerLine+1).join("\n"));
     const q={id,question,options:optionRows,answerSourceIndex:answerLetter.charCodeAt(0)-65,feedback};
     return choiceSchema.parse(q);
