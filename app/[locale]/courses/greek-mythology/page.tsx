@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { COURSE_TITLE, isLocale } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
 import { CourseArtwork } from "@/components/CourseArtwork";
-import { CourseHeroArt } from "@/components/CourseHeroArt";
 
 const teaser = {
   "module-01": {
@@ -112,7 +111,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
 
   return <div className="courseLanding gmLanding">
     <section className="gmHero">
-      <div className="gmHeroBackdrop" aria-hidden="true"><CourseHeroArt/></div>
+      <div className="gmHeroBackdrop" aria-hidden="true"/>
       <div className="gmHeroVignette" aria-hidden="true"/>
       <div className="container gmHeroInner">
         <div className="gmHeroCopy">
@@ -131,7 +130,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     </section>
 
     <section className="gmWhy">
-      <div className="gmWhyArt" aria-hidden="true"><img src="/visuals/miyu-home-hero.webp" alt="" /></div>
+      <div className="gmWhyArt" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
       <div className="container gmWhyGrid">
         <div className="gmWhyCopy">
           <p className="eyebrow">{copy.whyEyebrow}</p>
