@@ -74,6 +74,10 @@ All other master copy remains unchanged.
    `npm run qa`
    `npm run dev`
 
+### Visual motion direction
+
+Homepage/editorial artwork follows the locked MIYU motion rule in `docs/visual-motion-rule.md`: subtle breathing, shallow parallax, atmospheric light/mist/gold movement, and a complete `prefers-reduced-motion` fallback. The goal is to make artwork feel alive without turning MIYU into a gamified or video-heavy interface.
+
 ### Production visual gate
 
 The Step 14 plan has 72 visual entries.
