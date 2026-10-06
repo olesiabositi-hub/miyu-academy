@@ -7,7 +7,7 @@ export function Header({locale}:{locale:Locale}){
   const pathname=usePathname();
   const router=useRouter();
   const courseOverview=/^\/(en|ru)\/courses\/greek-mythology\/?$/.test(pathname);
-  const moduleMatch=pathname.match(/^\/(en|ru)\/courses\/greek-mythology\/module-01\/?$/);
+  const moduleMatch=pathname.match(/^\/(en|ru)\/courses\/greek-mythology\/module-01(?:-preview)?\/?$/);
   const moduleNumber=moduleMatch?1:0;
 
   function change(next:Locale){
