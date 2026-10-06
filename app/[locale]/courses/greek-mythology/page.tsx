@@ -131,7 +131,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     </section>
 
     <section className="gmWhy">
-      <div className="gmWhyArt" aria-hidden="true"><CourseArtwork slot="why"/></div>
+      <div className="gmWhyArt" aria-hidden="true"><img src="/visuals/miyu-home-hero.webp" alt="" /></div>
       <div className="container gmWhyGrid">
         <div className="gmWhyCopy">
           <p className="eyebrow">{copy.whyEyebrow}</p>
@@ -148,7 +148,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     </section>
 
     <section className="gmLearning">
-      <div className="gmLearningBackdrop" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
+      <div className="gmLearningBackdrop" aria-hidden="true"/>
       <div className="container gmLearningInner">
         <div className="gmLearningLead">
           <p className="eyebrow">{copy.insideEyebrow}</p>
@@ -183,7 +183,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     </section>
 
     <section className="gmFinale">
-      <div className="gmFinaleBackdrop" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
+      <div className="gmFinaleBackdrop" aria-hidden="true"/>
       <div className="container gmFinaleGrid">
         <div className="gmFinaleCopy">
           <p className="eyebrow">{copy.finalEyebrow}</p>
