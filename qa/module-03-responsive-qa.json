@@ -1,0 +1,48 @@
+{
+  "module": "module-03",
+  "branch": "module-03-build",
+  "base_desktop_commit": "7c342c698d3018d33bc3e0a40c4f0236b9b4edf7",
+  "viewport_mobile_px": 390,
+  "desktop_viewport_px": 1440,
+  "desktop_locked": true,
+  "desktop_pixel_diff_after_mobile_patch": 0,
+  "locales": {
+    "ru": {
+      "scroll_width": 390,
+      "client_width": 390,
+      "images_ok": "8/8",
+      "runtime_exceptions": 0,
+      "full_page_height": 32610
+    },
+    "en": {
+      "scroll_width": 390,
+      "client_width": 390,
+      "images_ok": "8/8",
+      "runtime_exceptions": 0,
+      "full_page_height": 31253
+    }
+  },
+  "checks": {
+    "quick_checks": 4,
+    "self_check_questions": 7,
+    "production_choice_component_reused": true,
+    "persist_endpoint": "/api/module/check"
+  },
+  "progress": {
+    "header": "3/8 = 37.5%",
+    "completion": "3/8 = 37.5%"
+  },
+  "completion": {
+    "endpoint": "/api/module/complete",
+    "continue_target": "/{locale}/courses/greek-mythology/module-04"
+  },
+  "scope": {
+    "module_1_2_changed": false,
+    "middleware_changed": false,
+    "masters_changed": false
+  },
+  "notes": [
+    "Mobile screenshot harness forces lazy images eager only during full-page capture; application loading behavior is unchanged.",
+    "Responsive changes are scoped to max-width:650px."
+  ]
+}
