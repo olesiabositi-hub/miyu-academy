@@ -10,14 +10,16 @@ type ProseBlock = Extract<LessonBlock,{type:"prose"}>;
 type QuickBlock = Extract<LessonBlock,{type:"quick-check"}>;
 type SelfBlock = Extract<LessonBlock,{type:"self-check"}>;
 type CompleteBlock = Extract<LessonBlock,{type:"module-complete"}>;
-type ArtKind="hero"|"middle"|"chaos"|"gaia"|"titans";
+type ArtKind="hero"|"middle"|"chaos"|"gaia"|"titans"|"titansWide"|"hadesPortrait";
 
 const art:Record<ArtKind,{src:string;width:number;height:number;ru:string;en:string}>={
   hero:{src:"/visuals/module-01/01-HERO-gaia-birth-of-order-1672.webp",width:1672,height:941,ru:"Гея — живая Земля в первом свете первозданного мира.",en:"Gaia emerging as living Earth in the first light of the primordial world."},
   middle:{src:"/visuals/module-01/02-MIDDLE-gaia-primordial-world-1672.webp",width:1672,height:941,ru:"Гея и первозданный мир до установления олимпийского порядка.",en:"Gaia and the primordial world before the Olympian order."},
   chaos:{src:"/visuals/module-01/03-DETAIL-chaos-titans-1254.webp",width:1254,height:1254,ru:"Первозданный мир на переходе от Хаоса к древнему поколению богов.",en:"The primordial world in the transition from Chaos toward the older generation of gods."},
-  gaia:{src:"/visuals/module-01/04-DETAIL-gaia-1254.webp",width:1254,height:1254,ru:"Гея — Земля как живое божественное существо.",en:"Gaia — Earth as a living divine being."},
+  gaia:{src:"/visuals/module-01/08-PORTRAIT-gaia-editorial.avif",width:1122,height:1402,ru:"Гея — Земля как живое божественное существо.",en:"Gaia — Earth as a living divine being."},
   titans:{src:"/visuals/module-01/05-DETAIL-titans-1254.webp",width:1254,height:1254,ru:"Титаны — старшее поколение божеств.",en:"The Titans — the older generation of deities."},
+  titansWide:{src:"/visuals/module-01/06-LANDSCAPE-wide-titans-cinematic-1916.avif",width:1916,height:821,ru:"Широкий кинематографичный пейзаж с Титанами над морским побережьем.",en:"A wide cinematic landscape with the Titans above the sea coast."},
+  hadesPortrait:{src:"/visuals/module-01/07-PORTRAIT-hades-editorial.avif",width:1122,height:1402,ru:"Аид как спокойный и достойный правитель подземного мира.",en:"Hades as a calm and dignified ruler of the underworld."},
 };
 
 async function post(url:string,body:unknown){
@@ -162,7 +164,7 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
       {openingSplit.pull&&<blockquote className={styles.openingPull}>{openingSplit.pull}</blockquote>}
     </section>
 
-    <section id="section-01" className={styles.readingWide}><Markdown>{warning.markdown}</Markdown></section>
+    <section id="section-01" className={`${styles.readingWide} ${styles.readingRule}`}><Markdown>{warning.markdown}</Markdown></section>
 
     <section id="section-02" className={styles.gaiaSection}>
       <div className={styles.gaiaArt}><Art kind="gaia" locale={model.locale}/></div>
@@ -180,21 +182,23 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
       <div className={styles.quickArt}><Art kind="middle" locale={model.locale}/></div>
     </section>
 
-    <section id="section-03" className={styles.readingWide}><Markdown>{sky.markdown}</Markdown></section>
+    <section id="section-03" className={`${styles.readingWide} ${styles.readingSoft}`}><Markdown>{sky.markdown}</Markdown></section>
 
     <section id="section-04" className={styles.titansSection}>
       {titansSplit?<>
-        <div className={styles.titansLead}><p className={styles.marker}>02 /</p><h2>{titansSplit.heading}</h2><Markdown>{titansSplit.intro}</Markdown><Markdown>{titansSplit.tail}</Markdown></div>
-        <div className={styles.titanLists}>
-          <div><h3>{titansSplit.menLabel}</h3>{titansSplit.men.map(name=><p key={name}>{name}</p>)}</div>
-          <div><h3>{titansSplit.womenLabel}</h3>{titansSplit.women.map(name=><p key={name}>{name}</p>)}</div>
+        <div className={styles.titansLeadColumn}>
+          <div className={styles.titansLead}><p className={styles.marker}>02 /</p><h2>{titansSplit.heading}</h2><Markdown>{titansSplit.intro}</Markdown><Markdown>{titansSplit.tail}</Markdown></div>
+          <div id="prose-08" className={`${styles.titanSupport} ${styles.titanSupportLeft}`}><Markdown>{giantQuestion.markdown}</Markdown></div>
+        </div>
+        <div className={styles.titansSideColumn}>
+          <div className={styles.titanLists}>
+            <div><h3>{titansSplit.menLabel}</h3>{titansSplit.men.map(name=><p key={name}>{name}</p>)}</div>
+            <div><h3>{titansSplit.womenLabel}</h3>{titansSplit.women.map(name=><p key={name}>{name}</p>)}</div>
+          </div>
+          <div id="prose-09" className={`${styles.titanSupport} ${styles.titanSupportRight}`}><Markdown>{titanMeaning.markdown}</Markdown></div>
         </div>
       </>:<Markdown>{titans.markdown}</Markdown>}
-      <div className={styles.titanPair}>
-        <div id="prose-08"><Markdown>{giantQuestion.markdown}</Markdown></div>
-        <div id="prose-09"><Markdown>{titanMeaning.markdown}</Markdown></div>
-      </div>
-      <div className={styles.titansLandscape}><Art kind="chaos" locale={model.locale}/></div>
+      <div className={styles.titansLandscape}><Art kind="titansWide" locale={model.locale}/></div>
     </section>
 
     <nav className={styles.chapterTransition} aria-label={ru?"Продолжить модуль":"Continue module"}>
@@ -204,7 +208,7 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
       <a className={styles.continueButton} href="#section-05">{ru?"Продолжить":"Continue"}<span aria-hidden="true">→</span></a>
     </nav>
 
-    <section id="section-05" className={styles.readingWide}><Markdown>{nextGeneration.markdown}</Markdown></section>
+    <section id="section-05" className={`${styles.readingWide} ${styles.readingGenerational}`}><Markdown>{nextGeneration.markdown}</Markdown></section>
 
     <section id="quick-check-02" className={`${styles.quickScene} ${styles.quickScenePlain}`}>
       <div className={styles.quickInner}><div className={styles.quickCopy}>
@@ -213,8 +217,10 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
       </div></div>
     </section>
 
-    <section id="section-06" className={styles.readingWide}><Markdown>{cronus.markdown}</Markdown></section>
-    <figure className={styles.middleScene}><Art kind="titans" locale={model.locale}/></figure>
+    <section id="section-06" className={styles.detailEditorial}>
+      <div className={styles.detailEditorialCopy}><Markdown>{cronus.markdown}</Markdown></div>
+      <figure className={styles.detailEditorialArt}><Art kind="titans" locale={model.locale}/></figure>
+    </section>
 
     <section id="section-07" className={styles.splitEditorial}>
       <div><Markdown>{brothers.markdown}</Markdown></div>
@@ -227,7 +233,10 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
       <div id="section-11"><Markdown>{hades.markdown}</Markdown></div>
     </section>
 
-    <section id="section-12" className={styles.readingWide}><Markdown>{hadesClarification.markdown}</Markdown></section>
+    <section id="section-12" className={styles.hadesSection}>
+      <div className={styles.hadesCopy}><Markdown>{hadesClarification.markdown}</Markdown></div>
+      <figure className={styles.hadesPortrait}><Art kind="hadesPortrait" locale={model.locale}/></figure>
+    </section>
     <section id="section-13" className={`${styles.readingWide} ${styles.summary}`}><Markdown>{summary.markdown}</Markdown></section>
 
     <section id="self-check" className={styles.selfCheck}>
