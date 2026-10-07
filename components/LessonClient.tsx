@@ -4,6 +4,7 @@ import type { LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
 import { ChoiceCheck,RevealChallenge } from "@/components/Checks";
 import { ModuleOneLesson } from "@/components/ModuleOneLesson";
+import { ModuleTwoLesson } from "@/components/ModuleTwoLesson";
 import { VisualStop } from "@/components/VisualStop";
 
 async function post(url:string,body:unknown){
@@ -14,6 +15,7 @@ async function post(url:string,body:unknown){
 
 export function LessonClient({model}:{model:LessonModel}){
   if(model.moduleId==="module-01") return <ModuleOneLesson model={model}/>;
+  if(model.moduleId==="module-02") return <ModuleTwoLesson model={model}/>;
   return <GenericLesson model={model}/>;
 }
 
