@@ -212,7 +212,7 @@ export function ModuleTwoLesson({model}:{model:LessonModel}){
     <QuickScene block={q3} locale={model.locale} onPersist={persistCheck}/>
 
     <section id="twins" className={styles.twinsSection}>
-      <div className={`${styles.twinsHead} ${styles.reading}`}><p className={styles.marker}>{ru?"07 / БЛИЗНЕЦЫ":"07 / THE TWINS"}</p><h2>Apollo ↔ Artemis</h2></div>
+      <div className={`${styles.twinsHead} ${styles.reading}`}><p className={styles.marker}>{ru?"07 / БЛИЗНЕЦЫ":"07 / THE TWINS"}</p><h2>{ru?"Аполлон ↔ Артемида":"Apollo ↔ Artemis"}</h2></div>
       <figure className={styles.wideArt}><Art kind="twins" locale={model.locale}/></figure>
       <div className={`${styles.twinsCopy} ${styles.reading}`}>
         <div><h2>{s13.heading}</h2><div className={styles.rich}><Markdown>{s13.body}</Markdown></div><aside className={`${styles.modernCard} ${styles.inlineCard}`}><p className={styles.modernLabel}>NASA / APOLLO</p><h3>{s14.heading}</h3><div className={styles.rich}><Markdown>{s14.body}</Markdown></div></aside></div>
