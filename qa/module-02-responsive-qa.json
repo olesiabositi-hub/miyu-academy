@@ -1,0 +1,65 @@
+{
+  "module": "module-02",
+  "checkpoint_type": "responsive-mobile-qa",
+  "desktop_locked_from_commit": "1b8991e445d05a557e483445311094ade46f33a6",
+  "tested_viewports": [
+    {
+      "locale": "ru",
+      "width": 390,
+      "height": 844,
+      "document_scroll_width": 390,
+      "broken_images": 0,
+      "image_count": 8,
+      "console_errors": 0
+    },
+    {
+      "locale": "en",
+      "width": 390,
+      "height": 844,
+      "document_scroll_width": 390,
+      "broken_images": 0,
+      "image_count": 8,
+      "console_errors": 0
+    },
+    {
+      "locale": "ru",
+      "width": 1440,
+      "height": 1000,
+      "document_scroll_width": 1440,
+      "broken_images": 0,
+      "image_count": 8,
+      "console_errors": 0
+    },
+    {
+      "locale": "en",
+      "width": 1440,
+      "height": 1000,
+      "document_scroll_width": 1440,
+      "broken_images": 0,
+      "image_count": 8,
+      "console_errors": 0
+    }
+  ],
+  "content_parity": {
+    "ru_master_sha": "96836131507df19920cb0ed8492abda6de427b55",
+    "en_master_sha": "63ce94e02bfd3fdcfa6dfc73d1f033984e85daf4",
+    "numbered_sections_each": 22,
+    "quick_checks_each": 5,
+    "self_checks_each": 7
+  },
+  "functional_checks": {
+    "module_start_endpoint_wired": true,
+    "quick_check_persistence_endpoint_wired": true,
+    "completion_endpoint_wired": true,
+    "completion_target": "/{locale}/courses/greek-mythology/module-03",
+    "header_progress": "2 / 8 = 25%",
+    "module_two_route_uses_dedicated_component": true
+  },
+  "visual_checks": {
+    "desktop_application_code_changed": false,
+    "mobile_document_overflow": false,
+    "asset_placement_preserved": true,
+    "locked_assets_regenerated": false
+  },
+  "status": "PASS"
+}
