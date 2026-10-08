@@ -30,5 +30,5 @@ export function Header({locale}:{locale:Locale}){
       <button className={locale==="en"?"active":""} aria-pressed={locale==="en"} onClick={()=>change("en")}>EN</button>
       <button className={locale==="ru"?"active":""} aria-pressed={locale==="ru"} onClick={()=>change("ru")}>RU</button>
     </div>
-  </header>;
+  </header>
 }
