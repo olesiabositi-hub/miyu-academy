@@ -6,6 +6,7 @@ import { ChoiceCheck,RevealChallenge } from "@/components/Checks";
 import { ModuleOneLesson } from "@/components/ModuleOneLesson";
 import { ModuleTwoLesson } from "@/components/ModuleTwoLesson";
 import { ModuleThreeLesson } from "@/components/ModuleThreeLesson";
+import { ModuleFourLesson } from "@/components/ModuleFourLesson";
 import { VisualStop } from "@/components/VisualStop";
 
 async function post(url:string,body:unknown){
@@ -18,6 +19,7 @@ export function LessonClient({model}:{model:LessonModel}){
   if(model.moduleId==="module-01") return <ModuleOneLesson model={model}/>;
   if(model.moduleId==="module-02") return <ModuleTwoLesson model={model}/>;
   if(model.moduleId==="module-03") return <ModuleThreeLesson model={model}/>;
+  if(model.moduleId==="module-04") return <ModuleFourLesson model={model}/>;
   return <GenericLesson model={model}/>;
 }
 

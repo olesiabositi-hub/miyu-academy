@@ -7,7 +7,7 @@ export function Header({locale}:{locale:Locale}){
   const pathname=usePathname();
   const router=useRouter();
   const courseOverview=/^\/(en|ru)\/courses\/greek-mythology\/?$/.test(pathname);
-  const moduleMatch=pathname.match(/^\/(en|ru)\/courses\/greek-mythology\/module-(0[1-3])\/?$/);
+  const moduleMatch=pathname.match(/^\/(en|ru)\/courses\/greek-mythology\/module-(0[1-4])\/?$/);
   const moduleNumber=moduleMatch?Number(moduleMatch[2]):0;
 
   function change(next:Locale){
@@ -30,5 +30,5 @@ export function Header({locale}:{locale:Locale}){
       <button className={locale==="en"?"active":""} aria-pressed={locale==="en"} onClick={()=>change("en")}>EN</button>
       <button className={locale==="ru"?"active":""} aria-pressed={locale==="ru"} onClick={()=>change("ru")}>RU</button>
     </div>
-  </header>
+  </header>;
 }
