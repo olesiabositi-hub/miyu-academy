@@ -5,10 +5,13 @@ import { requireUser } from "@/lib/auth";
 import { parseLesson } from "@/lib/content/parser";
 import { LessonClient } from "@/components/LessonClient";
 import { ModuleNav } from "@/components/ModuleNav";
+import { isPreviewRequest } from "@/lib/preview";
+import { PreviewBadge } from "@/components/PreviewBadge";
 
 export default async function ModulePage({params}:{params:Promise<{locale:string;module:string}>}){
  const {locale,module}=await params;if(!isLocale(locale)||!MODULE_IDS.includes(module))notFound();
- await requireUser(locale,`/${locale}/courses/greek-mythology/${module}`);
+ const preview=await isPreviewRequest();
+ if(!preview) await requireUser(locale,`/${locale}/courses/greek-mythology/${module}`);
  const model=parseLesson(module,locale);
- return <><LessonClient model={model}/><ModuleNav locale={locale} moduleId={module}/></>;
+ return <>{preview&&<PreviewBadge locale={locale}/>}<LessonClient model={model}/><ModuleNav locale={locale} moduleId={module}/></>;
 }

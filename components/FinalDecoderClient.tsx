@@ -17,13 +17,15 @@ async function api(url:string,body?:unknown){
   return r.json();
 }
 
-export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Locale;questions:Q[];initialAttempt:Attempt|null}){
+export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:{locale:Locale;questions:Q[];initialAttempt:Attempt|null;demo?:boolean}){
   const router=useRouter();
   const [attempt,setAttempt]=useState<Attempt|null>(initialAttempt);
   const [review,setReview]=useState(false);
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState<UiKey|null>(null);
 
+  // Preview mode: nothing is sent to the server.
+  const call=(url:string,body?:unknown):Promise<any>=>demo?Promise.resolve({}):api(url,body);
   const total=questions.length;
   const last=total-1;
   const i=Math.min(attempt?.current_question_index??0,last);
@@ -34,7 +36,7 @@ export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Loc
   async function start(){
     setBusy(true);
     setError(null);
-    try{ setAttempt(await api("/api/final/start")); }
+    try{ setAttempt(demo?{id:"demo",current_question_index:0,selected_answers:{},option_order:questions.map(x=>x.ru.options.map((_,k)=>k))}:await api("/api/final/start")); }
     catch{ setError("fmd.submitError"); }
     finally{ setBusy(false); }
   }
@@ -44,7 +46,7 @@ export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Loc
     setAttempt({...attempt,selected_answers:{...attempt.selected_answers,[q.id]:sourceIndex}});
     setError(null);
     try{
-      await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex,currentQuestionIndex:i});
+      await call("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex,currentQuestionIndex:i});
     }catch{
       setError("fmd.saveError");
     }
@@ -55,7 +57,7 @@ export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Loc
     const n=Math.max(0,Math.min(last,next));
     setAttempt({...attempt,current_question_index:n});
     setReview(false);
-    await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex:attempt.selected_answers[q.id]??null,currentQuestionIndex:n}).catch(()=>{});
+    await call("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex:attempt.selected_answers[q.id]??null,currentQuestionIndex:n}).catch(()=>{});
   }
 
   async function submit(){
@@ -63,8 +65,8 @@ export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Loc
     setBusy(true);
     setError(null);
     try{
-      await api("/api/final/submit",{attemptId:attempt.id});
-      router.replace(`${courseBasePath(locale)}/final-myth-decoder/result`);
+      await call("/api/final/submit",{attemptId:attempt.id});
+      router.replace(`${courseBasePath(locale)}/final-myth-decoder/result${demo?"?demo=pass":""}`);
       router.refresh();
     }catch{
       setError("fmd.submitError");
