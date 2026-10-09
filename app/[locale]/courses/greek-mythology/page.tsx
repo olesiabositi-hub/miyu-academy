@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { COURSE_TITLE, isLocale } from "@/lib/course";
-import { MODULES } from "@/lib/content/catalog";
-import { CourseArtwork } from "@/components/CourseArtwork";
-import { MODULE_TEASERS } from "@/lib/content/teasers";
+import { ModuleMosaic } from "@/components/ModuleMosaic";
+import { AuthorBlock } from "@/components/AuthorBlock";
+import { Faq } from "@/components/Faq";
+import { Reveal } from "@/components/Reveal";
 export default async function CourseOverview({params}:{params:Promise<{locale:string}>}){
   const {locale}=await params;
   if(!isLocale(locale)) notFound();
@@ -74,105 +75,102 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       ["06","Certificate","Unlocked after a successful final."]
     ];
 
-  return <div className="courseLanding gmLanding">
-    <section className="gmHero">
-      <div className="gmHeroBackdrop" aria-hidden="true"/>
-      <div className="gmHeroVignette" aria-hidden="true"/>
-      <div className="container gmHeroInner">
-        <div className="gmHeroCopy">
-          <p className="eyebrow">{copy.kicker}</p>
-          <h1>{titleMain}:<span>{titleSub}</span></h1>
-          <p className="gmHeroLead">{copy.intro}</p>
-          <div className="gmHeroActions">
-            <Link className="btn courseGoldBtn" href={"/"+locale+"/courses/greek-mythology/dashboard"}>{copy.primary}<b aria-hidden="true">→</b></Link>
-            <a className="gmTextLink" href="#modules">{copy.secondary}<b aria-hidden="true">↓</b></a>
+  const modulesLead=locale==="ru"?"Не нужно знать мифологию заранее. Курс собирает карту постепенно, модуль за модулем.":"No prior mythology knowledge is needed. The course builds the map gradually, module by module.";
+  const dashboard="/"+locale+"/courses/greek-mythology/dashboard";
+
+  return <div className="hx">
+    <section className="hxHero hxHeroCourse">
+      <picture className="hxHeroArt" aria-hidden="true">
+        <source media="(max-width: 800px)" srcSet="/visuals/home/course-hero-960.webp"/>
+        <img src="/visuals/home/course-hero-1916.webp" width={1916} height={821} alt="" fetchPriority="high" decoding="async"/>
+      </picture>
+      <div className="hxHeroShade" aria-hidden="true"/>
+      <div className="hxWrap hxHeroInner">
+        <div className="hxHeroCopy">
+          <div className="lxEyebrow lxEyebrowGold">{copy.kicker}</div>
+          <h1 className="hxH1">{titleMain}:<span>{titleSub}</span></h1>
+          <p className="hxLead">{copy.intro}</p>
+          <div className="hxActions">
+            <Link className="lxBtn lxBtnGold" href={dashboard}>{copy.primary} <span aria-hidden="true">→</span></Link>
+            <a className="hxTextLink" href="#modules">{copy.secondary} <span aria-hidden="true">↓</span></a>
           </div>
-          <div className="gmHeroFacts" aria-label={locale==="ru"?"Информация о курсе":"Course facts"}>
-            {facts.map(([value,label])=><span key={label}><strong>{value}</strong><small>{label}</small></span>)}
-          </div>
+          <ul className="hxFacts hxFactsHero" aria-label={locale==="ru"?"Информация о курсе":"Course facts"}>
+            {facts.map(([value,label])=><li key={label}><strong>{value}</strong><span>{label}</span></li>)}
+          </ul>
         </div>
       </div>
     </section>
 
-    <section className="gmWhy">
-      <div className="gmWhyArt" aria-hidden="true"><CourseArtwork slot="decoder"/></div>
-      <div className="container gmWhyGrid">
-        <div className="gmWhyCopy">
-          <p className="eyebrow">{copy.whyEyebrow}</p>
-          <h2>{copy.whyTitle}</h2>
-          <p>{copy.whyBody}</p>
-        </div>
-        <div className="gmWhyNotice">
-          <p className="eyebrow">{copy.noticeTitle}</p>
-          <div className="gmNoticeList">
-            {copy.notice.map((item,i)=><div key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></div>)}
+    <section className="hxSection">
+      <div className="hxWrap hxWhy">
+        <Reveal>
+          <div className="lxEyebrow">{copy.whyEyebrow}</div>
+          <h2 className="hxH2">{copy.whyTitle}</h2>
+          <p className="hxBody">{copy.whyBody}</p>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <div className="hxNotice">
+            <div className="lxEyebrow">{copy.noticeTitle}</div>
+            <ol>{copy.notice.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></li>)}</ol>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
 
-    <section className="gmLearning">
-      <div className="gmLearningBackdrop" aria-hidden="true"/>
-      <div className="container gmLearningInner">
-        <div className="gmLearningLead">
-          <p className="eyebrow">{copy.insideEyebrow}</p>
-          <h2>{copy.insideTitle}</h2>
-        </div>
-        <div className="gmLearningRail">
-          {learning.map(([num,title,body])=><article className="gmLearningItem" key={title}>
-            <span>{num}</span><h3>{title}</h3><p>{body}</p>
-          </article>)}
-        </div>
-      </div>
-    </section>
-
-    <section id="modules" className="gmModules">
-      <div className="container gmModulesHead">
+    <section className="hxSection hxHow">
+      <div className="hxWrap hxHowGrid">
         <div>
-          <p className="eyebrow">{copy.modulesEyebrow}</p>
-          <h2>{copy.modulesTitle}</h2>
+          <div className="lxEyebrow">{copy.insideEyebrow}</div>
+          <h2 className="hxH2">{copy.insideTitle}</h2>
+          <ol className="hxSteps hxSteps6">
+            {learning.map(([num,title,body])=><li key={title}><span>{num}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}
+          </ol>
         </div>
-        <p>{locale==="ru"?"Не нужно знать мифологию заранее. Курс собирает карту постепенно, модуль за модулем.":"No prior mythology knowledge is needed. The course builds the map gradually, module by module."}</p>
-      </div>
-      <div className="gmModuleRailWrap">
-        <div className="gmModuleRail">
-          {MODULES.map(m=><article className="gmModuleItem" key={m.id}>
-            <div className="gmModuleImage"><CourseArtwork slot={m.id}/></div>
-            <div className="gmModuleMeta"><span>{String(m.order).padStart(2,"0")}</span><small>~{m.duration[0]===m.duration[1]?m.duration[0]:m.duration[0]+"–"+m.duration[1]} min</small></div>
-            <h3>{m[locale]}</h3>
-            <p>{MODULE_TEASERS[m.id][locale]}</p>
-          </article>)}
-        </div>
+        <picture className="hxHowArt">
+          <source media="(max-width: 700px)" srcSet="/visuals/home/how-learning-600.webp"/>
+          <img src="/visuals/home/how-learning-1200.webp" width={1200} height={900} alt="" loading="lazy" decoding="async"/>
+        </picture>
       </div>
     </section>
 
-    <section className="gmFinale">
-      <div className="gmFinaleBackdrop" aria-hidden="true"/>
-      <div className="container gmFinaleGrid">
-        <div className="gmFinaleCopy">
-          <p className="eyebrow">{copy.finalEyebrow}</p>
-          <h2>{copy.finalTitle}</h2>
+    <section id="modules" className="hxSection">
+      <div className="hxWrap">
+        <div className="hxModulesHead">
+          <div>
+            <div className="lxEyebrow">{copy.modulesEyebrow}</div>
+            <h2 className="hxH2">{copy.modulesTitle}</h2>
+          </div>
+          <p className="hxBody">{modulesLead}</p>
+        </div>
+        <ModuleMosaic locale={locale}/>
+      </div>
+    </section>
+
+    <section className="hxFinale">
+      <div className="hxWrap hxFinaleGrid">
+        <div className="hxFinaleCopy">
+          <div className="lxEyebrow lxEyebrowGold">{copy.finalEyebrow}</div>
+          <h2 className="hxH2 hxH2Light">{copy.finalTitle}</h2>
           <p>{copy.finalBody}</p>
-          <div className="gmDecoderScore">
-            <span><strong>15</strong>{locale==="ru"?"вопросов":"questions"}</span>
-            <span><strong>12/15</strong>{locale==="ru"?"для прохождения":"to pass"}</span>
-            <span><strong>∞</strong>{locale==="ru"?"попыток":"attempts"}</span>
-          </div>
+          <ul className="hxFacts hxFactsHero">
+            <li><strong>15</strong><span>{locale==="ru"?"вопросов":"questions"}</span></li>
+            <li><strong>12/15</strong><span>{locale==="ru"?"для прохождения":"to pass"}</span></li>
+            <li><strong>∞</strong><span>{locale==="ru"?"попыток":"attempts"}</span></li>
+          </ul>
         </div>
-        <div className="gmCertificateStage">
-          <img src="/certificate-master.webp" alt={locale==="ru"?"Пример сертификата MIYU Academy":"MIYU Academy certificate preview"} />
+        <div className="hxCertShot">
+          <img src="/certificate-master.webp" width={1492} height={1054} loading="lazy" decoding="async" alt={locale==="ru"?"Пример сертификата MIYU Academy":"MIYU Academy certificate preview"}/>
         </div>
       </div>
     </section>
 
-    <section className="gmCTA">
-      <div className="container gmCTAInner">
-        <div>
-          <p className="eyebrow">MIYU ACADEMY</p>
-          <h2>{copy.ctaTitle}</h2>
-          <p>{copy.ctaBody}</p>
-        </div>
-        <Link className="btn courseGoldBtn" href={"/"+locale+"/courses/greek-mythology/dashboard"}>{copy.cta}<b aria-hidden="true">→</b></Link>
+    <AuthorBlock locale={locale}/>
+    <Faq locale={locale} title={locale==="ru"?"Частые вопросы":"Frequently asked questions"} eyebrow={locale==="ru"?"ВОПРОСЫ":"QUESTIONS"}/>
+
+    <section className="hxCta">
+      <div className="hxWrap hxCtaInner">
+        <div><h2 className="hxH2 hxH2Light">{copy.ctaTitle}</h2><p>{copy.ctaBody}</p></div>
+        <Link className="lxBtn lxBtnGold" href={dashboard}>{copy.cta} <span aria-hidden="true">→</span></Link>
       </div>
     </section>
   </div>
