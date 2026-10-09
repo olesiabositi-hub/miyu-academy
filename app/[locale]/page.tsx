@@ -55,9 +55,20 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
   };
 
   return <div className="hx">
-    <section className="hxHeroLight">
-      <div className="hxWrap hxHeroLightGrid">
-        <div className="hxHeroLightCopy">
+    <section className="hxHero hxHeroAcademy">
+      <picture className="hxHeroArt" aria-hidden="true">
+        <source media="(max-width: 800px)" srcSet="/visuals/home/academy-arch-860.webp"/>
+        <img src="/visuals/home/academy-hero-1672.webp" width={1672} height={716} alt="" fetchPriority="high" decoding="async"/>
+      </picture>
+      <div className="hxHeroFx" aria-hidden="true">
+        <span className="hxFx hxFxSun"/>
+        <span className="hxFx hxFxMist hxFxMistA"/>
+        <span className="hxFx hxFxMist hxFxMistB"/>
+        {[12,27,41,58,70,86].map((x,i)=><i key={x} className="hxMote" style={{left:`${x}%`,animationDelay:`${-i*3.1}s`,animationDuration:`${18+(i%3)*4}s`}}/>)}
+      </div>
+      <div className="hxHeroShade" aria-hidden="true"/>
+      <div className="hxWrap hxHeroInner">
+        <div className="hxHeroCopy hxHeroLightCopy">
           <div className="lxEyebrow">{c.kicker}</div>
           <h1 className="hxH1Dark">{c.h1}</h1>
           <p className="hxLeadDark">{c.lead}</p>
@@ -67,23 +78,11 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
           </div>
           <ul className="hxChipsDark">{c.chips.map(x=><li key={x}>{x}</li>)}</ul>
         </div>
-        <div className="hxArchWrap">
-          <div className="hxArchRing" aria-hidden="true"/>
-          <div className="hxArch">
-            <picture>
-              <source media="(max-width: 700px)" srcSet="/visuals/home/academy-arch-560.webp"/>
-              <img src="/visuals/home/academy-arch-860.webp" width={860} height={821} alt="" fetchPriority="high" decoding="async"/>
-            </picture>
-            <span className="hxFx hxFxSun" aria-hidden="true"/>
-            <span className="hxFx hxFxMist hxFxMistA" aria-hidden="true"/>
-            <span className="hxFx hxFxMist hxFxMistB" aria-hidden="true"/>
-          </div>
-          <Link className="hxArchBadge" href={course}>
-            <span className="lxEyebrow lxEyebrowGold">{c.courseEyebrow}</span>
-            <strong>{titleMain}</strong>
-          </Link>
-        </div>
       </div>
+      <Link className="hxArchBadge" href={course}>
+        <span className="lxEyebrow lxEyebrowGold">{c.courseEyebrow}</span>
+        <strong>{titleMain}</strong>
+      </Link>
     </section>
 
     <section className="hxSection">

@@ -20,6 +20,7 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
 @media print{.topbar,.footer,.certPanel{display:none!important}}
 
 
+
 .certificateVisual{position:relative;width:100%;aspect-ratio:1492/1054;overflow:hidden;background:#f3ead8;color:#0D1D35;container-type:inline-size;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .certificateMasterBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .certificateClean{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
@@ -94,6 +95,7 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
 }
 
 
+
 /* MIYU production deploy sync: Greek Mythology editorial landing */
 
 /* Greek Mythology image-quality and visual-variety pass, 2026-10-06 */
@@ -118,6 +120,7 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
 .moduleBrand{display:flex;align-items:center;gap:14px;color:#0d1d35;text-decoration:none}.moduleBrandWord{font:600 24px/.9 var(--font-serif);letter-spacing:.20em}.moduleBrandRule{width:1px;height:24px;background:rgba(13,29,53,.28)}.moduleBrandAcademy{font:700 9px/1 var(--font-sans);letter-spacing:.22em}
 .topbarModuleLesson .topnav{gap:30px;font-size:12px}.topbarModuleLesson .topnav a{color:#243248}.moduleHeaderProgress{width:170px;height:2px;margin-left:8px;background:rgba(13,29,53,.15)}.moduleHeaderProgress span{display:block;height:100%;background:#b18b52}
 .topbarModuleLesson .lang{gap:9px;padding:0;border:0;border-radius:0}.topbarModuleLesson .lang button{padding:2px 0;border-radius:0;background:transparent!important;color:#243248!important;font-size:10px}.topbarModuleLesson .lang button.active{font-weight:800;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#b18b52}@media(max-width:820px){.topbarModuleLesson{height:62px;padding:0 18px}.moduleBrand{gap:10px}.moduleBrandWord{font-size:21px}.moduleBrandAcademy{font-size:8px}.topbarModuleLesson .topnav{display:none}.moduleHeaderProgress{width:84px}.topbarModuleLesson .lang{gap:7px}}
+
 
 
 
@@ -167,6 +170,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 
 
+
 /* Footer */
 .footer{padding:56px 0 26px;text-align:left;font-size:14px;background:var(--parchment);color:var(--muted)}
 .footerGrid{width:min(var(--container),calc(100% - 64px));margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:40px}
@@ -185,6 +189,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 
 
+
 /* Shared module hero (modules 5–8) */
 .moduleHero{position:relative;background:var(--ivory)}
 .moduleHeroMedia{position:relative;height:clamp(300px,42vw,620px);overflow:hidden;background:var(--parchment)}
@@ -198,6 +203,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
  .moduleHeroMedia{height:auto;aspect-ratio:16/10}
  .moduleHeroPanel{width:calc(100% - 32px);margin-top:-34px;padding:24px 20px 22px}
 }
+
 
 @keyframes riseIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
@@ -217,10 +223,12 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 
 
+
 /* Scroll-in (see components/Reveal.tsx). Content is visible unless JS marks it pending. */
 [data-reveal]{transition:opacity var(--dur-reveal) var(--ease-out),transform var(--dur-reveal) var(--ease-out)}
 [data-reveal="pending"]{opacity:0;transform:translateY(var(--reveal-distance))}
 [data-reveal="shown"]{opacity:1;transform:none}@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
+
 
 
 /* Header on phones: brand + language + menu must fit at 320–390 px */
@@ -230,6 +238,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }@media(max-width:380px){
  .topbarModuleLesson .moduleBrandRule,.topbarModuleLesson .moduleBrandAcademy{display:none}
 }
+
 
 
 
@@ -314,6 +323,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 
 
+
 /* module outro */
 .lxOutro{padding:68px 20px 0;background:var(--ivory);border-top:1px solid rgba(13,29,53,.08)}
 .lxOutroGrid{width:min(1180px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:48px;align-items:start}
@@ -340,6 +350,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
  .lxOutroGrid{grid-template-columns:1fr;gap:28px}
  .lxNext{position:static}
 }
+
 
 
 /* visual stops, modules 5–8 */
@@ -376,6 +387,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 
 
+
 /* ---- Final Myth Decoder (stage 2) ---- */
 .fmd{max-width:760px;margin:0 auto;padding:clamp(28px,5vw,56px) 0 72px;display:flex;flex-direction:column;gap:20px;color:var(--ink)}
 .fmdIntro{align-items:flex-start}
@@ -410,6 +422,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
  .fmdNav .lxBtn{flex:1 1 100%}
  .fmdLead{font-size:17px}
 }
+
 
 
 /* Preview-only notice */
@@ -449,6 +462,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 .verifyStatus.is-revoked{background:#f3e2de;color:var(--error)}@media(max-width:900px){.certLayout{grid-template-columns:1fr}.certPage{width:calc(100% - 32px)}}
 
 
+
 @page{size:297mm 210mm;margin:0}@media print{
  html,body{height:210mm;overflow:hidden;margin:0;padding:0;background:#fff!important}
  .skip,header,footer,nav,.certHead,.certSide,.previewBadge{display:none!important}
@@ -457,6 +471,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
  .certStage{width:297mm;height:210mm;padding:0;border:0;border-radius:0;box-shadow:none;background:#fff;break-inside:avoid}
  .certStage .certificateVisual{width:297mm;height:210mm;aspect-ratio:auto;box-shadow:none}
 }
+
 
 
 /* ---- Accounts (stage 4) ---- */
@@ -527,6 +542,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 .dashMileLink:hover{color:var(--ochre)}
 .dashFoot{margin:28px 0 0;text-align:center}
 .dashFoot a{color:var(--muted);font-size:14px}@media(max-width:760px){.dashModules,.dashMilestones{grid-template-columns:1fr}}
+
 
 
 .resumeToast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:70;max-width:calc(100vw - 32px);padding:10px 18px;border-radius:999px;background:var(--navy-deep);color:#fff;font:600 13px/1.3 var(--font-sans);box-shadow:var(--shadow-sm)}
@@ -663,11 +679,11 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 @media(prefers-reduced-motion:reduce){.hxHeroArt img{animation:none}.hxTile img{transition:none}}
 
+
 a.lxBtn{text-decoration:none}
 
 /* ---- Academy home: bright editorial hero (differs from the dark cinematic course hero) ---- */
 .hxHeroLight{position:relative;overflow:hidden;background:radial-gradient(900px 520px at 78% 40%,rgba(224,182,111,.28),rgba(247,241,231,0) 70%),linear-gradient(180deg,var(--ivory),#f3ead9)}
-.hxHeroLightGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,6vw,80px);align-items:center;padding:clamp(40px,6vw,84px) 0 clamp(48px,7vw,96px)}
 .hxHeroLightCopy{max-width:600px}
 .hxH1Dark{margin:12px 0 0;font:500 clamp(42px,5.8vw,80px)/1.02 var(--font-serif);letter-spacing:-.02em;color:var(--navy);text-wrap:balance}
 .hxLeadDark{margin:22px 0 0;max-width:50ch;font-size:clamp(17px,1.5vw,20px);line-height:1.6;color:var(--muted)}
@@ -675,11 +691,6 @@ a.lxBtn{text-decoration:none}
 .hxTextLinkDark:hover{border-color:var(--gold)}
 .hxChipsDark{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0;padding:0}
 .hxChipsDark li{padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,249,.7);color:var(--navy);font:600 12px/1 var(--font-sans);letter-spacing:.04em}
-.hxArchWrap{position:relative;justify-self:center;width:min(100%,440px)}
-.hxArchRing{position:absolute;inset:-18px -18px 18px 18px;border:1.5px solid var(--gold);border-radius:240px 240px 26px 26px;opacity:.55}
-.hxArch{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:240px 240px 24px 24px;box-shadow:0 30px 70px rgba(13,29,53,.28)}
-.hxArch picture{display:block;width:100%;height:100%}
-.hxArch img{display:block;width:100%;height:100%;object-fit:cover;object-position:52% 50%;animation:hxDrift 26s ease-in-out infinite alternate}
 .hxArchBadge{position:absolute;left:-22px;bottom:34px;display:flex;flex-direction:column;gap:4px;max-width:230px;padding:14px 18px;border-radius:var(--radius-md);background:rgba(255,253,249,.94);box-shadow:var(--shadow-md,var(--shadow-sm));color:var(--navy);text-decoration:none;backdrop-filter:blur(6px);animation:hxFloat 7s ease-in-out infinite}
 .hxArchBadge strong{font:500 20px/1.15 var(--font-serif)}
 
@@ -704,10 +715,9 @@ a.lxBtn{text-decoration:none}
 .hxFaqItem p{animation:hxRise .35s var(--ease-out) both}
 .hxPortrait img{transition:transform .8s var(--ease-out)}
 .hxAuthorGrid:hover .hxPortrait img{transform:scale(1.02)}@media(max-width:860px){
- .hxHeroLightGrid{grid-template-columns:1fr}
- .hxArchWrap{width:min(100%,360px);margin-top:12px}
  .hxArchBadge{left:8px;bottom:18px}
 }
+
 /* ---- Final hero motion: soft mist, light and drifting motes ---- */
 .hxFx{position:absolute;pointer-events:none}
 .hxFxMist{left:-30%;right:-30%;filter:blur(12px);will-change:transform,opacity}
@@ -720,15 +730,14 @@ a.lxBtn{text-decoration:none}
 .hxMote{position:absolute;bottom:-4%;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#ffe7ae,rgba(255,231,174,0));box-shadow:0 0 10px 3px rgba(255,214,140,.45);opacity:0;animation:hxMote 20s linear infinite}
 @keyframes hxMistSlide{from{transform:translate3d(-7%,0,0);opacity:.75}to{transform:translate3d(7%,-3%,0);opacity:1}}
 @keyframes hxGlow{from{opacity:.45;transform:scale(.96)}to{opacity:.95;transform:scale(1.06)}}
-@keyframes hxMote{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.85}70%{opacity:.6}100%{transform:translate3d(24px,-70vh,0);opacity:0}}
-@media(max-width:700px){.hxMote:nth-child(n+7){display:none}}
-
+@keyframes hxMote{0%{transform:translate3d(0,0,0);opacity:0}12%{opacity:.85}70%{opacity:.6}100%{transform:translate3d(24px,-70vh,0);opacity:0}}@media(max-width:700px){.hxMote:nth-child(n+7){display:none}}
 @media(prefers-reduced-motion:reduce){
  .hxFx,.hxMote{animation:none!important}
  .hxMote{display:none}
  .hxHeroCopy>*,.hxHeroLightCopy>*,.hxCertShot img,.hxArchBadge,.hxArch img,.lxTrack i,.hxFaqItem p{animation:none!important}
  .hxSoonCard img,.hxCourseArt img,.hxPortrait img{transition:none}
 }
+
 
 
 /* ---- Legal pages (stage 6) ---- */
@@ -753,5 +762,18 @@ a.lxBtn{text-decoration:none}
 .consentBtn{cursor:pointer;min-height:44px}@media(max-width:620px){.consent{left:10px;right:10px;bottom:10px;padding:16px}.consentActions{width:100%}.consentBtn{flex:1 1 0}}
 @media print{.consent{display:none}}
 
+
 .consent .consentBtn{background:#fff;color:#0b1a33;border:1px solid rgba(255,255,255,.4)}
 .consent .consentBtn:hover:not(:disabled){background:#e9edf6}
+
+/* ---- Academy home: full-bleed light hero ---- */
+.hxHeroAcademy{background:#e9e1d1}
+.hxHeroAcademy .hxHeroArt img{object-position:58% 50%}
+.hxHeroAcademy .hxHeroShade{background:linear-gradient(90deg,rgba(249,243,231,.94) 0%,rgba(249,243,231,.8) 34%,rgba(249,243,231,.18) 64%,rgba(249,243,231,0) 100%),linear-gradient(0deg,rgba(249,243,231,.35),rgba(249,243,231,0) 30%)}
+.hxHeroAcademy .hxArchBadge{position:absolute;z-index:1;left:auto;right:max(20px,4vw);bottom:clamp(20px,4vw,40px)}@media(max-width:800px){
+ .hxHeroAcademy .hxHeroShade{background:linear-gradient(180deg,rgba(249,243,231,.9) 0%,rgba(249,243,231,.8) 55%,rgba(249,243,231,.55) 100%)}
+ .hxHeroAcademy .hxArchBadge{position:relative;right:auto;bottom:auto;margin:0 20px 24px;max-width:none;align-self:flex-start}
+ .hxHeroAcademy{flex-direction:column;align-items:stretch}
+ .hxHeroAcademy .hxHeroInner{padding-bottom:20px}
+}
+
