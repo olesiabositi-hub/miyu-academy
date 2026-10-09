@@ -8,6 +8,7 @@ import { ModuleTwoLesson } from "@/components/ModuleTwoLesson";
 import { ModuleThreeLesson } from "@/components/ModuleThreeLesson";
 import { ModuleFourLesson } from "@/components/ModuleFourLesson";
 import { VisualStop } from "@/components/VisualStop";
+import { ModuleHero } from "@/components/ModuleHero";
 
 async function post(url:string,body:unknown){
   const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
@@ -28,11 +29,7 @@ function GenericLesson({model}:{model:LessonModel}){
   const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
 
   return <article>
-    <header className="lessonHero reading">
-      <p className="eyebrow">{model.locale==="ru"?`МОДУЛЬ ${model.moduleNumber} ИЗ 8`:`MODULE ${model.moduleNumber} OF 8`}</p>
-      <h1>{model.title}</h1>
-      <p className="muted">{model.durationLabel}</p>
-    </header>
+    <ModuleHero locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
     {model.blocks.map(block=>{
       if(block.type==="visual-stop") return <section id={block.id} className="visualStop" key={block.id}><VisualStop block={block}/></section>;
       if(block.type==="quick-check") return <section id={block.id} className="reading checkWrap" key={block.id}><p className="eyebrow">{model.locale==="ru"?"БЫСТРАЯ ПРОВЕРКА":"QUICK CHECK"}</p><ChoiceCheck question={block.question} locale={model.locale} onPersist={(v)=>persistCheck(block.id,v)} /></section>;
