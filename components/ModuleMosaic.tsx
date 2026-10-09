@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useStagger } from "@/components/Stagger";
 import { createBrowserSupabase } from "@/lib/supabase/client";
 import { COURSE_ID, type Locale } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
@@ -11,6 +12,8 @@ import { t } from "@/lib/i18n";
 /** The eight modules as an even 4×2 grid. Status chips appear only when the visitor is signed in. */
 export function ModuleMosaic({locale}:{locale:Locale}){
   const [status,setStatus]=useState<Record<string,string>>({});
+  const gridRef=useRef<HTMLDivElement>(null);
+  useStagger(gridRef,60);
 
   useEffect(()=>{
     let alive=true;
@@ -29,7 +32,7 @@ export function ModuleMosaic({locale}:{locale:Locale}){
     return ()=>{alive=false};
   },[]);
 
-  return <div className="hxMosaic">
+  return <div className="hxMosaic" ref={gridRef}>
     {MODULES.map(m=>{
       const n=String(m.order).padStart(2,"0");
       const s=status[m.id];

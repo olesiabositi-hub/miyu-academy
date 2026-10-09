@@ -6,6 +6,7 @@ import { ModuleMosaic } from "@/components/ModuleMosaic";
 import { AuthorBlock } from "@/components/AuthorBlock";
 import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
+import { Stagger } from "@/components/Stagger";
 export default async function CourseOverview({params}:{params:Promise<{locale:string}>}){
   const {locale}=await params;
   if(!isLocale(locale)) notFound();
@@ -108,7 +109,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
           <h2 className="hxH2">{copy.whyTitle}</h2>
           <p className="hxBody">{copy.whyBody}</p>
         </Reveal>
-        <Reveal delay={0.08}>
+        <Reveal delay={90}>
           <div className="hxNotice">
             <div className="lxEyebrow">{copy.noticeTitle}</div>
             <ol>{copy.notice.map((item,i)=><li key={item}><span>{String(i+1).padStart(2,"0")}</span><p>{item}</p></li>)}</ol>
@@ -122,9 +123,9 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
         <div>
           <div className="lxEyebrow">{copy.insideEyebrow}</div>
           <h2 className="hxH2">{copy.insideTitle}</h2>
-          <ol className="hxSteps hxSteps6">
+          <Stagger as="ol" className="hxSteps hxSteps6" step={80}>
             {learning.map(([num,title,body])=><li key={title}><span>{num}</span><div><h3>{title}</h3><p>{body}</p></div></li>)}
-          </ol>
+          </Stagger>
         </div>
         <picture className="hxHowArt">
           <source media="(max-width: 700px)" srcSet="/visuals/home/how-learning-600.webp"/>

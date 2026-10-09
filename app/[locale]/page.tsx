@@ -7,6 +7,7 @@ import { SOON, STEPS } from "@/lib/content/home";
 import { AuthorBlock } from "@/components/AuthorBlock";
 import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
+import { Stagger } from "@/components/Stagger";
 
 export default async function AcademyHome({params}:{params:Promise<{locale:string}>}){
   const {locale}=await params;if(!isLocale(locale))notFound();
@@ -54,22 +55,28 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
   };
 
   return <div className="hx">
-    <section className="hxHero">
-      <picture className="hxHeroArt" aria-hidden="true">
-        <source media="(max-width: 800px)" srcSet="/visuals/home/academy-hero-836.webp"/>
-        <img src="/visuals/home/academy-hero-1672.webp" width={1672} height={941} alt="" fetchPriority="high" decoding="async"/>
-      </picture>
-      <div className="hxHeroShade" aria-hidden="true"/>
-      <div className="hxWrap hxHeroInner">
-        <div className="hxHeroCopy">
-          <div className="lxEyebrow lxEyebrowGold">{c.kicker}</div>
-          <h1 className="hxH1">{c.h1}</h1>
-          <p className="hxLead">{c.lead}</p>
+    <section className="hxHeroLight">
+      <div className="hxWrap hxHeroLightGrid">
+        <div className="hxHeroLightCopy">
+          <div className="lxEyebrow">{c.kicker}</div>
+          <h1 className="hxH1Dark">{c.h1}</h1>
+          <p className="hxLeadDark">{c.lead}</p>
           <div className="hxActions">
-            <Link className="lxBtn lxBtnGold" href={course}>{c.start} <span aria-hidden="true">→</span></Link>
-            <a className="hxTextLink" href="#how">{c.how} <span aria-hidden="true">↓</span></a>
+            <Link className="lxBtn" href={course}>{c.start} <span aria-hidden="true">→</span></Link>
+            <a className="hxTextLinkDark" href="#how">{c.how} <span aria-hidden="true">↓</span></a>
           </div>
-          <ul className="hxChips">{c.chips.map(x=><li key={x}>{x}</li>)}</ul>
+          <ul className="hxChipsDark">{c.chips.map(x=><li key={x}>{x}</li>)}</ul>
+        </div>
+        <div className="hxArchWrap">
+          <div className="hxArchRing" aria-hidden="true"/>
+          <picture className="hxArch">
+            <source media="(max-width: 700px)" srcSet="/visuals/home/academy-arch-480.webp"/>
+            <img src="/visuals/home/academy-arch-800.webp" width={800} height={1000} alt="" fetchPriority="high" decoding="async"/>
+          </picture>
+          <Link className="hxArchBadge" href={course}>
+            <span className="lxEyebrow lxEyebrowGold">{c.courseEyebrow}</span>
+            <strong>{titleMain}</strong>
+          </Link>
         </div>
       </div>
     </section>
@@ -99,9 +106,9 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
         <div>
           <div className="lxEyebrow">{c.howEyebrow}</div>
           <h2 className="hxH2">{c.howTitle}</h2>
-          <ol className="hxSteps">
+          <Stagger as="ol" className="hxSteps" step={110}>
             {STEPS[locale].map(s=><li key={s.n}><span>{s.n}</span><div><h3>{s.title}</h3><p>{s.body}</p></div></li>)}
-          </ol>
+          </Stagger>
         </div>
         <picture className="hxHowArt">
           <source media="(max-width: 700px)" srcSet="/visuals/home/how-learning-600.webp"/>
@@ -114,14 +121,14 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
       <div className="hxWrap">
         <div className="lxEyebrow">{c.soonEyebrow}</div>
         <h2 className="hxH2">{c.soonTitle}</h2>
-        <div className="hxSoon">
+        <Stagger className="hxSoon" step={110}>
           {SOON[locale].map(s=><article className="hxSoonCard" key={s.key}>
             <img src={`/visuals/home/soon-${s.key}-960.webp`} width={960} height={720} alt="" loading="lazy" decoding="async"/>
             <span className="hxTileShade" aria-hidden="true"/>
             <span className="hxChip hxChipTime">{s.chip}</span>
             <div className="hxSoonBody"><h3>{s.title}</h3><p>{s.body}</p></div>
           </article>)}
-        </div>
+        </Stagger>
       </div>
     </section>
 

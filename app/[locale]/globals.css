@@ -1897,3 +1897,51 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 }
 @media(prefers-reduced-motion:reduce){.hxHeroArt img{animation:none}.hxTile img{transition:none}}
 a.lxBtn{text-decoration:none}
+
+/* ---- Academy home: bright editorial hero (differs from the dark cinematic course hero) ---- */
+.hxHeroLight{position:relative;overflow:hidden;background:radial-gradient(900px 520px at 78% 40%,rgba(224,182,111,.28),rgba(247,241,231,0) 70%),linear-gradient(180deg,var(--ivory),#f3ead9)}
+.hxHeroLightGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,6vw,80px);align-items:center;padding:clamp(40px,6vw,84px) 0 clamp(48px,7vw,96px)}
+.hxHeroLightCopy{max-width:600px}
+.hxH1Dark{margin:12px 0 0;font:500 clamp(42px,5.8vw,80px)/1.02 var(--font-serif);letter-spacing:-.02em;color:var(--navy);text-wrap:balance}
+.hxLeadDark{margin:22px 0 0;max-width:50ch;font-size:clamp(17px,1.5vw,20px);line-height:1.6;color:var(--muted)}
+.hxTextLinkDark{color:var(--navy);font:600 14px var(--font-sans);text-decoration:none;border-bottom:1px solid rgba(13,29,53,.3);padding:8px 0}
+.hxTextLinkDark:hover{border-color:var(--gold)}
+.hxChipsDark{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0;padding:0}
+.hxChipsDark li{padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,253,249,.7);color:var(--navy);font:600 12px/1 var(--font-sans);letter-spacing:.04em}
+.hxArchWrap{position:relative;justify-self:center;width:min(100%,440px)}
+.hxArchRing{position:absolute;inset:-18px -18px 18px 18px;border:1.5px solid var(--gold);border-radius:240px 240px 26px 26px;opacity:.55}
+.hxArch{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:240px 240px 24px 24px;box-shadow:0 30px 70px rgba(13,29,53,.28)}
+.hxArch img{display:block;width:100%;height:100%;object-fit:cover;animation:hxDrift 26s ease-in-out infinite alternate}
+.hxArchBadge{position:absolute;left:-22px;bottom:34px;display:flex;flex-direction:column;gap:4px;max-width:230px;padding:14px 18px;border-radius:var(--radius-md);background:rgba(255,253,249,.94);box-shadow:var(--shadow-md,var(--shadow-sm));color:var(--navy);text-decoration:none;backdrop-filter:blur(6px);animation:hxFloat 7s ease-in-out infinite}
+.hxArchBadge strong{font:500 20px/1.15 var(--font-serif)}
+
+/* ---- More motion (restrained; all switched off with reduced motion) ---- */
+@keyframes hxRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes hxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes hxGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hxHeroCopy>*,.hxHeroLightCopy>*{animation:hxRise .8s var(--ease-out) both}
+.hxHeroCopy>:nth-child(2),.hxHeroLightCopy>:nth-child(2){animation-delay:.08s}
+.hxHeroCopy>:nth-child(3),.hxHeroLightCopy>:nth-child(3){animation-delay:.16s}
+.hxHeroCopy>:nth-child(4),.hxHeroLightCopy>:nth-child(4){animation-delay:.24s}
+.hxHeroCopy>:nth-child(5),.hxHeroLightCopy>:nth-child(5){animation-delay:.32s}
+.hxCertShot img{animation:hxFloat 9s ease-in-out infinite}
+.hxCourseArt img,.hxHowArt img{transition:transform .8s var(--ease-out)}
+.hxCourseCard:hover .hxCourseArt img{transform:scale(1.03)}
+.hxCourseArt{overflow:hidden}
+.hxSoonCard img{transition:transform .8s var(--ease-out)}
+.hxSoonCard:hover img{transform:scale(1.05)}
+.lxBtn span[aria-hidden="true"]{display:inline-block;transition:transform var(--dur-fast) var(--ease-out)}
+.lxBtn:hover span[aria-hidden="true"]{transform:translateX(4px)}
+.lxTrack i{transform-origin:left;animation:hxGrow 1.1s var(--ease-out) .2s both}
+.hxFaqItem p{animation:hxRise .35s var(--ease-out) both}
+.hxPortrait img{transition:transform .8s var(--ease-out)}
+.hxAuthorGrid:hover .hxPortrait img{transform:scale(1.02)}
+@media(max-width:860px){
+ .hxHeroLightGrid{grid-template-columns:1fr}
+ .hxArchWrap{width:min(100%,360px);margin-top:12px}
+ .hxArchBadge{left:8px;bottom:18px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hxHeroCopy>*,.hxHeroLightCopy>*,.hxCertShot img,.hxArchBadge,.hxArch img,.lxTrack i,.hxFaqItem p{animation:none!important}
+ .hxSoonCard img,.hxCourseArt img,.hxPortrait img{transition:none}
+}
