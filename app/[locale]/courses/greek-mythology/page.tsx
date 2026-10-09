@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { COURSE_TITLE, isLocale } from "@/lib/course";
 import { ModuleMosaic } from "@/components/ModuleMosaic";
-import { AuthorBlock } from "@/components/AuthorBlock";
 import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
 import { Stagger } from "@/components/Stagger";
@@ -88,6 +87,11 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
         <source media="(max-width: 800px)" srcSet="/visuals/home/course-hero-960.webp"/>
         <img src="/visuals/home/course-hero-1916.webp" width={1916} height={821} alt="" fetchPriority="high" decoding="async"/>
       </picture>
+      <div className="hxHeroFx" aria-hidden="true">
+        <span className="hxFx hxFxMist hxFxMistA"/>
+        <span className="hxFx hxFxMist hxFxMistB"/>
+        {[8,17,29,38,52,61,73,84,92].map((x,i)=><i key={x} className="hxMote" style={{left:`${x}%`,animationDelay:`${-i*2.3}s`,animationDuration:`${16+(i%4)*4}s`}}/>)}
+      </div>
       <div className="hxHeroShade" aria-hidden="true"/>
       <div className="hxWrap hxHeroInner">
         <div className="hxHeroCopy">
@@ -168,7 +172,6 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       </div>
     </section>
 
-    <AuthorBlock locale={locale}/>
     <Faq locale={locale} title={locale==="ru"?"Частые вопросы":"Frequently asked questions"} eyebrow={locale==="ru"?"ВОПРОСЫ":"QUESTIONS"}/>
 
     <section className="hxCta">

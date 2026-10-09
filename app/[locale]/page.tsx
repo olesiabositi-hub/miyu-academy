@@ -69,10 +69,15 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
         </div>
         <div className="hxArchWrap">
           <div className="hxArchRing" aria-hidden="true"/>
-          <picture className="hxArch">
-            <source media="(max-width: 700px)" srcSet="/visuals/home/academy-arch-480.webp"/>
-            <img src="/visuals/home/academy-arch-800.webp" width={800} height={1000} alt="" fetchPriority="high" decoding="async"/>
-          </picture>
+          <div className="hxArch">
+            <picture>
+              <source media="(max-width: 700px)" srcSet="/visuals/home/academy-arch-560.webp"/>
+              <img src="/visuals/home/academy-arch-860.webp" width={860} height={821} alt="" fetchPriority="high" decoding="async"/>
+            </picture>
+            <span className="hxFx hxFxSun" aria-hidden="true"/>
+            <span className="hxFx hxFxMist hxFxMistA" aria-hidden="true"/>
+            <span className="hxFx hxFxMist hxFxMistB" aria-hidden="true"/>
+          </div>
           <Link className="hxArchBadge" href={course}>
             <span className="lxEyebrow lxEyebrowGold">{c.courseEyebrow}</span>
             <strong>{titleMain}</strong>
@@ -152,6 +157,6 @@ export async function generateMetadata({params}:{params:Promise<{locale:string}>
  return {
   title,description,
   alternates:{canonical:`${base}/${locale}`,languages:{en:`${base}/en`,ru:`${base}/ru`,"x-default":base}},
-  openGraph:{title,description,url:`${base}/${locale}`,siteName:"MIYU Academy",locale:locale==="ru"?"ru_RU":"en_US",type:"website",images:[{url:`${base}/visuals/home/academy-hero-1672.webp`,width:1672,height:941}]}
+  openGraph:{title,description,url:`${base}/${locale}`,siteName:"MIYU Academy",locale:locale==="ru"?"ru_RU":"en_US",type:"website",images:[{url:`${base}/visuals/home/academy-hero-1672.webp`,width:1672,height:716}]}
  }
 }
