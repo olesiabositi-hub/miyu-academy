@@ -13,7 +13,7 @@ export function CertificateVisual({
     <img className="certificateMasterBg" src="/certificate-master.webp" alt="" aria-hidden="true"/>
     <img className="certificateClean" src="/certificate-clean-patches.webp" alt="" aria-hidden="true"/>
     <div className="certLine certLinePre">{pre}</div>
-    <div className="certLine certLineName"><FitName className="certificateName" text={name} baseCqw={6}/></div>
+    <div className="certLine certLineName"><FitName className="certificateName" text={name} baseCqw={6} twoLine/></div>
     <div className="certLine certLinePost">{post}</div>
     <div className="certLine certLineCourse1"><FitName className="certificateCourse" text={line1} baseCqw={4.2}/></div>
     <div className="certLine certLineCourse2"><FitName className="certificateCourse certificateCourseSub" text={line2} baseCqw={3}/></div>

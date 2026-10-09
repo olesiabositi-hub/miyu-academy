@@ -33,13 +33,14 @@ h1,h2,h3,h4{font-family:var(--font-serif);font-weight:500;line-height:1.05;color
 .certificateVisual{position:relative;width:100%;aspect-ratio:1492/1054;overflow:hidden;background:#f3ead8;color:#0D1D35;container-type:inline-size;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .certificateMasterBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .certificateClean{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.certLine{position:absolute;left:18%;width:47%;text-align:center;transform:translateY(-50%);white-space:nowrap;font-family:var(--font-serif);color:#0D1D35}
+.certLine{position:absolute;left:17%;width:49%;text-align:center;transform:translateY(-50%);white-space:nowrap;font-family:var(--font-serif);color:#0D1D35}
 .certLinePre{top:39.7%;font-size:2.3cqw;letter-spacing:.02em}
 .certLineName{top:46.2%}
 .certLinePost{top:53.3%;font-size:2.3cqw;letter-spacing:.02em}
 .certLineCourse1{top:60.2%}
 .certLineCourse2{top:66.1%}
 .certificateName{font-family:var(--font-serif);line-height:1.1;letter-spacing:.045em;text-transform:uppercase;white-space:nowrap;width:100%;text-align:center}
+.certificateName.is-two{letter-spacing:.025em;line-height:1.08}
 .certificateCourse{font-family:var(--font-serif);line-height:1.1;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;width:100%;text-align:center}
 .certificateCourseSub{color:var(--gold)}
 .certificateMetaLeft,.certificateMetaRight{position:absolute;top:72.1%;width:22%;text-align:center;font-family:var(--font-serif);letter-spacing:.04em;color:#0D1D35}.certificateMetaLeft{left:15.4%}.certificateMetaRight{left:42.1%}
@@ -1680,10 +1681,10 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 
 @page{size:297mm 210mm;margin:0}
 @media print{
- body{background:#fff!important}
- body *{visibility:hidden!important}
- .certStage,.certStage *{visibility:visible!important}
- .certStage{position:fixed;left:0;top:0;width:297mm;height:210mm;padding:0;border:0;border-radius:0;box-shadow:none;background:#fff}
+ html,body{height:210mm;overflow:hidden;margin:0;padding:0;background:#fff!important}
+ .skip,header,footer,nav,.certHead,.certSide,.previewBadge{display:none!important}
+ main,.certPage{margin:0!important;padding:0!important;width:auto!important;max-width:none!important}
+ .certLayout{display:block}
+ .certStage{width:297mm;height:210mm;padding:0;border:0;border-radius:0;box-shadow:none;background:#fff;break-inside:avoid}
  .certStage .certificateVisual{width:297mm;height:210mm;aspect-ratio:auto;box-shadow:none}
- .previewBadge{display:none!important}
 }
