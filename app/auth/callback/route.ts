@@ -16,10 +16,13 @@ export async function GET(request:Request){
   if(!error){
    const {data:{user}}=await supabase.auth.getUser();
    if(user){
+    // Keep what the profile already has; only fill gaps (never reset a confirmed age to null).
+    const {data:existing}=await supabase.from("profiles").select("preferred_locale,age_16_plus_confirmed_at").eq("id",user.id).maybeSingle();
+    const age16=url.searchParams.get("age16")==="1"||!!user.user_metadata?.age16;
     await supabase.from("profiles").upsert({
      id:user.id,
-     preferred_locale:user.user_metadata?.preferred_locale??locale,
-     age_16_plus_confirmed_at:user.user_metadata?.age16?new Date().toISOString():null
+     preferred_locale:existing?.preferred_locale??user.user_metadata?.preferred_locale??locale,
+     age_16_plus_confirmed_at:existing?.age_16_plus_confirmed_at??(age16?new Date().toISOString():null)
     },{onConflict:"id"});
    }
    return NextResponse.redirect(new URL(next,base));

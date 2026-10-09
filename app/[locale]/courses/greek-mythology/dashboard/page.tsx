@@ -4,39 +4,105 @@ import { notFound } from "next/navigation";
 import { isLocale, COURSE_ID, COURSE_TITLE } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
 import { requireUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { courseBasePath, modulePath, PRIMARY_COURSE } from "@/lib/courses";
 import { isPreviewRequest } from "@/lib/preview";
+import { PreviewBadge } from "@/components/PreviewBadge";
+import { t } from "@/lib/i18n";
+
+type ModRow={module_id:string;status:string;last_active_at:string|null};
+type FinalRow={passed:boolean;active_attempt_id:string|null}|null;
 
 export default async function Dashboard({params}:{params:Promise<{locale:string}>}){
  const {locale}=await params;if(!isLocale(locale))notFound();
- if(await isPreviewRequest()) redirect(`/${locale}/courses/greek-mythology/module-01`);
- const {user,supabase}=await requireUser(locale,`/${locale}/courses/greek-mythology/dashboard`);
- const [{data:mods},{data:final},{data:cert}]=await Promise.all([
-  supabase.from("module_progress").select("module_id,status,last_active_at,resume_block_id").eq("user_id",user.id).eq("course_id",COURSE_ID),
-  supabase.from("final_decoder_progress").select("*").eq("user_id",user.id).eq("course_id",COURSE_ID).maybeSingle(),
-  supabase.from("certificates").select("certificate_id,student_name,completed_at,status").eq("user_id",user.id).eq("course_id",COURSE_ID).maybeSingle(),
- ]);
- const state=new Map((mods??[]).map(x=>[x.module_id,x]));
- const completed=MODULES.filter(m=>state.get(m.id)?.status==="completed").length;
- const recommended=MODULES.find(m=>state.get(m.id)?.status!=="completed");
- const active=(mods??[]).filter(x=>x.status==="in_progress").sort((a,b)=>String(b.last_active_at).localeCompare(String(a.last_active_at)))[0];
- let continueHref=active?`/${locale}/courses/greek-mythology/${active.module_id}${active.resume_block_id?`#${active.resume_block_id}`:""}`:`/${locale}/courses/greek-mythology/${recommended?.id??"module-01"}`;
- let continueLabel=locale==="ru"?"Продолжить обучение":"Continue learning";
- if(final?.active_attempt_id){continueHref=`/${locale}/courses/greek-mythology/final-myth-decoder`;continueLabel=locale==="ru"?"Продолжить Final Myth Decoder":"Continue Final Myth Decoder"}
- else if(final?.passed&&!cert){continueHref=`/${locale}/courses/greek-mythology/certificate`;continueLabel=locale==="ru"?"Получить сертификат":"Get your certificate"}
- else if(cert){continueHref=`/${locale}/courses/greek-mythology/certificate`;continueLabel=locale==="ru"?"Открыть сертификат":"View certificate"}
- else if(completed===8){continueHref=`/${locale}/courses/greek-mythology/final-myth-decoder`;continueLabel=locale==="ru"?"Начать Final Myth Decoder":"Start Final Myth Decoder"}
+ const base=courseBasePath(locale);
+ const total=PRIMARY_COURSE.moduleCount;
 
- return <div className="container">
-  <section className="hero"><div className="heroGrid"><div><p className="eyebrow">{locale==="ru"?"ВАШ КУРС":"YOUR COURSE"}</p><h1>{COURSE_TITLE[locale]}</h1>
-  <p><strong>{final?.passed?(locale==="ru"?"Курс завершён":"Course completed"):`${completed} / 8`}</strong></p>
-  {!final?.passed&&<div className="progressDots" aria-label={`${completed} of 8 modules completed`}>{MODULES.map(m=><span key={m.id} className={`dot ${state.get(m.id)?.status==="completed"?"doneDot":""}`}/>)}</div>}
-  <Link className="btn" href={continueHref}>{continueLabel} →</Link></div><div className="heroArt" aria-hidden="true"/></div></section>
+ let mods:ModRow[]=[];
+ let final:FinalRow=null;
+ let hasCert=false;
+ const preview=await isPreviewRequest();
 
-  <p className="eyebrow">{locale==="ru"?"МОДУЛИ":"MODULES"}</p>
-  <div className="moduleList">{MODULES.map(m=>{const s=state.get(m.id)?.status??"not_started";return <Link className="moduleRow" key={m.id} href={`/${locale}/courses/greek-mythology/${m.id}`}><div className="moduleNum">{String(m.order).padStart(2,"0")}</div><div><div className="moduleTitle">{m[locale]}</div><div className="moduleMeta"><span className={s==="completed"?"done":s==="in_progress"?"progress":""}>{s==="completed"?(locale==="ru"?"Завершено":"Completed"):s==="in_progress"?(locale==="ru"?"В процессе":"In progress"):(locale==="ru"?"Не начато":"Not started")}</span>{recommended?.id===m.id&&` · ${locale==="ru"?"Рекомендуем дальше":"Recommended next"}`}</div></div><span>→</span></Link>})}</div>
+ if(preview){
+  // Deploy preview: sample data so the cabinet can be reviewed without signing in.
+  mods=[
+   {module_id:"module-01",status:"completed",last_active_at:null},
+   {module_id:"module-02",status:"completed",last_active_at:null},
+   {module_id:"module-03",status:"completed",last_active_at:null},
+   {module_id:"module-04",status:"in_progress",last_active_at:new Date().toISOString()},
+  ];
+ }else{
+  const {user,supabase}=await requireUser(locale,`${base}/dashboard`);
+  const [{data:m},{data:f},{data:c}]=await Promise.all([
+   supabase.from("module_progress").select("module_id,status,last_active_at").eq("user_id",user.id).eq("course_id",COURSE_ID),
+   supabase.from("final_decoder_progress").select("passed,active_attempt_id").eq("user_id",user.id).eq("course_id",COURSE_ID).maybeSingle(),
+   supabase.from("certificates").select("certificate_id").eq("user_id",user.id).eq("course_id",COURSE_ID).maybeSingle(),
+  ]);
+  mods=(m??[]) as ModRow[];final=(f??null) as FinalRow;hasCert=!!c;
+ }
 
-  <div className="milestones"><section className="card milestone"><p className="eyebrow">FINAL MYTH DECODER</p><h3>{final?.passed?(locale==="ru"?"Завершён":"Completed"):final?.active_attempt_id?(locale==="ru"?"В процессе":"In progress"):completed===8?(locale==="ru"?"Готов":"Ready"):(locale==="ru"?"Заблокирован":"Locked")}</h3><p>15 questions · 80% · unlimited attempts</p><Link href={`/${locale}/courses/greek-mythology/final-myth-decoder`}>{locale==="ru"?"Открыть":"Open"} →</Link></section>
-  <section className="card milestone"><p className="eyebrow">CERTIFICATE</p><h3>{cert?(locale==="ru"?"Выпущен":"Issued"):final?.passed?(locale==="ru"?"Готов":"Ready"):(locale==="ru"?"Заблокирован":"Locked")}</h3><p>{locale==="ru"?"Открывается после успешного Final Myth Decoder.":"Unlocks after a successful Final Myth Decoder."}</p>{final?.passed&&<Link href={`/${locale}/courses/greek-mythology/certificate`}>{cert?(locale==="ru"?"Открыть сертификат":"View certificate"):(locale==="ru"?"Получить сертификат":"Get your certificate")} →</Link>}</section></div>
- </div>
+ const state=new Map(mods.map(x=>[x.module_id,x.status]));
+ const completed=MODULES.filter(m=>state.get(m.id)==="completed").length;
+ const recommended=MODULES.find(m=>state.get(m.id)!=="completed");
+ const active=mods.filter(x=>x.status==="in_progress").sort((a,b)=>String(b.last_active_at).localeCompare(String(a.last_active_at)))[0];
+ const passed=!!final?.passed;
+ const allDone=completed===total;
+
+ let href=modulePath(locale,active?.module_id??recommended?.id??"module-01");
+ let label=t(locale,completed===0&&!active?"dash.start":"dash.continue");
+ if(final?.active_attempt_id){href=`${base}/final-myth-decoder`;label=t(locale,"dash.continueFinal")}
+ else if(hasCert){href=`${base}/certificate`;label=t(locale,"dash.viewCert")}
+ else if(passed){href=`${base}/certificate`;label=t(locale,"dash.getCert")}
+ else if(allDone){href=`${base}/final-myth-decoder`;label=t(locale,"dash.startFinal")}
+
+ const finalStatus=passed?t(locale,"dash.finalDone"):final?.active_attempt_id?t(locale,"dash.finalProgress"):allDone?t(locale,"dash.finalReady"):t(locale,"dash.finalLocked");
+ const certStatus=hasCert?t(locale,"dash.certIssued"):passed?t(locale,"dash.certReady"):t(locale,"dash.certLocked");
+
+ return <section className="dashPage">
+  {preview&&<PreviewBadge locale={locale}/>}
+  <div className="dashHero">
+   <div className="dashHeroMain">
+    <div className="lxEyebrow lxEyebrowGold">{t(locale,"dash.eyebrow")}</div>
+    <h1 className="dashTitle">{COURSE_TITLE[locale]}</h1>
+    <div className="dashProgressLine">
+     <strong>{passed?t(locale,"dash.completedCourse"):t(locale,"dash.progress",{n:completed,total})}</strong>
+     <div className="lxTrack dashTrack" aria-hidden="true"><i style={{width:`${completed/total*100}%`}}/></div>
+    </div>
+    <Link className="lxBtn lxBtnGold" href={href}>{label} <span aria-hidden="true">→</span></Link>
+   </div>
+  </div>
+
+  <div className="lxEyebrow dashSection">{t(locale,"dash.modules")}</div>
+  <div className="dashModules">
+   {MODULES.map(m=>{
+    const s=state.get(m.id)??"not_started";
+    return <Link className={"dashModule is-"+s} key={m.id} href={modulePath(locale,m.id)}>
+     <span className="dashNum">{String(m.order).padStart(2,"0")}</span>
+     <span className="dashModuleBody">
+      <span className="dashModuleTitle">{m[locale]}</span>
+      <span className="dashModuleMeta">
+       <span className={"dashChip is-"+s}>{t(locale,s==="completed"?"dash.statusDone":s==="in_progress"?"dash.statusProgress":"dash.statusNew")}</span>
+       {recommended?.id===m.id&&s!=="in_progress"&&<span className="dashRec">{t(locale,"dash.recommended")}</span>}
+      </span>
+     </span>
+     <span className="dashArrow" aria-hidden="true">→</span>
+    </Link>;
+   })}
+  </div>
+
+  <div className="dashMilestones">
+   <div className={"dashMile"+(allDone?"":" is-locked")}>
+    <div className="lxEyebrow">{t(locale,"dash.final")}</div>
+    <div className="dashMileTitle">{finalStatus}</div>
+    <p className="dashMileMeta">{t(locale,"dash.finalMeta")}</p>
+    {allDone&&<Link className="dashMileLink" href={`${base}/final-myth-decoder`}>{t(locale,"dash.open")} →</Link>}
+   </div>
+   <div className={"dashMile"+(passed?"":" is-locked")}>
+    <div className="lxEyebrow">{t(locale,"dash.certificate")}</div>
+    <div className="dashMileTitle">{certStatus}</div>
+    {passed&&<Link className="dashMileLink" href={`${base}/certificate`}>{t(locale,hasCert?"dash.viewCert":"dash.getCert")} →</Link>}
+   </div>
+  </div>
+
+  <p className="dashFoot"><Link href={`/${locale}/account`}>{t(locale,"dash.settings")} →</Link></p>
+ </section>
 }
