@@ -8,5 +8,8 @@
 const PREVIEW_HOST = /^deploy-preview-\d+--miyu-academy\.netlify\.app$/i;
 
 export function isPreviewHost(host: string | null | undefined): boolean {
-  return !!host && PREVIEW_HOST.test(host);
+  if(!host||!PREVIEW_HOST.test(host)) return false;
+  // Netlify sets CONTEXT at build/run time; when present it must be a deploy preview.
+  const ctx=process.env.CONTEXT;
+  return !ctx||ctx==="deploy-preview";
 }

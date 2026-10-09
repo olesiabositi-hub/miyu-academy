@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import { createServerSupabase } from "@/lib/supabase/server";
 
 export async function POST(req:Request){
-  const {attemptId}=await req.json();
+  const body=await req.json().catch(()=>null);
+  const attemptId=body?.attemptId;
+  if(typeof attemptId!=="string") return new NextResponse("Invalid",{status:400});
   const supabase=await createServerSupabase();
   const {data:{user}}=await supabase.auth.getUser();
   if(!user) return new NextResponse("Unauthorized",{status:401});
@@ -12,7 +14,7 @@ export async function POST(req:Request){
   });
   if(error){
     const status=error.message.includes("Attempt unavailable")?409:400;
-    return new NextResponse(error.message,{status});
+    return new NextResponse(status===409?"Attempt unavailable":"Could not submit",{status});
   }
   return NextResponse.json(data);
 }

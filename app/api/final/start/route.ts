@@ -9,7 +9,7 @@ export async function POST(){
   const {data,error}=await supabase.rpc("start_greek_mythology_final_decoder");
   if(error){
     const status=error.message.includes("Complete all 8 modules")?403:400;
-    return new NextResponse(error.message,{status});
+    return new NextResponse(status===403?"Complete all 8 modules first":"Could not start",{status});
   }
   return NextResponse.json(data);
 }

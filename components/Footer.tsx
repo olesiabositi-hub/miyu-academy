@@ -20,6 +20,7 @@ export function Footer({locale}:{locale:Locale}){
         <h2>{t(locale,"footer.groupLegal")}</h2>
         <Link href={`/${locale}/privacy`}>{t(locale,"footer.privacy")}</Link>
         <Link href={`/${locale}/terms`}>{t(locale,"footer.terms")}</Link>
+        <Link href={`/${locale}/cookies`}>{t(locale,"footer.cookies")}</Link>
         <Link href={`/${locale}/privacy-settings`}>{t(locale,"footer.privacySettings")}</Link>
       </nav>
       <nav className="footerCol" aria-label={t(locale,"footer.groupMore")}>

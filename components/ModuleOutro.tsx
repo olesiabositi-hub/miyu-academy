@@ -6,6 +6,7 @@ import { MODULE_TEASERS } from "@/lib/content/teasers";
 import { displayify, splitFlow } from "@/lib/content/outro";
 import { adjacentModules, courseBasePath, modulePath, PRIMARY_COURSE } from "@/lib/courses";
 import { t } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 import { Markdown } from "@/components/Markdown";
 
 /**
@@ -41,6 +42,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody}:
     try{
       const r=await fetch("/api/module/complete",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({moduleId})});
       if(!r.ok) throw new Error(await r.text());
+      track("module_complete",{module:moduleId});
       window.location.assign(target);
     }catch{
       setFailed(true);

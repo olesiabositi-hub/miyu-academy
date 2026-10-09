@@ -15,6 +15,6 @@ export async function POST(req:Request){
   const {error}=await supabase.from("module_progress")
     .update({scroll_ratio:clamped,last_active_at:new Date().toISOString()})
     .eq("user_id",user.id).eq("course_id",COURSE_ID).eq("module_id",moduleId);
-  if(error) return new NextResponse(error.message,{status:400});
+  if(error) return new NextResponse("Could not save",{status:400});
   return NextResponse.json({ok:true});
 }
