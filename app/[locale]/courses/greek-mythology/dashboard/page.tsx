@@ -9,7 +9,7 @@ import { isPreviewRequest } from "@/lib/preview";
 
 export default async function Dashboard({params}:{params:Promise<{locale:string}>}){
  const {locale}=await params;if(!isLocale(locale))notFound();
- if(await isPreviewRequest()) redirect(`/${locale}/courses/greek-mythology`);
+ if(await isPreviewRequest()) redirect(`/${locale}/courses/greek-mythology/module-01`);
  const {user,supabase}=await requireUser(locale,`/${locale}/courses/greek-mythology/dashboard`);
  const [{data:mods},{data:final},{data:cert}]=await Promise.all([
   supabase.from("module_progress").select("module_id,status,last_active_at,resume_block_id").eq("user_id",user.id).eq("course_id",COURSE_ID),
