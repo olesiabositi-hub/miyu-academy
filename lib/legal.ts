@@ -9,7 +9,7 @@ export const OPERATOR = {
   address: "Javakhishvili 91, 2B, Tbilisi" as string | null,
   country: "Georgia" as string | null,
   privacyEmail: "privacy@miyu.academy" as string | null,
-  governingLaw: null as string | null,
+  governingLaw: { ru: "законодательство Грузии", en: "the laws of Georgia" } as { ru: string; en: string } | null,
   effectiveDate: { ru: "9 октября 2026", en: "9 October 2026" },
 };
 

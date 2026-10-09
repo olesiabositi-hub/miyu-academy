@@ -89,7 +89,7 @@ export function termsDoc(loc: Locale): LegalDoc {
       { h: "5. Правила использования", list: ["Не пытайтесь получить доступ к чужим аккаунтам и данным.", "Не нарушайте работу сайта и не обходите проверку финала.", "Не используйте сайт в незаконных целях."] },
       { h: "6. Доступность и ответственность", p: ["Мы стараемся, чтобы сайт работал стабильно, но не гарантируем бесперебойность. Материалы носят образовательный характер. В пределах, разрешённых законом, оператор не отвечает за косвенные убытки."] },
       { h: "7. Удаление аккаунта и прекращение доступа", p: ["Вы можете удалить аккаунт в настройках в любой момент. Мы можем ограничить доступ при нарушении этих условий."] },
-      { h: "8. Изменения и право", p: [`Мы можем обновлять условия, актуальная редакция всегда на этой странице. Применимое право: ${OPERATOR.governingLaw ?? "[применимое право]"}.`, `Вопросы: ${contact(loc)}. Редакция от ${OPERATOR.effectiveDate.ru}.`] },
+      { h: "8. Изменения и право", p: [`Мы можем обновлять условия, актуальная редакция всегда на этой странице. Применимое право: ${OPERATOR.governingLaw?.ru ?? "[применимое право]"}.`, `Вопросы: ${contact(loc)}. Редакция от ${OPERATOR.effectiveDate.ru}.`] },
     ],
   } : {
     title: "Terms of Use",
@@ -102,7 +102,7 @@ export function termsDoc(loc: Locale): LegalDoc {
       { h: "5. Acceptable use", list: ["Do not try to access other people's accounts or data.", "Do not disrupt the site or bypass the Final Myth Decoder checks.", "Do not use the site for unlawful purposes."] },
       { h: "6. Availability and liability", p: ["We aim to keep the site reliable but do not guarantee uninterrupted service. The materials are educational. To the extent permitted by law, the operator is not liable for indirect losses."] },
       { h: "7. Account deletion and termination", p: ["You can delete your account in settings at any time. We may restrict access if these terms are breached."] },
-      { h: "8. Changes and governing law", p: [`We may update these terms; the current version is always on this page. Governing law: ${OPERATOR.governingLaw ?? "[governing law]"}.`, `Questions: ${contact(loc)}. Version of ${OPERATOR.effectiveDate.en}.`] },
+      { h: "8. Changes and governing law", p: [`We may update these terms; the current version is always on this page. Governing law: ${OPERATOR.governingLaw?.en ?? "[governing law]"}.`, `Questions: ${contact(loc)}. Version of ${OPERATOR.effectiveDate.en}.`] },
     ],
   };
 }
