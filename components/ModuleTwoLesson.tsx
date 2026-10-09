@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
-import { ChoiceCheck } from "@/components/Checks";
+import { ChoiceCheck, SelfCheck } from "@/components/Checks";
+import { ModuleOutro } from "@/components/ModuleOutro";
+import { parseCompletion } from "@/lib/content/outro";
 import styles from "./ModuleTwoLesson.module.css";
 
 type ProseBlock = Extract<LessonBlock,{type:"prose"}>;
@@ -129,7 +131,8 @@ export function ModuleTwoLesson({model}:{model:LessonModel}){
   const q1=quick(model,"quick-check-01"),q2=quick(model,"quick-check-02"),q3=quick(model,"quick-check-03"),q4=quick(model,"quick-check-04"),q5=quick(model,"quick-check-05");
   const self=selfCheck(model);
   const remember=splitSubsections(rememberBlock(model).markdown);
-  const complete=splitHeading(completion(model).markdown);
+  const outro=parseCompletion([completion(model).markdown]);
+  const selfIntro=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
   const minorLast=s21.items[s21.items.length-1];
   const minorSplit=minorLast?splitFirstParagraph(minorLast.body):{first:"",rest:""};
   const minorItems=minorLast?[...s21.items.slice(0,-1),{...minorLast,body:minorSplit.first}]:s21.items;
@@ -139,10 +142,6 @@ export function ModuleTwoLesson({model}:{model:LessonModel}){
 
   useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
   const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
-  async function finish(){
-    await post("/api/module/complete",{moduleId:model.moduleId});
-    location.href=`/${model.locale}/courses/greek-mythology/module-03`;
-  }
 
   return <article className={styles.page}>
     <section className={styles.hero} aria-labelledby="m2-title">
@@ -249,21 +248,14 @@ export function ModuleTwoLesson({model}:{model:LessonModel}){
       {pantheonSplit.rest&&<div className={`${styles.rich} ${styles.sumTail}`}><Markdown>{pantheonSplit.rest}</Markdown></div>}
     </div></section>
 
-    <section id="self-check" className={`${styles.selfCheck} ${styles.reading}`}>
-      <p className={styles.marker}>{ru?"САМОПРОВЕРКА":"SELF-CHECK"}</p><h2>{ru?"Самопроверка":"Self-check"}</h2>
-      <div className={`${styles.rich} ${styles.selfIntro}`}><Markdown>{self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim()}</Markdown></div>
-      <div className={styles.selfList}>{self.questions.map((q,i)=><article className={styles.selfItem} key={q.id}><div className={styles.selfNum}>{String(i+1).padStart(2,"0")}</div><ChoiceCheck question={q} locale={model.locale} onPersist={(v)=>persistCheck(q.id,v)}/></article>)}</div>
-    </section>
+    <SelfCheck questions={self.questions} locale={model.locale} onPersist={persistCheck} intro={selfIntro?<Markdown>{selfIntro}</Markdown>:undefined}/>
 
     <section className={styles.rememberSection}><div className={styles.reading}>
       <p className={styles.marker}>{ru?"ЕСЛИ ЗАПОМНИТЬ ТОЛЬКО СЕМЬ ВЕЩЕЙ":"IF YOU REMEMBER ONLY SEVEN THINGS"}</p><h2>{remember.heading}</h2>
       <div className={styles.rememberGrid}>{remember.items.map((item,i)=><article key={item.heading}><span>{i+1}</span><div className={styles.rich}><Markdown>{item.body}</Markdown></div></article>)}</div>
     </div></section>
 
-    <section className={styles.completion}>
-      <div className={`${styles.reading} ${styles.completionCopy}`}><p className={styles.marker}>{ru?"МОДУЛЬ 02 / 08":"MODULE 02 / 08"}</p><h2>{complete.heading}</h2><div className={styles.rich}><Markdown>{complete.body}</Markdown></div></div>
-      <div className={styles.completeNav}><span>02 / 08</span><div className={styles.track}><i/></div><strong>{ru?"Дальше — существа и чудовища":"Next — creatures and monsters"}</strong><button onClick={finish}>{ru?"Продолжить":"Continue"} <span aria-hidden="true">→</span></button></div>
-    </section>
+    <ModuleOutro locale={model.locale} moduleId={model.moduleId} heading={outro.heading} body={outro.body}/>
   </article>;
 }
 

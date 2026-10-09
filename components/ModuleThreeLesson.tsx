@@ -3,7 +3,9 @@
 import { Fragment, useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
-import { ChoiceCheck } from "@/components/Checks";
+import { ChoiceCheck, SelfCheck } from "@/components/Checks";
+import { ModuleOutro } from "@/components/ModuleOutro";
+import { parseCompletion, parseNext } from "@/lib/content/outro";
 import styles from "./ModuleThreeLesson.module.css";
 
 type ProseBlock = Extract<LessonBlock,{type:"prose"}>;
@@ -178,15 +180,12 @@ export function ModuleThreeLesson({model}:{model:LessonModel}){
   const q1=quick(model,"quick-check-01"),q2=quick(model,"quick-check-02"),q3=quick(model,"quick-check-03"),q4=quick(model,"quick-check-04");
   const self=selfCheck(model);
   const remember=splitSubsections(rememberBlock(model).markdown);
-  const complete=splitHeading(completion(model).markdown);
-  const next=splitNext(nextBlock(model).markdown);
+  const outro=parseCompletion([completion(model).markdown]);
+  const nextText=parseNext(nextBlock(model).markdown);
+  const selfIntro=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
 
   useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
   const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
-  async function finish(){
-    await post("/api/module/complete",{moduleId:model.moduleId});
-    location.href=`/${model.locale}/courses/greek-mythology/module-04`;
-  }
 
   return <article className={styles.page}>
     <section className={styles.hero} aria-labelledby="m3-title">
@@ -303,24 +302,14 @@ export function ModuleThreeLesson({model}:{model:LessonModel}){
       <div className={`${styles.reading} ${styles.closingQuestion}`}>{t.closingQuestion}</div>
     </section>
 
-    <section id="self-check" className={`${styles.selfCheck} ${styles.reading}`}>
-      <p className={styles.marker}>{t.self}</p><h2>{model.locale==="ru"?"Самопроверка":"Self-check"}</h2>
-      <div className={`${styles.rich} ${styles.selfIntro}`}><Markdown>{self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim()}</Markdown></div>
-      <div className={styles.selfList}>{self.questions.map((q,i)=><article className={styles.selfItem} key={q.id}><span className={styles.selfNum}>{String(i+1).padStart(2,"0")}</span><ChoiceCheck question={q} locale={model.locale} onPersist={(v)=>persistCheck(q.id,v)}/></article>)}</div>
-    </section>
+    <SelfCheck questions={self.questions} locale={model.locale} onPersist={persistCheck} intro={selfIntro?<Markdown>{selfIntro}</Markdown>:undefined}/>
 
     <section className={styles.remember}><div className={styles.reading}>
       <p className={styles.marker}>{t.remember}</p><h2>{remember.heading}</h2>
       <div className={styles.rememberGrid}>{remember.items.map((item,i)=><article key={item.heading}><span>{i+1}</span><div className={styles.rich}><Markdown>{item.body}</Markdown></div></article>)}</div>
     </div></section>
 
-    <section className={styles.completion}>
-      <div className={`${styles.reading} ${styles.completionGrid}`}>
-        <article><p className={styles.marker}>{t.module}</p><h2>{complete.heading}</h2><div className={styles.rich}><Markdown>{complete.body}</Markdown></div></article>
-        <aside className={styles.next}><p className={styles.marker}>{model.locale==="ru"?"ДАЛЬШЕ":"NEXT"}</p><div className={styles.rich}><h3>{next.heading}</h3><Markdown>{next.body}</Markdown></div></aside>
-      </div>
-      <div className={`${styles.reading} ${styles.completeNav}`}><span>03 / 08</span><div className={styles.track}><i/></div><strong>{t.nextLabel}</strong><button onClick={finish}>{t.continue} <span aria-hidden="true">→</span></button></div>
-    </section>
+    <ModuleOutro locale={model.locale} moduleId={model.moduleId} heading={outro.heading} body={outro.body} nextHeading={nextText.heading} nextBody={nextText.body}/>
   </article>;
 }
 

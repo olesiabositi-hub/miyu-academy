@@ -1,29 +1,151 @@
 "use client";
-import { useMemo,useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
+import { courseBasePath, courseDashboardPath } from "@/lib/courses";
+import { t, type UiKey } from "@/lib/i18n";
 
 type Q={id:string;category:string;module:number;en:{question:string;options:string[]};ru:{question:string;options:string[]}};
 type Attempt={id:string;current_question_index:number;selected_answers:Record<string,number>;option_order:number[][]};
 
-async function api(url:string,body?:unknown){const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:body?JSON.stringify(body):undefined});if(!r.ok)throw new Error(await r.text());return r.json()}
+const LETTERS=["A","B","C","D","E"];
+const CATEGORY_KEYS:Record<string,UiKey>={recognition:"fmd.cat.recognition",meaning:"fmd.cat.meaning",connection:"fmd.cat.connection"};
+
+async function api(url:string,body?:unknown){
+  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:body?JSON.stringify(body):undefined});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
 
 export function FinalDecoderClient({locale,questions,initialAttempt}:{locale:Locale;questions:Q[];initialAttempt:Attempt|null}){
- const router=useRouter();const [attempt,setAttempt]=useState<Attempt|null>(initialAttempt);const [review,setReview]=useState(false);const [busy,setBusy]=useState(false);
- const i=attempt?.current_question_index??0;const q=questions[i];const L=q?.[locale];
- const answered=Object.keys(attempt?.selected_answers??{}).length;
+  const router=useRouter();
+  const [attempt,setAttempt]=useState<Attempt|null>(initialAttempt);
+  const [review,setReview]=useState(false);
+  const [busy,setBusy]=useState(false);
+  const [error,setError]=useState<UiKey|null>(null);
 
- async function start(){setBusy(true);try{const a=await api("/api/final/start");setAttempt(a)}finally{setBusy(false)}}
- async function choose(sourceIndex:number){if(!attempt)return;const next={...attempt,selected_answers:{...attempt.selected_answers,[q.id]:sourceIndex}};setAttempt(next);await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex,currentQuestionIndex:i})}
- async function move(next:number){if(!attempt)return;const n=Math.max(0,Math.min(14,next));const a={...attempt,current_question_index:n};setAttempt(a);setReview(false);await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex:attempt.selected_answers[q.id]??null,currentQuestionIndex:n}).catch(()=>{})}
- async function submit(){if(!attempt||answered<15)return;setBusy(true);try{await api("/api/final/submit",{attemptId:attempt.id});router.replace(`/${locale}/courses/greek-mythology/final-myth-decoder/result`);router.refresh()}finally{setBusy(false)}}
+  const total=questions.length;
+  const last=total-1;
+  const i=Math.min(attempt?.current_question_index??0,last);
+  const q=questions[i];
+  const L=q?q[locale]:undefined;
+  const answeredCount=Object.keys(attempt?.selected_answers??{}).length;
 
- if(!attempt)return <section className="assessment"><p className="eyebrow">FINAL MYTH DECODER</p><h1>FINAL MYTH DECODER</h1><p>15 questions · 80% · unlimited attempts</p><p className="muted">{locale==="ru"?"Без таймера. Правильность ответов не раскрывается по ходу попытки.":"No timer. Correctness is not revealed during the attempt."}</p><button className="btn" disabled={busy} onClick={start}>{locale==="ru"?"Начать":"Start Final Myth Decoder"}</button></section>;
+  async function start(){
+    setBusy(true);
+    setError(null);
+    try{ setAttempt(await api("/api/final/start")); }
+    catch{ setError("fmd.submitError"); }
+    finally{ setBusy(false); }
+  }
 
- if(review)return <section className="assessment"><p className="eyebrow">FINAL MYTH DECODER</p><h1>{locale==="ru"?"Проверить ответы":"Review answers"}</h1><p>{answered} / 15 {locale==="ru"?"отвечено":"answered"}</p><div className="reviewGrid">{questions.map((x,idx)=><button key={x.id} className="reviewItem" onClick={()=>move(idx)}>{String(idx+1).padStart(2,"0")} · {attempt.selected_answers[x.id]===undefined?(locale==="ru"?"без ответа":"unanswered"):(locale==="ru"?"отвечено":"answered")}</button>)}</div><div className="assessmentNav"><button className="btn secondary" onClick={()=>{setReview(false);move(14)}}>{locale==="ru"?"Назад":"Back"}</button><button className="btn" disabled={answered<15||busy} onClick={submit}>{locale==="ru"?"Отправить Final Myth Decoder":"Submit Final Myth Decoder"}</button></div></section>;
+  async function choose(sourceIndex:number){
+    if(!attempt||!q) return;
+    setAttempt({...attempt,selected_answers:{...attempt.selected_answers,[q.id]:sourceIndex}});
+    setError(null);
+    try{
+      await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex,currentQuestionIndex:i});
+    }catch{
+      setError("fmd.saveError");
+    }
+  }
 
- const order=attempt.option_order[i]??[0,1,2];const selected=attempt.selected_answers[q.id];
- return <section className="assessment"><div className="assessmentHeader"><p className="eyebrow">{locale==="ru"?"ВОПРОС":"QUESTION"} {i+1} / 15</p><span className="eyebrow">{q.category}</span></div><div className="progressBar"><span style={{width:`${((i+1)/15)*100}%`}}/></div><h1>{L.question}</h1>
- {order.map(src=><button key={src} className={`assessmentAnswer ${selected===src?"selected":""}`} onClick={()=>choose(src)}>{L.options[src]}</button>)}
- <div className="assessmentNav"><button className="btn secondary" onClick={()=>i===0?router.push(`/${locale}/courses/greek-mythology/dashboard`):move(i-1)}>{locale==="ru"?"Назад":"Back"}</button><button className="btn" onClick={()=>i===14?setReview(true):move(i+1)}>{i===14?(locale==="ru"?"Проверить ответы":"Review answers"):(locale==="ru"?"Далее":"Next")}</button></div></section>
+  async function move(next:number){
+    if(!attempt||!q) return;
+    const n=Math.max(0,Math.min(last,next));
+    setAttempt({...attempt,current_question_index:n});
+    setReview(false);
+    await api("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex:attempt.selected_answers[q.id]??null,currentQuestionIndex:n}).catch(()=>{});
+  }
+
+  async function submit(){
+    if(!attempt||answeredCount<total) return;
+    setBusy(true);
+    setError(null);
+    try{
+      await api("/api/final/submit",{attemptId:attempt.id});
+      router.replace(`${courseBasePath(locale)}/final-myth-decoder/result`);
+      router.refresh();
+    }catch{
+      setError("fmd.submitError");
+      setBusy(false);
+    }
+  }
+
+  // ---- Intro
+  if(!attempt){
+    return <section className="fmd fmdIntro">
+      <div className="lxEyebrow">FINAL MYTH DECODER</div>
+      <h1 className="fmdHeadline">{t(locale,"fmd.title")}</h1>
+      <p className="fmdLead">{t(locale,"fmd.lead")}</p>
+      <ul className="fmdFacts">
+        <li><b>{total}</b><span>{t(locale,"fmd.factQuestions")}</span></li>
+        <li><b>12/{total}</b><span>{t(locale,"fmd.factPass")}</span></li>
+        <li><b>0:00</b><span>{t(locale,"fmd.factNoTimer")}</span></li>
+        <li><b>∞</b><span>{t(locale,"fmd.factAttempts")}</span></li>
+      </ul>
+      <p className="fmdNote">{t(locale,"fmd.noteHidden")}</p>
+      {error&&<div className="lxError fmdError" role="alert">{t(locale,error)}</div>}
+      <button type="button" className="lxBtn" disabled={busy} onClick={start}>{t(locale,"fmd.start")} <span aria-hidden="true">→</span></button>
+    </section>;
+  }
+
+  // ---- Review before submit
+  if(review){
+    return <section className="fmd">
+      <div className="lxEyebrow">FINAL MYTH DECODER</div>
+      <h1 className="fmdHeadline fmdHeadlineSm">{t(locale,"fmd.reviewTitle")}</h1>
+      <p className="fmdNote">{t(locale,"fmd.answeredOf",{n:answeredCount,total})}</p>
+      <div className="fmdTiles">
+        {questions.map((x,idx)=>{
+          const done=attempt.selected_answers[x.id]!==undefined;
+          return <button key={x.id} type="button" className={"fmdTile"+(done?" is-done":"")} onClick={()=>move(idx)}>
+            <b>{String(idx+1).padStart(2,"0")}</b>
+            <span>{t(locale,done?"fmd.answered":"fmd.unanswered")}</span>
+          </button>;
+        })}
+      </div>
+      {error&&<div className="lxError fmdError" role="alert">{t(locale,error)}</div>}
+      <div className="fmdNav">
+        <button type="button" className="lxBtn lxBtnGhost" onClick={()=>move(last)}>{t(locale,"fmd.back")}</button>
+        <button type="button" className="lxBtn" disabled={answeredCount<total||busy} onClick={submit}>{t(locale,"fmd.submit")}</button>
+      </div>
+    </section>;
+  }
+
+  // ---- Question
+  if(!q||!L) return null;
+  const order=attempt.option_order[i]??L.options.map((_,k)=>k);
+  const selected=attempt.selected_answers[q.id];
+  const catKey=CATEGORY_KEYS[q.category];
+  const labelId=`fmd-q-${q.id}`;
+  return <section className="fmd">
+    <div className="fmdHead">
+      <div className="lxEyebrow">{t(locale,"fmd.question",{n:i+1,total})}</div>
+      <span className="fmdChip">{catKey?t(locale,catKey):q.category}</span>
+    </div>
+    <div className="fmdDots">
+      {questions.map((x,idx)=>{
+        const done=attempt.selected_answers[x.id]!==undefined;
+        return <button key={x.id} type="button" aria-label={String(idx+1).padStart(2,"0")} aria-current={idx===i?"step":undefined}
+          className={"fmdDot"+(done?" is-done":"")+(idx===i?" is-current":"")} onClick={()=>move(idx)}/>;
+      })}
+    </div>
+    <h1 className="fmdQuestion" id={labelId}>{L.question}</h1>
+    <div className="lxOptions" role="radiogroup" aria-labelledby={labelId}>
+      {order.map((src,k)=>{
+        const isSel=selected===src;
+        return <button key={src} type="button" role="radio" aria-checked={isSel} className={"lxOption"+(isSel?" is-selected":"")} onClick={()=>choose(src)}>
+          <span className="lxMark" aria-hidden="true">{LETTERS[k]??""}</span>
+          <span className="lxText">{L.options[src]}</span>
+        </button>;
+      })}
+    </div>
+    {error&&<div className="lxError fmdError" role="alert">{t(locale,error)}</div>}
+    <div className="fmdNav">
+      <button type="button" className="lxBtn lxBtnGhost" onClick={()=>i===0?router.push(courseDashboardPath(locale)):move(i-1)}>{t(locale,"fmd.back")}</button>
+      <button type="button" className="lxBtn" onClick={()=>i===last?setReview(true):move(i+1)}>{t(locale,i===last?"fmd.toReview":"fmd.next")} <span aria-hidden="true">→</span></button>
+    </div>
+    <p className="fmdNote">{t(locale,"fmd.noteHidden")}</p>
+  </section>;
 }
