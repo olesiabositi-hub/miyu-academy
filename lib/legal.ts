@@ -5,10 +5,10 @@
 export const OPERATOR = {
   brand: "MIYU Academy",
   site: "miyu.academy",
-  legalName: "Olesia Botsieva, IE" as string | null,
-  address: null as string | null,
-  country: null as string | null,
-  privacyEmail: null as string | null,
+  legalName: "IE Olesia Botsieva" as string | null,
+  address: "Javakhishvili 91, 2B, Tbilisi" as string | null,
+  country: "Georgia" as string | null,
+  privacyEmail: "privacy@miyu.academy" as string | null,
   governingLaw: null as string | null,
   effectiveDate: { ru: "9 октября 2026", en: "9 October 2026" },
 };

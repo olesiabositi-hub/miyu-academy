@@ -9,8 +9,9 @@
 - Headers: nosniff, frame denial (X-Frame-Options + CSP frame-ancestors), Referrer-Policy, Permissions-Policy, HSTS, COOP; API responses `no-store`.
 - Google Analytics loads only after explicit consent and is removed on withdrawal.
 
-## Recommended database hardening (needs a SQL migration, not yet applied)
-1. `module_progress` allows a signed-in user to write their own rows directly through the Supabase API, including `status='completed'`. Move completion into a security-definer RPC (or restrict columns with a trigger) and make the final-test/certificate functions count only the 8 real module ids.
-2. Add `length(p_student_name) <= 60` inside `issue_greek_mythology_certificate`.
-3. Optional: cooldown or attempt cap for the Final Myth Decoder, and omit category scores on failed attempts.
-Impact today: a learner can only cheat their own progress; no other user's data is exposed.
+## Database hardening: `supabase/migrations/0005_module_completion_hardening.sql`
+Run it once in the Supabase SQL editor (idempotent). It: removes rows with unknown module ids; adds a trigger so `status='completed'` / `completed_at` can only be set by the new `complete_greek_mythology_module()` RPC (used by `/api/module/complete`); caps certificate names at 60 characters.
+Deploy order: run the SQL first, then merge (the old API code keeps working only until completion is blocked, so do both in the same session).
+
+## Still optional
+Cooldown or attempt cap for the Final Myth Decoder; omit category scores on failed attempts.
