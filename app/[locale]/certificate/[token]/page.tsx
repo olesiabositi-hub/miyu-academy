@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { isLocale, COURSE_TITLE } from "@/lib/course";
 import { createServerSupabase } from "@/lib/supabase/server";
+import { t } from "@/lib/i18n";
+import { isPreviewRequest } from "@/lib/preview";
 
 export const metadata={robots:{index:false,follow:false},title:"Certificate Verification | MIYU Academy"};
 
@@ -8,21 +10,30 @@ export default async function VerifyPage({params}:{params:Promise<{locale:string
  const {locale,token}=await params;
  if(!isLocale(locale))notFound();
 
- const supabase=await createServerSupabase();
- const {data,error}=await supabase.rpc("verify_certificate",{p_token:token});
- const c=Array.isArray(data)?data[0]:data;
+ let c:{student_name:string;completed_at:string;certificate_id:string;status:string}|null=null;
+ if(token==="demo"&&await isPreviewRequest()){
+  c={student_name:locale==="ru"?"Анастасия Соколова":"Olivia Martin",completed_at:new Date().toISOString(),certificate_id:"MIYU-GM-2026-000124",status:"valid"};
+ }else{
+  const supabase=await createServerSupabase();
+  const {data,error}=await supabase.rpc("verify_certificate",{p_token:token});
+  const row=Array.isArray(data)?data[0]:data;
+  if(!error&&row) c=row;
+ }
 
- if(error||!c)return <section className="assessment"><h1>{locale==="ru"?"Сертификат не найден":"Certificate not found"}</h1></section>;
+ if(!c)return <section className="certPage"><div className="verifyCard"><div className="lxEyebrow">MIYU ACADEMY</div><h1 className="verifyName">{t(locale,"cert.verifyNotFound")}</h1><p className="verifyMeta">{t(locale,"cert.verifyNotFoundBody")}</p></div></section>;
 
  const valid=c.status==="valid";
- return <section className="assessment">
-   <p className="eyebrow">MIYU ACADEMY</p>
-   <h1>{locale==="ru"?"ПРОВЕРЕННЫЙ СЕРТИФИКАТ":"VERIFIED CERTIFICATE"}</h1>
-   <h2>{c.student_name}</h2>
-   <p>{locale==="ru"?"Сертификат подтверждает успешное прохождение курса":"has successfully completed the course"}</p>
-   <h3>{COURSE_TITLE[locale]}</h3>
-   <p>{locale==="ru"?"Завершено":"Completed"}: {new Date(c.completed_at).toLocaleDateString(locale)}</p>
-   <p>Certificate ID: <strong>{c.certificate_id}</strong></p>
-   <p className={valid?"done":""}><strong>{valid?(locale==="ru"?"✓ Действителен":"✓ Valid"):(locale==="ru"?"✕ Сертификат отозван":"✕ Certificate revoked")}</strong></p>
+ const completed=new Date(c.completed_at).toLocaleDateString(locale,{day:"numeric",month:"long",year:"numeric"});
+ return <section className="certPage">
+  <div className="verifyCard">
+   <div className="lxEyebrow">MIYU ACADEMY · {t(locale,"cert.verifyTitle")}</div>
+   <h1 className="verifyName">{c.student_name}</h1>
+   <p className="verifyMeta">{t(locale,"cert.certifies")}</p>
+   <p className="verifyCourse">{COURSE_TITLE[locale]}</p>
+   <p className="verifyMeta">{t(locale,"cert.completed")[0]+t(locale,"cert.completed").slice(1).toLowerCase()}: {completed}</p>
+   <p className="verifyMeta">Certificate ID: <strong>{c.certificate_id}</strong></p>
+   <div className={"verifyStatus "+(valid?"is-valid":"is-revoked")}>{valid?"✓ "+t(locale,"cert.valid"):"✕ "+t(locale,"cert.revoked")}</div>
+   <p className="verifyMeta">{t(locale,"cert.verifiedBy")}</p>
+  </div>
  </section>
 }

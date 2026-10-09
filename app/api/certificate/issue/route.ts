@@ -4,6 +4,7 @@ import { createServerSupabase } from "@/lib/supabase/server";
 export async function POST(req:Request){
   const {studentName,language}=await req.json();
   if(typeof studentName!=="string"||!studentName.trim()) return new NextResponse("Name required",{status:400});
+  if(studentName.trim().length>60) return new NextResponse("Name too long",{status:400});
   if(!["en","ru"].includes(language)) return new NextResponse("Invalid language",{status:400});
   const supabase=await createServerSupabase();
   const {data:{user}}=await supabase.auth.getUser();

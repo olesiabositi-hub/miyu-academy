@@ -2,18 +2,68 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
+import { t } from "@/lib/i18n";
+
+const MAX_NAME=60;
 
 export function CertificateForm({locale}:{locale:Locale}){
- const router=useRouter();const [name,setName]=useState("");const [ok,setOk]=useState(false);const [busy,setBusy]=useState(false);
- async function issue(){setBusy(true);try{const r=await fetch("/api/certificate/issue",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({studentName:name,language:locale})});if(!r.ok)throw new Error(await r.text());router.refresh()}finally{setBusy(false)}}
- return <div className="card formCard"><label htmlFor="certName">{locale==="ru"?"Имя в сертификате":"Name on certificate"}</label><input id="certName" type="text" autoComplete="name" value={name} onChange={e=>setName(e.target.value)}/>
- <label className="checkline"><input type="checkbox" checked={ok} onChange={e=>setOk(e.target.checked)}/><span>{locale==="ru"?"Я подтверждаю, что имя написано правильно.":"I confirm that my name is written correctly."}</span></label>
- <div className="notice">{locale==="ru"?"Сертификат не индексируется в поиске. Любой, у кого есть ссылка или QR-код для проверки, сможет увидеть имя в сертификате, название курса, дату завершения, ID сертификата и его статус.":"Your certificate is unlisted. Anyone with its verification link or QR code can view your certificate name, course, completion date, Certificate ID and status."}</div>
- <button className="btn" style={{marginTop:16}} disabled={!name.trim()||!ok||busy} onClick={issue}>{locale==="ru"?"Сгенерировать сертификат":"Generate my certificate"}</button></div>
+ const router=useRouter();
+ const [name,setName]=useState("");
+ const [ok,setOk]=useState(false);
+ const [busy,setBusy]=useState(false);
+ const [failed,setFailed]=useState(false);
+ async function issue(){
+  setBusy(true);setFailed(false);
+  try{
+   const r=await fetch("/api/certificate/issue",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({studentName:name.trim(),language:locale})});
+   if(!r.ok) throw new Error(await r.text());
+   router.refresh();
+  }catch{
+   setFailed(true);
+  }finally{
+   setBusy(false);
+  }
+ }
+ return <div className="certForm">
+  <label htmlFor="certName">{t(locale,"cert.nameLabel")}</label>
+  <input id="certName" type="text" autoComplete="name" maxLength={MAX_NAME} placeholder={t(locale,"cert.namePlaceholder")} value={name} onChange={e=>setName(e.target.value)}/>
+  <label className="certCheck"><input type="checkbox" checked={ok} onChange={e=>setOk(e.target.checked)}/><span>{t(locale,"cert.confirmName")}</span></label>
+  <div className="certNote">{t(locale,"cert.privacyNote")}</div>
+  {failed&&<div className="lxError" role="alert">{t(locale,"cert.issueError")}</div>}
+  <button type="button" className="lxBtn" disabled={!name.trim()||!ok||busy} onClick={issue}>{busy?t(locale,"cert.generating"):t(locale,"cert.generate")}</button>
+ </div>;
 }
 
-export function CertificateActions({locale,token}:{locale:Locale;token:string}){
- async function copy(){await navigator.clipboard.writeText(`${location.origin}/en/certificate/${token}`)}
- async function share(){if(navigator.share)await navigator.share({title:"MIYU Academy Certificate",url:`${location.origin}/en/certificate/${token}`})}
- return <div className="actions"><button className="btn" onClick={()=>window.print()}>Download PDF</button><button className="btn secondary" onClick={copy}>Copy certificate link</button><button className="btn secondary" onClick={share}>Share</button><a className="btn secondary" href={`/${locale}/certificate/${token}`}>Open verification</a></div>
+export function CertificateActions({locale,token,certificateId}:{locale:Locale;token:string;certificateId:string}){
+ const [toast,setToast]=useState("");
+ const url=()=>`${location.origin}/${locale}/certificate/${token}`;
+ function download(){
+  // The browser uses the page title as the default file name for "Save as PDF".
+  const prev=document.title;
+  document.title=`MIYU-Certificate-${certificateId}`;
+  const restore=()=>{document.title=prev;window.removeEventListener("afterprint",restore)};
+  window.addEventListener("afterprint",restore);
+  window.print();
+ }
+ async function copy(){
+  try{
+   await navigator.clipboard.writeText(url());
+   setToast(t(locale,"cert.copied"));
+   window.setTimeout(()=>setToast(""),2500);
+  }catch{setToast("")}
+ }
+ async function share(){
+  try{
+   if(navigator.share) await navigator.share({title:"MIYU Academy",url:url()});
+   else await copy();
+  }catch{/* cancelled */}
+ }
+ return <div className="certActions">
+  <button type="button" className="lxBtn" onClick={download}>{t(locale,"cert.download")}</button>
+  <p className="certHint">{t(locale,"cert.downloadHint")}</p>
+  <button type="button" className="lxBtn lxBtnGhost" onClick={copy}>{t(locale,"cert.copy")}</button>
+  <button type="button" className="lxBtn lxBtnGhost" onClick={share}>{t(locale,"cert.share")}</button>
+  <a className="lxBtn lxBtnGhost" href={`/${locale}/certificate/${token}`}>{t(locale,"cert.open")}</a>
+  <div className="certToast" role="status" aria-live="polite">{toast}</div>
+ </div>;
 }
