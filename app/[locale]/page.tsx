@@ -130,7 +130,7 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
             <img src={`/visuals/home/soon-${s.key}-960.webp`} width={960} height={720} alt="" loading="lazy" decoding="async"/>
             <span className="hxTileShade" aria-hidden="true"/>
             <span className="hxChip hxChipTime">{s.chip}</span>
-            <div className="hxSoonBody"><h3>{s.title}</h3><p>{s.body}</p></div>
+            <div className="hxSoonBody"><h3>{s.title}</h3></div>
           </article>)}
         </Stagger>
       </div>
