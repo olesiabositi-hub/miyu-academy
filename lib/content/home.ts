@@ -62,15 +62,15 @@ export const STEPS: Record<Locale, {n:string;title:string;body:string}[]> = {
   ],
 };
 
-export const SOON: Record<Locale, {key:string;title:string;body:string;chip:string}[]> = {
+export const SOON: Record<Locale, {key:string;title:string;chip:string}[]> = {
   ru: [
-    {key:"language",title:"Язык",body:"Слова, у которых есть история.",chip:"Скоро"},
-    {key:"culture",title:"Культура",body:"Знакомые образы, символы и смыслы.",chip:"Скоро"},
-    {key:"meaning",title:"Смысл и современность",body:"Как старые идеи живут в сегодняшнем мире.",chip:"Скоро"},
+    {key:"norse",title:"Скандинавская мифология",chip:"Скоро"},
+    {key:"nart",title:"Нартский эпос",chip:"Скоро"},
+    {key:"egypt",title:"Древнеегипетская мифология",chip:"Скоро"},
   ],
   en: [
-    {key:"language",title:"Language",body:"Words with a story behind them.",chip:"Coming soon"},
-    {key:"culture",title:"Culture",body:"Familiar images, symbols and meanings.",chip:"Coming soon"},
-    {key:"meaning",title:"Meaning and modernity",body:"How old ideas live in today's world.",chip:"Coming soon"},
+    {key:"norse",title:"Norse Mythology",chip:"Coming soon"},
+    {key:"nart",title:"The Nart Epic",chip:"Coming soon"},
+    {key:"egypt",title:"Ancient Egyptian Mythology",chip:"Coming soon"},
   ],
 };
