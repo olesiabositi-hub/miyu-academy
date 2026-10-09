@@ -8,7 +8,10 @@ export async function GET(request:Request){
  const locale=url.searchParams.get("locale")==="ru"?"ru":"en";
  const fallback=`/${locale}/courses/greek-mythology/dashboard`;
  const nextRaw=url.searchParams.get("next")??fallback;
- const next=nextRaw.startsWith("/")&&!nextRaw.startsWith("//")?nextRaw:fallback;
+ let next=fallback;
+ if(nextRaw.startsWith("/")&&!nextRaw.includes("\\")){
+  try{const u=new URL(nextRaw,base);if(u.origin===new URL(base).origin) next=u.pathname+u.search}catch{}
+ }
 
  if(code){
   const supabase=await createServerSupabase();

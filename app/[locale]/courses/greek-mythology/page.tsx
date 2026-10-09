@@ -79,7 +79,10 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
   const modulesLead=locale==="ru"?"Не нужно знать мифологию заранее. Курс собирает карту постепенно, модуль за модулем.":"No prior mythology knowledge is needed. The course builds the map gradually, module by module.";
   const dashboard="/"+locale+"/courses/greek-mythology/dashboard";
 
+  const base=(process.env.NEXT_PUBLIC_SITE_URL??"").replace(/\/$/,"");
+  const courseLd={"@context":"https://schema.org","@type":"Course",name:COURSE_TITLE[locale],inLanguage:locale,provider:{"@type":"Organization",name:"MIYU Academy",url:base||undefined},url:`${base}/${locale}/courses/greek-mythology`};
   return <div className="hx">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(courseLd).replace(/</g,"\\u003c")}}/>
     <section className="hxHero hxHeroCourse">
       <picture className="hxHeroArt" aria-hidden="true">
         <source media="(max-width: 800px)" srcSet="/visuals/home/course-hero-960.webp"/>
@@ -189,6 +192,7 @@ export async function generateMetadata({params}:{params:Promise<{locale:string}>
     title:COURSE_TITLE[locale]+" | MIYU Academy",
     description,
     alternates:{canonical:url,languages:{en:base+"/en/courses/greek-mythology",ru:base+"/ru/courses/greek-mythology"}},
-    openGraph:{title:COURSE_TITLE[locale],description,url,siteName:"MIYU Academy",locale:locale==="ru"?"ru_RU":"en_US",type:"website"}
+    openGraph:{title:COURSE_TITLE[locale],description,url,siteName:"MIYU Academy",locale:locale==="ru"?"ru_RU":"en_US",type:"website",images:[{url:base+"/visuals/home/course-hero-1916.webp",width:1916,height:821}]},
+    twitter:{card:"summary_large_image",title:COURSE_TITLE[locale],description}
   }
 }

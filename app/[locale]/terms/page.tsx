@@ -1,2 +1,19 @@
-import { notFound } from "next/navigation";import { isLocale } from "@/lib/course";
-export default async function Terms({params}:{params:Promise<{locale:string}>}){const {locale}=await params;if(!isLocale(locale))notFound();return <article className="container legal"><p className="eyebrow">MIYU ACADEMY</p><h1>{locale==="ru"?"Условия использования":"Terms of Use"}</h1><div className="notice">{locale==="ru"?"Финальная юридическая редакция требует реальные данные оператора и применимое право до публичного запуска.":"Final legal wording requires the real operator identity and applicable law before public launch."}</div><h2>{locale==="ru"?"Ключевые правила V1":"V1 core terms"}</h2><p>{locale==="ru"?"Аккаунт — 16+. Материалы курса предназначены для личного образовательного использования. Сертификат MIYU подтверждает успешное прохождение этого курса по критериям MIYU Academy; это не государственный или университетский диплом и не гарантия трудоустройства.":"Accounts are 16+. Course material is licensed for personal educational use. A MIYU certificate confirms successful completion under MIYU Academy criteria; it is not a government or university degree and does not guarantee employment."}</p></article>}
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { isLocale } from "@/lib/course";
+import { termsDoc } from "@/lib/content/legal";
+import { LegalDocView } from "@/components/LegalDoc";
+
+export default async function TermsPage({params}:{params:Promise<{locale:string}>}){
+ const {locale}=await params;if(!isLocale(locale))notFound();
+ return <section className="legalPage"><LegalDocView doc={termsDoc(locale)} locale={locale}/></section>
+}
+
+export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{
+ const {locale}=await params;if(!isLocale(locale))return {};
+ const base=process.env.NEXT_PUBLIC_SITE_URL??"http://localhost:3000";
+ return {
+  title:`${termsDoc(locale).title} | MIYU Academy`,
+  alternates:{canonical:`${base}/${locale}/terms`,languages:{en:`${base}/en/terms`,ru:`${base}/ru/terms`}},
+ };
+}

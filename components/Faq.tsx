@@ -21,6 +21,6 @@ export function Faq({locale,title,eyebrow}:{locale:Locale;title:string;eyebrow:s
         </details>)}
       </div>
     </div>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(ld)}}/>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(ld).replace(/</g,"\\u003c")}}/>
   </section>;
 }

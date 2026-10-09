@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
+import { track } from "@/lib/analytics";
 import { t } from "@/lib/i18n";
 
 const MAX_NAME=60;
@@ -17,6 +18,7 @@ export function CertificateForm({locale}:{locale:Locale}){
   try{
    const r=await fetch("/api/certificate/issue",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({studentName:name.trim(),language:locale})});
    if(!r.ok) throw new Error(await r.text());
+   track("certificate_issue",{language:locale});
    router.refresh();
   }catch{
    setFailed(true);

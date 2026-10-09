@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
 import { courseBasePath, courseDashboardPath } from "@/lib/courses";
+import { track } from "@/lib/analytics";
 import { t, type UiKey } from "@/lib/i18n";
 
 type Q={id:string;category:string;module:number;en:{question:string;options:string[]};ru:{question:string;options:string[]}};
@@ -66,6 +67,7 @@ export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:
     setError(null);
     try{
       await call("/api/final/submit",{attemptId:attempt.id});
+      track("final_submit");
       router.replace(`${courseBasePath(locale)}/final-myth-decoder/result${demo?"?demo=pass":""}`);
       router.refresh();
     }catch{
