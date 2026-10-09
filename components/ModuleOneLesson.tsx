@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
-import { ChoiceCheck } from "@/components/Checks";
+import { ChoiceCheck, SelfCheck } from "@/components/Checks";
+import { ModuleOutro } from "@/components/ModuleOutro";
+import { parseCompletion } from "@/lib/content/outro";
 import styles from "./ModuleOneLesson.module.css";
 
 type ProseBlock = Extract<LessonBlock,{type:"prose"}>;
@@ -128,14 +130,11 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
   const self=selfCheck(model);
   const remember=prose(model,"prose-21");
   const complete=completion(model);
+  const outro=parseCompletion([complete.markdown]);
+  const selfIntro=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
 
   useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
   const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
-
-  async function finish(){
-    await post("/api/module/complete",{moduleId:model.moduleId});
-    location.href=`/${model.locale}/courses/greek-mythology/module-02`;
-  }
 
   return <article className={styles.page}>
     <section id="intro" className={styles.hero} aria-labelledby="m1-title">
@@ -239,21 +238,10 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
     </section>
     <section id="section-13" className={`${styles.readingWide} ${styles.summary}`}><Markdown>{summary.markdown}</Markdown></section>
 
-    <section id="self-check" className={styles.selfCheck}>
-      <Markdown>{self.markdown}</Markdown>
-      <div className={styles.selfQuestions}>{self.questions.map(q=><ChoiceCheck key={q.id} question={q} locale={model.locale} onPersist={(v)=>persistCheck(q.id,v)}/>)}</div>
-    </section>
+    <SelfCheck questions={self.questions} locale={model.locale} onPersist={persistCheck} intro={selfIntro?<Markdown>{selfIntro}</Markdown>:undefined}/>
 
     <section id="prose-21" className={`${styles.readingWide} ${styles.remember}`}><Markdown>{remember.markdown}</Markdown></section>
 
-    <section id="module-complete" className={styles.complete}>
-      <div className={styles.completeCopy}><Markdown>{complete.markdown}</Markdown></div>
-      <div className={styles.completeNav}>
-        <div className={styles.chapterCount}>13 / 13</div>
-        <div className={styles.chapterTrack}><span style={{width:"100%"}}/></div>
-        <div className={styles.chapterNext}>{ru?"Модуль 2":"Module 2"}</div>
-        <button className={styles.continueButton} onClick={finish}>{ru?"Продолжить":"Continue"}<span aria-hidden="true">→</span></button>
-      </div>
-    </section>
+    <ModuleOutro locale={model.locale} moduleId={model.moduleId} heading={outro.heading} body={outro.body}/>
   </article>;
 }

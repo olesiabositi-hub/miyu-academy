@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
-import { ChoiceCheck } from "@/components/Checks";
+import { ChoiceCheck, SelfCheck } from "@/components/Checks";
+import { ModuleOutro } from "@/components/ModuleOutro";
+import { parseCompletion, parseNext } from "@/lib/content/outro";
 import styles from "./ModuleFourLesson.module.css";
 
 type ProseBlock = Extract<LessonBlock,{type:"prose"}>;
@@ -95,11 +97,10 @@ export function ModuleFourLesson({model}:{model:LessonModel}){
  const t=copy[model.locale], intro=specialProse(model,/^#\s+(?:Модуль 4|Module 4)/m);
  const s=Array.from({length:24},(_,i)=>splitHeading(prose(model,i+1).markdown));
  const cerberus=splitHeading(specialProse(model,/^###\s+(?:Цербер|Cerberus)/m).markdown);
- const qs=[1,2,3,4,5].map(n=>quick(model,n)), self=selfCheck(model), remember=splitSubsections(rememberBlock(model).markdown), complete=cleanCompletion(completion(model).markdown), next=splitNext(nextBlock(model).markdown);
+ const qs=[1,2,3,4,5].map(n=>quick(model,n)), self=selfCheck(model), remember=splitSubsections(rememberBlock(model).markdown), outro=parseCompletion([completion(model).markdown]), nextText=parseNext(nextBlock(model).markdown);
  const selfIntroMarkdown=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
  useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
  const persistCheck=(id:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId:id,sourceIndex}).catch(()=>{});
- async function finish(){await post("/api/module/complete",{moduleId:model.moduleId});location.href=`/${model.locale}/courses/greek-mythology/module-05`}
  const Quick=({n}:{n:number})=><div className={`${styles.quick} ${styles.reading}`}><p className={styles.marker}>{t.quick}</p><ChoiceCheck question={qs[n-1].question} locale={model.locale} onPersist={(v)=>persistCheck(qs[n-1].id,v)}/></div>;
  return <article className={styles.page}>
   <section className={styles.hero}><Art kind="hero" className={styles.heroImage} locale={model.locale} eager/><div className={styles.heroShade}/><div className={styles.heroInner}><div className={styles.heroCopy}><p className={styles.kicker}>{t.module}</p><h1>{model.title}</h1><p className={styles.duration}><span className={styles.clock}/>{model.durationLabel}</p></div></div></section>
@@ -125,8 +126,8 @@ export function ModuleFourLesson({model}:{model:LessonModel}){
   <section className={styles.summary}><div className={styles.reading}><p className={styles.marker}>{t.markers[7]}</p><h2 className={styles.sectionTitle}>{model.locale==="ru"?"Теперь без подробностей":"Now without the details"}</h2><div className={styles.summaryGrid}>{splitSubsections(prose(model,24).markdown).items.map(item=><div className={styles.summaryCard} key={item.heading}><h3>{item.heading}</h3><div className={styles.rich}><Markdown>{item.body}</Markdown></div></div>)}</div></div></section>
   <section className={styles.visualStop}><div className={`${styles.reading} ${styles.intro}`}><p className={styles.marker}>{model.locale==="ru"?"ВИЗУАЛЬНАЯ ОСТАНОВКА 09":"VISUAL STOP 09"}</p><h2 className={styles.sectionTitle}>{t.visual9Title}</h2><p>{t.visual9Text}</p></div><figure className={styles.gridArt}><Art kind="grid" locale={model.locale}/></figure><div className={`${styles.reading} ${styles.heroMap}`}>{t.heroesClose.map(x=><div key={x[0]}><b>{x[0]}</b><span>{x[1]}</span></div>)}</div></section>
 
-  <section id="self-check" className={styles.selfCheck}><div className={styles.reading}><p className={styles.marker}>{t.self}</p><h2 className={styles.sectionTitle}>{t.selfTitle}</h2><div className={`${styles.rich} ${styles.selfIntro}`}><Markdown>{selfIntroMarkdown}</Markdown></div><div className={styles.selfGrid}>{self.questions.map((q,i)=><article className={styles.selfQ} key={q.id}><span className={styles.selfNum}>{String(i+1).padStart(2,"0")}</span><ChoiceCheck question={q} locale={model.locale} onPersist={(v)=>persistCheck(q.id,v)}/></article>)}</div></div></section>
+  <SelfCheck questions={self.questions} locale={model.locale} onPersist={persistCheck} intro={selfIntroMarkdown?<Markdown>{selfIntroMarkdown}</Markdown>:undefined}/>
   <section className={styles.remember}><div className={styles.reading}><p className={styles.marker}>{t.remember}</p><h2 className={styles.sectionTitle}>{t.rememberTitle}</h2><div className={styles.rememberGrid}>{remember.items.map((item,i)=><article className={styles.rememberCard} key={item.heading}><b>{String(i+1).padStart(2,"0")}</b><div className={styles.rich}><Markdown>{item.body}</Markdown></div></article>)}</div></div></section>
-  <section className={styles.completion}><div className={`${styles.reading} ${styles.completionGrid}`}><article><p className={styles.marker}>{t.completed}</p><h2 className={styles.sectionTitle}>{complete.heading}</h2><div className={styles.network}><span>{model.locale==="ru"?"боги":"gods"}</span><i>→</i><span>{model.locale==="ru"?"монстры":"monsters"}</span><i>→</i><span>{model.locale==="ru"?"герои":"heroes"}</span></div><div className={styles.rich}><Markdown>{complete.body}</Markdown></div></article><aside className={styles.nextCard}><p className={styles.marker}>{t.next}</p><h3>{next.heading}</h3><div className={styles.rich}><Markdown>{next.body}</Markdown></div><button className={styles.continue} onClick={finish}>{t.continue} <span aria-hidden="true">→</span></button></aside></div></section>
+  <ModuleOutro locale={model.locale} moduleId={model.moduleId} heading={outro.heading} body={outro.body} nextHeading={nextText.heading} nextBody={nextText.body}/>
  </article>
 }
