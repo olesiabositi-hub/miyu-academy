@@ -33,7 +33,7 @@ function clearGaCookies(){
 /** Loads Google Analytics only after explicit consent; withdraws it otherwise. */
 export function applyConsent(){
   if(typeof window==="undefined"||!GA_ID) return;
-  const w=window as W;
+  const w=window as unknown as W;
   const disableKey=`ga-disable-${GA_ID}`;
   if(getConsent()==="allow"){
     w[disableKey]=false;
@@ -55,6 +55,6 @@ export function applyConsent(){
 /** Vendor-neutral event boundary. No user identifiers are ever sent. */
 export function track(event:string,props:EventProps={}){
   if(getConsent()!=="allow") return;
-  const w=window as W;
+  const w=window as unknown as W;
   if(w.gtag) w.gtag("event",event,props);
 }
