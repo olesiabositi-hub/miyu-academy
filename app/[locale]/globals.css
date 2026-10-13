@@ -1046,3 +1046,11 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 @keyframes mhSnow{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.85}80%{opacity:.6}100%{transform:translate3d(-40px,60vh,0);opacity:0}}
 @media (max-width:700px){.mhFlake:nth-child(n+8){display:none}}
 @media (prefers-reduced-motion:reduce){.moduleHeroFlow .moduleHeroMedia img,.mhMist,.mhFlake{animation:none!important}.mhFlake{display:none}}
+
+/* ---------- Pinned header ---------- */
+.topbar{position:-webkit-sticky;position:sticky;top:0;transition:background-color .25s,box-shadow .25s}
+.topbarScrolled{box-shadow:0 6px 22px rgba(10,19,32,.14)}
+/* Course landing: the bar floats over the picture, stays pinned while scrolling and turns solid. */
+.topbarCourse{position:fixed;left:0;right:0;top:0;inset:0 0 auto 0;width:100%}
+.topbarCourse.topbarScrolled{background:rgba(13,29,53,.96);backdrop-filter:blur(9px);box-shadow:0 6px 22px rgba(0,0,0,.25)}
+body:has(.themeMark.theme-norse) .topbarCourse.topbarScrolled{background:rgba(10,19,32,.96)}

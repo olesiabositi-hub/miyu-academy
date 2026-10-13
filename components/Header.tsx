@@ -11,6 +11,7 @@ export function Header({locale}:{locale:Locale}){
   const pathname=usePathname();
   const router=useRouter();
   const [open,setOpen]=useState(false);
+  const [scrolled,setScrolled]=useState(false);
 
   // The course the visitor is inside (null on the academy home, account, legal pages…).
   const current=courseFromPath(pathname);
@@ -23,6 +24,14 @@ export function Header({locale}:{locale:Locale}){
   const moduleNumber=moduleInfo?moduleInfo.moduleNumber:0;
   const moduleTotal=moduleInfo?moduleInfo.course.moduleCount:PRIMARY_COURSE.moduleCount;
   const inModule=moduleInfo!==null;
+
+  // The bar stays pinned; once the page is scrolled it gets a solid background and a shadow.
+  useEffect(()=>{
+    const on=()=>setScrolled(window.scrollY>24);
+    on();
+    window.addEventListener("scroll",on,{passive:true});
+    return ()=>window.removeEventListener("scroll",on);
+  },[]);
 
   // Close the mobile menu after any navigation and on Escape.
   useEffect(()=>{setOpen(false)},[pathname]);
@@ -42,7 +51,7 @@ export function Header({locale}:{locale:Locale}){
   const isActive=(href:string)=>pathname.replace(/\/$/,"")===href;
   const progressLabel=t(locale,inModule?"nav.progressModule":"nav.progress");
 
-  return <header className={"topbar"+(courseOverview?" topbarCourse":"")+(inModule?" topbarModuleLesson":"")+(open?" topbarOpen":"")}>
+  return <header className={"topbar"+(courseOverview?" topbarCourse":"")+(inModule?" topbarModuleLesson":"")+(open?" topbarOpen":"")+(scrolled?" topbarScrolled":"")}>
     {inModule?
       <Link className="moduleBrand" href={"/"+locale}><span className="moduleBrandWord">MIYU</span><span className="moduleBrandRule" aria-hidden="true"/><span className="moduleBrandAcademy">ACADEMY</span></Link>:
       <Link className="brand" href={"/"+locale}>MIYU<span>ACADEMY</span></Link>}
