@@ -8,7 +8,7 @@ export function LegalDocView({doc,locale,showOperatorNotice=true}:{doc:Doc;local
     <h1 className="legalTitle">{doc.title}</h1>
     <p className="legalLead">{doc.lead}</p>
     {showOperatorNotice&&!operatorComplete()&&<div className="certNote" role="note">
-      {locale==="ru"?"Черновик: перед публичным запуском нужно указать реквизиты оператора (адрес, страна, email, применимое право).":"Draft: operator details (address, country, email, governing law) must be filled in before the public launch."}
+      {locale==="ru"?"Черновик: не заполнены контактный email или применимое право.":"Draft: contact email or governing law is not filled in."}
     </div>}
     {doc.sections.map(s=><section key={s.h} className="legalSection">
       <h2>{s.h}</h2>

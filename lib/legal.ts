@@ -1,18 +1,15 @@
 /**
- * Operator details shown on the legal pages. Fill the `null` fields before the public launch:
- * the pages show a visible notice while any of them is missing, and the build keeps working.
+ * Public contact details shown on the legal pages.
+ * No personal or sole-proprietor identity details are published on the site.
  */
 export const OPERATOR = {
   brand: "MIYU Academy",
   site: "miyu.academy",
-  legalName: "IE Olesia Botsieva" as string | null,
-  address: "Javakhishvili 91, 2B, Tbilisi" as string | null,
-  country: "Georgia" as string | null,
   privacyEmail: "privacy@miyu.academy" as string | null,
   governingLaw: { ru: "законодательство Грузии", en: "the laws of Georgia" } as { ru: string; en: string } | null,
-  effectiveDate: { ru: "9 октября 2026", en: "9 October 2026" },
+  effectiveDate: { ru: "13 октября 2026", en: "13 October 2026" },
 };
 
 export function operatorComplete(): boolean {
-  return !!(OPERATOR.legalName && OPERATOR.address && OPERATOR.country && OPERATOR.privacyEmail && OPERATOR.governingLaw);
+  return !!(OPERATOR.privacyEmail && OPERATOR.governingLaw);
 }

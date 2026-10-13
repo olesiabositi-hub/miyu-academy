@@ -15,3 +15,6 @@ Deploy order: run the SQL first, then merge (the old API code keeps working only
 
 ## Still optional
 Cooldown or attempt cap for the Final Myth Decoder; omit category scores on failed attempts.
+
+## Open courses (0006)
+`supabase/migrations/0006_open_courses.sql`: the Final Myth Decoder can be started at any time (optional), and the certificate RPCs are revoked. The certificate pages, API and design were removed from the site.
