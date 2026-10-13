@@ -13,7 +13,7 @@ export async function loadCourse(slug: string): Promise<{ course: CourseDefiniti
   const course = getCourseBySlug(slug);
   if (!course || course.slug === "greek-mythology") notFound();
   const preview = await isPreviewRequest();
-  const visible = course.status === "live" || (preview && course.modules.length > 0);
+  const visible = course.status === "live" || (preview && course.modules.some((m) => !m.soon));
   if (!visible) notFound();
   return { course, preview };
 }

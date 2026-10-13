@@ -36,6 +36,15 @@ export function ModuleMosaic({locale,courseId}:{locale:Locale;courseId?:string})
       const n=String(m.order).padStart(2,"0");
       const s=status[m.id];
       const time=m.duration[0]===m.duration[1]?`${m.duration[0]}`:`${m.duration[0]}–${m.duration[1]}`;
+      if(m.soon) return <div key={m.id} className="hxTile is-noart is-soon" aria-disabled="true">
+        <span className="hxTileShade" aria-hidden="true"/>
+        <span className="hxChip hxChipTime">{t(locale,"dash.statusSoon")}</span>
+        <span className="hxTileBody">
+          <span className="hxTileNum">{n}</span>
+          <span className="hxTileTitle">{m.title[locale]}</span>
+          <span className="hxTileText">{m.teaser[locale]}</span>
+        </span>
+      </div>;
       return <Link key={m.id} href={modulePath(locale,m.id,course)} className={"hxTile"+(m.image?"":" is-noart")}>
         {m.image&&<picture>
           <source media="(max-width: 700px)" srcSet={m.image.src360}/>

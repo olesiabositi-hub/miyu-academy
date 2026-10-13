@@ -2,7 +2,7 @@
 import { useState } from "react";
 import type { Locale } from "@/lib/course";
 import { displayify, splitFlow } from "@/lib/content/outro";
-import { adjacentModules, courseBasePath, courseModule, getCourse, modulePath, PRIMARY_COURSE } from "@/lib/courses";
+import { adjacentModules, courseBasePath, courseModule, getCourse, modulePath, PRIMARY_COURSE, upcomingModule } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 import { Markdown } from "@/components/Markdown";
@@ -20,6 +20,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
   const number=current?current.order:0;
   const total=course.moduleCount;
   const nextId=adjacentModules(moduleId,course).next;
+  const upcoming=upcomingModule(moduleId,course);
   // After the last module: Greek goes to the optional final, other courses back to the course page.
   const target=nextId?modulePath(locale,nextId,course):course.hasFinal?`${courseBasePath(locale,course)}/final-myth-decoder`:`${courseBasePath(locale,course)}`;
 
@@ -30,6 +31,9 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
       const nextModule=courseModule(course,nextId);
       nextTitle=`${locale==="ru"?"Модуль":"Module"} ${nextModule?nextModule.order:""}. ${nextModule?nextModule.title[locale]:""}`;
       if(!nextText) nextText=nextModule?.teaser[locale]??"";
+    }else if(upcoming){
+      nextTitle=`${locale==="ru"?"Модуль":"Module"} ${upcoming.order}. ${upcoming.title[locale]}`;
+      if(!nextText) nextText=upcoming.teaser[locale];
     }else if(!course.hasFinal){
       nextTitle=t(locale,"outro.courseDoneTitle");
       if(!nextText) nextText=t(locale,"outro.courseDoneBody");
@@ -70,8 +74,9 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
         <div className="lxEyebrow lxEyebrowGold">{t(locale,"outro.next")}</div>
         <div className="lxNextTitle">{nextTitle}</div>
         {nextText&&<div className="lxNextBody"><Markdown>{displayify(nextText)}</Markdown></div>}
+        {upcoming&&!nextId&&<div className="lxNextSoon">{t(locale,"outro.soon")}</div>}
         <button type="button" className="lxBtn lxBtnGold" onClick={go} disabled={busy}>
-          {busy?t(locale,"outro.saving"):<>{t(locale,"outro.continue")} <span aria-hidden="true">→</span></>}
+          {busy?t(locale,"outro.saving"):<>{t(locale,upcoming&&!nextId?"outro.backToCourse":"outro.continue")} <span aria-hidden="true">→</span></>}
         </button>
         {failed&&<div className="lxError" role="alert">{t(locale,"outro.error")}</div>}
       </aside>

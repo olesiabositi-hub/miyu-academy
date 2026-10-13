@@ -1,5 +1,5 @@
 import type { Locale } from "@/lib/course";
-import { PRIMARY_COURSE, getCourse } from "@/lib/courses";
+import { PRIMARY_COURSE, courseModule, getCourse } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 import { moduleHeroArt } from "@/lib/visuals";
 
@@ -10,8 +10,8 @@ import { moduleHeroArt } from "@/lib/visuals";
  */
 export function ModuleHero({locale,moduleId,moduleNumber,title,durationLabel,courseId}:{locale:Locale;moduleId:string;moduleNumber:number;title:string;durationLabel:string;courseId?:string}){
   const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
-  // Hero art for modules 5–8 is Greek-only; other courses use the plain title panel.
-  const art=course.id===PRIMARY_COURSE.id?moduleHeroArt(moduleId):null;
+  // Greek modules 5–8 take their art from lib/visuals.ts; other courses from the module definition.
+  const art=course.id===PRIMARY_COURSE.id?moduleHeroArt(moduleId):courseModule(course,moduleId)?.hero??null;
   return <header className={"moduleHero"+(art?"":" moduleHeroPlain")}>
     {art&&<div className="moduleHeroMedia">
       <picture>

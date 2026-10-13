@@ -7,13 +7,13 @@ import { LessonClient } from "@/components/LessonClient";
 import { ModuleNav } from "@/components/ModuleNav";
 import { ResumeTracker } from "@/components/ResumeTracker";
 import { PreviewBadge } from "@/components/PreviewBadge";
-import { courseBasePath } from "@/lib/courses";
+import { courseBasePath, isModuleOpen } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
 
 export default async function ModulePage({params}:{params:Promise<{locale:string;course:string;module:string}>}){
  const {locale,course:slug,module}=await params;if(!isLocale(locale))notFound();
  const {course,preview}=await loadCourse(slug);
- if(!course.moduleIds.includes(module))notFound();
+ if(!isModuleOpen(course,module))notFound();
  let initialRatio:number|null=null;
  if(!preview){
   const {user,supabase}=await requireUser(locale,`${courseBasePath(locale,course)}/${module}`);

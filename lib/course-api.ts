@@ -1,4 +1,4 @@
-import { PRIMARY_COURSE, getCourse } from "@/lib/courses";
+import { PRIMARY_COURSE, getCourse, isModuleOpen } from "@/lib/courses";
 import type { CourseDefinition } from "@/lib/courses";
 
 /**
@@ -12,6 +12,6 @@ export function resolveCourseModule(body: any): { course: CourseDefinition; modu
   const courseId = body?.courseId;
   const course = courseId === undefined ? PRIMARY_COURSE : typeof courseId === "string" ? getCourse(courseId) : undefined;
   if (!course || course.status !== "live") return null;
-  if (!course.moduleIds.includes(moduleId)) return null;
+  if (!isModuleOpen(course, moduleId)) return null;
   return { course, moduleId };
 }

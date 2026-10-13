@@ -39,3 +39,15 @@ so it can be reviewed before it is announced. In production they return 404 unti
 
 ## 6. Checks
 `python3 scripts/validate_content.py` (runs on every Netlify build) verifies ru/en pairs and duration lines.
+
+## Courses with their own course page (Norse Mythology)
+Put the approved page text in `content/<course>/landing/landing.ru.md` and `landing.en.md`
+and add a page file `app/[locale]/courses/<slug>/page.tsx` (see `norse-mythology`), which lays the
+text out with the course illustrations (`public/visuals/<course>/home/`). Without such a file the course
+uses the generic page (`app/[locale]/courses/[course]/page.tsx`).
+
+## Publishing a course module by module
+Mark modules that are announced but not written yet with `soon: true` in `lib/content/<course>.ts`.
+They are shown as "Coming soon" and are never linked. To open a module: add `module-NN.ru.md` and
+`module-NN.en.md`, set `duration`, remove `soon`. Lesson illustrations are plain Markdown images
+(`![caption](/visuals/<course>/mNN/….webp)`) in their own `---` chunk.

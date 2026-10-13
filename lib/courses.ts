@@ -2,6 +2,7 @@ import type { Locale } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
 import { MODULE_TEASERS } from "@/lib/content/teasers";
 import { NORSE_MODULES } from "@/lib/content/norse";
+import type { ModuleHeroArt } from "@/lib/visuals";
 
 /**
  * Course registry.
@@ -21,6 +22,10 @@ export type CourseModuleDef = {
   teaser: Record<Locale, string>;
   /** Optional tile art for the module grid (portrait 4:5). Without it the tile uses a gradient. */
   image?: { src: string; src360: string };
+  /** Hero picture at the top of the lesson (Greek modules 5–8 keep theirs in lib/visuals.ts). */
+  hero?: ModuleHeroArt;
+  /** Announced in the programme but not published yet: shown as "Coming soon", never linked. */
+  soon?: boolean;
 };
 
 export type CourseDefinition = {
@@ -84,11 +89,14 @@ export const COURSES: readonly CourseDefinition[] = [
   def({
     id: "norse-mythology",
     slug: "norse-mythology",
-    status: "soon",
+    status: "live",
     title: { ru: "Скандинавская мифология", en: "Norse Mythology" },
-    blurb: null,
-    card: { src: "/visuals/home/soon-norse-960.webp", src960: "/visuals/home/soon-norse-960.webp", width: 960, height: 720 },
-    hero: null,
+    blurb: {
+      ru: "Девять миров. Боги с сомнительными решениями. Конец света неизбежен.",
+      en: "Nine worlds. Gods with questionable judgment. The end of the world is inevitable.",
+    },
+    card: { src: "/visuals/norse/home/hero-1916.webp", src960: "/visuals/norse/home/hero-960.webp", width: 1916, height: 821 },
+    hero: { src: "/visuals/norse/home/hero-1916.webp", src960: "/visuals/norse/home/hero-960.webp", width: 1916, height: 821, pos: "60% 50%" },
     modules: NORSE_MODULES,
     hasFinal: false,
     contentDir: "norse-mythology",
@@ -188,12 +196,24 @@ export function parseModulePath(pathname: string): { locale: Locale; course: Cou
   return { locale: m[1] as Locale, course, moduleId: m[3], moduleNumber: Number(m[4]) };
 }
 
-/** Previous and next module ids inside a course (null at the edges). */
+/** Previous and next *open* module ids inside a course (null at the edges or when the next one is still "soon"). */
 export function adjacentModules(moduleId: string, course: CourseDefinition = PRIMARY_COURSE): { prev: string | null; next: string | null } {
   const i = course.moduleIds.indexOf(moduleId);
   if (i < 0) return { prev: null, next: null };
-  return {
-    prev: i > 0 ? course.moduleIds[i - 1] : null,
-    next: i < course.moduleIds.length - 1 ? course.moduleIds[i + 1] : null,
-  };
+  const prev = i > 0 ? course.modules[i - 1] : null;
+  const next = i < course.modules.length - 1 ? course.modules[i + 1] : null;
+  return { prev: prev && !prev.soon ? prev.id : null, next: next && !next.soon ? next.id : null };
+}
+
+/** The module that follows `moduleId` when it is announced but not open yet. */
+export function upcomingModule(moduleId: string, course: CourseDefinition = PRIMARY_COURSE): CourseModuleDef | null {
+  const i = course.moduleIds.indexOf(moduleId);
+  const next = i >= 0 ? course.modules[i + 1] : undefined;
+  return next && next.soon ? next : null;
+}
+
+/** True when the module exists and its lesson is published. */
+export function isModuleOpen(course: CourseDefinition, moduleId: string): boolean {
+  const m = courseModule(course, moduleId);
+  return !!m && !m.soon;
 }

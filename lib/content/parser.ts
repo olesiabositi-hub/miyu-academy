@@ -45,12 +45,12 @@ function parseChoice(chunk:string,id:string):ChoiceQuestion{
   const optionRows:{sourceIndex:number;text:string}[]=[];
   let firstOption=-1, answerLine=-1, answerLetter="";
   lines.forEach((line,i)=>{
-    const m=line.match(/^([A-C])\.\s+(.+?)\s*$/);
+    const m=line.match(/^([A-D])\.\s+(.+?)\s*$/);
     if(m){
       if(firstOption<0) firstOption=i;
       optionRows.push({sourceIndex:m[1].charCodeAt(0)-65,text:stripMd(m[2])});
     }
-    const a=line.match(/^\*\*(?:Ответ|Answer):\*\*\s*([A-C])\b/i);
+    const a=line.match(/^\*\*(?:Ответ|Answer):\*\*\s*([A-D])\b/i);
     if(a){answerLine=i;answerLetter=a[1].toUpperCase();}
   });
   if(optionRows.length>=2 && firstOption>=0 && answerLine>=0){
@@ -131,6 +131,12 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
   const manifestFile=path.join(process.cwd(),"content",course.contentDir,"visual-assets.json");
   const visualManifest:{entries:any[]}=fs.existsSync(manifestFile)?JSON.parse(fs.readFileSync(manifestFile,"utf8")):{entries:[]};
   const chunks=splitChunks(learnerSource);
+  // Courses other than Greek start with "# Модуль N / # Title / subtitle / **Время:**". The page hero already
+  // shows the title and duration, so drop those lines from the first chunk and keep the subtitle.
+  if(course.id!==PRIMARY_COURSE.id && chunks.length){
+    chunks[0]=chunks[0].split(/\r?\n/).filter(l=>!/^#\s/.test(l)&&!/^\*\*(?:Время|Time):\*\*/.test(l)).join("\n").trim();
+    if(!chunks[0]) chunks.shift();
+  }
   const blocks:LessonBlock[]=[];
   let quick=0, introAssigned=false;
 

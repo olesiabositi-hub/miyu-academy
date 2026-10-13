@@ -9,6 +9,7 @@ export function Markdown({children}:{children:string}){
       h2:({children})=><h3>{children}</h3>,
       h3:({children})=><h4>{children}</h4>,
       blockquote:({children})=><blockquote>{children}</blockquote>,
+      img:({src,alt})=><figure className="lessonFigure"><img src={typeof src==="string"?src:undefined} alt={alt??""} loading="lazy" decoding="async"/>{alt?<figcaption>{alt}</figcaption>:null}</figure>,
       a:({href,children})=><a href={href} rel="noreferrer">{children}</a>,
     }}
   >{children}</ReactMarkdown>;
