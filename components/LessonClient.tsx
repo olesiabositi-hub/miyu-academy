@@ -51,6 +51,10 @@ function GenericLesson({model}:{model:LessonModel}){
         const intro=block.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
         return <SelfCheck key={block.id} questions={block.questions} locale={model.locale} onPersist={persistCheck} intro={intro?<Markdown>{intro}</Markdown>:undefined}/>;
       }
+      if(block.type==="exam"){
+        const intro=block.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Course final exam|Итоговый тест курса)\s*/i,"").trim();
+        return <SelfCheck key={block.id} id="course-exam" variant="exam" questions={block.questions} locale={model.locale} onPersist={persistCheck} intro={intro?<Markdown>{intro}</Markdown>:undefined}/>;
+      }
       if(block.type==="module-challenge") return <section id={block.id} className="reading challenge" key={block.id}><p className="eyebrow">MYTH DECODER — LEVEL {block.level}</p>{block.question?<ChoiceCheck question={block.question} locale={model.locale} onPersist={(v)=>persistCheck(`challenge-${block.level}`,v)} />:<RevealChallenge label={model.locale==="ru"?"Показать разбор":"Reveal answer"}><Markdown>{block.markdown}</Markdown></RevealChallenge>}</section>;
       if(block.type==="module-complete"){
         if(block.id!==firstCompleteId) return null;

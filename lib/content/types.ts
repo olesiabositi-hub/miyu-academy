@@ -17,6 +17,7 @@ export type LessonBlock =
   | { type:"module-challenge"; id:string; level:number; markdown:string; question?:ChoiceQuestion; revealOnly?:boolean }
   | { type:"module-complete"; id:"module-complete"; markdown:string }
   | { type:"next-module"; id:"next-module"; markdown:string }
+  | { type:"exam"; id:"exam"; markdown:string; questions:ChoiceQuestion[] }
   | { type:"game"; id:string; game:string; markdown:string };
 
 export type LessonModel = {
