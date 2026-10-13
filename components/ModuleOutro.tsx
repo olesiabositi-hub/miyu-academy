@@ -6,6 +6,9 @@ import { adjacentModules, courseBasePath, courseModule, getCourse, modulePath, P
 import { t } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 import { Markdown } from "@/components/Markdown";
+import { RuneReveal } from "@/components/RuneReveal";
+import { drawRune } from "@/lib/rune-client";
+import type { RuneName } from "@/components/Rune";
 
 /**
  * End of every module, 1–8: what we just covered, what comes next, one Continue button.
@@ -15,6 +18,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
   const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
   const [busy,setBusy]=useState(false);
   const [failed,setFailed]=useState(false);
+  const [rune,setRune]=useState<RuneName|null>(null);
 
   const current=courseModule(course,moduleId);
   const number=current?current.order:0;
@@ -50,6 +54,11 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
       const r=await fetch("/api/module/complete",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({moduleId,courseId:course.id})});
       if(!r.ok) throw new Error(await r.text());
       track("module_complete",{module:moduleId,course:course.id});
+      if(course.runes){
+        // The reward must never block the lesson: if the draw fails we simply move on.
+        const drawn=await drawRune(course.id,moduleId,number);
+        if(drawn){ setRune(drawn); setBusy(false); return; }
+      }
       window.location.assign(target);
     }catch{
       setFailed(true);
@@ -58,6 +67,10 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
   }
 
   const parts=splitFlow(body);
+
+  if(rune) return <section id="module-complete" className="lxOutro" aria-labelledby="rune-title">
+    <RuneReveal locale={locale} rune={rune} stepsLeft={Math.max(0,total-number)} onNext={()=>window.location.assign(target)} nextLabel={t(locale,upcoming&&!nextId?"outro.backToCourse":"outro.continue")}/>
+  </section>;
 
   return <section id="module-complete" className="lxOutro" aria-labelledby="module-complete-title">
     <div className="lxOutroGrid">

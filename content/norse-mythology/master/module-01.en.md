@@ -456,6 +456,10 @@ And not even the gods.
 
 ---
 
+[[game:yggdrasil]]
+
+---
+
 ## Chapter 8. The World Is Ready. Let the Problems Begin.
 
 ---

@@ -28,12 +28,14 @@ ap.add_argument("--minutes", required=True)
 ap.add_argument("--done-ru", required=True)
 ap.add_argument("--done-en", required=True)
 ap.add_argument("--anchor", action="append", default=[])
+ap.add_argument("--game", action="append", default=[], help="CH=name puts the interactive [[game:name]] after chapter CH")
 ap.add_argument("--quick-after", type=int, default=4)
 a = ap.parse_args()
 
 root = Path(__file__).resolve().parent.parent
 pkg = Path(a.package)
 mid = f"{a.module:02d}"
+games = {int(x.split("=")[0]): x.split("=")[1] for x in a.game}
 anchors = {int(x.split("=")[0]): int(x.split("=")[1]) for x in a.anchor}
 manifest = json.loads((pkg / "asset-manifest.json").read_text(encoding="utf-8"))
 
@@ -108,6 +110,7 @@ def build(loc):
             out += ["", "---", "", "\n\n".join(paras[cut + 1:])]
         else:
             out += ["", "---", "", "\n\n".join(paras)]
+        if n in games: out += ["", "---", "", f"[[game:{games[n]}]]"]
         if n == a.quick_after:
             for q in [x for x in qs if x[0] == "quick"]:
                 out += ["", "---", "", qblock(q, "## " + ("Быстрая проверка" if ru else "Quick check"))]

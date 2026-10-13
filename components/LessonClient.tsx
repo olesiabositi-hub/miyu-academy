@@ -13,6 +13,7 @@ import { ModuleOutro } from "@/components/ModuleOutro";
 import { Reveal } from "@/components/Reveal";
 import { parseCompletion, parseNext } from "@/lib/content/outro";
 import { t } from "@/lib/i18n";
+import { GameBlock } from "@/components/GameBlock";
 
 async function post(url:string,body:unknown){
   const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
@@ -56,6 +57,7 @@ function GenericLesson({model}:{model:LessonModel}){
         return <ModuleOutro key={block.id} courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} heading={outro.heading} body={outro.body} nextHeading={nextText?nextText.heading:undefined} nextBody={nextText?nextText.body:undefined}/>;
       }
       if(block.type==="next-module") return null;
+      if(block.type==="game") return <Reveal key={block.id}><section id={block.id} className="reading gameWrap"><GameBlock game={block.game} locale={model.locale} courseId={model.courseId}/></section></Reveal>;
       return <section id={block.id} className="reading prose" key={block.id}><Markdown>{block.markdown}</Markdown></section>;
   };
 
