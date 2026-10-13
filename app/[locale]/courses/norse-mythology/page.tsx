@@ -196,6 +196,54 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       </div>
     </section>
 
+
+    <section className="hxSection nlPlay" id="how-it-works">
+      <div className="hxWrap">
+        <Reveal>
+          <div className="lxEyebrow lxEyebrowGold">{ru ? "КАК ПРОХОДИТ КУРС" : "HOW THE COURSE WORKS"}</div>
+          <h2 className="hxH2">{ru ? "Это не просто чтение. Здесь есть игра." : "This is not just reading. There is a game."}</h2>
+          <p className="nlPlayLead">{ru
+            ? "Курс устроен как путь по девяти модулям. Ты читаешь, смотришь иллюстрации, проверяешь себя и собираешь руны. В конце судьба сама скажет, что она о тебе думает."
+            : "The course is a path through nine modules. You read, look at the art, check yourself and collect runes. In the end, fate will tell you what it thinks of you."}</p>
+        </Reveal>
+        <ol className="nlPlaySteps">
+          {(ru ? [
+            ["Читай и смотри", "В каждом модуле 15–20 минут: короткие главы и большие иллюстрации. Сам миф пересказан честно, без выдумок."],
+            ["Проверяй себя", "По ходу идут быстрые вопросы и самопроверка в конце. Без оценок и штрафов: это способ закрепить, а не сдать экзамен."],
+            ["Собирай руны", "После каждого модуля выпадает случайная руна из 24 рун Старшего Футарка. Повторов не бывает. У каждой свой смысл и своя шутка."],
+            ["Играй", "В первом модуле, в главе про Иггдрасиль, есть мини-игра. Расставь существ по дереву, и получишь бонусную руну."],
+            ["Следи за Рагнарёком", "После каждого модуля счётчик сообщает, сколько шагов осталось до конца света. Он честно идёт к нулю."],
+          ] : [
+            ["Read and look", "Each module takes 15–20 minutes: short chapters and large illustrations. The myth is retold faithfully, nothing invented."],
+            ["Check yourself", "Quick questions along the way and a self-check at the end. No grades, no penalties: it is for remembering, not for passing an exam."],
+            ["Collect runes", "After every module you draw a random rune out of the 24 of the Elder Futhark. No repeats. Each has its own meaning and its own joke."],
+            ["Play", "Module 1 has a mini-game in the chapter about Yggdrasil. Place the creatures on the tree and earn a bonus rune."],
+            ["Watch Ragnarök", "After each module a counter tells you how many steps are left until the end of the world. It honestly heads for zero."],
+          ]).map(([h, b], i) => <li key={h}><span className="nlPlayNum">{String(i + 1).padStart(2, "0")}</span><h3>{h}</h3><p>{b}</p></li>)}
+        </ol>
+        <Reveal>
+          <div className="nlPlayEnd">
+            <div className="nlPlayRunes" aria-hidden="true">{(["ansuz", "kenaz", "othala", "dagaz"] as RuneName[]).map((r) => <Rune key={r} name={r} size={34} />)}</div>
+            <div>
+              <h3>{ru ? "Что ты получишь в конце" : "What you get at the end"}</h3>
+              <ul>
+                {(ru ? [
+                  "Свой мешочек рун: до 24 штук, у каждой значение и шутка. Он хранится в твоём кабинете.",
+                  "Уникальное предсказание, собранное из твоих рун: прошлое, настоящее и будущее. Оно открывается после всех девяти модулей, и у разных людей оно разное.",
+                  "Бонусную руну за игру про Иггдрасиль.",
+                ] : [
+                  "Your own pouch of runes: up to 24, each with a meaning and a joke. It lives in your account.",
+                  "A unique prophecy built from your runes: past, present and future. It opens after all nine modules, and it differs from person to person.",
+                  "A bonus rune for the Yggdrasil game.",
+                ]).map((x) => <li key={x}>{x}</li>)}
+              </ul>
+              <p className="nlPlayNote">{ru ? "Чтобы руны и прогресс сохранялись, войди в аккаунт: это бесплатно." : "To keep your runes and progress, sign in: it is free."}</p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+
     <RuneDivider runes={["naudhiz", "othala", "ansuz"]} />
 
     <section className="hxSection">
