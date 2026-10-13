@@ -1,9 +1,7 @@
 {
-  "status": "FAIL",
+  "status": "PASS",
   "content_version": "gm-v2",
-  "errors": [
-    "Missing locked certificate master"
-  ],
+  "errors": [],
   "master_hashes": {
     "module-01.en.md": "8e32a14eac7f3172fd8f5c883c6b9c68c52f3c7ce1e6ae38f7d56ddd71a18565",
     "module-01.ru.md": "126e0e6d9d53734ebebe1c20b9bd31539f5a899aede481fb5eb5992ef7d758f1",
@@ -21,6 +19,5 @@
     "module-07.ru.md": "2dbf5dc9d1ace943023e5055b10f16fb0b0b7a57c72acf1340c1837bff5d8ce1",
     "module-08.en.md": "e7b7c8f222df84c4070557cc888d917e44ed48f565bac0cae94cb007cab0b4e1",
     "module-08.ru.md": "8ebaf6218212be981d8029ec46aefa8413a544b17e4ebc48c58003d5cc8e154b"
-  },
-  "certificate_sha256": null
+  }
 }

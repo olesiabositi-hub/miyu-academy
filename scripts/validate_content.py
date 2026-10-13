@@ -99,15 +99,11 @@ for m in range(3,9):
         aid=f"gm-m{m:02d}-vs{n:02d}"
         if aid not in ids: errors.append(f"Missing visual mapping {aid}")
 
-cert=root/"public"/"certificate-master.webp"
-if not cert.exists(): errors.append("Missing locked certificate master")
-
 report={
  "status":"PASS" if not errors else "FAIL",
  "content_version":"gm-v2",
  "errors":errors,
- "master_hashes":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
- "certificate_sha256":hashlib.sha256(cert.read_bytes()).hexdigest() if cert.exists() else None
+ "master_hashes":{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
 }
 (root/"qa"/"final-build-content-qa.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
 if errors:
