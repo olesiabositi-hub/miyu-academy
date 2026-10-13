@@ -51,3 +51,18 @@ Mark modules that are announced but not written yet with `soon: true` in `lib/co
 They are shown as "Coming soon" and are never linked. To open a module: add `module-NN.ru.md` and
 `module-NN.en.md`, set `duration`, remove `soon`. Lesson illustrations are plain Markdown images
 (`![caption](/visuals/<course>/mNN/….webp)`) in their own `---` chunk.
+
+## Importing a delivered module (recommended)
+`scripts/import_module.py` turns a module package (RU/EN text, questions, `asset-manifest.json`, PNGs) into the
+site format and checks that every paragraph of the chapters is copied verbatim. See the header of the script
+for the options. Example (Norse, module 1):
+
+    python3 scripts/import_module.py --course norse-mythology --public norse --module 1 \
+      --package /path/to/module-01 --minutes "15–20" \
+      --done-ru "…" --done-en "…" --anchor 2=12
+
+Layout rules the site applies to every non-Greek lesson (nothing in the text is changed):
+- chapter heading on its own, then the chapter picture (wide), then the text;
+- runs of short one-sentence paragraphs are set as one paragraph (`lib/content/tidy.ts`);
+  headings, pictures, quotes, lists, dialogue lines and all-bold / all-italic lines stay separate;
+- text is left-aligned; all-bold lines become pull lines, an italic opening line becomes the lead.

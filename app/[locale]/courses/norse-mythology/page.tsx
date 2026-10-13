@@ -25,7 +25,7 @@ function Picture({ name, alt = "", lazy = true }: { name: string; alt?: string; 
 
 /** Card art per module (module 1 uses its own lesson illustration). */
 const MODULE_ART: Record<number, { src: string; src480: string; alt: Record<"ru" | "en", string> }> = {
-  1: { src: "/visuals/norse/m01/01-ginnungagap-724.webp", src480: "/visuals/norse/m01/01-ginnungagap-724.webp", alt: { ru: "Гиннунгагап: лёд и огонь", en: "Ginnungagap: ice and fire" } },
+  1: { src: "/visuals/norse/m01/01-ginnungagap-ice-and-fire-724.webp", src480: "/visuals/norse/m01/01-ginnungagap-ice-and-fire-724.webp", alt: { ru: "Гиннунгагап: лёд и огонь", en: "Ginnungagap: ice and fire" } },
   2: { src: "/visuals/norse/art/02-asgard-960.webp", src480: "/visuals/norse/art/02-asgard-480.webp", alt: { ru: "Асгард и мост Биврёст", en: "Asgard and the Bifröst bridge" } },
   3: { src: "/visuals/norse/art/03-odin-960.webp", src480: "/visuals/norse/art/03-odin-480.webp", alt: { ru: "Один на троне с воронами и волками", en: "Odin on his throne with ravens and wolves" } },
   4: { src: "/visuals/norse/art/04-thor-960.webp", src480: "/visuals/norse/art/04-thor-480.webp", alt: { ru: "Тор с молотом Мьёльнир в грозу", en: "Thor with Mjölnir in a thunderstorm" } },

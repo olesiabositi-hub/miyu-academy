@@ -10,6 +10,12 @@
 
 ## Chapter 1. Before Everything Went Wrong
 
+---
+
+![Ginnungagap — Ice and Fire](/visuals/norse/m01/01-ginnungagap-ice-and-fire-1448.webp)
+
+---
+
 Try to imagine a world where nothing exists.
 
 Not an empty room. Not an endless ocean or a black sky without stars.
@@ -52,11 +58,13 @@ And things were about to get considerably worse.
 
 ---
 
-![Ginnungagap — Ice and Fire](/visuals/norse/m01/01-ginnungagap-1448.webp)
+## Chapter 2. A Giant, a Cow, and a Rather Unusual Family Tree
 
 ---
 
-## Chapter 2. A Giant, a Cow, and a Rather Unusual Family Tree
+![Ymir and Audhumla](/visuals/norse/m01/02-ymir-and-audhumla-1448.webp)
+
+---
 
 Ymir existed in the frozen emptiness, at a time when there was no earth and no ordinary source of food.
 
@@ -83,6 +91,12 @@ By the third day, an entire man stood before her.
 His name was **Búri**.
 
 He was beautiful, strong, and would become the ancestor of the gods.
+
+---
+
+![Audhumla Reveals Buri](/visuals/norse/m01/03-audhumla-reveals-buri-1448.webp)
+
+---
 
 The ancient Norse sources don't explain why there was a man inside a block of ice, or how he got there in the first place.
 
@@ -120,15 +134,13 @@ And their decision would be final.
 
 ---
 
-![Ymir and Audhumla](/visuals/norse/m01/02-ymir-audhumla-1448.webp)
-
----
-
-![Audhumla Reveals Buri](/visuals/norse/m01/03-buri-1448.webp)
-
----
-
 ## Chapter 3. The First Murder. Absolutely Enormous Consequences.
+
+---
+
+![Odin, Vili, and Ve Slay Ymir](/visuals/norse/m01/04-odin-vili-ve-slay-ymir-1448.webp)
+
+---
 
 Odin, Vili, and Vé killed Ymir.
 
@@ -162,11 +174,13 @@ This may have been the first occasion in history when the phrase "waste not, wan
 
 ---
 
-![Odin, Vili, and Ve Slay Ymir](/visuals/norse/m01/04-ymir-slain-1448.webp)
+## Chapter 4. How to Build a Universe from a Dead Giant
 
 ---
 
-## Chapter 4. How to Build a Universe from a Dead Giant
+![Creating the Cosmos from Ymir](/visuals/norse/m01/05-creation-from-ymir-1448.webp)
+
+---
 
 Ymir's body became the raw material for everything that existed.
 
@@ -224,10 +238,6 @@ And even the slightest indication of when morning was supposed to begin.
 
 ---
 
-![Creating the Cosmos from Ymir](/visuals/norse/m01/05-creation-1448.webp)
-
----
-
 ## Quick check
 
 According to Norse mythology, how did life first emerge?
@@ -259,6 +269,12 @@ The giant's eyebrows became the human world's first line of defence. Even in dea
 ---
 
 ## Chapter 5. The Sun, the Moon, and a Spectacularly Bad Security System
+
+---
+
+![Sol, Mani, Skoll, and Hati](/visuals/norse/m01/06-sol-mani-skoll-hati-1448.webp)
+
+---
 
 To illuminate the new world, the gods took sparks and burning embers from Muspelheim.
 
@@ -308,11 +324,13 @@ Humans.
 
 ---
 
-![Sol, Mani, Skoll, and Hati](/visuals/norse/m01/06-sol-mani-1448.webp)
+## Chapter 6. The First Humans. No Instruction Manual Included.
 
 ---
 
-## Chapter 6. The First Humans. No Instruction Manual Included.
+![Awakening Ask and Embla](/visuals/norse/m01/07-ask-and-embla-1448.webp)
+
+---
 
 One day, Odin, Vili, and Vé were walking along the seashore.
 
@@ -364,11 +382,13 @@ The tree that connects the worlds.
 
 ---
 
-![Awakening Ask and Embla](/visuals/norse/m01/07-ask-embla-1448.webp)
+## Chapter 7. Yggdrasil. The Tree Holding Everything Together.
 
 ---
 
-## Chapter 7. Yggdrasil. The Tree Holding Everything Together.
+![Yggdrasil — The World Tree](/visuals/norse/m01/08-yggdrasil-world-tree-1448.webp)
+
+---
 
 Somewhere within the very structure of the universe stands an enormous ash tree.
 
@@ -436,11 +456,9 @@ And not even the gods.
 
 ---
 
-![Yggdrasil — The World Tree](/visuals/norse/m01/08-yggdrasil-1448.webp)
+## Chapter 8. The World Is Ready. Let the Problems Begin.
 
 ---
-
-## Chapter 8. The World Is Ready. Let the Problems Begin.
 
 So, let's return to where we started.
 

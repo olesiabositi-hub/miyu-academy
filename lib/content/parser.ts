@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/course";
 import { PRIMARY_COURSE, courseModule } from "@/lib/courses";
 import type { CourseDefinition } from "@/lib/courses";
 import { moduleTitle } from "@/lib/content/catalog";
+import { tidyProse } from "@/lib/content/tidy";
 import type { ChoiceQuestion, LessonBlock, LessonModel } from "@/lib/content/types";
 
 const choiceSchema = z.object({
@@ -187,7 +188,7 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
     const strict=chunk.match(/^#\s+(\d+)\.[ \t]+(.+)\s*$/m);
     const id=strict?`section-${String(Number(strict[1])).padStart(2,"0")}`:(!introAssigned?"intro":`prose-${String(blocks.length+1).padStart(2,"0")}`);
     if(!introAssigned) introAssigned=true;
-    blocks.push({type:"prose",id,markdown:chunk});
+    blocks.push({type:"prose",id,markdown:course.id===PRIMARY_COURSE.id?chunk:tidyProse(chunk)});
     i++;
   }
 
