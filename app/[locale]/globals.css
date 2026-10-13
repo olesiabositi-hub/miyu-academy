@@ -886,11 +886,10 @@ body:has(.themeMark.theme-norse) .hxChip{background:rgba(242,244,246,.92)}
 
 /* Norse theme, step 2: stone grain, woven cards, framed pictures, runes, ember progress */
 body:has(.themeMark.theme-norse){
- background:url(/visuals/norse/ui/noise.svg),linear-gradient(180deg,#E8ECEF 0%,#DCE2E7 100%);background-attachment:fixed,fixed;
+ background:linear-gradient(180deg,#E8ECEF 0%,#DCE2E7 100%);background-attachment:fixed;
 }
-body:has(.themeMark.theme-norse) :is(.nlLearn li,.dashModule,.moduleHeroPanel,.lxOutroMain){background-image:url(/visuals/norse/ui/weave.svg);background-size:28px 28px}
-.nlDark,.nlFinale{background-image:url(/visuals/norse/ui/noise.svg),linear-gradient(180deg,#0E1823 0%,#0A1320 100%);background-blend-mode:soft-light,normal}
-.nlFinale{background-image:url(/visuals/norse/ui/noise.svg),radial-gradient(120% 120% at 80% 0%,#1B2B3A 0%,#0E1824 55%,#080F18 100%)}
+.nlDark{background:linear-gradient(180deg,#0E1823 0%,#0A1320 100%)}
+.nlFinale{background:radial-gradient(120% 120% at 80% 0%,#1B2B3A 0%,#0E1824 55%,#080F18 100%)}
 /* Framed pictures: double line + inner keyline, like a carved panel */
 .nl .nlArt,body:has(.themeMark.theme-norse) .lessonFigure img{position:relative;box-shadow:0 0 0 1px #6E8398,0 0 0 6px var(--ivory),0 0 0 7px #6E8398,0 18px 40px -18px rgba(10,19,32,.55)}
 .nl .nlFinale .nlArt,.nl .nlDark .nlArt{box-shadow:0 0 0 1px #6E8398,0 0 0 6px #0E1824,0 0 0 7px #6E8398}
