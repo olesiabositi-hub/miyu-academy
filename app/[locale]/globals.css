@@ -754,3 +754,18 @@ a.lxBtn{text-decoration:none}
 
 .signOr{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}
 .signOr::before,.signOr::after{content:"";flex:1;border-top:1px solid var(--line)}
+
+/* ---- Final Myth Decoder: answer review ---- */
+.fmdReview{max-width:760px;margin:0 auto;padding:8px 0 96px;color:var(--ink)}
+.fmdReviewTitle{margin:0 0 6px;font:500 clamp(28px,4vw,38px)/1.1 var(--font-serif);color:var(--navy)}
+.fmdReviewCount,.fmdReviewOk{margin:0 0 22px;color:var(--muted);font-size:16px}
+.fmdReviewList{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.fmdReviewItem{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--paper,#fffdf9)}
+.fmdReviewNum{font:500 26px/1 var(--font-serif);color:var(--gold)}
+.fmdReviewQ{margin:0 0 12px;font:600 17px/1.4 var(--font-sans);color:var(--navy)}
+.fmdReviewRow{margin:0 0 6px;font-size:15px;line-height:1.45}
+.fmdReviewRow span{display:block;font:700 11px/1.6 var(--font-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fmdReviewRow.is-bad{color:#9a3b2e}
+.fmdReviewRow.is-good{color:#2f6b45;font-weight:600}
+.fmdReviewWhy{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:15px;line-height:1.55;color:var(--ink)}
+@media(max-width:560px){.fmdReviewItem{grid-template-columns:1fr;gap:6px}}
