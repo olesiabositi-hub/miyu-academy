@@ -43,9 +43,7 @@ function GenericLesson({model}:{model:LessonModel}){
   const nextText=next?parseNext(next.markdown):undefined;
   const firstCompleteId=completes.length>0?completes[0].id:"";
 
-  return <article className={model.courseId==="greek-mythology"?undefined:"lessonFlow"}>
-    <ModuleHero courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
-    {model.blocks.map(block=>{
+  const renderBlock=(block:LessonBlock)=>{
       if(block.type==="visual-stop") return <Reveal key={block.id}><section id={block.id} className="visualStop"><VisualStop block={block} locale={model.locale}/></section></Reveal>;
       if(block.type==="quick-check") return <Reveal key={block.id}><section id={block.id} className="reading lxQuickWrap"><div className="lxEyebrow">{t(model.locale,"check.quick")}</div><ChoiceCheck question={block.question} locale={model.locale} onPersist={(v)=>persistCheck(block.id,v)} /></section></Reveal>;
       if(block.type==="self-check"){
@@ -59,6 +57,50 @@ function GenericLesson({model}:{model:LessonModel}){
       }
       if(block.type==="next-module") return null;
       return <section id={block.id} className="reading prose" key={block.id}><Markdown>{block.markdown}</Markdown></section>;
+  };
+
+  // Lessons of other courses: a chapter heading, its picture and its text are set as one spread
+  // (picture beside the text on wide screens). Greek lessons keep their original flow.
+  const flow=model.courseId!=="greek-mythology";
+  const items=flow?groupChapters(model.blocks):model.blocks.map(block=>({kind:"block" as const,block}));
+
+  return <article className={flow?"lessonFlow":undefined}>
+    <ModuleHero courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
+    {items.map(item=>{
+      if(item.kind==="block") return renderBlock(item.block);
+      return <section className={"chapter"+(item.lead?" hasArt":"")+(item.flip?" isFlip":"")} id={item.id} key={item.id}>
+        <div className="chapterHead"><Markdown>{item.head}</Markdown></div>
+        <div className="chapterGrid">
+          {item.lead&&<div className="chapterArt"><Markdown>{item.lead}</Markdown></div>}
+          <div className="chapterText">{item.body.map(b=><Markdown key={b.id}>{b.markdown}</Markdown>)}</div>
+        </div>
+      </section>;
     })}
   </article>;
+}
+
+type Prose=Extract<LessonBlock,{type:"prose"}>;
+type Item=
+  |{kind:"block";block:LessonBlock}
+  |{kind:"chapter";id:string;head:string;lead:string|null;body:Prose[];flip:boolean};
+
+const isHeadingOnly=(b:LessonBlock):b is Prose=>b.type==="prose"&&/^##\s+[^\n]+$/.test(b.markdown.trim());
+const isFigureOnly=(b:LessonBlock):b is Prose=>b.type==="prose"&&/^!\[[^\]]*\]\([^)]+\)\s*$/.test(b.markdown.trim());
+
+function groupChapters(blocks:LessonBlock[]):Item[]{
+  const items:Item[]=[];
+  let n=0;
+  for(let i=0;i<blocks.length;){
+    const b=blocks[i];
+    if(!isHeadingOnly(b)){items.push({kind:"block",block:b});i++;continue;}
+    let j=i+1;
+    let lead:string|null=null;
+    if(j<blocks.length&&isFigureOnly(blocks[j])){lead=(blocks[j] as Prose).markdown;j++;}
+    const body:Prose[]=[];
+    while(j<blocks.length&&blocks[j].type==="prose"&&!isHeadingOnly(blocks[j])){body.push(blocks[j] as Prose);j++;}
+    n++;
+    items.push({kind:"chapter",id:b.id,head:b.markdown,lead,body,flip:n%2===0});
+    i=j;
+  }
+  return items;
 }
