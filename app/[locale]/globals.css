@@ -591,7 +591,7 @@ html{scroll-padding-top:calc(var(--header-h) + 16px)}
 .hxTileText{font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.78)}
 .hxTile:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
-.hxSoon{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+.hxSoon{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
 .hxSoonCard{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:var(--radius-md);background:var(--navy-deep);color:#fff;isolation:isolate}
 .hxSoonCard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
 .hxSoonBody{position:absolute;left:0;right:0;bottom:0;padding:20px}
@@ -769,3 +769,12 @@ a.lxBtn{text-decoration:none}
 .fmdReviewRow.is-good{color:#2f6b45;font-weight:600}
 .fmdReviewWhy{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:15px;line-height:1.55;color:var(--ink)}
 @media(max-width:560px){.fmdReviewItem{grid-template-columns:1fr;gap:6px}}
+
+/* Multi-course home: chooser, stacked course cards, announcement tiles without art */
+.hxChooseHead{max-width:640px;margin:0 0 30px}
+.hxChooseHead .hxBody{margin-top:10px}
+.hxCourseList{display:grid;gap:26px}
+.hxSoonCard.is-noart,.hxTile.is-noart{background:radial-gradient(120% 90% at 20% 10%,#2b4a6b 0%,#14283f 55%,#0b1727 100%)}
+.hxSoonCard{cursor:default}
+.hxTile.is-noart .hxTileShade{opacity:.55}
+.hxHeroNoArt{background:radial-gradient(120% 90% at 70% 20%,#2b4a6b 0%,#14283f 55%,#0b1727 100%)}

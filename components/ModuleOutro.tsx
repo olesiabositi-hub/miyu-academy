@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
 import type { Locale } from "@/lib/course";
-import { MODULES } from "@/lib/content/catalog";
-import { MODULE_TEASERS } from "@/lib/content/teasers";
 import { displayify, splitFlow } from "@/lib/content/outro";
-import { adjacentModules, courseBasePath, modulePath, PRIMARY_COURSE } from "@/lib/courses";
+import { adjacentModules, courseBasePath, courseModule, getCourse, modulePath, PRIMARY_COURSE } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 import { Markdown } from "@/components/Markdown";
@@ -13,23 +11,28 @@ import { Markdown } from "@/components/Markdown";
  * End of every module, 1–8: what we just covered, what comes next, one Continue button.
  * Marks the module complete, then goes to the next module (or the Final Myth Decoder after module 8).
  */
-export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody}:{locale:Locale;moduleId:string;heading:string;body:string;nextHeading?:string;nextBody?:string}){
+export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,courseId}:{locale:Locale;moduleId:string;heading:string;body:string;nextHeading?:string;nextBody?:string;courseId?:string}){
+  const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
   const [busy,setBusy]=useState(false);
   const [failed,setFailed]=useState(false);
 
-  const current=MODULES.find(m=>m.id===moduleId);
+  const current=courseModule(course,moduleId);
   const number=current?current.order:0;
-  const total=PRIMARY_COURSE.moduleCount;
-  const nextId=adjacentModules(moduleId).next;
-  const target=nextId?modulePath(locale,nextId):`${courseBasePath(locale)}/final-myth-decoder`;
+  const total=course.moduleCount;
+  const nextId=adjacentModules(moduleId,course).next;
+  // After the last module: Greek goes to the optional final, other courses back to the course page.
+  const target=nextId?modulePath(locale,nextId,course):course.hasFinal?`${courseBasePath(locale,course)}/final-myth-decoder`:`${courseBasePath(locale,course)}`;
 
   let nextTitle=nextHeading??"";
   let nextText=nextBody??"";
   if(!nextTitle){
     if(nextId){
-      const nextModule=MODULES.find(m=>m.id===nextId);
-      nextTitle=`${locale==="ru"?"Модуль":"Module"} ${nextModule?nextModule.order:""}. ${nextModule?nextModule[locale]:""}`;
-      if(!nextText) nextText=MODULE_TEASERS[nextId]?.[locale]??"";
+      const nextModule=courseModule(course,nextId);
+      nextTitle=`${locale==="ru"?"Модуль":"Module"} ${nextModule?nextModule.order:""}. ${nextModule?nextModule.title[locale]:""}`;
+      if(!nextText) nextText=nextModule?.teaser[locale]??"";
+    }else if(!course.hasFinal){
+      nextTitle=t(locale,"outro.courseDoneTitle");
+      if(!nextText) nextText=t(locale,"outro.courseDoneBody");
     }else{
       nextTitle=t(locale,"outro.finalTitle");
       if(!nextText) nextText=t(locale,"outro.finalBody");
@@ -40,9 +43,9 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody}:
     setBusy(true);
     setFailed(false);
     try{
-      const r=await fetch("/api/module/complete",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({moduleId})});
+      const r=await fetch("/api/module/complete",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({moduleId,courseId:course.id})});
       if(!r.ok) throw new Error(await r.text());
-      track("module_complete",{module:moduleId});
+      track("module_complete",{module:moduleId,course:course.id});
       window.location.assign(target);
     }catch{
       setFailed(true);

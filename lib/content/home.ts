@@ -61,16 +61,3 @@ export const STEPS: Record<Locale, {n:string;title:string;body:string}[]> = {
     {n:"03",title:"Decode the finale",body:"The 15-question Final Myth Decoder, if you like. Take it for yourself or skip it."},
   ],
 };
-
-export const SOON: Record<Locale, {key:string;title:string;chip:string}[]> = {
-  ru: [
-    {key:"norse",title:"Скандинавская мифология",chip:"Скоро"},
-    {key:"nart",title:"Нартский эпос",chip:"Скоро"},
-    {key:"egypt",title:"Древнеегипетская мифология",chip:"Скоро"},
-  ],
-  en: [
-    {key:"norse",title:"Norse Mythology",chip:"Coming soon"},
-    {key:"nart",title:"The Nart Epic",chip:"Coming soon"},
-    {key:"egypt",title:"Ancient Egyptian Mythology",chip:"Coming soon"},
-  ],
-};

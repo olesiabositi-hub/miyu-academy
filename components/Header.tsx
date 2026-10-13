@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
-import { PRIMARY_COURSE, courseBasePath, courseDashboardPath, parseModulePath } from "@/lib/courses";
+import { PRIMARY_COURSE, courseBasePath, courseDashboardPath, courseFromPath, parseModulePath } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 import { AccountLink } from "@/components/AccountLink";
 
@@ -12,12 +12,16 @@ export function Header({locale}:{locale:Locale}){
   const router=useRouter();
   const [open,setOpen]=useState(false);
 
-  const courseHref=courseBasePath(locale);
-  const progressHref=courseDashboardPath(locale);
-  const courseOverview=pathname.replace(/\/$/,"")===courseHref;
+  // The course the visitor is inside (null on the academy home, account, legal pages…).
+  const current=courseFromPath(pathname);
+  const course=current??PRIMARY_COURSE;
+  const courseHref=current?courseBasePath(locale,current):`/${locale}#courses`;
+  const progressHref=courseDashboardPath(locale,course);
+  const courseLabel=t(locale,current?"nav.course":"nav.courses");
+  const courseOverview=current!==null&&pathname.replace(/\/$/,"")===courseHref;
   const moduleInfo=parseModulePath(pathname);
   const moduleNumber=moduleInfo?moduleInfo.moduleNumber:0;
-  const moduleTotal=PRIMARY_COURSE.moduleCount;
+  const moduleTotal=moduleInfo?moduleInfo.course.moduleCount:PRIMARY_COURSE.moduleCount;
   const inModule=moduleInfo!==null;
 
   // Close the mobile menu after any navigation and on Escape.
@@ -44,7 +48,7 @@ export function Header({locale}:{locale:Locale}){
       <Link className="brand" href={"/"+locale}>MIYU<span>ACADEMY</span></Link>}
     <div className="topSpacer"/>
     <nav aria-label={t(locale,"nav.primary")} className="topnav">
-      <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{t(locale,"nav.course")}</Link>
+      <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{courseLabel}</Link>
       <Link href={progressHref} aria-current={isActive(progressHref)?"page":undefined}>{progressLabel}</Link>
       <AccountLink locale={locale} className="topAccount"/>
     </nav>
@@ -58,7 +62,7 @@ export function Header({locale}:{locale:Locale}){
     </button>
     <nav id="mobile-nav" className="mobileNav" aria-label={t(locale,"nav.primary")} hidden={!open}>
       <Link href={"/"+locale} aria-current={isActive("/"+locale)?"page":undefined}>{t(locale,"nav.academy")}</Link>
-      <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{t(locale,"nav.course")}</Link>
+      <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{courseLabel}</Link>
       <Link href={progressHref} aria-current={isActive(progressHref)?"page":undefined}>{t(locale,"nav.progress")}</Link>
       <AccountLink locale={locale}/>
     </nav>

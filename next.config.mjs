@@ -7,7 +7,7 @@ const nextConfig = {
   // Include them explicitly in server output tracing so Netlify's Next.js
   // serverless bundle contains the course source files.
   outputFileTracingIncludes: {
-    "/*": ["./content/greek-mythology/**/*"]
+    "/*": ["./content/**/*"]
   },
 
   async headers() {

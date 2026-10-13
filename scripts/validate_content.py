@@ -99,6 +99,19 @@ for m in range(3,9):
         aid=f"gm-m{m:02d}-vs{n:02d}"
         if aid not in ids: errors.append(f"Missing visual mapping {aid}")
 
+# Other courses (content/<course>/master): ru/en pairs must exist, carry a duration line and valid checks.
+for cdir in sorted((root/"content").iterdir()):
+    cm=cdir/"master"
+    if cdir.name=="greek-mythology" or not cm.is_dir(): continue
+    for ru in sorted(cm.glob("module-*.ru.md")):
+        en=cm/ru.name.replace(".ru.md",".en.md")
+        if not en.exists(): errors.append(f"{cdir.name}: missing English version of {ru.name}"); continue
+        for pth,rx in ((ru,r"(?m)^\*\*Время:\*\*"),(en,r"(?m)^\*\*Time:\*\*")):
+            txt=pth.read_text(encoding="utf-8")
+            if not re.search(rx,txt): errors.append(f"{cdir.name}/{pth.name}: no duration line")
+    for en in sorted(cm.glob("module-*.en.md")):
+        if not (cm/en.name.replace(".en.md",".ru.md")).exists(): errors.append(f"{cdir.name}: missing Russian version of {en.name}")
+
 report={
  "status":"PASS" if not errors else "FAIL",
  "content_version":"gm-v2",
