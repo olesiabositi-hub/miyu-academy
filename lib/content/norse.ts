@@ -15,8 +15,8 @@ export const NORSE_MODULES: readonly CourseModuleDef[] = [
     teaser: { ru: "Лёд, огонь, первый великан, гигантская корова и весьма необычные строительные материалы. Узнаем, как возник мир и почему всё началось с убийства.", en: "Ice, fire, the first giant, an enormous cow, and some deeply unconventional building materials. Discover how the world came into existence and why it all started with a murder." },
     duration: [15, 20],
     hero: {
-      src: "/visuals/norse/art/01-yggdrasil-1448.webp", src836: "/visuals/norse/art/01-yggdrasil-960.webp", width: 1448, height: 1086, pos: "50% 40%",
-      alt: { ru: "Иггдрасиль, мировое древо, и девять миров.", en: "Yggdrasil, the World Tree, and the nine worlds." },
+      src: "/visuals/norse/art/01-hero-1916.webp", src836: "/visuals/norse/art/01-hero-960.webp", width: 1916, height: 821, pos: "50% 45%",
+      alt: { ru: "Имир и корова Аудумла между льдом и огнём, вдали Иггдрасиль.", en: "Ymir and the cow Audhumla between ice and fire, Yggdrasil in the distance." },
     },
   },
   {
