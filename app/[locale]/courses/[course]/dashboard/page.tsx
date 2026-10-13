@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/auth";
 import { courseBasePath } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
 import { CourseDashboard } from "@/components/CourseDashboard";
+import { CourseTheme } from "@/components/CourseTheme";
 import type { ModRow } from "@/components/CourseDashboard";
 
 export default async function Dashboard({params}:{params:Promise<{locale:string;course:string}>}){
@@ -19,5 +20,5 @@ export default async function Dashboard({params}:{params:Promise<{locale:string;
   const {data}=await supabase.from("module_progress").select("module_id,status,last_active_at").eq("user_id",user.id).eq("course_id",course.id);
   mods=(data??[]) as ModRow[];
  }
- return <CourseDashboard locale={locale} course={course} mods={mods} preview={preview}/>;
+ return <><CourseTheme course={course}/><CourseDashboard locale={locale} course={course} mods={mods} preview={preview}/></>;
 }

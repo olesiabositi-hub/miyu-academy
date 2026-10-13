@@ -846,3 +846,40 @@ a.lxBtn{text-decoration:none}
 @media(max-width:640px){
  .nlModules,.nlLearn{grid-template-columns:1fr}
 }
+
+/* Theme: Norse — fog and slate. Switched on by <CourseTheme/> via :has(), so header and footer follow. */
+body:has(.themeMark.theme-norse){
+ --navy:#18232F;--navy-deep:#0A1320;--ivory:#E5E9EC;--parchment:#D7DDE2;--paper:#F2F4F6;
+ --ink:#18202B;--muted:#586471;--line:#B7C1CA;--gold:#4C6883;--ochre:#4A5E73;--gold-soft:#9FB3C6;
+ background:linear-gradient(180deg,#E8ECEF 0%,#DCE2E7 100%) fixed;
+}
+body:has(.themeMark.theme-norse) :is(.hxHero,.nlFinale,.hxCta,.nlDark,.topbarCourse){--gold:#E0A45A;--gold-soft:#EBC48F}
+body:has(.themeMark.theme-norse) .lxBtnGold{background:#E0A45A;color:#0A1320}
+body:has(.themeMark.theme-norse) .lxBtnGold:hover{background:#EDB46B}
+body:has(.themeMark.theme-norse) .topbar:not(.topbarCourse){background:rgba(229,233,236,.95);border-bottom-color:rgba(24,35,47,.14)}
+body:has(.themeMark.theme-norse) .topbarModuleLesson{background:#E5E9EC}
+body:has(.themeMark.theme-norse) .topbarCourse .brand span{color:#B8C4CF}
+body:has(.themeMark.theme-norse) .moduleHeroMedia:after{background:linear-gradient(to top,rgba(229,233,236,.88),rgba(229,233,236,0))}
+body:has(.themeMark.theme-norse) .moduleHeroPanel{background:rgba(242,244,246,.97)}
+body:has(.themeMark.theme-norse) .hxChip{background:rgba(242,244,246,.92)}
+/* Darker, colder dark sections */
+.nlFinale{background:radial-gradient(120% 120% at 80% 0%,#1B2B3A 0%,#0E1824 55%,#080F18 100%)}
+.nlDark{background:linear-gradient(180deg,#0E1823 0%,#0A1320 100%);color:#fff}
+.nlDark .hxH2{color:#fff}
+.nlDark .nlProse p{color:rgba(255,255,255,.84)}
+.nlDark .nlModule{background:#142030;border-color:#263647}
+.nlDark .nlModule.is-open:hover{border-color:#E0A45A}
+.nlDark .nlModule.is-soon{background:transparent;border-color:#2B3C4E}
+.nlDark .nlModule h3{color:#fff}
+.nlDark .nlModText p{color:rgba(255,255,255,.78)}
+.nlDark .nlModNote{color:#E0A45A}
+.nlDark .nlModStatus{color:rgba(255,255,255,.55)}
+.nlDark .nlModStatus.is-open{color:#E0A45A}
+/* Rune divider */
+.runeDivider{display:flex;align-items:center;justify-content:center;gap:18px;color:#6E8398;padding:clamp(14px,2.5vw,26px) 0 0}
+.runeDivider:before,.runeDivider:after{content:"";height:1px;width:min(26vw,300px);background:linear-gradient(90deg,transparent,currentColor)}
+.runeDivider:after{background:linear-gradient(270deg,transparent,currentColor)}
+.runeDivider svg{flex:none;opacity:.9}
+/* Snow instead of embers on the Norse banner */
+.nl .hxMote{bottom:auto;top:-4%;width:5px;height:5px;background:#fff;box-shadow:0 0 7px 1px rgba(190,215,255,.65);animation-name:nlSnow}
+@keyframes nlSnow{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.9}85%{opacity:.7}100%{transform:translate3d(-34px,78vh,0);opacity:0}}

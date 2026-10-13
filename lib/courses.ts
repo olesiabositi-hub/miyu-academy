@@ -49,6 +49,8 @@ export type CourseDefinition = {
   contentVersion: string;
   /** Greek keeps its strict visual manifest; new courses may omit entries. */
   strictVisuals: boolean;
+  /** Visual theme name (see `theme-*` in globals.css). Omitted = the default light look. */
+  theme?: string;
 };
 
 function def(d: Omit<CourseDefinition, "moduleCount" | "moduleIds">): CourseDefinition {
@@ -103,6 +105,7 @@ export const COURSES: readonly CourseDefinition[] = [
     assetPrefix: "nm",
     contentVersion: "nm-v1",
     strictVisuals: false,
+    theme: "norse",
   }),
   def({
     id: "kalevala",

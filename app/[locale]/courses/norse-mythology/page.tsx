@@ -6,6 +6,8 @@ import { courseDashboardPath, getCourseBySlug, modulePath } from "@/lib/courses"
 import { groupBold, isItalicLine, loadLanding, mergeShort, plain } from "@/lib/content/landing";
 import { Markdown } from "@/components/Markdown";
 import { Reveal } from "@/components/Reveal";
+import { CourseTheme } from "@/components/CourseTheme";
+import { RuneDivider } from "@/components/RuneDivider";
 import { t } from "@/lib/i18n";
 
 const SLUG = "norse-mythology";
@@ -63,6 +65,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
   const courseLd = { "@context": "https://schema.org", "@type": "Course", name: course.title[locale], description: course.blurb?.[locale], inLanguage: locale, provider: { "@type": "Organization", name: "MIYU Academy", url: base || undefined }, url: `${base}/${locale}/courses/${SLUG}` };
 
   return <div className="hx nl">
+    <CourseTheme course={course} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseLd).replace(/</g, "\\u003c") }} />
 
     <section className="hxHero hxHeroCourse nlHero">
@@ -99,6 +102,8 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       </div>
     </section>
 
+    <RuneDivider />
+
     <section className="hxSection">
       <div className="hxWrap nlSplit">
         <Reveal>
@@ -122,7 +127,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       </div>
     </section>
 
-    <section id="modules" className="hxSection">
+    <section id="modules" className="hxSection nlDark">
       <div className="hxWrap">
         <div className="nlModulesHead">
           <h2 className="hxH2">{programme.heading}</h2>
@@ -171,6 +176,8 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
         <Reveal delay={90}><figure className="nlArt"><Picture name="runes" /></figure></Reveal>
       </div>
     </section>
+
+    <RuneDivider />
 
     <section className="hxSection hxHow">
       <div className="hxWrap">

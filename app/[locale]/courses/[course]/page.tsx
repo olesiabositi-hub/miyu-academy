@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/course";
 import { ModuleMosaic } from "@/components/ModuleMosaic";
 import { Reveal } from "@/components/Reveal";
+import { CourseTheme } from "@/components/CourseTheme";
 import { courseDashboardPath, getCourseBySlug } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
 
@@ -41,6 +42,7 @@ export default async function CoursePage({params}:{params:Promise<{locale:string
   const hero=course.hero??course.card;
 
   return <div className="hx">
+    <CourseTheme course={course}/>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(courseLd).replace(/</g,"\\u003c")}}/>
     <section className={"hxHero hxHeroCourse"+(hero?"":" hxHeroNoArt")}>
       {hero&&<picture className="hxHeroArt" aria-hidden="true">

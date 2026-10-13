@@ -7,6 +7,7 @@ import { LessonClient } from "@/components/LessonClient";
 import { ModuleNav } from "@/components/ModuleNav";
 import { ResumeTracker } from "@/components/ResumeTracker";
 import { PreviewBadge } from "@/components/PreviewBadge";
+import { CourseTheme } from "@/components/CourseTheme";
 import { courseBasePath, isModuleOpen } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
 
@@ -22,5 +23,5 @@ export default async function ModulePage({params}:{params:Promise<{locale:string
   if(row?.status==="in_progress"&&row.scroll_ratio!==null) initialRatio=Number(row.scroll_ratio);
  }
  const model=parseLesson(module,locale,course);
- return <>{preview&&<PreviewBadge locale={locale}/>}<ResumeTracker courseId={course.id} moduleId={module} locale={locale} initialRatio={initialRatio} enabled={!preview}/><LessonClient model={model}/><ModuleNav courseId={course.id} locale={locale} moduleId={module}/></>;
+ return <><CourseTheme course={course}/>{preview&&<PreviewBadge locale={locale}/>}<ResumeTracker courseId={course.id} moduleId={module} locale={locale} initialRatio={initialRatio} enabled={!preview}/><LessonClient model={model}/><ModuleNav courseId={course.id} locale={locale} moduleId={module}/></>;
 }
