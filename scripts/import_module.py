@@ -65,11 +65,17 @@ def questions(path):
     return out
 
 def next_module(loc):
+    """Title and description of module N+1 from the approved course page (first paragraph block only)."""
     f = root / "content" / a.course / "landing" / f"landing.{loc}.md"
     if not f.exists(): return None
     t = f.read_text(encoding="utf-8")
-    m = re.search(rf"(?m)^### {a.module + 1:02d}\.\s+(.+)\n\n(.+?)(?=\n\n\*|\n\n###|\n---|\Z)", t, re.S)
-    return (m.group(1).strip(), " ".join(x.strip() for x in m.group(2).split("\n\n") if not x.startswith("*"))) if m else None
+    m = re.search(rf"(?m)^### {a.module + 1:02d}\.\s+(.+)$", t)
+    if not m: return None
+    rest = t[m.end():]
+    end = re.search(r"(?m)^(###\s|---|##\s)", rest)
+    block = rest[:end.start()] if end else rest
+    paras = [p.strip() for p in block.split("\n\n") if p.strip() and not p.strip().startswith("*")]
+    return (m.group(1).strip(), " ".join(paras)) if paras else (m.group(1).strip(), "")
 
 def build(loc):
     ru = loc == "ru"

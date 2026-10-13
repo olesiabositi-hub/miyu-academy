@@ -923,9 +923,9 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 .lessonFlow .reading>*{max-width:780px;margin-left:0;margin-right:auto}
 .lessonFlow .reading.prose{text-align:left;padding-block:0}
 .lessonFlow .reading.prose:first-of-type{padding-top:34px}
-.lessonFlow p{margin:0 0 1.15em;font-size:clamp(17.5px,1.4vw,19.5px);line-height:1.72;color:var(--ink)}
-.lessonFlow p.pullLine{margin:.4em 0 1.15em;padding-left:18px;border-left:3px solid var(--gold);font:500 clamp(24px,2.6vw,32px)/1.22 var(--font-serif);color:var(--navy)}
-.lessonFlow p.leadLine{font:italic 400 clamp(21px,2.2vw,26px)/1.45 var(--font-serif);color:var(--ochre)}
+.lessonFlow :is(.chapterText,.reading.prose) p{margin:0 0 1.15em;font-size:clamp(17.5px,1.4vw,19.5px);line-height:1.72;color:var(--ink)}
+.lessonFlow :is(.chapterText,.reading.prose) p.pullLine{margin:.4em 0 1.15em;padding-left:18px;border-left:3px solid var(--gold);font:500 clamp(24px,2.6vw,32px)/1.22 var(--font-serif);color:var(--navy)}
+.lessonFlow :is(.chapterText,.reading.prose) p.leadLine{font:italic 400 clamp(21px,2.2vw,26px)/1.45 var(--font-serif);color:var(--ochre)}
 .lessonFlow .lxQuickWrap,.lessonFlow .lxOutro{text-align:left}
 /* a chapter: heading, then picture and text side by side */
 .lessonFlow .chapter{width:min(1180px,calc(100% - 64px));margin:clamp(56px,8vw,104px) auto 0}
