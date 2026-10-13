@@ -1,5 +1,5 @@
 import type { Locale } from "@/lib/course";
-import { PRIMARY_COURSE } from "@/lib/courses";
+import { PRIMARY_COURSE, courseModule, getCourse } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 import { moduleHeroArt } from "@/lib/visuals";
 
@@ -8,8 +8,10 @@ import { moduleHeroArt } from "@/lib/visuals";
  * Full-width art band on top, title panel overlapping it. Works with any image
  * composition and on phones, because the title never sits on the picture.
  */
-export function ModuleHero({locale,moduleId,moduleNumber,title,durationLabel}:{locale:Locale;moduleId:string;moduleNumber:number;title:string;durationLabel:string}){
-  const art=moduleHeroArt(moduleId);
+export function ModuleHero({locale,moduleId,moduleNumber,title,durationLabel,courseId}:{locale:Locale;moduleId:string;moduleNumber:number;title:string;durationLabel:string;courseId?:string}){
+  const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
+  // Greek modules 5–8 take their art from lib/visuals.ts; other courses from the module definition.
+  const art=course.id===PRIMARY_COURSE.id?moduleHeroArt(moduleId):courseModule(course,moduleId)?.hero??null;
   return <header className={"moduleHero"+(art?"":" moduleHeroPlain")}>
     {art&&<div className="moduleHeroMedia">
       <picture>
@@ -18,7 +20,7 @@ export function ModuleHero({locale,moduleId,moduleNumber,title,durationLabel}:{l
       </picture>
     </div>}
     <div className="moduleHeroPanel">
-      <p className="eyebrow">{t(locale,"module.eyebrow",{n:moduleNumber,total:PRIMARY_COURSE.moduleCount})}</p>
+      <p className="eyebrow">{t(locale,"module.eyebrow",{n:moduleNumber,total:course.moduleCount})}</p>
       <h1>{title}</h1>
       <p className="moduleHeroMeta">{durationLabel}</p>
     </div>

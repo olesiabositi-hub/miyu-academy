@@ -5,7 +5,8 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import { z } from "zod";
 import type { Locale } from "@/lib/course";
-import { CONTENT_VERSION, COURSE_ID } from "@/lib/course";
+import { PRIMARY_COURSE, courseModule } from "@/lib/courses";
+import type { CourseDefinition } from "@/lib/courses";
 import { moduleTitle } from "@/lib/content/catalog";
 import type { ChoiceQuestion, LessonBlock, LessonModel } from "@/lib/content/types";
 
@@ -44,12 +45,12 @@ function parseChoice(chunk:string,id:string):ChoiceQuestion{
   const optionRows:{sourceIndex:number;text:string}[]=[];
   let firstOption=-1, answerLine=-1, answerLetter="";
   lines.forEach((line,i)=>{
-    const m=line.match(/^([A-C])\.\s+(.+?)\s*$/);
+    const m=line.match(/^([A-D])\.\s+(.+?)\s*$/);
     if(m){
       if(firstOption<0) firstOption=i;
       optionRows.push({sourceIndex:m[1].charCodeAt(0)-65,text:stripMd(m[2])});
     }
-    const a=line.match(/^\*\*(?:Ответ|Answer):\*\*\s*([A-C])\b/i);
+    const a=line.match(/^\*\*(?:Ответ|Answer):\*\*\s*([A-D])\b/i);
     if(a){answerLine=i;answerLetter=a[1].toUpperCase();}
   });
   if(optionRows.length>=2 && firstOption>=0 && answerLine>=0){
@@ -119,16 +120,23 @@ function parseChallenge(chunk:string, fallbackId:string){
   }
 }
 
-export function parseLesson(moduleId:string,locale:Locale):LessonModel{
-  const file=path.join(process.cwd(),"content","greek-mythology","master",`${moduleId}.${locale}.md`);
+export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinition=PRIMARY_COURSE):LessonModel{
+  const file=path.join(process.cwd(),"content",course.contentDir,"master",`${moduleId}.${locale}.md`);
   const source=fs.readFileSync(file,"utf8");
 
   // Required Step 8 architecture: source must form a valid Markdown AST before semantic transforms.
   unified().use(remarkParse).use(remarkGfm).parse(source);
 
   const learnerSource=stripEditorialSources(source);
-  const visualManifest=JSON.parse(fs.readFileSync(path.join(process.cwd(),"content","greek-mythology","visual-assets.json"),"utf8"));
+  const manifestFile=path.join(process.cwd(),"content",course.contentDir,"visual-assets.json");
+  const visualManifest:{entries:any[]}=fs.existsSync(manifestFile)?JSON.parse(fs.readFileSync(manifestFile,"utf8")):{entries:[]};
   const chunks=splitChunks(learnerSource);
+  // Courses other than Greek start with "# Модуль N / # Title / subtitle / **Время:**". The page hero already
+  // shows the title and duration, so drop those lines from the first chunk and keep the subtitle.
+  if(course.id!==PRIMARY_COURSE.id && chunks.length){
+    chunks[0]=chunks[0].split(/\r?\n/).filter(l=>!/^#\s/.test(l)&&!/^\*\*(?:Время|Time):\*\*/.test(l)).join("\n").trim();
+    if(!chunks[0]) chunks.shift();
+  }
   const blocks:LessonBlock[]=[];
   let quick=0, introAssigned=false;
 
@@ -147,12 +155,13 @@ export function parseLesson(moduleId:string,locale:Locale):LessonModel{
       const anchor=`visual-stop-${String(n).padStart(2,"0")}`;
       const challenge=parseChallenge(chunk,anchor);
       if(challenge){blocks.push(challenge);i++;continue;}
-      const assetId=`gm-m${String(Number(moduleId.slice(-2))).padStart(2,"0")}-vs${String(n).padStart(2,"0")}`;
+      const assetId=`${course.assetPrefix}-m${String(Number(moduleId.slice(-2))).padStart(2,"0")}-vs${String(n).padStart(2,"0")}`;
       const entry=visualManifest.entries.find((x:any)=>x.id===assetId);
-      if(!entry) throw new Error(`Missing approved Step 14 visual mapping for ${assetId}`);
-      blocks.push({type:"visual-stop",id:anchor,number:n,markdown:chunk,asset:{
+      if(!entry && course.strictVisuals) throw new Error(`Missing approved Step 14 visual mapping for ${assetId}`);
+      // Courses without a manifest entry get a text-only stop (no picture) instead of failing the build.
+      blocks.push({type:"visual-stop",id:anchor,number:n,markdown:chunk,asset:entry?{
         id:entry.id,title:entry.title,alt:entry.alt[locale],production:entry.production,priority:entry.priority
-      }});
+      }:{id:assetId,title:"",alt:"",production:"none",priority:"normal"}});
       i++; continue;
     }
 
@@ -187,8 +196,8 @@ export function parseLesson(moduleId:string,locale:Locale):LessonModel{
   const durationLabel=durationLine?.replace(/^\*\*(?:Время|Time):\*\*\s*/,"").trim() ?? "";
 
   return {
-    courseId:COURSE_ID,moduleId,moduleNumber,locale,
-    title:moduleTitle(moduleId,locale),durationLabel,
-    contentVersion:CONTENT_VERSION,blocks
+    courseId:course.id,moduleId,moduleNumber,locale,
+    title:courseModule(course,moduleId)?.title[locale] ?? moduleTitle(moduleId,locale),durationLabel,
+    contentVersion:course.contentVersion,blocks
   };
 }

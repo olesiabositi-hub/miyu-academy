@@ -19,12 +19,12 @@ export type LessonBlock =
   | { type:"next-module"; id:"next-module"; markdown:string };
 
 export type LessonModel = {
-  courseId:"greek-mythology";
+  courseId:string;
   moduleId:string;
   moduleNumber:number;
   locale:Locale;
   title:string;
   durationLabel:string;
-  contentVersion:"gm-v2";
+  contentVersion:string;
   blocks:LessonBlock[];
 };

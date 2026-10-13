@@ -7,7 +7,7 @@ import { t } from "@/lib/i18n";
  * Saves how far the learner has scrolled in a module and, on return, scrolls back to that spot.
  * Renders nothing but a short toast when it resumes.
  */
-export function ResumeTracker({moduleId,locale,initialRatio,enabled=true}:{moduleId:string;locale:Locale;initialRatio:number|null;enabled?:boolean}){
+export function ResumeTracker({moduleId,locale,initialRatio,enabled=true,courseId}:{moduleId:string;locale:Locale;initialRatio:number|null;enabled?:boolean;courseId?:string}){
   const [toast,setToast]=useState(false);
   const last=useRef(initialRatio??0);
   const latest=useRef(initialRatio??0);
@@ -22,7 +22,7 @@ export function ResumeTracker({moduleId,locale,initialRatio,enabled=true}:{modul
       const r=latest.current;
       if(Math.abs(r-last.current)<0.01) return;
       last.current=r;
-      fetch("/api/module/progress",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({moduleId,ratio:r})}).catch(()=>{});
+      fetch("/api/module/progress",{method:"POST",keepalive:true,headers:{"content-type":"application/json"},body:JSON.stringify({moduleId,courseId,ratio:r})}).catch(()=>{});
     };
 
     let resumed=false;
@@ -53,7 +53,7 @@ export function ResumeTracker({moduleId,locale,initialRatio,enabled=true}:{modul
       if(timer!==undefined) window.clearTimeout(timer);
       void resumed;
     };
-  },[moduleId,initialRatio,enabled]);
+  },[moduleId,courseId,initialRatio,enabled]);
 
   return toast?<div className="resumeToast" role="status">{t(locale,"resume.toast")}</div>:null;
 }
