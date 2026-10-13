@@ -1490,8 +1490,6 @@ Wardruna делает нечто другое.
 
 **Wardruna — Helvegen**
 
-Последняя музыкальная сцена Module 08
-
 [Посмотреть видео Helvegen](https://youtu.be/n90SVmnomdM?si=WSjGVDgT7mx9ckTM)
 
 Перед прослушиванием представьте один образ.
