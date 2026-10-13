@@ -110,7 +110,7 @@ export const COURSES: readonly CourseDefinition[] = [
     status: "soon",
     title: { ru: "Калевала: финский эпос", en: "The Kalevala: the Finnish Epic" },
     blurb: null,
-    card: null,
+    card: { src: "/visuals/home/soon-kalevala-960.webp", src960: "/visuals/home/soon-kalevala-960.webp", width: 960, height: 720 },
     hero: null,
     modules: [],
     hasFinal: false,

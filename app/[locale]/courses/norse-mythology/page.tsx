@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/course";
 import { courseDashboardPath, getCourseBySlug, modulePath } from "@/lib/courses";
-import { groupBold, isItalicLine, loadLanding, plain } from "@/lib/content/landing";
+import { groupBold, isItalicLine, loadLanding, mergeShort, plain } from "@/lib/content/landing";
 import { Markdown } from "@/components/Markdown";
 import { Reveal } from "@/components/Reveal";
 import { t } from "@/lib/i18n";
@@ -18,6 +18,19 @@ function Picture({ name, alt = "", lazy = true }: { name: string; alt?: string; 
     <img src={i.src} width={1448} height={1086} alt={alt} loading={lazy ? "lazy" : undefined} decoding="async" />
   </picture>;
 }
+
+/** Card art per module (module 1 uses its own lesson illustration). */
+const MODULE_ART: Record<number, { src: string; src480: string; alt: Record<"ru" | "en", string> }> = {
+  1: { src: "/visuals/norse/m01/01-ginnungagap-724.webp", src480: "/visuals/norse/m01/01-ginnungagap-724.webp", alt: { ru: "Гиннунгагап: лёд и огонь", en: "Ginnungagap: ice and fire" } },
+  2: { src: "/visuals/norse/art/02-asgard-960.webp", src480: "/visuals/norse/art/02-asgard-480.webp", alt: { ru: "Асгард и мост Биврёст", en: "Asgard and the Bifröst bridge" } },
+  3: { src: "/visuals/norse/art/03-odin-960.webp", src480: "/visuals/norse/art/03-odin-480.webp", alt: { ru: "Один на троне с воронами и волками", en: "Odin on his throne with ravens and wolves" } },
+  4: { src: "/visuals/norse/art/04-thor-960.webp", src480: "/visuals/norse/art/04-thor-480.webp", alt: { ru: "Тор с молотом Мьёльнир в грозу", en: "Thor with Mjölnir in a thunderstorm" } },
+  5: { src: "/visuals/norse/art/05-loki-960.webp", src480: "/visuals/norse/art/05-loki-480.webp", alt: { ru: "Локи с зелёной магией", en: "Loki wreathed in green magic" } },
+  6: { src: "/visuals/norse/art/06-freyja-960.webp", src480: "/visuals/norse/art/06-freyja-480.webp", alt: { ru: "Фрейя на колеснице, запряжённой рысями", en: "Freyja in her lynx-drawn chariot" } },
+  7: { src: "/visuals/norse/art/08-fenrir-960.webp", src480: "/visuals/norse/art/08-fenrir-480.webp", alt: { ru: "Волк Фенрир на фоне луны", en: "The wolf Fenrir before the moon" } },
+  8: { src: "/visuals/norse/art/09-valkyries-960.webp", src480: "/visuals/norse/art/09-valkyries-480.webp", alt: { ru: "Валькирии у ворот Вальгаллы", en: "Valkyries riding to Valhalla" } },
+  9: { src: "/visuals/norse/art/10-ragnarok-960.webp", src480: "/visuals/norse/art/10-ragnarok-480.webp", alt: { ru: "Рагнарёк: последняя битва", en: "Ragnarök: the last battle" } },
+};
 
 /** Course page for Norse Mythology: approved copy from content/norse-mythology/landing/, laid out with its five illustrations. */
 export default async function NorsePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -82,7 +95,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
 
     <section className="hxSection nlIntro">
       <div className="hxWrap">
-        <Reveal><div className="nlLead">{leadBlocks.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div></Reveal>
+        <Reveal><div className="nlLead">{[leadBlocks[0], ...mergeShort(leadBlocks.slice(1))].filter(Boolean).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div></Reveal>
       </div>
     </section>
 
@@ -90,7 +103,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       <div className="hxWrap nlSplit">
         <Reveal>
           <h2 className="hxH2">{world.heading}</h2>
-          <div className="nlProse">{world.blocks.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+          <div className="nlProse">{mergeShort(world.blocks).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
         </Reveal>
         <Reveal delay={90}><figure className="nlArt"><Picture name="creation" /></figure></Reveal>
       </div>
@@ -113,42 +126,49 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       <div className="hxWrap">
         <div className="nlModulesHead">
           <h2 className="hxH2">{programme.heading}</h2>
-          <div className="nlProse">{programme.blocks.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+          <div className="nlProse">{mergeShort(programme.blocks).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
         </div>
         <div className="nlModules">
           {programme.subs.map((sub, i) => {
             const mod = course.modules[i];
+            const art = MODULE_ART[i + 1];
             const [num, ...titleParts] = sub.heading.split(/\.\s+/);
             const title = titleParts.join(". ");
             const notes = sub.blocks.filter(isItalicLine);
-            const text = sub.blocks.filter((b) => !isItalicLine(b));
+            const text = mergeShort(sub.blocks.filter((b) => !isItalicLine(b)), 400, 600);
             const open = !!mod && !mod.soon;
             const card = <>
-              <span className="nlModNum">{num}</span>
-              <h3>{title}</h3>
-              <div className="nlModText">{text.map((b, k) => <Markdown key={k}>{b}</Markdown>)}</div>
-              {notes.map((n, k) => <p className="nlModNote" key={k}>{plain(n)}</p>)}
-              <span className={"nlModStatus" + (open ? " is-open" : "")}>{open ? <>{t(locale, "nl.read")} <span aria-hidden="true">→</span></> : t(locale, "dash.statusSoon")}</span>
+              <span className="nlModArt">
+                {art && <picture>
+                  <source media="(max-width: 640px)" srcSet={art.src} />
+                  <img src={art.src480} srcSet={`${art.src480} 480w, ${art.src} 960w`} sizes="(max-width: 900px) 50vw, 380px" width={960} height={720} alt={art.alt[locale]} loading="lazy" decoding="async" />
+                </picture>}
+                <span className="nlModNum">{num}</span>
+              </span>
+              <span className="nlModBody">
+                <h3>{title}</h3>
+                <span className="nlModText">{text.map((b, k) => <Markdown key={k}>{b}</Markdown>)}</span>
+                {notes.map((n, k) => <span className="nlModNote" key={k}>{plain(n)}</span>)}
+                <span className={"nlModStatus" + (open ? " is-open" : "")}>{open ? <>{t(locale, "nl.read")} <span aria-hidden="true">→</span></> : t(locale, "dash.statusSoon")}</span>
+              </span>
             </>;
-            return <div className="nlModuleWrap" key={sub.heading}>
-              <Reveal>
-                {open && mod
-                  ? <Link className="nlModule is-open" href={modulePath(locale, mod.id, course)}>{card}</Link>
-                  : <div className="nlModule is-soon" aria-disabled="true">{card}</div>}
-              </Reveal>
-              {i === 2 && <figure className="nlArt nlArtWide"><Picture name="runes" /></figure>}
-            </div>;
+            return <Reveal key={sub.heading}>
+              {open && mod
+                ? <Link className="nlModule is-open" href={modulePath(locale, mod.id, course)}>{card}</Link>
+                : <div className="nlModule is-soon" aria-disabled="true">{card}</div>}
+            </Reveal>;
           })}
         </div>
       </div>
     </section>
 
     <section className="hxSection nlVikings">
-      <div className="hxWrap nlNarrow">
+      <div className="hxWrap nlSplit">
         <Reveal>
           <h2 className="hxH2">{vikings.heading}</h2>
-          <div className="nlProse">{vikings.blocks.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+          <div className="nlProse">{mergeShort(vikings.blocks).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
         </Reveal>
+        <Reveal delay={90}><figure className="nlArt"><Picture name="runes" /></figure></Reveal>
       </div>
     </section>
 
@@ -158,34 +178,34 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
         <ul className="nlLearn">
           {learnG.items.map((it, i) => <li key={it.title}><span className="nlLearnNum">{String(i + 1).padStart(2, "0")}</span><h3>{it.title}</h3>{it.body.map((b, k) => <Markdown key={k}>{b}</Markdown>)}</li>)}
         </ul>
-        <div className="nlProse nlLearnOutro">{learnG.outro.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+        <div className="nlProse nlLearnOutro">{mergeShort(learnG.outro).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
       </div>
     </section>
 
     <section className="hxSection">
-      <div className="hxWrap nlNarrow">
-        <Reveal>
+      <div className="hxWrap nlSplit nlSplitRev">
+        <Reveal><figure className="nlArt"><picture>
+          <source media="(max-width: 700px)" srcSet="/visuals/norse/art/01-yggdrasil-480.webp" />
+          <img src="/visuals/norse/art/01-yggdrasil-960.webp" width={960} height={720} alt="" loading="lazy" decoding="async" />
+        </picture></figure></Reveal>
+        <Reveal delay={90}>
           <h2 className="hxH2">{audience.heading}</h2>
-          <div className="nlProse">{audience.blocks.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+          <div className="nlProse">{mergeShort(audience.blocks).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
         </Reveal>
       </div>
     </section>
 
-    <section className="nlFinale">
-      <picture className="nlFinaleArt" aria-hidden="true">
-        <source media="(max-width: 700px)" srcSet={IMG("ragnarok").src960} />
-        <img src={IMG("ragnarok").src} width={1448} height={1086} alt="" loading="lazy" decoding="async" />
-      </picture>
-      <div className="nlFinaleShade" aria-hidden="true" />
-      <div className="hxWrap nlFinaleInner">
+    <section className="hxSection nlFinale">
+      <div className="hxWrap nlSplit">
         <Reveal>
           <h2 className="hxH2 hxH2Light">{finale.heading}</h2>
-          <div className="nlFinaleText">{finaleText.map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
+          <div className="nlFinaleText">{mergeShort(finaleText).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
           {finaleBold.map((b, i) => <p className="nlFinaleAsk" key={i}>{plain(b)}</p>)}
           <Link className="lxBtn lxBtnGold" href={dashboard}>{finaleCta} <span aria-hidden="true">→</span></Link>
           {finaleNote && <p className="nlHeroNote">{finaleNote}</p>}
           {brand && <p className="nlBrand">{plain(brand)}</p>}
         </Reveal>
+        <Reveal delay={90}><figure className="nlArt"><Picture name="ragnarok" /></figure></Reveal>
       </div>
     </section>
   </div>;

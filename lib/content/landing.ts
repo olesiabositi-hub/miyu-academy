@@ -52,3 +52,27 @@ export function groupBold(blocks: string[], lastBodyBlocks = 1) {
   }
   return { intro, items, outro };
 }
+
+const isPlain = (b: string) => !/^(\*|>|#|-|\d+\.|!\[)/.test(b);
+
+/**
+ * Joins runs of very short plain paragraphs into one paragraph (same words, same order).
+ * The approved copy is written as one sentence per line; on the page that reads as a wall of
+ * single-line paragraphs, so short neighbours are set together.
+ */
+export function mergeShort(blocks: string[], maxShort = 150, maxMerged = 420): string[] {
+  const out: string[] = [];
+  let run = "";
+  const flush = () => { if (run) out.push(run); run = ""; };
+  for (const b of blocks) {
+    if (isPlain(b) && b.length <= maxShort) {
+      if (run && run.length + b.length + 1 > maxMerged) flush();
+      run = run ? `${run} ${b}` : b;
+    } else {
+      flush();
+      out.push(b);
+    }
+  }
+  flush();
+  return out;
+}
