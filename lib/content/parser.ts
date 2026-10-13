@@ -166,6 +166,9 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
       i++; continue;
     }
 
+    const game=chunk.trim().match(/^\[\[game:([a-z0-9-]+)\]\]$/);
+    if(game){blocks.push({type:"game",id:`game-${game[1]}`,game:game[1],markdown:chunk});i++;continue;}
+
     const challenge=parseChallenge(chunk,"");
     if(challenge){blocks.push(challenge);i++;continue;}
 

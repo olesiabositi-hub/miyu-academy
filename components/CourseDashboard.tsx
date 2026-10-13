@@ -4,11 +4,13 @@ import type { CourseDefinition } from "@/lib/courses";
 import { courseBasePath, modulePath } from "@/lib/courses";
 import { PreviewBadge } from "@/components/PreviewBadge";
 import { t } from "@/lib/i18n";
+import { RunePouch } from "@/components/RunePouch";
+import type { RuneDraw } from "@/components/RunePouch";
 
 export type ModRow = { module_id: string; status: string; last_active_at: string | null };
 
 /** Learner's progress page for any course without a final test (module list + continue button). */
-export function CourseDashboard({ locale, course, mods, preview }: { locale: Locale; course: CourseDefinition; mods: ModRow[]; preview: boolean }) {
+export function CourseDashboard({ locale, course, mods, preview, draws = [] }: { locale: Locale; course: CourseDefinition; mods: ModRow[]; preview: boolean; draws?: RuneDraw[] }) {
   const total = course.moduleCount;
   const state = new Map(mods.map((x) => [x.module_id, x.status]));
   const completed = course.modules.filter((m) => state.get(m.id) === "completed").length;
@@ -58,6 +60,8 @@ export function CourseDashboard({ locale, course, mods, preview }: { locale: Loc
         </Link>;
       })}
     </div>
+
+    {course.runes && <RunePouch locale={locale} draws={draws} completed={completed} total={total} />}
 
     <p className="dashFoot"><Link href={`/${locale}/account`}>{t(locale, "dash.settings")} →</Link></p>
   </section>;

@@ -51,6 +51,8 @@ export type CourseDefinition = {
   strictVisuals: boolean;
   /** Visual theme name (see `theme-*` in globals.css). Omitted = the default light look. */
   theme?: string;
+  /** Rune rewards + final prophecy (Norse course). */
+  runes?: boolean;
 };
 
 function def(d: Omit<CourseDefinition, "moduleCount" | "moduleIds">): CourseDefinition {
@@ -106,6 +108,7 @@ export const COURSES: readonly CourseDefinition[] = [
     contentVersion: "nm-v1",
     strictVisuals: false,
     theme: "norse",
+    runes: true,
   }),
   def({
     id: "kalevala",

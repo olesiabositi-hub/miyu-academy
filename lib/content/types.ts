@@ -16,7 +16,8 @@ export type LessonBlock =
   | { type:"self-check"; id:"self-check"; markdown:string; questions:ChoiceQuestion[] }
   | { type:"module-challenge"; id:string; level:number; markdown:string; question?:ChoiceQuestion; revealOnly?:boolean }
   | { type:"module-complete"; id:"module-complete"; markdown:string }
-  | { type:"next-module"; id:"next-module"; markdown:string };
+  | { type:"next-module"; id:"next-module"; markdown:string }
+  | { type:"game"; id:string; game:string; markdown:string };
 
 export type LessonModel = {
   courseId:string;

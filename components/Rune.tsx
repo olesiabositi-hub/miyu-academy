@@ -17,6 +17,16 @@ const PATHS = {
   berkano: "M5 3v22M5 3l9 5-9 5 9 5-9 5",
   sowilo: "M14 3L6 11l8 6-8 8",
   laguz: "M6 25V3l9 6",
+  uruz: "M5 25V3l10 7v15",
+  raidho: "M5 3v22M5 3h7l4 4-4 5H5M5 12l11 13",
+  gebo: "M4 4l12 20M16 4L4 24",
+  wunjo: "M6 3v22M6 3h7l4 4-4 4H6",
+  jera: "M7 4l5 5-5 5M13 13l-5 5 5 5",
+  eihwaz: "M10 3v22M10 3l5 5M10 25l-5-5",
+  perthro: "M5 3v22M5 3l10 6-10 6M5 15l10 6-10 4",
+  ehwaz: "M5 25V3M15 25V3M5 3l5 7 5-7",
+  mannaz: "M5 25V3M15 25V3M5 3l10 10M15 3L5 13",
+  ingwaz: "M10 3l7 11-7 11-7-11z",
 } as const;
 
 export type RuneName = keyof typeof PATHS;
