@@ -1496,8 +1496,6 @@ Even though the answers haven't become much simpler in a thousand years.
 
 **Wardruna — Helvegen**
 
-Final musical scene · Module 08
-
 [Watch Helvegen](https://youtu.be/n90SVmnomdM?si=WSjGVDgT7mx9ckTM)
 
 Before listening, imagine one image.
