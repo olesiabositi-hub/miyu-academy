@@ -154,7 +154,7 @@ begin
 
   if not found or v_attempt.status<>'in_progress' then raise exception 'Attempt unavailable'; end if;
 
-  if jsonb_object_length(coalesce(v_attempt.selected_answers,'{}'::jsonb))<>15 then
+  if (select count(*) from jsonb_object_keys(coalesce(v_attempt.selected_answers,'{}'::jsonb)))<>15 then
     raise exception 'All 15 answers are required';
   end if;
 
