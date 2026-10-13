@@ -8,6 +8,8 @@ import { Markdown } from "@/components/Markdown";
 import { Reveal } from "@/components/Reveal";
 import { CourseTheme } from "@/components/CourseTheme";
 import { RuneDivider } from "@/components/RuneDivider";
+import { Rune } from "@/components/Rune";
+import type { RuneName } from "@/components/Rune";
 import { t } from "@/lib/i18n";
 
 const SLUG = "norse-mythology";
@@ -33,6 +35,9 @@ const MODULE_ART: Record<number, { src: string; src480: string; alt: Record<"ru"
   8: { src: "/visuals/norse/art/09-valkyries-960.webp", src480: "/visuals/norse/art/09-valkyries-480.webp", alt: { ru: "Валькирии у ворот Вальгаллы", en: "Valkyries riding to Valhalla" } },
   9: { src: "/visuals/norse/art/10-ragnarok-960.webp", src480: "/visuals/norse/art/10-ragnarok-480.webp", alt: { ru: "Рагнарёк: последняя битва", en: "Ragnarök: the last battle" } },
 };
+
+/** One rune per module, chosen to echo its story (ice, home, wisdom, thunder, fire, wealth, ruin, protection, dawn). */
+const MODULE_RUNE: RuneName[] = ["isa", "othala", "ansuz", "thurisaz", "kenaz", "fehu", "hagalaz", "algiz", "dagaz"];
 
 /** Course page for Norse Mythology: approved copy from content/norse-mythology/landing/, laid out with its five illustrations. */
 export default async function NorsePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -92,6 +97,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
             {plain(factsLine).split(" · ").map((f) => <li key={f}><span>{f}</span></li>)}
           </ul>
           {heroNote && <p className="nlHeroNote">{heroNote}</p>}
+          <div className="nlRuneStrip" aria-hidden="true">{MODULE_RUNE.map((n, i) => <Rune key={n} name={n} size={20} className="nlRuneGlow" />)}</div>
         </div>
       </div>
     </section>
@@ -102,7 +108,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       </div>
     </section>
 
-    <RuneDivider />
+    <RuneDivider runes={["fehu", "algiz", "tiwaz"]} />
 
     <section className="hxSection">
       <div className="hxWrap nlSplit">
@@ -149,6 +155,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
                   <img src={art.src480} srcSet={`${art.src480} 480w, ${art.src} 960w`} sizes="(max-width: 900px) 50vw, 380px" width={960} height={720} alt={art.alt[locale]} loading="lazy" decoding="async" />
                 </picture>}
                 <span className="nlModNum">{num}</span>
+                <span className="nlModRune"><Rune name={MODULE_RUNE[i] ?? "isa"} size={22} /></span>
               </span>
               <span className="nlModBody">
                 <h3>{title}</h3>
@@ -177,7 +184,7 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
       </div>
     </section>
 
-    <RuneDivider />
+    <RuneDivider runes={["berkano", "sowilo", "laguz"]} />
 
     <section className="hxSection hxHow">
       <div className="hxWrap">
@@ -188,6 +195,8 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
         <div className="nlProse nlLearnOutro">{mergeShort(learnG.outro).map((b, i) => <Markdown key={i}>{b}</Markdown>)}</div>
       </div>
     </section>
+
+    <RuneDivider runes={["naudhiz", "othala", "ansuz"]} />
 
     <section className="hxSection">
       <div className="hxWrap nlSplit nlSplitRev">

@@ -883,3 +883,37 @@ body:has(.themeMark.theme-norse) .hxChip{background:rgba(242,244,246,.92)}
 /* Snow instead of embers on the Norse banner */
 .nl .hxMote{bottom:auto;top:-4%;width:5px;height:5px;background:#fff;box-shadow:0 0 7px 1px rgba(190,215,255,.65);animation-name:nlSnow}
 @keyframes nlSnow{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.9}85%{opacity:.7}100%{transform:translate3d(-34px,78vh,0);opacity:0}}
+
+/* Norse theme, step 2: stone grain, woven cards, framed pictures, runes, ember progress */
+body:has(.themeMark.theme-norse){
+ background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%20.1%20%200%200%200%200%20.14%20%200%200%200%200%20.2%20%200%200%200%20.55%200'/%3E%3C/filter%3E%3Crect%20width='100%'%20height='100%'%20filter='url(#n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#E8ECEF 0%,#DCE2E7 100%);background-attachment:fixed,fixed;
+}
+body:has(.themeMark.theme-norse) :is(.nlLearn li,.dashModule,.moduleHeroPanel,.lxOutroMain){background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><path d='M0 14L14 0l14 14L14 28z' fill='none' stroke='%2318232F' stroke-opacity='.06' stroke-width='1'/></svg>");background-size:28px 28px}
+.nlDark,.nlFinale{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%20.1%20%200%200%200%200%20.14%20%200%200%200%200%20.2%20%200%200%200%20.55%200'/%3E%3C/filter%3E%3Crect%20width='100%'%20height='100%'%20filter='url(#n)'/%3E%3C/svg%3E"),linear-gradient(180deg,#0E1823 0%,#0A1320 100%);background-blend-mode:soft-light,normal}
+.nlFinale{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='220'%20height='220'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.85'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20values='0%200%200%200%20.1%20%200%200%200%200%20.14%20%200%200%200%200%20.2%20%200%200%200%20.55%200'/%3E%3C/filter%3E%3Crect%20width='100%'%20height='100%'%20filter='url(#n)'/%3E%3C/svg%3E"),radial-gradient(120% 120% at 80% 0%,#1B2B3A 0%,#0E1824 55%,#080F18 100%)}
+/* Framed pictures: double line + inner keyline, like a carved panel */
+.nl .nlArt,body:has(.themeMark.theme-norse) .lessonFigure img{position:relative;box-shadow:0 0 0 1px #6E8398,0 0 0 6px var(--ivory),0 0 0 7px #6E8398,0 18px 40px -18px rgba(10,19,32,.55)}
+.nl .nlFinale .nlArt,.nl .nlDark .nlArt{box-shadow:0 0 0 1px #6E8398,0 0 0 6px #0E1824,0 0 0 7px #6E8398}
+.nl .nlArt:after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.28);pointer-events:none}
+/* Heading mark */
+.nl .hxH2:after{content:"";display:block;width:64px;height:9px;margin-top:14px;background:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='9'%20viewBox='0%200%2064%209'%3E%3Cpath%20d='M0%204.5h48'%20stroke='%236E8398'%20stroke-width='1.2'/%3E%3Cpath%20d='M56%20.8l3.7%203.7L56%208.2l-3.7-3.7z'%20fill='%236E8398'/%3E%3C/svg%3E") left center/64px 9px no-repeat}
+.nl :is(.nlDark,.nlFinale) .hxH2:after,.nl .hxH2Light:after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='9'%20viewBox='0%200%2064%209'%3E%3Cpath%20d='M0%204.5h48'%20stroke='%23E0A45A'%20stroke-width='1.2'/%3E%3Cpath%20d='M56%20.8l3.7%203.7L56%208.2l-3.7-3.7z'%20fill='%23E0A45A'/%3E%3C/svg%3E")}
+.nl .hxH1:after{content:none}
+/* Runes */
+.nlRuneStrip{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:26px;color:#E0A45A}
+.nlRuneGlow{opacity:.35;animation:nlRuneGlow 5.4s ease-in-out infinite}
+.nlRuneStrip svg:nth-child(2){animation-delay:.6s}.nlRuneStrip svg:nth-child(3){animation-delay:1.2s}.nlRuneStrip svg:nth-child(4){animation-delay:1.8s}.nlRuneStrip svg:nth-child(5){animation-delay:2.4s}.nlRuneStrip svg:nth-child(6){animation-delay:3s}.nlRuneStrip svg:nth-child(7){animation-delay:3.6s}.nlRuneStrip svg:nth-child(8){animation-delay:4.2s}.nlRuneStrip svg:nth-child(9){animation-delay:4.8s}
+@keyframes nlRuneGlow{0%,100%{opacity:.3;filter:none}50%{opacity:1;filter:drop-shadow(0 0 6px rgba(224,164,90,.8))}}
+.nlModRune{position:absolute;right:12px;bottom:10px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:rgba(8,16,30,.72);color:#E0A45A;backdrop-filter:blur(4px);transition:box-shadow .4s}
+.nlModule.is-open:hover .nlModRune{box-shadow:0 0 14px 2px rgba(224,164,90,.55)}
+.nlModule.is-soon .nlModRune{color:#9FB3C6}
+.runeDivider{gap:16px}
+.runeDivider svg{color:#6E8398}
+/* Progress as a road to the end: slate line, ember head */
+body:has(.themeMark.theme-norse) .lxTrack{overflow:visible;height:4px;background:#C2CAD2;position:relative}
+body:has(.themeMark.theme-norse) .lxTrack i{position:relative;background:linear-gradient(90deg,#6E8398,#E0A45A)}
+body:has(.themeMark.theme-norse) .lxTrack i:after,body:has(.themeMark.theme-norse) .moduleHeaderProgress span:after{content:"";position:absolute;right:-5px;top:50%;width:10px;height:10px;margin-top:-5px;transform:rotate(45deg);background:#E0A45A;box-shadow:0 0 12px 3px rgba(224,164,90,.6);animation:nlEmber 2.4s ease-in-out infinite}
+body:has(.themeMark.theme-norse) .moduleHeaderProgress{background:rgba(24,35,47,.16);overflow:visible}
+body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;background:linear-gradient(90deg,#6E8398,#E0A45A);transition:width .8s var(--ease-out)}
+@keyframes nlEmber{0%,100%{opacity:.8;box-shadow:0 0 8px 2px rgba(224,164,90,.45)}50%{opacity:1;box-shadow:0 0 18px 5px rgba(224,164,90,.8)}}
+@media(prefers-reduced-motion:reduce){.nlRuneGlow,body:has(.themeMark.theme-norse) .lxTrack i:after,body:has(.themeMark.theme-norse) .moduleHeaderProgress span:after{animation:none!important}.nlRuneGlow{opacity:.7}}
