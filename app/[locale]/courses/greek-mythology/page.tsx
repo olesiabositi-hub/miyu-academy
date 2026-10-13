@@ -26,7 +26,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     modulesTitle:"8 модулей — от происхождения мира до мифологии вокруг нас",
     finalEyebrow:"ФИНАЛ КУРСА",
     finalTitle:"Не экзамен на память. Проверка того, что ты действительно научилась распознавать.",
-    finalBody:"В Final Myth Decoder — 15 вопросов на узнавание, смысл и связи. После успешного прохождения открывается сертификат MIYU Academy.",
+    finalBody:"В Final Myth Decoder — 15 вопросов на узнавание, смысл и связи. Он необязательный: пройди для себя или просто читай курс.",
     ctaTitle:"Готова начать видеть знакомый мир по-другому?",
     ctaBody:"Можно проходить курс в своём темпе и переключаться между русской и английской версиями.",
     cta:"Начать курс"
@@ -46,7 +46,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     modulesTitle:"8 modules — from the origins of the world to mythology around us",
     finalEyebrow:"THE COURSE FINALE",
     finalTitle:"Not a memory test. A check that you can actually recognise what you learned.",
-    finalBody:"The Final Myth Decoder has 15 questions across recognition, meaning and connection. Pass it to unlock your MIYU Academy certificate.",
+    finalBody:"The Final Myth Decoder has 15 questions across recognition, meaning and connection. It is optional: take it for yourself, or simply read the course.",
     ctaTitle:"Ready to see the familiar world differently?",
     ctaBody:"Study at your own pace and switch between Russian and English versions.",
     cta:"Start course"
@@ -54,8 +54,8 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
 
   const [titleMain,titleSub]=COURSE_TITLE[locale].split(": ");
   const facts=locale==="ru"
-    ? [["8","модулей"],["RU / EN","две версии"],["15","Final Myth Decoder"],["✓","сертификат"],["∞","в своём темпе"]]
-    : [["8","modules"],["RU / EN","bilingual"],["15","Final Myth Decoder"],["✓","certificate"],["∞","self-paced"]];
+    ? [["8","модулей"],["RU / EN","две версии"],["15","Final Myth Decoder"],["✓","тесты по желанию"],["∞","в своём темпе"]]
+    : [["8","modules"],["RU / EN","bilingual"],["15","Final Myth Decoder"],["✓","tests optional"],["∞","self-paced"]];
 
   const learning=locale==="ru"
     ? [
@@ -64,7 +64,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       ["03","Quick Checks","Короткие вопросы после ключевых идей."],
       ["04","Self-check","Проверка себя без давления и оценок."],
       ["05","Final Myth Decoder","Узнавание, смысл и связи."],
-      ["06","Сертификат","После успешного финала."]
+      ["06","По желанию","Тесты можно пропустить и просто читать."]
     ]
     : [
       ["01","Stories","Clear narrative instead of an encyclopedia."],
@@ -72,7 +72,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
       ["03","Quick Checks","Short checks right after key ideas."],
       ["04","Self-check","Check yourself without pressure or grades."],
       ["05","Final Myth Decoder","Recognition, meaning and connection."],
-      ["06","Certificate","Unlocked after a successful final."]
+      ["06","Optional","Skip the tests and simply read, if you prefer."]
     ];
 
   const modulesLead=locale==="ru"?"Не нужно знать мифологию заранее. Курс собирает карту постепенно, модуль за модулем.":"No prior mythology knowledge is needed. The course builds the map gradually, module by module.";
@@ -155,7 +155,7 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
     </section>
 
     <section className="hxFinale">
-      <div className="hxWrap hxFinaleGrid">
+      <div className="hxWrap hxFinaleGrid hxFinaleSolo">
         <div className="hxFinaleCopy">
           <div className="lxEyebrow lxEyebrowGold">{copy.finalEyebrow}</div>
           <h2 className="hxH2 hxH2Light">{copy.finalTitle}</h2>
@@ -165,9 +165,6 @@ export default async function CourseOverview({params}:{params:Promise<{locale:st
             <li><strong>12/15</strong><span>{locale==="ru"?"для прохождения":"to pass"}</span></li>
             <li><strong>∞</strong><span>{locale==="ru"?"попыток":"attempts"}</span></li>
           </ul>
-        </div>
-        <div className="hxCertShot">
-          <img src="/certificate-master.webp" width={1492} height={1054} loading="lazy" decoding="async" alt={locale==="ru"?"Пример сертификата MIYU Academy":"MIYU Academy certificate preview"}/>
         </div>
       </div>
     </section>

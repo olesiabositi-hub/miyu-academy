@@ -27,8 +27,8 @@ export default async function ResultPage({params,searchParams}:{params:Promise<{
   <div className="lxEyebrow">FINAL MYTH DECODER</div>
   <div className="fmdScore">{t(locale,"fmd.scoreOf",{score:result.latest_score,total})}</div>
   <h1 className="fmdHeadline">{t(locale,"fmd.resultPassTitle")}</h1>
-  <p className="fmdLead">{t(locale,"fmd.resultPassBody")} {t(locale,"fmd.resultPassCert")}</p>
-  <Link className="lxBtn lxBtnGold" href={`${base}/certificate`}>{t(locale,"fmd.getCertificate")} <span aria-hidden="true">→</span></Link>
+  <p className="fmdLead">{t(locale,"fmd.resultPassBody")}</p>
+  <Link className="lxBtn lxBtnGold" href={base}>{t(locale,"fmd.toCourse")} <span aria-hidden="true">→</span></Link>
  </section>;
  return <section className="fmd fmdIntro fmdResult">{badge}
   <div className="lxEyebrow">FINAL MYTH DECODER</div>

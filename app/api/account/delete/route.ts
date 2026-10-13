@@ -4,7 +4,7 @@ import { createAdminSupabase } from "@/lib/supabase/admin";
 
 /**
  * Deletes the signed-in user. All course data (progress, Final Myth Decoder attempts,
- * certificate, profile) is removed by `on delete cascade` from auth.users.
+ * profile) is removed by `on delete cascade` from auth.users.
  */
 export async function POST(req:Request){
   const {confirm}=await req.json().catch(()=>({confirm:""}));
