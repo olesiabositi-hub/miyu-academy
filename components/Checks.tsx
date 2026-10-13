@@ -57,7 +57,7 @@ export function ChoiceCheck({question,locale,onPersist}:{question:ChoiceQuestion
   </div>;
 }
 
-export function SelfCheck({questions,locale,onPersist,intro,id="self-check"}:{questions:ChoiceQuestion[];locale:Locale;onPersist?:(questionId:string,sourceIndex:number)=>void;intro?:ReactNode;id?:string}){
+export function SelfCheck({questions,locale,onPersist,intro,id="self-check",variant}:{questions:ChoiceQuestion[];locale:Locale;onPersist?:(questionId:string,sourceIndex:number)=>void;intro?:ReactNode;id?:string;variant?:"exam"}){
   const [i,setI]=useState(0);
   const [answers,setAnswers]=useState<Record<string,number>>({});
   const [checked,setChecked]=useState(false);
@@ -96,8 +96,8 @@ export function SelfCheck({questions,locale,onPersist,intro,id="self-check"}:{qu
 
   return <section id={id} className="lxSelf" aria-labelledby={`${id}-title`}>
     <div className="lxSelfInner">
-      <div className="lxEyebrow">{t(locale,"check.self")}</div>
-      <h2 className="lxSelfTitle" id={`${id}-title`}>{locale==="ru"?"Самопроверка":"Self-check"}</h2>
+      <div className="lxEyebrow">{variant==="exam"?(locale==="ru"?"ИТОГОВЫЙ ТЕСТ":"FINAL TEST"):t(locale,"check.self")}</div>
+      <h2 className="lxSelfTitle" id={`${id}-title`}>{variant==="exam"?(locale==="ru"?"Итоговый тест курса":"Course final test"):(locale==="ru"?"Самопроверка":"Self-check")}</h2>
       {intro&&<div className="lxSelfIntro">{intro}</div>}
 
       <div className="lxCard" ref={stepRef} tabIndex={-1}>

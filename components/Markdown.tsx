@@ -20,7 +20,7 @@ export function Markdown({children}:{children:string}){
         return <p className={cls}>{children}</p>;
       },
       img:({src,alt})=><figure className="lessonFigure"><img src={typeof src==="string"?src:undefined} alt={alt??""} loading="lazy" decoding="async"/>{alt?<figcaption>{alt}</figcaption>:null}</figure>,
-      a:({href,children})=><a href={href} rel="noreferrer">{children}</a>,
+      a:({href,children})=><a href={href} target={href&&/^https?:/.test(href)?"_blank":undefined} rel="noreferrer noopener">{children}</a>,
     }}
   >{children}</ReactMarkdown>;
 }

@@ -95,18 +95,20 @@ function parseChoice(chunk:string,id:string):ChoiceQuestion{
   throw new Error(`Ambiguous choice block ${id}`);
 }
 
-function parseSelfCheck(chunks:string[],start:number,locale:Locale){
+function parseSelfCheck(chunks:string[],start:number,locale:Locale,prefix="self-check"){
   const questions:ChoiceQuestion[]=[];
   let i=start+1;
   while(i<chunks.length){
     const h=firstHeading(chunks[i]);
     const m=h.match(/^##\s+(\d+)\.\s+/);
     if(!m) break;
-    questions.push(parseChoice(chunks[i],`self-check-q${String(Number(m[1])).padStart(2,"0")}`));
+    questions.push(parseChoice(chunks[i],`${prefix}-q${String(Number(m[1])).padStart(2,"0")}`));
     i++;
   }
   if(!questions.length) throw new Error(`Self-check has no questions (${locale})`);
-  return {end:i,block:{type:"self-check",id:"self-check",markdown:chunks.slice(start,i).join("\n\n---\n\n"),questions} as const};
+  const markdown=chunks.slice(start,i).join("\n\n---\n\n");
+  if(prefix==="exam") return {end:i,block:{type:"exam",id:"exam",markdown,questions} as const};
+  return {end:i,block:{type:"self-check",id:"self-check",markdown,questions} as const};
 }
 
 function parseChallenge(chunk:string, fallbackId:string){
@@ -144,6 +146,11 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
   for(let i=0;i<chunks.length;){
     const chunk=chunks[i];
     const h=firstHeading(chunk);
+
+    if(/^#\s+(?:Course final exam|Итоговый тест курса)\s*$/i.test(h)){
+      const parsed=parseSelfCheck(chunks,i,locale,"exam");
+      blocks.push(parsed.block); i=parsed.end; continue;
+    }
 
     if(/^#\s+(?:Self-check|Самопроверка)\s*$/i.test(h)){
       const parsed=parseSelfCheck(chunks,i,locale);
