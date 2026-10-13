@@ -1015,3 +1015,20 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 .ygGame .runeRevealName{color:#F0E6D2}
 @media (max-width:760px){.ygBoard{grid-template-columns:1fr}.ygTree{max-width:280px;margin:0 auto}}
 @media (prefers-reduced-motion:reduce){.ygChip.is-shake{animation:none}}
+
+/* ---------- Norse landing: "how the course works" ---------- */
+.nlPlay{background:var(--parchment)}
+.nlPlayLead{max-width:720px;margin:0 0 32px;font-size:18px;line-height:1.6;color:var(--ink)}
+.nlPlaySteps{list-style:none;margin:0 0 36px;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.nlPlaySteps li{padding:18px 16px;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--paper)}
+.nlPlayNum{display:block;margin-bottom:8px;font-size:13px;letter-spacing:.12em;color:#B97A2B}
+.nlPlaySteps h3{margin:0 0 8px;font-size:19px;line-height:1.2}
+.nlPlaySteps p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+.nlPlayEnd{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,40px);align-items:center;padding:clamp(24px,4vw,40px);border-radius:var(--radius-lg);background:linear-gradient(135deg,#0A1320,#1c2b42);color:#F0E6D2;box-shadow:0 0 0 1px rgba(224,164,90,.35)}
+.nlPlayRunes{display:grid;grid-template-columns:repeat(2,auto);gap:14px 18px;color:#E0A45A}
+.nlPlayEnd h3{margin:0 0 12px;font-size:clamp(22px,3vw,30px);color:#F0E6D2}
+.nlPlayEnd ul{margin:0 0 12px;padding-left:20px}
+.nlPlayEnd li{margin:0 0 8px;font-size:16px;line-height:1.55;color:#F0E6D2}
+.nlPlayNote{margin:0;font-size:14px;color:#E0A45A}
+@media (max-width:1000px){.nlPlaySteps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.nlPlaySteps{grid-template-columns:1fr}.nlPlayEnd{grid-template-columns:1fr}.nlPlayRunes{grid-template-columns:repeat(4,auto);justify-content:start}}
