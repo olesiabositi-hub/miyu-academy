@@ -5,7 +5,7 @@ export const FAQ: Record<Locale, {q:string;a:string}[]> = {
   ru: [
     {q:"Нужно ли знать мифологию заранее?",a:"Нет. Курс собирает карту постепенно, модуль за модулем: от того, как устроен мир мифов, до героев, Трои, Одиссеи и мифов в современной жизни."},
     {q:"Сколько времени занимает курс?",a:"Восемь модулей по 15–35 минут, в сумме около 3,5 часов. Проходить можно в своём темпе, прогресс сохраняется."},
-    {q:"Нужен ли аккаунт?",a:"Аккаунт нужен, чтобы сохранять прогресс и продолжать с того же места. Войти можно через Google."},
+    {q:"Нужен ли аккаунт?",a:"Аккаунт нужен, чтобы сохранять прогресс и продолжать с того же места. Войти можно через Google или по ссылке на email."},
     {q:"На каком языке курс?",a:"На русском и на английском. Языки можно переключать в любой момент."},
     {q:"Как устроен Final Myth Decoder?",a:"Это необязательная проверка для себя: 15 вопросов на узнавание, смысл и связи. Правильных ответов нужно 12, но можно и просто читать курс. Без таймера, попыток сколько угодно."},
     {q:"Обязательны ли тесты?",a:"Нет. Проверки в уроках и финал можно пройти для себя, а можно просто читать. Курс открыт для всех."},
@@ -14,7 +14,7 @@ export const FAQ: Record<Locale, {q:string;a:string}[]> = {
   en: [
     {q:"Do I need to know mythology beforehand?",a:"No. The course builds the map gradually, module by module: from how the world of myth is structured to heroes, Troy, the Odyssey and myths in modern life."},
     {q:"How long does the course take?",a:"Eight modules of 15–35 minutes each, about 3.5 hours in total. Study at your own pace; your progress is saved."},
-    {q:"Do I need an account?",a:"An account is only needed to save your progress and continue where you left off. You sign in with Google."},
+    {q:"Do I need an account?",a:"An account is only needed to save your progress and continue where you left off. You can sign in with Google or with an email link."},
     {q:"Which languages is the course in?",a:"Russian and English. You can switch between them at any time."},
     {q:"How does the Final Myth Decoder work?",a:"It is an optional check for yourself: 15 questions on recognition, meaning and connections. Answer 12 correctly to pass, or simply read the course instead. There is no timer and you can try as many times as you like."},
     {q:"Are the tests required?",a:"No. The in-lesson checks and the final are there if you want to test yourself; you can also just read. The course is open to everyone."},

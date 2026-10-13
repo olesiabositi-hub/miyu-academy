@@ -13,7 +13,7 @@ export function privacyDoc(loc: Locale): LegalDoc {
     sections: [
       { h: "1. Контакты", p: [`По вопросам о ваших данных на сайте ${OPERATOR.site} пишите на ${contact(loc)}.`] },
       { h: "2. Какие данные мы обрабатываем", list: [
-        "Аккаунт: email из вашего аккаунта Google и технические данные входа.",
+        "Аккаунт: email и технические данные входа. При входе через Google мы используем только адрес email.",
         "Профиль: язык интерфейса и время подтверждения, что вам не меньше 16 лет.",
         "Обучение: статусы модулей, время начала и завершения, место, где вы остановились, ответы на проверки внутри уроков.",
         "Final Myth Decoder (необязательный): порядок вопросов и вариантов, выбранные ответы, результат, дата попытки.",
@@ -26,7 +26,8 @@ export function privacyDoc(loc: Locale): LegalDoc {
       { h: "4. Кому мы передаём данные", p: ["Мы используем поставщиков, которые обрабатывают данные по нашему поручению:"], list: [
         "Supabase: аккаунты, авторизация и база данных.",
         "Netlify: хостинг сайта.",
-        "Google: вход через Google и, только с вашего согласия, Google Analytics."] },
+        "Google: вход через Google и, только с вашего согласия, Google Analytics.",
+        "Сервис отправки писем: ссылки для входа по email."] },
       { h: "5. Передача данных за границу", p: ["Поставщики могут обрабатывать данные за пределами вашей страны, в том числе в США. Мы опираемся на условия обработки данных и гарантии этих поставщиков."] },
       { h: "6. Cookies и аналитика", p: ["Необходимые cookies и локальное хранилище нужны для входа, безопасности и сохранения вашего выбора. Google Analytics 4 включается только после вашего согласия. Подробности на странице «Cookies». Рекламных и маркетинговых трекеров нет, запись сессий не ведётся."] },
       { h: "7. Срок хранения", p: ["Данные хранятся, пока существует ваш аккаунт. Вы можете удалить аккаунт в настройках: вместе с ним удаляются прогресс, результаты финала и профиль. Технические журналы хранятся в сроки, которые устанавливают поставщики."] },
@@ -41,7 +42,7 @@ export function privacyDoc(loc: Locale): LegalDoc {
     sections: [
       { h: "1. Contact", p: [`For questions about your data on ${OPERATOR.site}, write to ${contact(loc)}.`] },
       { h: "2. Data we process", list: [
-        "Account: the email address of your Google account and technical sign-in data.",
+        "Account: email and technical sign-in data. When you sign in with Google we use only your email address.",
         "Profile: interface language and the time you confirmed you are at least 16.",
         "Learning: module statuses, start and completion times, where you left off, and your answers to in-lesson checks.",
         "Final Myth Decoder (optional): question and option order, selected answers, result and attempt date.",
@@ -54,7 +55,8 @@ export function privacyDoc(loc: Locale): LegalDoc {
       { h: "4. Who receives data", p: ["We use providers that process data on our behalf:"], list: [
         "Supabase: accounts, authentication and database.",
         "Netlify: website hosting.",
-        "Google: Google sign-in and, only with your consent, Google Analytics."] },
+        "Google: Google sign-in and, only with your consent, Google Analytics.",
+        "Email delivery service: email sign-in links."] },
       { h: "5. International transfers", p: ["Providers may process data outside your country, including in the United States. We rely on the data-processing terms and safeguards of these providers."] },
       { h: "6. Cookies and analytics", p: ["Essential cookies and local storage are used for sign-in, security and remembering your choice. Google Analytics 4 is switched on only after you consent. See the Cookies page for details. There are no advertising or marketing trackers and no session recording."] },
       { h: "7. Retention", p: ["Data is kept while your account exists. You can delete your account in settings: your progress, Final Myth Decoder results and profile are deleted with it. Technical logs are kept for the periods set by our providers."] },
@@ -72,7 +74,7 @@ export function termsDoc(loc: Locale): LegalDoc {
     lead: "Короткие правила работы с MIYU Academy.",
     sections: [
       { h: "1. О сервисе", p: [`${OPERATOR.brand} (${OPERATOR.site}) — образовательный сайт с открытыми курсами. Пользуясь сайтом, вы принимаете эти условия.`] },
-      { h: "2. Аккаунт", list: ["Аккаунт можно создать, если вам не меньше 16 лет.", "Аккаунт нужен, чтобы сохранять прогресс. Вход выполняется через Google, и вы отвечаете за доступ к своему аккаунту Google."] },
+      { h: "2. Аккаунт", list: ["Аккаунт можно создать, если вам не меньше 16 лет.", "Аккаунт нужен, чтобы сохранять прогресс. Вход выполняется через Google или по ссылке на email, и вы отвечаете за доступ к своей почте и аккаунту Google."] },
       { h: "3. Материалы курса", p: ["Тексты, иллюстрации, структура курса и Final Myth Decoder принадлежат MIYU Academy. Вы можете проходить курс для личного обучения. Нельзя копировать, распространять или перепродавать материалы без письменного разрешения."] },
       { h: "4. Тесты", p: ["Проверки в уроках и Final Myth Decoder необязательны: их можно пройти для себя или просто читать курс. Результаты носят учебный характер и не являются официальной оценкой, документом об образовании или квалификацией."] },
       { h: "5. Правила использования", list: ["Не пытайтесь получить доступ к чужим аккаунтам и данным.", "Не нарушайте работу сайта.", "Не используйте сайт в незаконных целях."] },
@@ -85,7 +87,7 @@ export function termsDoc(loc: Locale): LegalDoc {
     lead: "Short rules for using MIYU Academy.",
     sections: [
       { h: "1. About the service", p: [`${OPERATOR.brand} (${OPERATOR.site}) is an educational website with open courses. By using the site you accept these terms.`] },
-      { h: "2. Your account", list: ["You can create an account if you are at least 16.", "An account is only needed to save your progress. You sign in with Google and are responsible for access to your Google account."] },
+      { h: "2. Your account", list: ["You can create an account if you are at least 16.", "An account is only needed to save your progress. You sign in with Google or an email link and are responsible for access to your email and Google account."] },
       { h: "3. Course materials", p: ["The texts, illustrations, course structure and Final Myth Decoder belong to MIYU Academy. You may take the course for your own learning. You may not copy, distribute or resell the materials without written permission."] },
       { h: "4. Tests", p: ["In-lesson checks and the Final Myth Decoder are optional: you can take them for yourself or simply read the course. Results are for learning only and are not an official assessment, educational document or qualification."] },
       { h: "5. Acceptable use", list: ["Do not try to access other people's accounts or data.", "Do not disrupt the site.", "Do not use the site for unlawful purposes."] },
