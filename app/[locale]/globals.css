@@ -1032,3 +1032,25 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 .nlPlayNote{margin:0;font-size:14px;color:#E0A45A}
 @media (max-width:1000px){.nlPlaySteps{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.nlPlaySteps{grid-template-columns:1fr}.nlPlayEnd{grid-template-columns:1fr}.nlPlayRunes{grid-template-columns:repeat(4,auto);justify-content:start}}
+
+/* ---------- Norse module hero: uncropped picture + slow zoom, mist, snow ---------- */
+.moduleHeroFlow .moduleHeroMedia{height:auto;background:#0A1320}
+.moduleHeroFlow .moduleHeroMedia img{height:100%;object-fit:cover;transform-origin:50% 40%;animation:mhZoom 30s ease-out both}
+.moduleHeroFlow .moduleHeroMedia:after{height:16%}
+@keyframes mhZoom{from{transform:scale(1)}to{transform:scale(1.05)}}
+.mhFx{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.mhMist{position:absolute;left:-30%;right:-30%;filter:blur(14px);will-change:transform,opacity}
+.mhMistA{bottom:-8%;height:40%;background:radial-gradient(55% 55% at 30% 60%,rgba(255,255,255,.4),transparent 70%),radial-gradient(45% 50% at 78% 70%,rgba(255,255,255,.3),transparent 70%);animation:hxMistSlide 26s ease-in-out infinite alternate}
+.mhMistB{top:30%;height:30%;background:radial-gradient(50% 50% at 65% 50%,rgba(255,255,255,.16),transparent 70%),radial-gradient(40% 45% at 20% 55%,rgba(255,255,255,.12),transparent 70%);animation:hxMistSlide 36s ease-in-out -12s infinite alternate-reverse}
+.mhFlake{position:absolute;top:-3%;border-radius:50%;background:#fff;box-shadow:0 0 7px 1px rgba(190,215,255,.65);opacity:0;animation:mhSnow 18s linear infinite}
+@keyframes mhSnow{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.85}80%{opacity:.6}100%{transform:translate3d(-40px,60vh,0);opacity:0}}
+@media (max-width:700px){.mhFlake:nth-child(n+8){display:none}}
+@media (prefers-reduced-motion:reduce){.moduleHeroFlow .moduleHeroMedia img,.mhMist,.mhFlake{animation:none!important}.mhFlake{display:none}}
+
+/* ---------- Pinned header ---------- */
+.topbar{position:-webkit-sticky;position:sticky;top:0;transition:background-color .25s,box-shadow .25s}
+.topbarScrolled{box-shadow:0 6px 22px rgba(10,19,32,.14)}
+/* Course landing: the bar floats over the picture, stays pinned while scrolling and turns solid. */
+.topbarCourse{position:fixed;left:0;right:0;top:0;inset:0 0 auto 0;width:100%}
+.topbarCourse.topbarScrolled{background:rgba(13,29,53,.96);backdrop-filter:blur(9px);box-shadow:0 6px 22px rgba(0,0,0,.25)}
+body:has(.themeMark.theme-norse) .topbarCourse.topbarScrolled{background:rgba(10,19,32,.96)}
