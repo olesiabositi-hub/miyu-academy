@@ -916,3 +916,23 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress{background:rgba(24,35,47,
 body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;background:linear-gradient(90deg,#6E8398,#E0A45A);transition:width .8s var(--ease-out)}
 @keyframes nlEmber{0%,100%{opacity:.8;box-shadow:0 0 8px 2px rgba(224,164,90,.45)}50%{opacity:1;box-shadow:0 0 18px 5px rgba(224,164,90,.8)}}
 @media(prefers-reduced-motion:reduce){.nlRuneGlow,body:has(.themeMark.theme-norse) .lxTrack i:after,body:has(.themeMark.theme-norse) .moduleHeaderProgress span:after{animation:none!important}.nlRuneGlow{opacity:.7}}
+
+/* Lesson reading layout for courses other than Greek: left-aligned magazine flow */
+.lessonFlow .moduleHeroPanel{text-align:left}
+.lessonFlow .reading.prose{text-align:left;padding-block:0}
+.lessonFlow .reading.prose p{margin:0 0 1.15em;font-size:clamp(17.5px,1.55vw,19px);line-height:1.72;color:var(--ink)}
+.lessonFlow .reading.prose p:last-child{margin-bottom:.6em}
+/* chapter opener: heading on its own, generous air above */
+.lessonFlow .reading.prose:has(> h3:only-child){margin-top:clamp(56px,8vw,104px)}
+.lessonFlow .reading.prose h3{margin:0 0 .2em;font:500 clamp(30px,4vw,44px)/1.12 var(--font-serif);color:var(--navy);text-wrap:balance}
+.lessonFlow .reading.prose h3:after{content:"";display:block;width:56px;height:2px;margin-top:18px;background:var(--gold)}
+/* pictures: wider than the text column, they are the main visual */
+.lessonFlow .reading.prose:has(> .lessonFigure){width:min(1060px,calc(100% - 40px));padding-block:20px 26px}
+.lessonFlow .lessonFigure{margin:0}
+.lessonFlow .lessonFigure img{border-radius:var(--radius-lg)}
+.lessonFlow .lessonFigure figcaption{text-align:left;margin-top:12px;font:italic 400 15px/1.4 var(--font-serif);letter-spacing:0;color:var(--muted)}
+/* lines that are entirely bold become pull lines; an italic opening line becomes the lead */
+.lessonFlow .reading.prose p:has(> strong:only-child){margin:.4em 0 1.1em;padding-left:18px;border-left:3px solid var(--gold);font:500 clamp(24px,3vw,32px)/1.22 var(--font-serif);color:var(--navy)}
+.lessonFlow .reading.prose p:has(> em:only-child){font:italic 400 clamp(21px,2.4vw,26px)/1.45 var(--font-serif);color:var(--ochre)}
+.lessonFlow .reading.prose:first-of-type{padding-top:34px}
+@media(max-width:640px){.lessonFlow .reading.prose:has(> .lessonFigure){width:100%}.lessonFlow .lessonFigure img{border-radius:0}.lessonFlow .lessonFigure figcaption{padding:0 20px}}

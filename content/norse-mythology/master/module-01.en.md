@@ -10,6 +10,12 @@
 
 ## Chapter 1. Before Everything Went Wrong
 
+---
+
+![Ginnungagap — Ice and Fire](/visuals/norse/m01/01-ginnungagap-ice-and-fire-1448.webp)
+
+---
+
 Try to imagine a world where nothing exists.
 
 Not an empty room. Not an endless ocean or a black sky without stars.
@@ -52,11 +58,13 @@ And things were about to get considerably worse.
 
 ---
 
-![Ginnungagap — Ice and Fire](/visuals/norse/m01/01-ginnungagap-1448.webp)
+## Chapter 2. A Giant, a Cow, and a Rather Unusual Family Tree
 
 ---
 
-## Chapter 2. A Giant, a Cow, and a Rather Unusual Family Tree
+![Ymir and Audhumla](/visuals/norse/m01/02-ymir-and-audhumla-1448.webp)
+
+---
 
 Ymir existed in the frozen emptiness, at a time when there was no earth and no ordinary source of food.
 
@@ -83,6 +91,12 @@ By the third day, an entire man stood before her.
 His name was **Búri**.
 
 He was beautiful, strong, and would become the ancestor of the gods.
+
+---
+
+![Audhumla Reveals Buri](/visuals/norse/m01/03-audhumla-reveals-buri-1448.webp)
+
+---
 
 The ancient Norse sources don't explain why there was a man inside a block of ice, or how he got there in the first place.
 
@@ -120,15 +134,13 @@ And their decision would be final.
 
 ---
 
-![Ymir and Audhumla](/visuals/norse/m01/02-ymir-audhumla-1448.webp)
-
----
-
-![Audhumla Reveals Buri](/visuals/norse/m01/03-buri-1448.webp)
-
----
-
 ## Chapter 3. The First Murder. Absolutely Enormous Consequences.
+
+---
+
+![Odin, Vili, and Ve Slay Ymir](/visuals/norse/m01/04-odin-vili-ve-slay-ymir-1448.webp)
+
+---
 
 Odin, Vili, and Vé killed Ymir.
 
@@ -162,11 +174,13 @@ This may have been the first occasion in history when the phrase "waste not, wan
 
 ---
 
-![Odin, Vili, and Ve Slay Ymir](/visuals/norse/m01/04-ymir-slain-1448.webp)
+## Chapter 4. How to Build a Universe from a Dead Giant
 
 ---
 
-## Chapter 4. How to Build a Universe from a Dead Giant
+![Creating the Cosmos from Ymir](/visuals/norse/m01/05-creation-from-ymir-1448.webp)
+
+---
 
 Ymir's body became the raw material for everything that existed.
 
@@ -224,10 +238,6 @@ And even the slightest indication of when morning was supposed to begin.
 
 ---
 
-![Creating the Cosmos from Ymir](/visuals/norse/m01/05-creation-1448.webp)
-
----
-
 ## Quick check
 
 According to Norse mythology, how did life first emerge?
@@ -259,6 +269,12 @@ The giant's eyebrows became the human world's first line of defence. Even in dea
 ---
 
 ## Chapter 5. The Sun, the Moon, and a Spectacularly Bad Security System
+
+---
+
+![Sol, Mani, Skoll, and Hati](/visuals/norse/m01/06-sol-mani-skoll-hati-1448.webp)
+
+---
 
 To illuminate the new world, the gods took sparks and burning embers from Muspelheim.
 
@@ -308,11 +324,13 @@ Humans.
 
 ---
 
-![Sol, Mani, Skoll, and Hati](/visuals/norse/m01/06-sol-mani-1448.webp)
+## Chapter 6. The First Humans. No Instruction Manual Included.
 
 ---
 
-## Chapter 6. The First Humans. No Instruction Manual Included.
+![Awakening Ask and Embla](/visuals/norse/m01/07-ask-and-embla-1448.webp)
+
+---
 
 One day, Odin, Vili, and Vé were walking along the seashore.
 
@@ -364,11 +382,13 @@ The tree that connects the worlds.
 
 ---
 
-![Awakening Ask and Embla](/visuals/norse/m01/07-ask-embla-1448.webp)
+## Chapter 7. Yggdrasil. The Tree Holding Everything Together.
 
 ---
 
-## Chapter 7. Yggdrasil. The Tree Holding Everything Together.
+![Yggdrasil — The World Tree](/visuals/norse/m01/08-yggdrasil-world-tree-1448.webp)
+
+---
 
 Somewhere within the very structure of the universe stands an enormous ash tree.
 
@@ -436,11 +456,9 @@ And not even the gods.
 
 ---
 
-![Yggdrasil — The World Tree](/visuals/norse/m01/08-yggdrasil-1448.webp)
+## Chapter 8. The World Is Ready. Let the Problems Begin.
 
 ---
-
-## Chapter 8. The World Is Ready. Let the Problems Begin.
 
 So, let's return to where we started.
 
@@ -552,3 +570,129 @@ The world is built, and it is already full of problems.
 ## Module 2. Welcome to Asgard. The Leadership Is Questionable.
 
 Meet the Æsir and the Vanir, explore their power struggles, conflicts, and complicated family ties. Find out who's in charge — and why that doesn't always help.
+
+### 03. Odin. Knowledge Comes at a Price.
+
+Odin, his ravens, prophecies, the Well of Wisdom, and nine nights hanging from the World Tree. We'll also explore runes and the history behind them.
+
+*Higher education has never been quite this expensive.*
+
+### 04. Thor. When a Hammer Is the Answer to Everything.
+
+The god of thunder, his famous Mjölnir, giants, extraordinary adventures, and stories in which brute strength turns out to be surprisingly unhelpful.
+
+### 05. Loki. Some Problems Are Better Left Unsolved. Especially His Way.
+
+Shapeshifting, trickery, deception, and brilliant plans that regularly end in disaster. Loki never fails to surprise. Unfortunately, it's not just his enemies who suffer.
+
+### 06. Goddesses, Witches, and a Fate That Couldn't Care Less About Your Plans.
+
+Freyja, Frigg, the Norns, Valkyries, and seiðr magic. We'll explore power, choice, love, death, and a destiny that even the gods struggle to negotiate with.
+
+### 07. Monsters. Family Problems on a Cosmic Scale.
+
+Fenrir, Jörmungandr, Hel, and other creatures destined to play a rather significant role in the fate of the world.
+
+*Some children really do grow up and destroy everything.*
+
+### 08. Death Isn't the End. Terms and Conditions Apply.
+
+Valhalla, Fólkvangr, the realm of Hel, and Norse beliefs about the afterlife. Find out why not every fallen warrior earned a seat at Odin's table.
+
+### 09. Ragnarök. The End of the World Is Scheduled. No Cancellations.
+
+The prophecies come true. The wolves finally catch their prey. Ancient enemies meet in one last battle, and the world as everyone knows it comes to an end.
+
+But the story doesn't end there.
+
+---
+
+## Familiar Names. Very Different Stories.
+
+You've probably heard of Odin, Thor, Loki, or Valhalla.
+
+Maybe you've encountered them in Marvel films, God of War, books, or music.
+
+Or perhaps it all started with *Vikings*.
+
+With Ragnar Lothbrok, searching for new lands and trying to understand the will of the gods. With Lagertha, who was never particularly interested in letting other people make decisions for her. Or with Floki, for whom Odin seemed a far more real presence than most of the people around him.
+
+In the series, the gods rarely appear in person. Yet their presence is felt everywhere: in prophecies, dreams, sacrifices, omens, and the fear of an inescapable fate.
+
+But who were these gods, really? What did the ancient Norse believe? What exactly was Valhalla? Why did Odin sacrifice an eye? And was everyone's fate truly written in advance?
+
+And just how close is *Vikings* to the ancient sources?
+
+We'll explore these questions throughout the course.
+
+You'll discover which stories survive in the myths and sagas, what historians actually know, and what modern screenwriters decided to add.
+
+Because Ragnar Lothbrok is a figure of legend, *Vikings* is a historical drama, and Norse mythology is an entire universe that existed long before television ratings.
+
+And yes, you'll finally be able to explain why Marvel's Thor and Loki are rather different from their mythological counterparts.
+
+Without having to argue with strangers on the internet.
+
+Although Ragnar probably wouldn't have ruled that out.
+
+---
+
+## How You'll Learn
+
+**One story at a time.**
+
+Each module is a complete narrative, divided into short chapters. Not a collection of dates and names to memorise, but a story in which everything connects.
+
+**Read. Explore. Notice.**
+
+Cinematic illustrations, atmospheric scenes, and carefully chosen details that bring the world of Norse mythology to life.
+
+**See what stays with you.**
+
+Short questions along the way and at the end of each module. Not designed to catch you out, but to help what you've learned actually stick.
+
+**Recognise mythology in the modern world.**
+
+Go beyond remembering what happened in ancient stories. Understand why we're still telling them today.
+
+No mandatory sacrifices, no hanging from trees for nine nights, and no final examination supervised by Odin.
+
+We're reasonably civilised.
+
+---
+
+## Who Is This Course For?
+
+For anyone who loves a good story.
+
+For anyone who's ever wondered where the gods, giants, runes, and legends of the North came from.
+
+For those who watched *Vikings*, followed Ragnar Lothbrok's adventures, played God of War, or discovered Thor through Marvel — and now want to know the ancient stories behind those familiar faces.
+
+And for anyone who simply wants to learn something new, beautiful, and completely unrelated to their day job.
+
+You don't need to speak Old Norse, know Viking history, or remember the names of every god.
+
+We'll start at the very beginning.
+
+Literally. Before the world even existed.
+
+---
+
+## Every Story Has an Ending. Almost.
+
+Norse mythology is more than a collection of stories about gods fighting monsters.
+
+It's about courage and fear, wisdom and foolishness, loyalty and betrayal. About a world that cannot be preserved forever — but is still worth fighting for.
+
+Nine modules from now, you'll recognise ancient stories where you once saw only familiar names.
+
+And perhaps you'll see the whole idea of the end of the world a little differently.
+
+**Ready to head North?**
+
+**[Start the Course]**
+
+*Ragnarök can wait. Chapter One is already here.*
+
+

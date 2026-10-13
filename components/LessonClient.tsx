@@ -43,7 +43,7 @@ function GenericLesson({model}:{model:LessonModel}){
   const nextText=next?parseNext(next.markdown):undefined;
   const firstCompleteId=completes.length>0?completes[0].id:"";
 
-  return <article>
+  return <article className={model.courseId==="greek-mythology"?undefined:"lessonFlow"}>
     <ModuleHero courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
     {model.blocks.map(block=>{
       if(block.type==="visual-stop") return <Reveal key={block.id}><section id={block.id} className="visualStop"><VisualStop block={block} locale={model.locale}/></section></Reveal>;
