@@ -43,7 +43,7 @@ function Text({ md }: { md: string }) {
 function ChapterView({ ch, locale }: { ch: Chapter; locale: Locale }) {
   return <section className={"cxChap cxChap-" + ch.key} id={ch.key} aria-labelledby={`${ch.key}-h`}>
     {ch.cover && ch.cover.kind === "block" && <Block seg={ch.cover} locale={locale} />}
-    <div className="cxGut cxChapHead"><div className="cxCol">
+    <div className="cxGut cxChapHead"><div className="cxCol" data-n={ch.label.match(/\d+/)?.[0] ?? ""}>
       <div className="cxNum">{ch.label}</div>
       <h2 id={`${ch.key}-h`}>{ch.title}</h2>
     </div></div>
