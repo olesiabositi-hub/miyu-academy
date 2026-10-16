@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { Locale } from "@/lib/course";
 import { CRAFT, GALLERY, MEDIA, MOTIFS, PATH, PICS, TOUCH, UI, WEAVE, YEAR } from "@/lib/content/ossetianHeadscarf";
 
@@ -71,20 +71,13 @@ export function HeroVideo() {
 
 /** Full-bleed picture with gentle parallax. */
 export function Scene({ name, locale, children, className = "" }: { name: string; locale: Locale; children?: ReactNode; className?: string }) {
-  const box = useRef<HTMLDivElement>(null);
-  const still = useStill();
-  useScroll(() => {
-    const el = box.current; if (!el) return;
-    const img = el.querySelector("img"); if (!img) return;
-    if (still) { img.style.transform = ""; return; }
-    const r = el.getBoundingClientRect(); if (r.bottom < 0 || r.top > window.innerHeight) return;
-    const k = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
-    img.style.transform = `translate3d(0,${(k * -6).toFixed(2)}%,0)`;
-  });
-  return <figure className={"cxScene " + className} ref={box}>
-    <Pic name={name} locale={locale} />
-    <figcaption className="cxIll">{UI[locale].illustration}</figcaption>
-    {children}
+  // Pictures are shown whole, in their own proportions: no cropping, no parallax.
+  return <figure className={"cxScene " + className}>
+    <div className="cxFrame">
+      <Pic name={name} locale={locale} />
+      <figcaption className="cxIll">{UI[locale].illustration}</figcaption>
+      {children}
+    </div>
   </figure>;
 }
 
@@ -371,7 +364,8 @@ export function Motifs({ locale }: { locale: Locale }) {
 /* ------------------------------------------------------------------ gallery */
 
 export function Gallery({ locale }: { locale: Locale }) {
-  return <div className="cxDuo">{GALLERY.map((n) => <Pic key={n} name={n} locale={locale} />)}</div>;
+  // Each picture keeps its own proportions; widths follow the aspect ratio so the row has one height.
+  return <div className="cxDuo">{GALLERY.map((n) => { const p = PICS[n]; return <div key={n} className="cxDuoItem" style={{ "--ar": `${p.w} / ${p.h}`, "--r": (p.w / p.h).toFixed(4) } as CSSProperties}><Pic name={n} locale={locale} /></div>; })}</div>;
 }
 
 /* ------------------------------------------------------------------ the craft lives on */

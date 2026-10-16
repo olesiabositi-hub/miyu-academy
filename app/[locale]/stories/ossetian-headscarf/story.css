@@ -38,24 +38,44 @@
 @keyframes cxDrip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media (max-width:640px){.cxCue{display:none}}
 
-/* chapters & prose */
+/* chapters & prose — editorial layout: a reading column set off-centre, chapter number in the left rail,
+   pull quotes that break out of the column, a lead paragraph with a drop cap. */
 .cxChapHead{padding-top:clamp(64px,10vw,128px)}
-.cxNum{font-family:var(--cx-f-ui);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cx-gold)}
-.cx h2{font-family:var(--cx-f-display);font-weight:400;font-size:clamp(36px,5.6vw,64px);line-height:1.04;margin:.3em 0 .6em;text-wrap:balance;color:var(--cx-bordeaux)}
-.cxProse{padding-bottom:8px}
-.cxProse p{margin:0 0 1.15em}
+.cxNum{font-family:var(--cx-f-ui);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cx-gold);display:flex;align-items:center;gap:12px}
+.cxNum::before{content:"";flex:0 0 auto;width:12px;height:12px;border:1px solid currentColor;transform:rotate(45deg)}
+.cx h2{font-family:var(--cx-f-display);font-weight:400;font-size:clamp(36px,5.6vw,68px);line-height:1.02;margin:.3em 0 .7em;text-wrap:balance;color:var(--cx-bordeaux);text-align:left}
+.cxProse{padding-bottom:8px;text-align:left;hyphens:auto;-webkit-hyphens:auto}
+.cxProse p{margin:0 0 1.2em;text-wrap:pretty}
 .cxProse strong{font-weight:500;color:var(--cx-bordeaux)}
 .cxProse em{font-style:italic}
-.cxProse .pullLine{font-family:var(--cx-f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.18;color:var(--cx-bordeaux);margin:1.3em 0;padding-left:22px;border-left:1px solid var(--cx-gold);text-wrap:balance}
-.cxProse .pullLine strong{font-weight:400}
+/* lead + drop cap: the first paragraph after a chapter heading */
+.cxChapHead+.cxGut .cxProse>p:first-child{font-size:1.16em;line-height:1.62;color:var(--cx-ink)}
+.cxChapHead+.cxGut .cxProse>p:first-child::first-letter{float:left;font-family:var(--cx-f-display);font-size:4.1em;line-height:.82;margin:.06em .1em 0 0;color:var(--cx-bordeaux)}
+/* pull quote: a sentence of the text set apart */
+.cxProse .pullLine{position:relative;font-family:var(--cx-f-display);font-size:clamp(27px,3.4vw,42px);line-height:1.16;color:var(--cx-bordeaux);margin:1.5em 0 1.5em;padding:.55em 0 .1em;border-top:1px solid rgba(154,117,54,.5);text-wrap:balance;hyphens:manual;-webkit-hyphens:manual}
+.cxProse .pullLine::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;background:var(--cx-ivory);border:1px solid var(--cx-gold);transform:rotate(45deg)}
+.cxProse .pullLine strong{font-weight:400;color:inherit}
 .cxChap>.cxGut:last-child .cxProse{padding-bottom:clamp(40px,6vw,72px)}
 .cxChap>.cxGut:has(.cxMotifs){padding-bottom:12px}
-
+@media (min-width:1100px){
+  .cx{font-size:19px}
+  .cxCol{max-width:1180px;padding-left:280px;padding-right:200px}
+  .cxChapHead .cxCol{position:relative}
+  .cxChapHead .cxNum{position:absolute;left:0;top:.9em;width:220px;flex-direction:column;align-items:flex-start;gap:14px}
+  .cxChapHead .cxNum::after{content:"";width:64px;height:1px;background:currentColor;opacity:.6}
+  .cxChapHead .cxNum::before{display:none}
+  .cx .cxChapHead h2{margin-top:0;max-width:20ch}
+  .cxProse .pullLine{margin-left:-140px;margin-right:-60px;font-size:44px}
+  .cxFin .cxCol{padding-right:120px}
+}
 /* scenes */
-.cxScene{position:relative;margin:0;height:min(92vh,900px);min-height:420px;overflow:hidden;background:var(--cx-night);color:var(--cx-on-dark)}
-.cxScene picture,.cxScene img{position:absolute;left:0;width:100%}
-.cxScene picture{inset:0}
-.cxScene img{top:-8%;height:116%;object-fit:cover;will-change:transform}
+.cxScene{position:relative;margin:clamp(32px,5vw,64px) 0;padding:0 max(18px,env(safe-area-inset-left,0px));color:var(--cx-on-dark)}
+.cxFrame{position:relative;width:fit-content;max-width:min(100%,1448px);margin:0 auto;overflow:hidden;box-shadow:0 30px 60px -30px rgba(43,27,24,.55)}
+.cxFrame picture{display:block}
+.cxFrame img{display:block;width:auto;height:auto;max-width:100%;max-height:min(88vh,1086px)}
+.cxChap>.cxScene:first-child,.cxChap>.cxLight:first-child .cxScene{margin:0;padding:0;background:var(--cx-night)}
+.cxChap>.cxScene:first-child .cxFrame,.cxChap>.cxLight:first-child .cxFrame{box-shadow:none}
+@media (max-width:640px){.cxScene{padding:0}.cxFrame{box-shadow:none}.cxCap{position:relative;padding:18px 18px 22px;background:var(--cx-night)}}
 .cxIll{position:absolute;z-index:3;top:14px;right:max(14px,env(safe-area-inset-right,0px));font-family:var(--cx-f-ui);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cx-on-dark-soft);background:rgba(30,15,18,.5);padding:4px 8px;border-radius:2px}
 .cxCap{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:80px max(18px,env(safe-area-inset-right,0px)) 32px max(18px,env(safe-area-inset-left,0px));background:linear-gradient(transparent,rgba(30,15,18,.8))}
 .cxCap p{max-width:52ch;margin:0;font-size:17px;color:var(--cx-on-dark)}
@@ -151,11 +171,12 @@
 @media (max-width:640px){.cxMotif{font-size:12px!important;padding:14px 4px 12px;letter-spacing:0;hyphens:auto;overflow-wrap:anywhere}.cxReading{grid-template-columns:1fr}.cxReading>div+div{border-left:0;border-top:1px solid rgba(154,117,54,.4)}.cxMotif svg{width:48px;height:48px}}
 
 /* gallery */
-.cxDuo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;background:var(--cx-night);padding:6px;margin:16px 0 40px}
-.cxDuo picture{display:block;overflow:hidden;aspect-ratio:3/4}
-.cxDuo img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
-.cxDuo picture:hover img{transform:scale(1.04)}
-@media (max-width:760px){.cxDuo{grid-template-columns:1fr 1fr}}
+.cxDuo{display:flex;align-items:flex-start;gap:clamp(6px,1vw,14px);max-width:1440px;margin:clamp(32px,5vw,64px) auto;padding:0 max(18px,env(safe-area-inset-left,0px))}
+.cxDuoItem{flex:var(--r) 1 0;min-width:0;aspect-ratio:var(--ar);overflow:hidden}
+.cxDuoItem picture,.cxDuoItem img{display:block;width:100%;height:100%}
+.cxDuoItem img{transition:transform 1.2s ease}
+.cxDuoItem:hover img{transform:scale(1.03)}
+@media (max-width:760px){.cxDuo{flex-wrap:wrap}.cxDuoItem{flex:1 1 calc(50% - 6px)}}
 
 /* craft lives on */
 .cxCraft{padding-block:clamp(64px,10vw,120px)}
@@ -212,5 +233,5 @@
 .cxStill .cxThread{display:none}
 .cxStill .cxYear{height:auto;padding-block:80px}
 .cxStill .cxDot::after,.cxStill .cxNode.is-next .cxH,.cxStill .cxCue i{animation:none}
-.cxStill .cxDuo img,.cxStill .cxConn::after,.cxStill .cxKnots i{transition:none}
+.cxStill .cxDuoItem img,.cxStill .cxConn::after,.cxStill .cxKnots i{transition:none}
 @media (prefers-reduced-motion:reduce){.cxDot::after,.cxNode.is-next .cxH,.cxCue i{animation:none}}
