@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/course";
 import { LIVE_COURSES, SOON_COURSES, courseBasePath } from "@/lib/courses";
 import { STEPS } from "@/lib/content/home";
+import { STORIES, storyPath } from "@/lib/stories";
 import { AuthorBlock } from "@/components/AuthorBlock";
 import { Faq } from "@/components/Faq";
 import { Reveal } from "@/components/Reveal";
@@ -33,6 +34,8 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
     chooseTitle:"Выберите курс",
     chooseLead:"Все курсы открыты для всех, на русском и английском, без обязательных тестов.",
     open:"О курсе",
+    storyEyebrow:"ВИЗУАЛЬНАЯ ИСТОРИЯ",
+    storyOpen:"Смотреть историю",
     howEyebrow:"КАК УСТРОЕНО ОБУЧЕНИЕ",
     howTitle:"Три шага от интереса к пониманию",
     soonEyebrow:"СКОРО",
@@ -56,6 +59,8 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
     chooseTitle:"Choose a course",
     chooseLead:"Every course is open to everyone, in Russian and English, with no required tests.",
     open:"About the course",
+    storyEyebrow:"VISUAL STORY",
+    storyOpen:"View the story",
     howEyebrow:"HOW LEARNING WORKS",
     howTitle:"Three steps from curiosity to understanding",
     soonEyebrow:"COMING SOON",
@@ -126,6 +131,21 @@ export default async function AcademyHome({params}:{params:Promise<{locale:strin
               </article>
             </Reveal>;
           })}
+          {STORIES.map(st=><Reveal key={st.id}>
+            <article className="hxCourseCard">
+              <picture className="hxCourseArt">
+                <source media="(max-width: 700px)" srcSet={st.card.src960}/>
+                <img src={st.card.src} width={st.card.width} height={st.card.height} alt="" loading="lazy" decoding="async"/>
+              </picture>
+              <div className="hxCourseBody">
+                <div className="lxEyebrow">{c.storyEyebrow}</div>
+                <h2 className="hxH2">{st.title[locale]}{st.original&&<span lang="os">{st.original}</span>}</h2>
+                <p>{st.blurb[locale]}</p>
+                <ul className="hxFacts">{st.facts[locale].map(([v,l])=><li key={l}><strong>{v}</strong><span>{l}</span></li>)}</ul>
+                <Link className="lxBtn" href={storyPath(locale,st)}>{c.storyOpen} <span aria-hidden="true">→</span></Link>
+              </div>
+            </article>
+          </Reveal>)}
         </div>
       </div>
     </section>
