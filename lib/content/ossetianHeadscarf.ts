@@ -30,6 +30,9 @@ export const PICS: Record<string, { w: number; h: number; alt: L }> = {
   "dance-towers": { w: 1448, h: 1086, alt: { ru: "Танец в платке у старинных башен", en: "A dance in a headscarf by the old towers" } },
   keepers: { w: 1448, h: 1086, alt: { ru: "Две женщины бережно раскладывают старинный платок", en: "Two women carefully laying out an old headscarf" } },
   "three-generations": { w: 1448, h: 1086, alt: { ru: "Три поколения женщин за плетением", en: "Three generations of women netting together" } },
+  "spinning-silk": { w: 1122, h: 1402, alt: { ru: "Женщина сматывает шёлковую нить с коконов", en: "A woman reeling silk thread from cocoons" } },
+  "netting-window": { w: 1122, h: 1402, alt: { ru: "Женщина плетёт ажурную сетку у окна", en: "A woman netting an open-work headscarf by the window" } },
+  "towers-solitude": { w: 1149, h: 1369, alt: { ru: "Женщина в платке у старинных башен на закате", en: "A woman in a headscarf by the old towers at sunset" } },
 };
 
 export const UI = {
@@ -142,4 +145,4 @@ export const CRAFT = {
   final: { ru: "Традиция вышла за пределы музейной витрины.", en: "The tradition has moved beyond the museum display case." },
 };
 
-export const GALLERY = ["bride-circle", "bride-veil", "bride-mountains", "dance-towers"];
+export const GALLERY = ["spinning-silk", "netting-window", "bride-circle", "towers-solitude"];

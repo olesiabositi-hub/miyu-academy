@@ -108,11 +108,12 @@ export default async function OssetianHeadscarfStory({ params }: { params: Promi
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params; if (!isLocale(locale)) return {};
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const base = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://miyu.academy").replace(/\/$/, "");
   const u = UI[locale], p = `/stories/${STORY_SLUG}`;
   return {
     title: u.metaTitle, description: u.metaDesc,
     alternates: { canonical: `${base}/${locale}${p}`, languages: { en: `${base}/en${p}`, ru: `${base}/ru${p}` } },
-    openGraph: { title: u.metaTitle, description: u.metaDesc, url: `${base}/${locale}${p}`, siteName: "MIYU Academy", locale: locale === "ru" ? "ru_RU" : "en_US", type: "article", images: [{ url: `${base}${MEDIA}/golden-hour-1600.webp`, width: 1600, height: 900 }] },
+    openGraph: { title: u.metaTitle, description: u.metaDesc, url: `${base}/${locale}${p}`, siteName: "MIYU Academy", locale: locale === "ru" ? "ru_RU" : "en_US", type: "article", images: [{ url: `${base}${MEDIA}/og-${locale}.jpg`, width: 1200, height: 630, alt: u.title }] },
+    twitter: { card: "summary_large_image", title: u.metaTitle, description: u.metaDesc, images: [`${base}${MEDIA}/og-${locale}.jpg`] },
   };
 }

@@ -14,7 +14,9 @@
 
 Some things cannot truly be appreciated from a distance. To understand their beauty, you need to come closer: to see light passing between the threads, a delicate pattern emerging from an almost transparent net, the soft fringe falling along its edge. The Ossetian silk headscarf is one of those things.
 
-From a distance, it looks like a light shawl. Up close, it becomes clear that this is more than a piece of fabric. Its foundation is made from countless tiny knots, and the pattern is worked over it with a separate, meticulous technique. Its weightlessness is deceptive. Behind it lie hours, weeks, sometimes months of a person's time.
+From a distance, it looks like a light shawl. Up close, it becomes clear that this is more than a piece of fabric. Its foundation is made from countless tiny knots, and the pattern is worked over it with a separate, meticulous technique.
+
+**Its weightlessness is deceptive. Behind it lie hours, weeks, sometimes months of a person's time.**
 
 This headscarf is usually described as a beautiful element of national dress or a wedding tradition. But look at it a little longer, and another story begins to emerge. It is the story of women whose lives did not always leave much room for beauty—and who nevertheless found a place for it.
 
@@ -40,7 +42,9 @@ Another important point: **tsyllæ khyz is not an ordinary woven headscarf**. It
 
 Surviving pieces show different approaches. On some, the ornament is denser and covers much of the surface; on others, the design seems to let the net itself “breathe.” Some are especially festive because of their generous fringe. Others rely on the beauty of the netting alone. There is no single “correct” design: the craft allowed women to work within a recognizable tradition without making identical objects.
 
-For someone seeing such a headscarf for the first time, its beauty may seem purely decorative: it is lovely, and that is all. Yet there is much more to discover by looking not just at the finished design, but at the boundary between what is visible and what is not. Where there is no solid cloth, the eye sees air. Where the embroidery crosses the net, it notices the thread. This art does not try to cover every inch of the surface. Instead, it knows how to leave space empty so that the design becomes more distinct.
+For someone seeing such a headscarf for the first time, its beauty may seem purely decorative: it is lovely, and that is all. Yet there is much more to discover by looking not just at the finished design, but at the boundary between what is visible and what is not. Where there is no solid cloth, the eye sees air. Where the embroidery crosses the net, it notices the thread. This art does not try to cover every inch of the surface.
+
+**Instead, it knows how to leave space empty so that the design becomes more distinct.**
 
 This tells us something important about the Ossetian headscarf. It has none of the heavy luxury that demands attention. Even when the shawl is quite large, it remains visually light. And it is especially beautiful in motion: when a woman turns her head, when the long tassels sway gently, when the light shifts over the delicate threads.
 
@@ -70,7 +74,11 @@ In traditional societies, women are often remembered through family roles: daugh
 
 This work demanded an unusual combination of qualities. Patience did not mean passive submission. It meant the ability to sustain attention through hundreds of repeated actions. Precision was not mechanical obedience to a model, but the skill needed to create a beautiful result. And taste meant the ability to make a personal composition from familiar elements.
 
-We are accustomed to calling those who sign a canvas “artists.” Old headscarves, as a rule, bear no signatures. The names of many of their makers are unknown to us. But a missing name does not mean there was no author. Someone chose that pattern. Someone painstakingly carried the net all the way to the edge. Someone noticed that the diamonds were uneven and redid the work, even with countless household tasks still waiting.
+We are accustomed to calling those who sign a canvas “artists.” Old headscarves, as a rule, bear no signatures. The names of many of their makers are unknown to us.
+
+**But a missing name does not mean there was no author.**
+
+Someone chose that pattern. Someone painstakingly carried the net all the way to the edge. Someone noticed that the diamonds were uneven and redid the work, even with countless household tasks still waiting.
 
 The way knowledge was passed on could vary, too. In one family, a girl might learn by watching her mother or an older relative. In another, she might need to seek out an experienced craftswoman outside the home to learn the more difficult techniques. Elsewhere, a young woman might begin with a smaller piece before attempting a large shawl. We do not have detailed diaries recording every pupil's journey. But contemporary teaching shows how much it matters to see the movement of a hand, ask questions, and try again. A traditional skill is almost always made up of countless small adjustments that are difficult to explain in words alone.
 
@@ -107,7 +115,9 @@ If the women of a household raised silkworms, prepared the fibres, and made the 
 
 Purchased textiles existed too, as did trade in silk; the ways of obtaining the material changed over time. Ossetian names for different kinds of silk and silk goods preserve traces of contact with neighbouring languages and cultures. Language can seem to hold a map of the roads along which both materials and words travelled. Yet what is most fascinating is that silk, distant and foreign in its origins, gradually became part of a very recognizable local tradition of women's dress.
 
-An important idea emerges here: a tradition is not necessarily something that appeared once in a fixed form and then remained frozen forever. It can absorb a new material, adapt a familiar technique, acquire a meaning of its own, and become part of family memory. The Ossetian silk headscarf is a fine example of precisely this kind of living history.
+An important idea emerges here: a tradition is not necessarily something that appeared once in a fixed form and then remained frozen forever. It can absorb a new material, adapt a familiar technique, acquire a meaning of its own, and become part of family memory.
+
+**The Ossetian silk headscarf is a fine example of precisely this kind of living history.**
 
 ---
 
@@ -143,7 +153,9 @@ There is another stage we seldom think about when admiring a finished piece: sha
 
 How long does it take to make one? There is no universal answer. Much depends on the size, the fineness of the thread, the complexity of the pattern, and the time the craftswoman can devote to it. The basic technique can be learned relatively quickly: eight two-hour lessons can be enough for an introduction. But learning the movements does not mean instantly producing a large, elaborate shawl. One contemporary craftswoman said that she spent about a year making her own wedding headscarf, working on it for at least two hours every day.
 
-That is one of the most eloquent details in this entire story. A year of daily work—not in a factory, not to the unbroken rhythm of a machine, but by hand, alongside the rest of life. Every such headscarf has not only a length and a width. It has a duration.
+That is one of the most eloquent details in this entire story. A year of daily work—not in a factory, not to the unbroken rhythm of a machine, but by hand, alongside the rest of life.
+
+**Every such headscarf has not only a length and a width. It has a duration.**
 
 [[year]]
 
@@ -183,7 +195,9 @@ There is another level of symbolism, too—not in the design, but in the object 
 
 Let us look at the ornament once more. Even without knowing its original meaning, we can see a woman's command of rhythm and proportion. She knows where to repeat a motif and where to stop. How to make a design festive without weighing it down. How to place a flower within the strict geometry of a net, or a diamond within the larger composition. This, too, is a language—and unlike disputed symbolic interpretations, it can be plainly seen.
 
-Not every old line can be translated into words. That does not make it any less meaningful. Sometimes it matters more to preserve the complexity of a pattern's history than to give it an explanation that is too simple. We can admire a mystery without declaring it solved.
+Not every old line can be translated into words. That does not make it any less meaningful. Sometimes it matters more to preserve the complexity of a pattern's history than to give it an explanation that is too simple.
+
+**We can admire a mystery without declaring it solved.**
 
 ---
 
@@ -217,7 +231,9 @@ Yet wedding traditions have a right to change, too. Today a bride may consciousl
 
 The brides themselves also deserve a central place in this story. In traditional society, a woman lived within a complex system of rules, which should neither be idealized nor reduced to a single formula. A festive covering might signal her position and her family's expectations; at the same time, it could express personal taste, beauty, and connection to loved ones. Social conventions, care, aesthetics, and family memory could all coexist in one object.
 
-Today the traditional Ossetian headscarf is once again appearing in wedding outfits. For some, it is a return to family customs; for others, a way to honour their roots and choose a kind of beauty that does not depend on bridal fashion. And there is no need to explain that choice through mysticism. Sometimes the reason is simple and deeply human: on a day she wants to remember, a woman wears something that reminds her of the women who came before her.
+Today the traditional Ossetian headscarf is once again appearing in wedding outfits. For some, it is a return to family customs; for others, a way to honour their roots and choose a kind of beauty that does not depend on bridal fashion. And there is no need to explain that choice through mysticism.
+
+**Sometimes the reason is simple and deeply human: on a day she wants to remember, a woman wears something that reminds her of the women who came before her.**
 
 ---
 
@@ -247,7 +263,9 @@ Preserving a tradition also means paying attention to photographs and their capt
 
 At the same time, people should not be expected to turn every family heirloom into a museum exhibit. A headscarf has a right to remain part of domestic life: carefully folded in a box, passed around on festive occasions, worn by someone dear. Tradition lives both in official collections and in ordinary homes—only in different ways.
 
-That is why the story of the craftswomen who never stopped teaching is not an appendix to museum history, but its continuation. They preserve more than the finished product. They preserve the very possibility of making it again.
+That is why the story of the craftswomen who never stopped teaching is not an appendix to museum history, but its continuation.
+
+**They preserve more than the finished product. They preserve the very possibility of making it again.**
 
 ---
 
@@ -283,7 +301,9 @@ A handmade headscarf need not compete with a factory-made one on speed. Its stre
 
 Interest in the object itself is growing, too. Workshops take place in Vladikavkaz. Brides choose open-net headscarves for their wedding outfits. Women commission pieces, learn the technique, photograph old family headscarves, and look for people who can explain how they were made. Not everyone is bringing the headscarf back into everyday dress, but the very conversation surrounding it shows that the tradition has moved beyond the museum display case.
 
-And yet the most important thing is not the number of workshops or a new fashion for national dress. The most important thing is **the possibility of passing knowledge on**. As long as one woman can make room for a pupil at her table and show her the first knot, the craft remains alive.
+And yet the most important thing is not the number of workshops or a new fashion for national dress. The most important thing is **the possibility of passing knowledge on**.
+
+**As long as one woman can make room for a pupil at her table and show her the first knot, the craft remains alive.**
 
 There is an especially beautiful continuation of the old story here. Once, craftswomen found hours for delicate netting amid the demands of household work. Today, women find hours to learn, teach, restore forgotten techniques, and rethink their heritage for their own time. The conditions of life have changed, but the delicacy of the work and the need for patience remain.
 
