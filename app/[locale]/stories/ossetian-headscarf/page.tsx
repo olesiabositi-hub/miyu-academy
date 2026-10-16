@@ -90,7 +90,7 @@ function SpreadView({ sp, locale, side }: { sp: Extract<Spread, { kind: "spread"
       if (variant === "lead") return <div key={i} className="cxRow cxRowLead cxProse"><Markdown>{md}</Markdown></div>;
       if (variant === "plain") return <div key={i} className={"cxRow cxProse " + (r.paras.length > 1 ? "cxTwoCol" : "cxOneCol")}><Markdown>{md}</Markdown></div>;
       const rail = variant === "pic"
-        ? <>{r.pic ? <figure className="cxRailPic"><Pic name={r.pic} locale={locale} /><figcaption className="cxIll">{UI[locale].illustration}</figcaption></figure> : null}{facts}</>
+        ? <>{r.pic ? <figure className="cxRailPic"><Pic name={r.pic} locale={locale} /></figure> : null}{facts}</>
         : <>{title()}{facts}</>;
       return <div key={i} className="cxRow cxRowSplit">
         <div className="cxRail">{rail}</div>
