@@ -14,7 +14,8 @@ const display = Forum({ weight: "400", subsets: ["latin", "cyrillic"], variable:
 const body = Literata({ subsets: ["latin", "cyrillic"], variable: "--cx-body", display: "swap" });
 const ui = Manrope({ weight: ["500", "600"], subsets: ["latin", "cyrillic"], variable: "--cx-ui", display: "swap" });
 
-export function generateStaticParams() { return [{ locale: "ru" }, { locale: "en" }]; }
+// Rendered on request: a stale CDN copy of the English page outlived several deploys.
+export const dynamic = "force-dynamic";
 
 const LIGHT_QUOTE: Record<Locale, string> = {
   ru: "«Это не ослепительно белый, а мягкий, чуть тёплый оттенок — от светло-бежевого до жемчужного, иногда с золотистым отливом. Он меняется в зависимости от освещения».",
