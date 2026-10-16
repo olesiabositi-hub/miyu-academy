@@ -11,6 +11,11 @@ Registry: `lib/stories.ts` (title, blurb, facts and card picture for the home pa
 - **Interactive blocks and pictures** are placed by marker lines in the text — move the line to move the block:
   `[[light]]` `[[path]]` `[[weave]]` `[[touch]]` `[[year]]` `[[motifs]]` `[[gallery]]` `[[craft]]` `[[scene:<picture>]]`.
   A marker right after a chapter heading is shown above that heading.
+- **Magazine layout inside chapters:** a `### Subhead` line starts a section; the page lays sections out on a grid.
+  `[[fact: 250–300 | what the figure means]]` sets a figure large (in the side rail); `[[pic:<picture>]]` puts a picture beside
+  the section's text, whole and uncropped; a paragraph that is entirely `**bold**` is a quote across the break.
+  Section with a picture → picture + text side by side; with a fact → rail with subhead and figures + text; otherwise two columns.
+  Rails alternate left/right. Phones get one column.
 - **Copy inside the blocks** (RU/EN): `lib/content/ossetianHeadscarf.ts` (`PATH`, `WEAVE`, `TOUCH`, `YEAR`, `MOTIFS`, `CRAFT`, `UI`).
   Pictures and their alt texts: `PICS`; gallery order: `GALLERY`.
 - **Media:** `public/visuals/ossetian-headscarf/` — `<name>-1448.webp` (or `-1600`) + `<name>-800.webp`, `hero.mp4`, `hero-poster-*.webp`.

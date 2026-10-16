@@ -38,8 +38,8 @@
 @keyframes cxDrip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media (max-width:640px){.cxCue{display:none}}
 
-/* chapters & prose — editorial layout: a reading column set off-centre, chapter number in the left rail,
-   pull quotes that break out of the column, a lead paragraph with a drop cap. */
+/* chapters & prose — editorial layout: a centred reading column with rhythm inside it —
+   subheads every few paragraphs, figures set large, quotes across the break, pictures between paragraphs. */
 .cxChapHead{padding-top:clamp(64px,10vw,128px)}
 .cxNum{font-family:var(--cx-f-ui);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cx-gold);display:flex;align-items:center;gap:12px}
 .cxNum::before{content:"";flex:0 0 auto;width:12px;height:12px;border:1px solid currentColor;transform:rotate(45deg)}
@@ -51,31 +51,36 @@
 /* lead + drop cap: the first paragraph after a chapter heading */
 .cxChapHead+.cxGut .cxProse>p:first-child{font-size:1.16em;line-height:1.62;color:var(--cx-ink)}
 .cxChapHead+.cxGut .cxProse>p:first-child::first-letter{float:left;font-family:var(--cx-f-display);font-size:4.1em;line-height:.82;margin:.06em .1em 0 0;color:var(--cx-bordeaux)}
-/* pull quote: a sentence of the text set apart */
-.cxProse .pullLine{position:relative;font-family:var(--cx-f-display);font-size:clamp(27px,3.4vw,42px);line-height:1.16;color:var(--cx-bordeaux);margin:1.5em 0 1.5em;padding:.55em 0 .1em;border-top:1px solid rgba(154,117,54,.5);text-wrap:balance;hyphens:manual;-webkit-hyphens:manual}
-.cxProse .pullLine::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;background:var(--cx-ivory);border:1px solid var(--cx-gold);transform:rotate(45deg)}
+/* subheads inside a chapter (### in the text) */
+.cx .cxProse h4{position:relative;font-family:var(--cx-f-display);font-weight:400;font-size:clamp(26px,2.9vw,34px);line-height:1.12;color:var(--cx-bordeaux);margin:2.1em 0 .7em;padding-top:.9em;text-wrap:balance;hyphens:manual;-webkit-hyphens:manual}
+.cx .cxProse h4::before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border:1px solid var(--cx-gold);transform:rotate(45deg)}
+.cx .cxProse h4::after{content:"";position:absolute;top:4px;left:20px;width:40px;height:1px;background:var(--cx-gold);opacity:.6}
+.cx .cxProse>h4:first-child{margin-top:.6em}
+/* quote across the break: a sentence of the text set large, centred, a little wider than the column */
+.cxProse .pullLine{position:relative;font-family:var(--cx-f-display);font-size:clamp(27px,3.6vw,42px);line-height:1.18;color:var(--cx-bordeaux);text-align:center;text-wrap:balance;hyphens:manual;-webkit-hyphens:manual;
+  width:min(860px,calc(100vw - 36px));margin:1.5em 0 1.4em calc((100% - min(860px,calc(100vw - 36px))) / 2);padding:.85em 0 .75em;border-top:1px solid rgba(154,117,54,.45);border-bottom:1px solid rgba(154,117,54,.45)}
+.cxProse .pullLine::before{content:"";position:absolute;top:-7px;left:50%;margin-left:-6px;width:12px;height:12px;background:var(--cx-ivory);border:1px solid var(--cx-gold);transform:rotate(45deg)}
 .cxProse .pullLine strong{font-weight:400;color:inherit}
+/* a figure set large between paragraphs */
+.cxBigFact{display:grid;justify-items:center;text-align:center;gap:10px;margin:clamp(28px,4vw,44px) auto clamp(32px,5vw,52px);padding:0 4px}
+.cxBigNum{font-family:var(--cx-f-display);font-size:clamp(56px,9vw,104px);line-height:.95;color:var(--cx-gold);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.cxBigNote{max-width:34ch;font-family:var(--cx-f-ui);font-size:13px;line-height:1.55;letter-spacing:.04em;color:var(--cx-ink-soft);text-wrap:balance}
+.cxBigNote::before{content:"";display:block;width:9px;height:9px;margin:0 auto 12px;border:1px solid var(--cx-gold);transform:rotate(45deg)}
 .cxChap>.cxGut:last-child .cxProse{padding-bottom:clamp(40px,6vw,72px)}
 .cxChap>.cxGut:has(.cxMotifs){padding-bottom:12px}
-/* desktop: the reading column sits against the left margin; pull quotes move out into the right margin */
-@media (min-width:900px){
-  .cxCol{max-width:none;margin:0;padding-left:clamp(40px,9vw,160px);padding-right:24px}
-  .cxCol>*{max-width:660px}
-  .cxChapHead .cxCol>h2{max-width:16ch}
-}
 @media (min-width:1100px){
   .cx{font-size:19px}
   .cx .cxChapHead h2{font-size:clamp(52px,5.4vw,76px)}
 }
-@media (min-width:1240px){
-  .cxProse{max-width:660px}
-  .cxProse .pullLine{float:right;clear:right;width:min(380px,calc(100vw - 660px - clamp(40px,9vw,160px) - 120px));margin:.2em calc(-1 * min(380px,calc(100vw - 660px - clamp(40px,9vw,160px) - 120px)) - 64px) 1.4em 0;font-size:30px;line-height:1.2;padding-top:.7em}
-  .cxProse .pullLine:last-child{float:none;width:auto;margin:1.6em 0 1.2em;font-size:40px}
-  .cxProse .pullLine:not(:last-child){position:sticky;top:calc(var(--cx-top) + 18vh)}
+/* wide screens: the chapter number sits large in the margin to the right of the centred column */
+@media (min-width:1360px){
   .cxChapHead .cxCol{position:relative}
-  .cxChapHead .cxCol[data-n]:not([data-n=""])::after{content:attr(data-n);position:absolute;top:-.12em;left:calc(clamp(40px,9vw,160px) + 660px + 64px);font-family:var(--cx-f-display);font-size:clamp(160px,15vw,240px);line-height:1;color:var(--cx-gold);opacity:.22;pointer-events:none}
-  .cxProse::after{content:"";display:table;clear:both}
+  .cxChapHead .cxCol[data-n]:not([data-n=""])::after{content:attr(data-n);position:absolute;top:-.12em;left:calc(100% + 56px);font-family:var(--cx-f-display);font-size:clamp(160px,13vw,220px);line-height:1;color:var(--cx-gold);opacity:.2;pointer-events:none}
 }
+/* a picture between paragraphs: smaller than a chapter scene, whole, never cropped */
+.cxScene.cxInset{margin:clamp(36px,5vw,60px) 0}
+.cxInset .cxFrame{max-width:min(100%,960px)}
+.cxInset .cxFrame img{max-height:min(78vh,900px)}
 /* scenes */
 .cxScene{position:relative;margin:clamp(32px,5vw,64px) 0;padding:0 max(18px,env(safe-area-inset-left,0px));color:var(--cx-on-dark)}
 .cxFrame{position:relative;width:fit-content;max-width:min(100%,1448px);margin:0 auto;overflow:hidden;box-shadow:0 30px 60px -30px rgba(43,27,24,.55)}
@@ -243,3 +248,50 @@
 .cxStill .cxDot::after,.cxStill .cxNode.is-next .cxH,.cxStill .cxCue i{animation:none}
 .cxStill .cxDuoItem img,.cxStill .cxConn::after,.cxStill .cxKnots i{transition:none}
 @media (prefers-reduced-motion:reduce){.cxDot::after,.cxNode.is-next .cxH,.cxCue i{animation:none}}
+
+/* ---------- magazine spreads (chapters whose text has ### sections) ---------- */
+.cxMag .cxChapHead .cxWide{position:relative}
+.cxMag .cxChapHead h2{max-width:18ch}
+.cxSpread{margin:0 0 clamp(8px,2vw,24px)}
+.cx .cxSub3{position:relative;font-family:var(--cx-f-display);font-weight:400;font-size:clamp(28px,3.2vw,40px);line-height:1.08;color:var(--cx-bordeaux);margin:0 0 .7em;padding-top:1em;text-wrap:balance;max-width:20ch}
+.cx .cxSub3::before{content:"";position:absolute;top:0;left:0;width:10px;height:10px;border:1px solid var(--cx-gold);transform:rotate(45deg)}
+.cx .cxSub3::after{content:"";position:absolute;top:5px;left:22px;width:56px;height:1px;background:var(--cx-gold);opacity:.6}
+.cxSpread:not(.cxSp-lead){padding-top:clamp(40px,6vw,88px)}
+.cxRow{margin:0}
+.cxRow .cxBigFact{justify-items:start;text-align:left;margin:0 0 28px;padding:0}
+.cxRow .cxBigNote{max-width:30ch}
+.cxRail .cxBigNum{font-size:clamp(48px,5.4vw,80px);white-space:nowrap}
+.cxSp-pic .cxRail .cxBigFact{margin-top:28px}
+.cxRow .cxBigNote::before{margin:0 0 12px}
+.cxRailPic{position:relative;margin:0 0 28px}
+.cxRailPic img{width:100%;height:auto;box-shadow:0 30px 60px -30px rgba(43,27,24,.55)}
+.cxQuote{margin:clamp(36px,5vw,64px) auto;max-width:980px;text-align:center;font-family:var(--cx-f-display);font-size:clamp(28px,3.8vw,48px);line-height:1.16;color:var(--cx-bordeaux);text-wrap:balance;position:relative;padding:.8em 0 .7em;border-top:1px solid rgba(154,117,54,.45);border-bottom:1px solid rgba(154,117,54,.45)}
+.cxQuote::before{content:"";position:absolute;top:-7px;left:50%;margin-left:-6px;width:12px;height:12px;background:var(--cx-ivory);border:1px solid var(--cx-gold);transform:rotate(45deg)}
+.cxRowLead>p:first-child{font-size:1.2em;line-height:1.6}
+.cxRowLead>p:first-child::first-letter{float:left;font-family:var(--cx-f-display);font-size:4.4em;line-height:.8;margin:.06em .1em 0 0;color:var(--cx-bordeaux)}
+@media (min-width:960px){
+  .cxRowLead{column-count:2;column-gap:64px}
+  .cxRowLead>p:first-child{column-span:all;max-width:880px;font-size:1.32em;margin-bottom:1.4em}
+  .cxTwoCol{column-count:2;column-gap:64px}
+  .cxTwoCol p,.cxRowLead p{orphans:3;widows:3}
+  .cxOneCol{max-width:680px}
+  .cxRowSplit{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(32px,4vw,56px);align-items:start}
+  .cxSp-fact .cxRail{grid-column:1/5;position:sticky;top:calc(var(--cx-top) + 32px)}
+  .cxSp-fact .cxMain{grid-column:5/12}
+  .cxSp-fact.cxSide-r .cxRail{grid-column:9/13;grid-row:1}
+  .cxSp-fact.cxSide-r .cxMain{grid-column:1/8;grid-row:1}
+  .cxSp-pic .cxRail{grid-column:1/8;position:sticky;top:calc(var(--cx-top) + 32px)}
+  .cxSp-pic .cxMain{grid-column:8/13}
+  .cxSp-pic.cxSide-r .cxRail{grid-column:6/13;grid-row:1}
+  .cxSp-pic.cxSide-r .cxMain{grid-column:1/6;grid-row:1}
+  .cxRailPic{margin:0}
+  .cxRailPic img{max-height:calc(100vh - var(--cx-top) - 64px);width:auto;max-width:100%;margin:0 auto}
+  .cxMag .cxChapHead .cxWide[data-n]:not([data-n=""])::after{content:attr(data-n);position:absolute;top:-.1em;right:0;font-family:var(--cx-f-display);font-size:clamp(150px,14vw,220px);line-height:1;color:var(--cx-gold);opacity:.2;pointer-events:none}
+}
+.cxMag>.cxSpread:last-child{padding-bottom:clamp(48px,7vw,96px)}
+@media (max-width:959px){
+  .cxSp-pic .cxRowSplit{display:flex;flex-direction:column}
+  .cxSp-pic .cxMain{display:contents}
+  .cxSp-pic .cxSub3{order:-1}
+  .cxSp-pic .cxRail .cxBigFact{margin-bottom:28px}
+}

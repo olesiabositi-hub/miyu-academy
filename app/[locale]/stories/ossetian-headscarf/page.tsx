@@ -7,7 +7,7 @@ import { MEDIA, STORY_SLUG, UI } from "@/lib/content/ossetianHeadscarf";
 import { loadStory, type Chapter, type Seg } from "@/lib/content/ossetianHeadscarfStory";
 import { Markdown } from "@/components/Markdown";
 import { Reveal } from "@/components/Reveal";
-import { Craft, FinaleThreads, Gallery, HeroVideo, LightScene, MotionToggle, Motifs, Scene, StoryShell, ThreadPath, Touch, Weave, Year } from "@/components/OssetianStory";
+import { Craft, FinaleThreads, Gallery, HeroVideo, LightScene, MotionToggle, Motifs, Pic, Scene, StoryShell, ThreadPath, Touch, Weave, Year } from "@/components/OssetianStory";
 import "./story.css";
 
 const display = Forum({ weight: "400", subsets: ["latin", "cyrillic"], variable: "--cx-display", display: "swap" });
@@ -26,6 +26,7 @@ function Block({ seg, locale }: { seg: Extract<Seg, { kind: "block" }>; locale: 
   switch (seg.id) {
     case "light": return <LightScene locale={locale} quote={LIGHT_QUOTE[locale]} />;
     case "scene": return seg.arg ? <Scene name={seg.arg} locale={locale} /> : null;
+    case "pic": return seg.arg ? <Scene name={seg.arg} locale={locale} className="cxInset" /> : null;
     case "path": return <ThreadPath locale={locale} />;
     case "weave": return <Weave locale={locale} />;
     case "touch": return <Touch locale={locale} />;
@@ -41,14 +42,76 @@ function Text({ md }: { md: string }) {
   return <div className="cxGut"><Reveal className="cxCol cxProse"><Markdown>{md}</Markdown></Reveal></div>;
 }
 
+function Fact({ big, note }: { big: string; note: string }) {
+  return <p className="cxBigFact"><span className="cxBigNum">{big}</span><span className="cxBigNote">{note}</span></p>;
+}
+
+/* ---------- magazine spreads: a chapter's text is laid out on a grid, section by section (### = new section) */
+
+type FactSeg = Extract<Seg, { kind: "fact" }>;
+type Row = { facts: FactSeg[]; pic?: string; paras: string[] };
+type Part = { kind: "row"; row: Row } | { kind: "quote"; text: string };
+type Spread = { kind: "spread"; title?: string; lead: boolean; parts: Part[] } | { kind: "block"; seg: Extract<Seg, { kind: "block" }> };
+
+const QUOTE = /^\*\*([^*][\s\S]*?)\*\*$/;
+
+function toSpreads(segs: Seg[]): Spread[] {
+  const out: Spread[] = [];
+  let cur: Extract<Spread, { kind: "spread" }> | null = null;
+  const open = (title?: string) => { cur = { kind: "spread", title, lead: !title && out.length === 0, parts: [] }; out.push(cur); return cur; };
+  const row = () => { const c = cur ?? open(); const last = c.parts[c.parts.length - 1]; if (last?.kind === "row") return last.row; const r: Row = { facts: [], paras: [] }; c.parts.push({ kind: "row", row: r }); return r; };
+  for (const s of segs) {
+    if (s.kind === "fact") { row().facts.push(s); continue; }
+    if (s.kind === "block" && s.id === "pic" && s.arg) { const r = row(); if (r.pic || r.paras.length) { (cur ?? open()).parts.push({ kind: "row", row: { facts: [], paras: [], pic: s.arg } }); } else r.pic = s.arg; continue; }
+    if (s.kind === "block") { out.push({ kind: "block", seg: s }); cur = null; continue; }
+    for (const b of s.md.split(/\n\s*\n/)) {
+      const t = b.trim(); if (!t) continue;
+      if (t.startsWith("### ")) { open(t.slice(4).trim()); continue; }
+      const q = t.match(QUOTE);
+      if (q) { (cur ?? open()).parts.push({ kind: "quote", text: q[1] }); continue; }
+      row().paras.push(t);
+    }
+  }
+  return out;
+}
+
+function SpreadView({ sp, locale, side }: { sp: Extract<Spread, { kind: "spread" }>; locale: Locale; side: "l" | "r" }) {
+  const rows = sp.parts.filter((p): p is Extract<Part, { kind: "row" }> => p.kind === "row").map((p) => p.row);
+  const hasPic = rows.some((r) => r.pic), hasFact = rows.some((r) => r.facts.length);
+  const variant = sp.lead ? "lead" : hasPic ? "pic" : hasFact ? "fact" : "plain";
+  let titled = false;
+  const title = () => { if (titled || !sp.title) return null; titled = true; return <h3 className="cxSub3">{sp.title}</h3>; };
+  return <div className={`cxGut cxSpread cxSp-${variant} cxSide-${side}`}><div className="cxWide">
+    {variant === "plain" && title()}
+    {sp.parts.map((p, i) => {
+      if (p.kind === "quote") return <p key={i} className="cxQuote"><span>{p.text}</span></p>;
+      const r = p.row, md = r.paras.join("\n\n");
+      const facts = r.facts.map((f, k) => <Fact key={k} big={f.big} note={f.note} />);
+      if (variant === "lead") return <div key={i} className="cxRow cxRowLead cxProse"><Markdown>{md}</Markdown></div>;
+      if (variant === "plain") return <div key={i} className={"cxRow cxProse " + (r.paras.length > 1 ? "cxTwoCol" : "cxOneCol")}><Markdown>{md}</Markdown></div>;
+      const rail = variant === "pic"
+        ? <>{r.pic ? <figure className="cxRailPic"><Pic name={r.pic} locale={locale} /><figcaption className="cxIll">{UI[locale].illustration}</figcaption></figure> : null}{facts}</>
+        : <>{title()}{facts}</>;
+      return <div key={i} className="cxRow cxRowSplit">
+        <div className="cxRail">{rail}</div>
+        <div className="cxMain cxProse">{variant === "pic" && title()}{md && <Markdown>{md}</Markdown>}</div>
+      </div>;
+    })}
+  </div></div>;
+}
+
 function ChapterView({ ch, locale }: { ch: Chapter; locale: Locale }) {
-  return <section className={"cxChap cxChap-" + ch.key} id={ch.key} aria-labelledby={`${ch.key}-h`}>
-    {ch.cover && ch.cover.kind === "block" && <Block seg={ch.cover} locale={locale} />}
-    <div className="cxGut cxChapHead"><div className="cxCol" data-n={ch.label.match(/\d+/)?.[0] ?? ""}>
+  const magazine = ch.segs.some((s) => s.kind === "text" && /(^|\n)### /.test(s.md));
+  let n = 0;
+  return <section className={"cxChap cxChap-" + ch.key + (magazine ? " cxMag" : "")} id={ch.key} aria-labelledby={`${ch.key}-h`}>
+    {ch.cover?.kind === "block" && <Block seg={ch.cover} locale={locale} />}
+    <div className="cxGut cxChapHead"><div className={magazine ? "cxWide" : "cxCol"} data-n={ch.label.match(/\d+/)?.[0] ?? ""}>
       <div className="cxNum">{ch.label}</div>
       <h2 id={`${ch.key}-h`}>{ch.title}</h2>
     </div></div>
-    {ch.segs.map((s, i) => s.kind === "text" ? <Text key={i} md={s.md} /> : <Block key={i} seg={s} locale={locale} />)}
+    {magazine
+      ? toSpreads(ch.segs).map((sp, i) => sp.kind === "block" ? <Block key={i} seg={sp.seg} locale={locale} /> : <SpreadView key={i} sp={sp} locale={locale} side={(sp.title && n++ % 2) ? "r" : "l"} />)
+      : ch.segs.map((s, i) => s.kind === "text" ? <Text key={i} md={s.md} /> : s.kind === "fact" ? <div key={i} className="cxGut"><div className="cxCol"><Fact big={s.big} note={s.note} /></div></div> : <Block key={i} seg={s} locale={locale} />)}
   </section>;
 }
 

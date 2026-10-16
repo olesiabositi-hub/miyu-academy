@@ -4,10 +4,12 @@ import type { Locale } from "@/lib/course";
 import { STORY_DIR } from "@/lib/content/ossetianHeadscarf";
 
 /** Server-only: reads content/ossetian-headscarf/story.<locale>.md (see lib/content/ossetianHeadscarf.ts). */
-export type Seg = { kind: "text"; md: string } | { kind: "block"; id: string; arg?: string };
+export type Seg = { kind: "text"; md: string } | { kind: "block"; id: string; arg?: string } | { kind: "fact"; big: string; note: string };
 export type Chapter = { key: string; label: string; title: string; cover: Seg | null; segs: Seg[] };
 
 const MARK = /^\[\[([a-z]+)(?::([a-z0-9-]+))?\]\]$/;
+/** `[[fact: 250–300 | what the number means]]` — a figure set large between paragraphs. */
+const FACT = /^\[\[fact:\s*([^|\]]+?)\s*\|\s*([\s\S]+?)\s*\]\]$/;
 
 export function loadStory(locale: Locale): Chapter[] {
   const file = path.join(process.cwd(), "content", STORY_DIR, `story.${locale}.md`);
@@ -24,6 +26,8 @@ export function loadStory(locale: Locale): Chapter[] {
     let buf: string[] = [];
     const flush = () => { if (buf.length) { segs.push({ kind: "text", md: buf.join("\n\n") }); buf = []; } };
     for (const b of blocks) {
+      const f = b.match(FACT);
+      if (f) { flush(); segs.push({ kind: "fact", big: f[1], note: f[2] }); continue; }
       const m = b.match(MARK);
       if (m) { flush(); segs.push({ kind: "block", id: m[1], arg: m[2] }); }
       else buf.push(b);

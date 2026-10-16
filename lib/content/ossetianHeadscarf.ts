@@ -32,6 +32,9 @@ export const PICS: Record<string, { w: number; h: number; alt: L }> = {
   "three-generations": { w: 1448, h: 1086, alt: { ru: "Три поколения женщин за плетением", en: "Three generations of women netting together" } },
   "spinning-silk": { w: 1122, h: 1402, alt: { ru: "Женщина сматывает шёлковую нить с коконов", en: "A woman reeling silk thread from cocoons" } },
   "netting-window": { w: 1122, h: 1402, alt: { ru: "Женщина плетёт ажурную сетку у окна", en: "A woman netting an open-work headscarf by the window" } },
+  "women-reeling": { w: 1122, h: 1402, alt: { ru: "Три женщины разматывают шёлк с коконов в горном селении", en: "Three women reeling silk from cocoons in a mountain village" } },
+  "motif-sketches": { w: 1600, h: 900, alt: { ru: "Мастерица рассматривает узор на платке рядом с эскизами орнаментов", en: "A craftswoman examining the pattern on a headscarf beside sketches of motifs" } },
+  "chest-memory": { w: 1600, h: 900, alt: { ru: "Женщина у сундука со старыми платками и семейной фотографией", en: "A woman by a chest of old headscarves and a family photograph" } },
   "towers-solitude": { w: 1149, h: 1369, alt: { ru: "Женщина в платке у старинных башен на закате", en: "A woman in a headscarf by the old towers at sunset" } },
 };
 
