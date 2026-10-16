@@ -75,7 +75,6 @@ export function Scene({ name, locale, children, className = "" }: { name: string
   return <figure className={"cxScene " + className}>
     <div className="cxFrame">
       <Pic name={name} locale={locale} />
-      <figcaption className="cxIll">{UI[locale].illustration}</figcaption>
       {children}
     </div>
   </figure>;
@@ -300,7 +299,6 @@ export function Touch({ locale }: { locale: Locale }) {
     </div>
     <div className="cxSpots">
       <Pic name="closeup-shuttle" locale={locale} />
-      <span className="cxIll">{UI[locale].illustration}</span>
       {TOUCH.spots.map((p, i) => <button key={i} type="button" className="cxDot" style={{ left: `${p.x}%`, top: `${p.y}%` }} aria-label={p.h[locale]} aria-expanded={open === i} onClick={() => setOpen(open === i ? -1 : i)} />)}
       {!narrow && note}
     </div>
