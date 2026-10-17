@@ -2,6 +2,7 @@ import type { Locale } from "@/lib/course";
 import { MODULES } from "@/lib/content/catalog";
 import { MODULE_TEASERS } from "@/lib/content/teasers";
 import { NORSE_MODULES } from "@/lib/content/norse";
+import { EGYPT_MODULES } from "@/lib/content/egypt";
 import type { ModuleHeroArt } from "@/lib/visuals";
 
 /**
@@ -53,6 +54,8 @@ export type CourseDefinition = {
   theme?: string;
   /** Rune rewards + final prophecy (Norse course). */
   runes?: boolean;
+  /** Lesson layout. "newspaper": chapter text set in columns beside / under the pictures (Ancient Egypt). */
+  layout?: "newspaper";
 };
 
 function def(d: Omit<CourseDefinition, "moduleCount" | "moduleIds">): CourseDefinition {
@@ -111,6 +114,26 @@ export const COURSES: readonly CourseDefinition[] = [
     runes: true,
   }),
   def({
+    id: "egyptian-mythology",
+    slug: "ancient-egypt",
+    status: "live",
+    title: { ru: "Древний Египет: боги, смерть и пирамиды", en: "Ancient Egypt: Gods, Death, and Pyramids" },
+    blurb: {
+      ru: "Тысячи лет назад на берегах Нила возникла цивилизация, которая научилась превращать камень в бессмертие, смерть — в новое путешествие, а богов — в очень сложную семью.",
+      en: "Thousands of years ago, on the banks of the Nile, a civilization emerged that learned to turn stone into immortality, death into another journey, and the gods into one very complicated family.",
+    },
+    card: { src: "/visuals/egypt/home/10-starlit-nile-beneath-the-pyramids-1672.webp", src960: "/visuals/egypt/home/10-starlit-nile-beneath-the-pyramids-960.webp", width: 1672, height: 941 },
+    hero: { src: "/visuals/egypt/home/hero-poster-1920.webp", src960: "/visuals/egypt/home/hero-poster-960.webp", width: 1920, height: 1080, pos: "50% 50%" },
+    modules: EGYPT_MODULES,
+    hasFinal: false,
+    contentDir: "egyptian-mythology",
+    assetPrefix: "em",
+    contentVersion: "em-v1",
+    strictVisuals: false,
+    theme: "egypt",
+    layout: "newspaper",
+  }),
+  def({
     id: "kalevala",
     slug: "kalevala",
     status: "soon",
@@ -138,21 +161,6 @@ export const COURSES: readonly CourseDefinition[] = [
     contentDir: "nart-epic",
     assetPrefix: "ne",
     contentVersion: "ne-v1",
-    strictVisuals: false,
-  }),
-  def({
-    id: "egyptian-mythology",
-    slug: "egyptian-mythology",
-    status: "soon",
-    title: { ru: "Древнеегипетская мифология", en: "Ancient Egyptian Mythology" },
-    blurb: null,
-    card: { src: "/visuals/home/soon-egypt-960.webp", src960: "/visuals/home/soon-egypt-960.webp", width: 960, height: 720 },
-    hero: null,
-    modules: [],
-    hasFinal: false,
-    contentDir: "egyptian-mythology",
-    assetPrefix: "em",
-    contentVersion: "em-v1",
     strictVisuals: false,
   }),
 ];

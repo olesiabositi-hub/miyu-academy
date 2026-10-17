@@ -9,13 +9,16 @@ const MAX = 780;   // …but never beyond this
 const isStandalone = (p: string) =>
   /^(#{1,6}\s|!\[|>|[-*+]\s|\d+[.)]\s|—|–)/.test(p) || /^\*\*[^*]+\*\*$/.test(p) || /^\*[^*]+\*$/.test(p) || /^_[^_]+_$/.test(p);
 
-export function tidyProse(markdown: string): string {
+/** "**Если запомнить одну мысль:** …" — a paragraph that opens with a bold label is a note of its own. */
+const isLeadIn = (p: string) => /^\*\*[^*\n]{2,60}[:.]\*\*(\s|$)/.test(p);
+
+export function tidyProse(markdown: string, opts: { leadIns?: boolean } = {}): string {
   const paras = markdown.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
   const out: string[] = [];
   let run = "";
   const flush = () => { if (run) out.push(run); run = ""; };
   for (const p of paras) {
-    if (isStandalone(p)) { flush(); out.push(p); continue; }
+    if (isStandalone(p) || (opts.leadIns && isLeadIn(p))) { flush(); out.push(p); continue; }
     if (run && (run.length >= MIN || run.length + 1 + p.length > MAX)) flush();
     run = run ? `${run} ${p}` : p;
     // "…трое сыновей:" introduces the next (standalone) line, so close the paragraph here.

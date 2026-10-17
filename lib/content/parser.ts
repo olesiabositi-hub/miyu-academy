@@ -17,6 +17,10 @@ const choiceSchema = z.object({
   options:z.array(z.object({sourceIndex:z.number().int().min(0),text:z.string().min(1)})).min(2),
   answerSourceIndex:z.number().int().min(0),
   feedback:z.string(),
+  kicker:z.string().optional(),
+  feedbackOk:z.string().optional(),
+  feedbackBad:z.string().optional(),
+  optionFeedback:z.record(z.string(),z.string()).optional(),
 });
 
 function stripMd(s:string){
@@ -24,6 +28,7 @@ function stripMd(s:string){
     .replace(/^#{1,6}\s+/gm,"")
     .replace(/\*\*/g,"")
     .replace(/^>\s?/gm,"")
+    .replace(/(^|[^*\w])\*([^*\n]+)\*(?!\*)/g,"$1$2")
     .trim();
 }
 
@@ -55,20 +60,39 @@ function parseChoice(chunk:string,id:string):ChoiceQuestion{
     if(a){answerLine=i;answerLetter=a[1].toUpperCase();}
   });
   if(optionRows.length>=2 && firstOption>=0 && answerLine>=0){
-    const pre=lines.slice(0,firstOption)
+    const preLines=lines.slice(0,firstOption)
       .filter(l=>!/^#{1,6}\s+/.test(l))
-      .filter(l=>!/^(?:Quick check|Быстрая проверка)$/i.test(stripMd(l)))
-      .join("\n");
-    let question=stripMd(pre);
-    // Numbered Self-check questions keep the question text in the heading
-    // itself (for example: "## 1. Who are the Titans?"). Since headings
-    // are removed from `pre`, use that heading text as the fallback.
-    if(!question){
-      const numberedHeading=firstHeading(chunk).match(/^##\s+\d+\.\s+(.+)\s*$/);
-      if(numberedHeading) question=stripMd(numberedHeading[1]);
+      .filter(l=>!/^(?:Quick check|Быстрая проверка)$/i.test(stripMd(l)));
+    const numberedHeading=firstHeading(chunk).match(/^##\s+\d+\.\s+(.+)\s*$/);
+    // A short all-bold or all-italic line above the question is its title (kicker).
+    const paras=preLines.join("\n").split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+    let kicker:string|undefined;
+    let question:string;
+    if(numberedHeading&&paras.length===1&&/^\*[^*].*\*$/.test(paras[0])){
+      // "## 1. Question" + one italic line: the italic line is the question's title.
+      question=stripMd(numberedHeading[1]);
+      kicker=stripMd(paras[0]);
+    }else{
+      if(paras.length>1&&/^(?:\*\*[^*].*\*\*|\*[^*].*\*)$/.test(paras[0])){kicker=stripMd(paras[0]);paras.shift();}
+      question=stripMd(paras.join("\n\n"));
+      // Numbered Self-check questions keep the question text in the heading itself ("## 1. Who are the Titans?").
+      if(!question&&numberedHeading) question=stripMd(numberedHeading[1]);
     }
-    const feedback=stripMd(lines.slice(answerLine+1).join("\n"));
-    const q={id,question,options:optionRows,answerSourceIndex:answerLetter.charCodeAt(0)-65,feedback};
+    // Tagged feedback lines: shown only for a right answer, a wrong answer, or one chosen option.
+    let feedbackOk:string|undefined, feedbackBad:string|undefined;
+    const optionFeedback:Record<string,string>={};
+    const rest:string[]=[];
+    for(const para of lines.slice(answerLine+1).join("\n").split(/\n\s*\n/)){
+      const t=para.trim(); if(!t) continue;
+      let m=t.match(/^\*\*(?:Если верно|If correct):\*\*\s*([\s\S]+)$/i); if(m){feedbackOk=stripMd(m[1]);continue;}
+      m=t.match(/^\*\*(?:Если неверно|If incorrect):\*\*\s*([\s\S]+)$/i); if(m){feedbackBad=stripMd(m[1]);continue;}
+      m=t.match(/^\*\*(?:Вариант|Option)\s+([A-D]):\*\*\s*([\s\S]+)$/i); if(m){optionFeedback[String(m[1].toUpperCase().charCodeAt(0)-65)]=stripMd(m[2]);continue;}
+      rest.push(t);
+    }
+    const feedback=stripMd(rest.join("\n\n"));
+    const q={id,question,options:optionRows,answerSourceIndex:answerLetter.charCodeAt(0)-65,feedback,
+      ...(kicker?{kicker}:{}),...(feedbackOk?{feedbackOk}:{}),...(feedbackBad?{feedbackBad}:{}),
+      ...(Object.keys(optionFeedback).length?{optionFeedback}:{})};
     return choiceSchema.parse(q);
   }
 
@@ -175,6 +199,9 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
 
     const game=chunk.trim().match(/^\[\[game:([a-z0-9-]+)\]\]$/);
     if(game){blocks.push({type:"game",id:`game-${game[1]}`,game:game[1],markdown:chunk});i++;continue;}
+    // [[activity:<id>]] — one of the drop-in activities from lib/content/activities.ts
+    const activity=chunk.trim().match(/^\[\[activity:([a-z0-9-]+)\]\]$/);
+    if(activity){blocks.push({type:"game",id:`activity-${activity[1]}`,game:`activity:${activity[1]}`,markdown:chunk});i++;continue;}
 
     const challenge=parseChallenge(chunk,"");
     if(challenge){blocks.push(challenge);i++;continue;}
@@ -198,7 +225,7 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
     const strict=chunk.match(/^#\s+(\d+)\.[ \t]+(.+)\s*$/m);
     const id=strict?`section-${String(Number(strict[1])).padStart(2,"0")}`:(!introAssigned?"intro":`prose-${String(blocks.length+1).padStart(2,"0")}`);
     if(!introAssigned) introAssigned=true;
-    blocks.push({type:"prose",id,markdown:course.id===PRIMARY_COURSE.id?chunk:tidyProse(chunk)});
+    blocks.push({type:"prose",id,markdown:course.id===PRIMARY_COURSE.id?chunk:tidyProse(chunk,{leadIns:course.layout==="newspaper"})});
     i++;
   }
 

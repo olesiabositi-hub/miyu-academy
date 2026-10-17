@@ -14,6 +14,8 @@ import { Reveal } from "@/components/Reveal";
 import { parseCompletion, parseNext } from "@/lib/content/outro";
 import { t } from "@/lib/i18n";
 import { GameBlock } from "@/components/GameBlock";
+import { NewspaperChapter } from "@/components/Newspaper";
+import { getCourse } from "@/lib/courses";
 
 async function post(url:string,body:unknown){
   const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
@@ -70,10 +72,12 @@ function GenericLesson({model}:{model:LessonModel}){
   const flow=model.courseId!=="greek-mythology";
   const items=flow?groupChapters(model.blocks):model.blocks.map(block=>({kind:"block" as const,block}));
 
-  return <article className={flow?"lessonFlow":undefined}>
+  const newspaper=getCourse(model.courseId)?.layout==="newspaper";
+  return <article className={flow?"lessonFlow"+(newspaper?" npLesson":""):undefined}>
     <ModuleHero courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
     {items.map(item=>{
       if(item.kind==="block") return renderBlock(item.block);
+      if(newspaper) return <NewspaperChapter key={item.id} id={item.id} head={item.head} lead={item.lead} body={item.body.map(b=>b.markdown)} flip={item.flip}/>;
       return <section className={"chapter"+(item.lead?" hasArt":"")+(item.flip?" isFlip":"")} id={item.id} key={item.id}>
         <div className="chapterHead"><Markdown>{item.head}</Markdown></div>
         <div className="chapterGrid">

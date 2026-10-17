@@ -66,3 +66,8 @@ Layout rules the site applies to every non-Greek lesson (nothing in the text is 
 - runs of short one-sentence paragraphs are set as one paragraph (`lib/content/tidy.ts`);
   headings, pictures, quotes, lists, dialogue lines and all-bold / all-italic lines stay separate;
 - text is left-aligned; all-bold lines become pull lines, an italic opening line becomes the lead.
+
+## Newspaper layout and drop-in activities
+Set `layout: "newspaper"` on a course to set its lessons in columns beside the pictures (see `docs/ANCIENT_EGYPT.md`).
+Any lesson can carry an activity: a line `[[activity:<id>]]` in its own `---` chunk; the activities are in
+`lib/content/activities.ts` (kinds: scales, order, match, cartouche).

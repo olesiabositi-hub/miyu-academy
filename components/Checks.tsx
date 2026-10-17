@@ -40,6 +40,9 @@ function Feedback({question,selected,locale}:{question:ChoiceQuestion;selected:n
   return <div className={"lxFeedback "+(ok?"is-ok":"is-bad")} role="status">
     <div className="lxFeedbackTitle">{t(locale,ok?"check.correct":"check.incorrect")}</div>
     {!ok&&right&&<div className="lxFeedbackAnswer">{t(locale,"check.correctIs",{answer:right.text})}</div>}
+    {selected!==null&&question.optionFeedback?.[String(selected)]&&<div className="lxFeedbackText">{question.optionFeedback[String(selected)]}</div>}
+    {ok&&question.feedbackOk&&<div className="lxFeedbackText">{question.feedbackOk}</div>}
+    {!ok&&question.feedbackBad&&<div className="lxFeedbackText">{question.feedbackBad}</div>}
     {question.feedback&&<div className="lxFeedbackText">{question.feedback}</div>}
   </div>;
 }
@@ -49,6 +52,7 @@ export function ChoiceCheck({question,locale,onPersist}:{question:ChoiceQuestion
   const [checked,setChecked]=useState(false);
   const labelId=`lxq-${question.id}`;
   return <div className="lxq">
+    {question.kicker&&<div className="lxKicker">{question.kicker}</div>}
     <div className="lxQuestion" id={labelId}>{question.question}</div>
     <Options question={question} selected={selected} checked={checked} labelId={labelId}
       onPick={(v)=>{setSelected(v);onPersist?.(v)}}/>
@@ -112,6 +116,7 @@ export function SelfCheck({questions,locale,onPersist,intro,id="self-check",vari
             </div>
             <div className="lxCount">{t(locale,"check.question",{n:i+1,total})}</div>
           </div>
+          {q.kicker&&<div className="lxKicker">{q.kicker}</div>}
           <div className="lxQuestion lxQuestionBig" id={`${id}-q-${i}`}>{q.question}</div>
           <Options question={q} selected={selected} checked={checked} labelId={`${id}-q-${i}`} onPick={pick}/>
           {checked&&<Feedback question={q} selected={selected} locale={locale}/>}

@@ -7,6 +7,13 @@ export type ChoiceQuestion = {
   options:Choice[];
   answerSourceIndex:number;
   feedback:string;
+  /** Short title shown above the question. */
+  kicker?:string;
+  /** Shown only after a right / a wrong answer. */
+  feedbackOk?:string;
+  feedbackBad?:string;
+  /** Explanation for the chosen option, keyed by its source index. */
+  optionFeedback?:Record<string,string>;
 };
 
 export type LessonBlock =
