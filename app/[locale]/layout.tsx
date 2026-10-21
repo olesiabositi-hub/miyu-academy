@@ -8,6 +8,7 @@ import { ConsentBanner } from "@/components/ConsentBanner";
 import { t } from "@/lib/i18n";
 import "./globals.css";
 import "./egypt.css";
+import "./home.css";
 
 const serif=Cormorant_Garamond({subsets:["latin","cyrillic"],variable:"--font-serif"});
 const sans=Inter({subsets:["latin","cyrillic"],variable:"--font-sans"});

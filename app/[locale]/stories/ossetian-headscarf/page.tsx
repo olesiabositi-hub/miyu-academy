@@ -1,3 +1,4 @@
+import { SupportNote } from "@/components/SupportNote";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -165,6 +166,7 @@ export default async function OssetianHeadscarfStory({ params }: { params: Promi
       </section>
       {chapters.slice(0, -1).map((ch) => <ChapterView key={ch.key} ch={ch} locale={locale} />)}
       <Finale ch={fin} locale={locale} />
+      <SupportNote locale={locale}/>
       <div className="cxGut cxEnd"><div className="cxCol"><Link className="cxBack" href={`/${locale}#courses`}>← {u.back}</Link></div></div>
     </StoryShell>
   </div>;

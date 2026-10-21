@@ -7,6 +7,7 @@ import { t } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
 import { Markdown } from "@/components/Markdown";
 import { RuneReveal } from "@/components/RuneReveal";
+import { SupportNote } from "@/components/SupportNote";
 import { drawRune } from "@/lib/rune-client";
 import type { RuneName } from "@/components/Rune";
 
@@ -70,6 +71,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
 
   if(rune) return <section id="module-complete" className="lxOutro" aria-labelledby="rune-title">
     <RuneReveal locale={locale} rune={rune} stepsLeft={Math.max(0,total-number)} onNext={()=>window.location.assign(target)} nextLabel={t(locale,upcoming&&!nextId?"outro.backToCourse":"outro.continue")}/>
+    {!nextId&&<SupportNote locale={locale}/>}
   </section>;
 
   return <section id="module-complete" className="lxOutro" aria-labelledby="module-complete-title">
@@ -94,6 +96,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
         {failed&&<div className="lxError" role="alert">{t(locale,"outro.error")}</div>}
       </aside>
     </div>
+    {!nextId&&<SupportNote locale={locale}/>}
     <div className="lxOutroTrack" aria-hidden="true">
       <span>{String(number).padStart(2,"0")} / {String(total).padStart(2,"0")}</span>
       <div className="lxTrack"><i style={{width:`${total?number/total*100:0}%`}}/></div>

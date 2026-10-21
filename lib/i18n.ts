@@ -178,6 +178,12 @@ const ru = {
   "footer.credits": "Источники",
   "footer.privacySettings": "Настройки приватности",
   "footer.rights": "Все права защищены.",
+  "footer.support": "Поддержать проект",
+  "nav.support": "Поддержать",
+  "support.eyebrow": "Поддержать проект",
+  "support.title": "Если вам было интересно",
+  "support.body": "MIYU — независимый проект: без рекламы и платного доступа, всё открыто для всех. Если хочется сказать спасибо и помочь появиться новым мирам, это можно сделать на Ko-fi — от 5 €, только по желанию.",
+  "support.cta": "Поддержать на Ko-fi",
 } as const;
 
 export type UiKey = keyof typeof ru;
@@ -353,6 +359,12 @@ const en: Record<UiKey, string> = {
   "footer.credits": "Credits",
   "footer.privacySettings": "Privacy settings",
   "footer.rights": "All rights reserved.",
+  "footer.support": "Support the project",
+  "nav.support": "Support",
+  "support.eyebrow": "Support the project",
+  "support.title": "If you enjoyed this",
+  "support.body": "MIYU is an independent project: no ads, no paywall, everything open to everyone. If you'd like to say thank you and help new worlds appear, you can do it on Ko-fi, from €5, entirely if you wish.",
+  "support.cta": "Support on Ko-fi",
 };
 
 export function t(locale: Locale, key: UiKey, vars?: Record<string, string | number>): string {
