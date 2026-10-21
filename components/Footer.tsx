@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { Locale } from "@/lib/course";
-import { courseBasePath, courseDashboardPath } from "@/lib/courses";
+import { courseDashboardPath } from "@/lib/courses";
 import { t } from "@/lib/i18n";
+import { SUPPORT_URL } from "@/lib/links";
 
 export function Footer({locale}:{locale:Locale}){
   const year=new Date().getFullYear();
@@ -13,8 +14,9 @@ export function Footer({locale}:{locale:Locale}){
       </div>
       <nav className="footerCol" aria-label={t(locale,"footer.groupAcademy")}>
         <h2>{t(locale,"footer.groupAcademy")}</h2>
-        <Link href={courseBasePath(locale)}>{t(locale,"nav.course")}</Link>
+        <Link href={`/${locale}#courses`}>{t(locale,"nav.courses")}</Link>
         <Link href={courseDashboardPath(locale)}>{t(locale,"nav.progress")}</Link>
+        <a href={SUPPORT_URL} target="_blank" rel="noopener">{t(locale,"footer.support")}</a>
       </nav>
       <nav className="footerCol" aria-label={t(locale,"footer.groupLegal")}>
         <h2>{t(locale,"footer.groupLegal")}</h2>

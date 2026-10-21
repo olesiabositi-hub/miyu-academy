@@ -1,4 +1,5 @@
 export const metadata={robots:{index:false,follow:false}};
+import { SupportNote } from "@/components/SupportNote";
 import Link from "next/link";import { notFound,redirect } from "next/navigation";
 import { isLocale, COURSE_ID } from "@/lib/course";import { requireUser } from "@/lib/auth";
 import { t } from "@/lib/i18n";
@@ -35,7 +36,7 @@ export default async function ResultPage({params,searchParams}:{params:Promise<{
   <h1 className="fmdHeadline">{t(locale,"fmd.resultPassTitle")}</h1>
   <p className="fmdLead">{t(locale,"fmd.resultPassBody")}</p>
   <Link className="lxBtn lxBtnGold" href={base}>{t(locale,"fmd.toCourse")} <span aria-hidden="true">→</span></Link>
- </section><FinalReview locale={locale} selected={selected}/></>;
+ </section><FinalReview locale={locale} selected={selected}/><SupportNote locale={locale}/><div className="supportNoteSpacer"/></>;
  return <><section className="fmd fmdIntro fmdResult">{badge}
   <div className="lxEyebrow">FINAL MYTH DECODER</div>
   <div className="fmdScore">{t(locale,"fmd.scoreOf",{score:result.latest_score,total})}</div>
@@ -45,5 +46,5 @@ export default async function ResultPage({params,searchParams}:{params:Promise<{
    <Link className="lxBtn lxBtnGhost" href={base}>{t(locale,"fmd.toCourse")}</Link>
    <Link className="lxBtn" href={`${base}/final-myth-decoder`}>{t(locale,"fmd.retry")}</Link>
   </div>
- </section><FinalReview locale={locale} selected={selected}/></>
+ </section><FinalReview locale={locale} selected={selected}/><SupportNote locale={locale}/><div className="supportNoteSpacer"/></>
 }

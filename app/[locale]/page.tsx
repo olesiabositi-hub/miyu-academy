@@ -1,206 +1,314 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Locale } from "@/lib/course";
 import { isLocale } from "@/lib/course";
-import { LIVE_COURSES, SOON_COURSES, courseBasePath } from "@/lib/courses";
-import { STEPS } from "@/lib/content/home";
+import { COURSES, LIVE_COURSES, courseBasePath, getCourse, modulePath } from "@/lib/courses";
 import { STORIES, storyPath } from "@/lib/stories";
-import { AuthorBlock } from "@/components/AuthorBlock";
-import { Faq } from "@/components/Faq";
+import { AUTHOR } from "@/lib/content/home";
+import { ACTS, EXHIBITS, HOME, HOME_FAQ, PANELS, ROUTES, SPREADS, STEPS3, STORY_ART, type ActKind } from "@/lib/content/museum";
+import { SUPPORT_URL } from "@/lib/links";
+import { HeroPanels } from "@/components/home/HeroPanels";
+import { Exhibit } from "@/components/home/Exhibit";
+import { ContinueBand } from "@/components/home/ContinueBand";
 import { Reveal } from "@/components/Reveal";
-import { Stagger } from "@/components/Stagger";
 
-export default async function AcademyHome({params}:{params:Promise<{locale:string}>}){
-  const {locale}=await params;if(!isLocale(locale))notFound();
-  const ru=locale==="ru";
-  // The academy leads with its newest open course; with several, the hero button jumps to the chooser.
-  const several=LIVE_COURSES.length>1;
-  const newest=LIVE_COURSES[LIVE_COURSES.length-1];
-  const course=courseBasePath(locale,newest);
-  const heroTarget=several?"#courses":course;
-  const newestMain=newest.title[locale].split(": ")[0];
-  const c=ru?{
-    kicker:"MIYU ACADEMY",
-    h1:"Учись расшифровывать мир вокруг",
-    lead:"Культурные курсы, в которых знание начинает работать за пределами урока.",
-    start:"Начать курс",
-    choose:"Выбрать курс",
-    how:"Как это работает",
-    chips:["RU / EN","в своём темпе","тесты по желанию"],
-    courseEyebrow:"ПЕРВЫЙ КУРС",
-    newEyebrow:"НОВЫЙ КУРС",
-    onlineEyebrow:"ОНЛАЙН-КУРС",
-    chooseEyebrow:"КУРСЫ",
-    chooseTitle:"Выберите курс",
-    chooseLead:"Все курсы открыты для всех, на русском и английском, без обязательных тестов.",
-    open:"О курсе",
-    storyEyebrow:"ВИЗУАЛЬНАЯ ИСТОРИЯ",
-    storyOpen:"Смотреть историю",
-    howEyebrow:"КАК УСТРОЕНО ОБУЧЕНИЕ",
-    howTitle:"Три шага от интереса к пониманию",
-    soonEyebrow:"СКОРО",
-    soonTitle:"Дальше будут новые курсы",
-    faqEyebrow:"ВОПРОСЫ",
-    faqTitle:"Частые вопросы",
-    ctaTitle:"Начни видеть знакомый мир по-другому",
-    ctaBody:"Первый курс уже открыт. Можно проходить в своём темпе и переключаться между русским и английским.",
-  }:{
-    kicker:"MIYU ACADEMY",
-    h1:"Learn to decode the world around you",
-    lead:"Cultural learning designed to keep working outside the lesson.",
-    start:"Start the course",
-    choose:"Choose a course",
-    how:"How it works",
-    chips:["RU / EN","self-paced","tests optional"],
-    courseEyebrow:"FIRST COURSE",
-    newEyebrow:"NEW COURSE",
-    onlineEyebrow:"ONLINE COURSE",
-    chooseEyebrow:"COURSES",
-    chooseTitle:"Choose a course",
-    chooseLead:"Every course is open to everyone, in Russian and English, with no required tests.",
-    open:"About the course",
-    storyEyebrow:"VISUAL STORY",
-    storyOpen:"View the story",
-    howEyebrow:"HOW LEARNING WORKS",
-    howTitle:"Three steps from curiosity to understanding",
-    soonEyebrow:"COMING SOON",
-    soonTitle:"More courses are on the way",
-    faqEyebrow:"QUESTIONS",
-    faqTitle:"Frequently asked questions",
-    ctaTitle:"Start seeing the familiar world differently",
-    ctaBody:"The first course is open. Study at your own pace and switch between Russian and English.",
-  };
-
-  return <div className="hx">
-    <section className="hxHero hxHeroAcademy">
-      <picture className="hxHeroArt" aria-hidden="true">
-        <source media="(max-width: 800px)" srcSet="/visuals/home/academy-arch-860.webp"/>
-        <img src="/visuals/home/academy-hero-1672.webp" width={1672} height={716} alt="" fetchPriority="high" decoding="async"/>
-      </picture>
-      <div className="hxHeroFx" aria-hidden="true">
-        <span className="hxFx hxFxSun"/>
-        <span className="hxFx hxFxMist hxFxMistA"/>
-        <span className="hxFx hxFxMist hxFxMistB"/>
-        {[12,27,41,58,70,86].map((x,i)=><i key={x} className="hxMote" style={{left:`${x}%`,animationDelay:`${-i*3.1}s`,animationDuration:`${18+(i%3)*4}s`}}/>)}
-      </div>
-      <div className="hxHeroShade" aria-hidden="true"/>
-      <div className="hxWrap hxHeroInner">
-        <div className="hxHeroCopy hxHeroLightCopy">
-          <div className="lxEyebrow">{c.kicker}</div>
-          <h1 className="hxH1Dark">{c.h1}</h1>
-          <p className="hxLeadDark">{c.lead}</p>
-          <div className="hxActions">
-            <Link className="lxBtn" href={heroTarget}>{several?c.choose:c.start} <span aria-hidden="true">→</span></Link>
-            <a className="hxTextLinkDark" href="#how">{c.how} <span aria-hidden="true">↓</span></a>
-          </div>
-          <ul className="hxChipsDark">{c.chips.map(x=><li key={x}>{x}</li>)}</ul>
-        </div>
-      </div>
-      <Link className="hxArchBadge" href={course}>
-        <span className="lxEyebrow lxEyebrowGold">{several?c.newEyebrow:c.courseEyebrow}</span>
-        <strong>{newestMain}</strong>
-      </Link>
-    </section>
-
-    <section className="hxSection" id="courses">
-      <div className="hxWrap">
-        {several&&<div className="hxChooseHead">
-          <div className="lxEyebrow">{c.chooseEyebrow}</div>
-          <h2 className="hxH2">{c.chooseTitle}</h2>
-          <p className="hxBody">{c.chooseLead}</p>
-        </div>}
-        <div className="hxCourseList">
-          {LIVE_COURSES.map(cr=>{
-            const [main,sub]=cr.title[locale].split(": ");
-            const facts=ru
-              ? [[String(cr.moduleCount),"модулей"],...(cr.hasFinal?[["15","вопросов в финале"]]:[]),["✓","тесты по желанию"]]
-              : [[String(cr.moduleCount),"modules"],...(cr.hasFinal?[["15","final questions"]]:[]),["✓","tests optional"]];
-            return <Reveal key={cr.id}>
-              <article className="hxCourseCard">
-                <picture className="hxCourseArt">
-                  {cr.card&&<source media="(max-width: 700px)" srcSet={cr.card.src960}/>}
-                  {cr.card&&<img src={cr.card.src} width={cr.card.width} height={cr.card.height} alt="" loading="lazy" decoding="async"/>}
-                </picture>
-                <div className="hxCourseBody">
-                  <div className="lxEyebrow">{several?c.onlineEyebrow:c.courseEyebrow}</div>
-                  <h2 className="hxH2">{sub?<>{main}:<span>{sub}</span></>:main}</h2>
-                  {cr.blurb&&<p>{cr.blurb[locale]}</p>}
-                  <ul className="hxFacts">{facts.map(([v,l])=><li key={l}><strong>{v}</strong><span>{l}</span></li>)}</ul>
-                  <Link className="lxBtn" href={courseBasePath(locale,cr)}>{c.open} <span aria-hidden="true">→</span></Link>
-                </div>
-              </article>
-            </Reveal>;
-          })}
-          {STORIES.map(st=><Reveal key={st.id}>
-            <article className="hxCourseCard">
-              <picture className="hxCourseArt">
-                <source media="(max-width: 700px)" srcSet={st.card.src960}/>
-                <img src={st.card.src} width={st.card.width} height={st.card.height} alt="" loading="lazy" decoding="async"/>
-              </picture>
-              <div className="hxCourseBody">
-                <div className="lxEyebrow">{c.storyEyebrow}</div>
-                <h2 className="hxH2">{st.title[locale]}{st.original&&<span lang="os">{st.original}</span>}</h2>
-                <p>{st.blurb[locale]}</p>
-                <ul className="hxFacts">{st.facts[locale].map(([v,l])=><li key={l}><strong>{v}</strong><span>{l}</span></li>)}</ul>
-                <Link className="lxBtn" href={storyPath(locale,st)}>{c.storyOpen} <span aria-hidden="true">→</span></Link>
-              </div>
-            </article>
-          </Reveal>)}
-        </div>
-      </div>
-    </section>
-
-    <section className="hxSection hxHow" id="how">
-      <div className="hxWrap hxHowGrid">
-        <div>
-          <div className="lxEyebrow">{c.howEyebrow}</div>
-          <h2 className="hxH2">{c.howTitle}</h2>
-          <Stagger as="ol" className="hxSteps" step={110}>
-            {STEPS[locale].map(s=><li key={s.n}><span>{s.n}</span><div><h3>{s.title}</h3><p>{s.body}</p></div></li>)}
-          </Stagger>
-        </div>
-        <picture className="hxHowArt">
-          <source media="(max-width: 700px)" srcSet="/visuals/home/how-learning-600.webp"/>
-          <img src="/visuals/home/how-learning-1200.webp" width={1200} height={900} alt="" loading="lazy" decoding="async"/>
-        </picture>
-      </div>
-    </section>
-
-    <section className="hxSection">
-      <div className="hxWrap">
-        <div className="lxEyebrow">{c.soonEyebrow}</div>
-        <h2 className="hxH2">{c.soonTitle}</h2>
-        <Stagger className="hxSoon" step={110}>
-          {SOON_COURSES.map(sc=><article className={"hxSoonCard"+(sc.card?"":" is-noart")} key={sc.id}>
-            {sc.card&&<img src={sc.card.src960} width={sc.card.width} height={sc.card.height} alt="" loading="lazy" decoding="async"/>}
-            <span className="hxTileShade" aria-hidden="true"/>
-            <span className="hxChip hxChipTime">{ru?"Скоро":"Coming soon"}</span>
-            <div className="hxSoonBody"><h3>{sc.title[locale]}</h3></div>
-          </article>)}
-        </Stagger>
-      </div>
-    </section>
-
-    <AuthorBlock locale={locale}/>
-    <Faq locale={locale} title={c.faqTitle} eyebrow={c.faqEyebrow}/>
-
-    <section className="hxCta">
-      <div className="hxWrap hxCtaInner">
-        <div><h2 className="hxH2 hxH2Light">{c.ctaTitle}</h2><p>{c.ctaBody}</p></div>
-        <Link className="lxBtn lxBtnGold" href={heroTarget}>{several?c.choose:c.start} <span aria-hidden="true">→</span></Link>
-      </div>
-    </section>
-  </div>
+/** Where a home-page reference points: a module, a course page or a story. */
+function hrefOf(locale: Locale, r: { course?: string; story?: string; module?: string }): string {
+  if (r.story) { const st = STORIES.find((s) => s.id === r.story); return st ? storyPath(locale, st) : `/${locale}`; }
+  const course = r.course ? getCourse(r.course) : undefined;
+  if (!course) return `/${locale}#courses`;
+  return r.module ? modulePath(locale, r.module, course) : courseBasePath(locale, course);
 }
 
-export async function generateMetadata({params}:{params:Promise<{locale:string}>}):Promise<Metadata>{
- const {locale}=await params;if(!isLocale(locale))return {};
- const base=process.env.NEXT_PUBLIC_SITE_URL??"http://localhost:3000";
- const title=locale==="ru"?"MIYU Academy — учись расшифровывать мир вокруг":"MIYU Academy — Learn to Decode the World";
- const description=locale==="ru"?"Культурные курсы, в которых знание начинает работать за пределами урока. Первый курс: греческая мифология.":"Cultural learning designed to keep working outside the lesson. First course: Greek mythology.";
- return {
-  title,description,
-  alternates:{canonical:`${base}/${locale}`,languages:{en:`${base}/en`,ru:`${base}/ru`,"x-default":base}},
-  openGraph:{title,description,url:`${base}/${locale}`,siteName:"MIYU Academy",locale:locale==="ru"?"ru_RU":"en_US",type:"website",images:[{url:`${base}/visuals/home/academy-hero-1672.webp`,width:1672,height:716}]}
- }
+function ActIcon({ kind }: { kind: ActKind }) {
+  const p = { width: 28, height: 28, viewBox: "0 0 28 28", fill: "none", stroke: "currentColor", strokeWidth: 1.3, "aria-hidden": true } as const;
+  if (kind === "scales") return <svg {...p}><path d="M14 4v20M7 24h14M5 8h18M5 8l-3 7h6zM23 8l-3 7h6z" /></svg>;
+  if (kind === "cartouche") return <svg {...p}><rect x="8" y="3" width="12" height="19" rx="6" /><path d="M6 25h16M12 8h4M14 12v4M11 18h6" /></svg>;
+  if (kind === "rune") return <svg {...p}><path d="M14 3v22M14 13l-7-8M14 13l7-8" /></svg>;
+  return <svg {...p}><path d="M3 20c4-10 7-10 9 0s6 10 9 0 3-8 4-8" /><circle cx="5" cy="8" r="2.5" /></svg>;
+}
+
+function Facts({ items }: { items: { v: string; l: string }[] }) {
+  return <ul className="muFacts">{items.map((f) => <li key={f.l}><b>{f.v}</b><span>{f.l}</span></li>)}</ul>;
+}
+
+export default async function AcademyHome({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params; if (!isLocale(locale)) notFound();
+  const c = HOME[locale];
+  const story = STORIES[0];
+  const newest = LIVE_COURSES[LIVE_COURSES.length - 1];
+  const others = LIVE_COURSES.filter((x) => x.id !== newest.id);
+  const faq = HOME_FAQ[locale];
+  const author = AUTHOR[locale];
+  const ld = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })) };
+
+  const spreadFacts = (id: string) => (SPREADS[id]?.facts ?? []).map((f) => ({ v: f.v[locale], l: f.l[locale] }));
+  const titleParts = (id: string) => { const cr = getCourse(id)!; const [main, sub] = cr.title[locale].split(": "); return { main, sub }; };
+
+  return <div className="mu">
+    <span className="themeMark theme-museum" hidden aria-hidden="true" />
+    <ContinueBand locale={locale} hello={c.continueHello} cta={c.continueBtn} doneLabel={c.continueDone} moduleOf={c.moduleOf} />
+
+    {/* ── Hero ── */}
+    <section className="muHero" aria-labelledby="mu-title">
+      <div className="muWrap muHeroHead">
+        <div className="muHeroTitle">
+          <div className="muEyebrow">{c.kicker}</div>
+          <h1 id="mu-title">{c.h1a}<br /><i>{c.h1b}</i></h1>
+        </div>
+        <div className="muHeroAside">
+          <p>{c.lead}</p>
+          <div className="muActions">
+            <Link className="muBtn" href="#courses">{c.choose} <span aria-hidden="true">→</span></Link>
+            <Link className="muLink" href="#how">{c.how}</Link>
+          </div>
+        </div>
+      </div>
+      <HeroPanels initial={2} panels={PANELS.map((p) => ({ num: p.num, href: hrefOf(locale, p.ref), title: p.title[locale], meta: p.meta[locale], src: p.img.src, src960: p.img.src960, pos: p.img.pos }))} />
+      <ul className="muWrap muStrip">{c.strip.map((s) => <li key={s}>{s}</li>)}</ul>
+    </section>
+
+    {/* ── Why ── */}
+    <section className="muSection muWhy">
+      <div className="muWrap muSplit">
+        <div className="muEyebrow muSide">{c.whyEyebrow}</div>
+        <div className="muMain">
+          <p className="muManifesto">{c.why[0]}<i>{c.why[1]}</i>{c.why[2]}</p>
+          <ul className="muPillars">{c.pillars.map((p) => <li key={p.t}><b>{p.t}</b><span>{p.b}</span></li>)}</ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Courses ── */}
+    <section className="muCourses" id="courses" aria-labelledby="mu-courses">
+      <div className="muWrap muHead">
+        <div><div className="muEyebrow">{c.coursesEyebrow}</div><h2 className="muH2" id="mu-courses">{c.coursesTitle}</h2></div>
+        <p>{c.coursesLead}</p>
+      </div>
+
+      {(() => {
+        const s = SPREADS[newest.id]; const { main, sub } = titleParts(newest.id);
+        return <article className="muFeature">
+          <picture className="muPlate muFeatureArt">
+            {s.img.src960 && <source media="(max-width: 860px)" srcSet={s.img.src960} />}
+            <img src={s.img.src} alt="" style={{ objectPosition: s.img.pos }} loading="lazy" decoding="async" />
+            <span className="muTag">{c.newCourse}</span>
+          </picture>
+          <Reveal className="muWrap muFeatureText">
+            <div className="muFeatureHead">
+              <span className="muOutline" aria-hidden="true">{s.num}</span>
+              <div><h3 className="muH3xl">{main}</h3>{sub && <div className="muSub">{sub}</div>}</div>
+            </div>
+            <div className="muFeatureBody">
+              <p className="muLeadText">{newest.blurb?.[locale]}</p>
+              <Facts items={spreadFacts(newest.id)} />
+              <Link className="muBtn" href={courseBasePath(locale, newest)}>{c.open} <span aria-hidden="true">→</span></Link>
+            </div>
+          </Reveal>
+        </article>;
+      })()}
+
+      {others.map((cr, i) => {
+        const s = SPREADS[cr.id]; const { main, sub } = titleParts(cr.id);
+        if (!s) return null;
+        return <article className={"muSpread" + (i % 2 ? " is-flip" : "")} key={cr.id}>
+          <picture className="muPlate muSpreadArt">
+            {s.img.src960 && <source media="(max-width: 860px)" srcSet={s.img.src960} />}
+            <img src={s.img.src} alt="" style={{ objectPosition: s.img.pos }} loading="lazy" decoding="async" />
+          </picture>
+          <Reveal className="muSpreadText">
+            <span className="muOutline muOutlineSm" aria-hidden="true">{s.num}</span>
+            <div className="muEyebrow">{c.onlineCourse}</div>
+            <h3 className="muH3">{main}</h3>
+            {sub ? <><div className="muSub">{sub}</div><p>{cr.blurb?.[locale]}</p></> : <p className="muQuote">{cr.blurb?.[locale]}</p>}
+            <Facts items={spreadFacts(cr.id)} />
+            <div><Link className="muLink" href={courseBasePath(locale, cr)}>{c.open} <span aria-hidden="true">→</span></Link></div>
+          </Reveal>
+        </article>;
+      })}
+    </section>
+
+    {/* ── Visual story ── */}
+    <section className="muSection muDeep" id="story" aria-labelledby="mu-story">
+      <div className="muWrap">
+        <div className="muHead muStoryHead">
+          <div className="muFeatureHead">
+            <span className="muOutline" aria-hidden="true">04</span>
+            <div>
+              <div className="muEyebrow">{c.visualStory}</div>
+              {story.original && <div className="muOrig" lang="os">{story.original}</div>}
+              <h2 className="muH3xl" id="mu-story">{story.title[locale]}</h2>
+            </div>
+          </div>
+          <div className="muStoryAside">
+            <p>{story.blurb[locale]}</p>
+            <Link className="muBtn" href={storyPath(locale, story)}>{c.storyOpen} <span aria-hidden="true">→</span></Link>
+          </div>
+        </div>
+        <Reveal className="muStoryGrid">
+          <picture className="muPlate muStoryMain">
+            <source media="(max-width: 860px)" srcSet={STORY_ART.main.src960} />
+            <img src={STORY_ART.main.src} alt="" width={STORY_ART.main.w} height={STORY_ART.main.h} loading="lazy" decoding="async" />
+          </picture>
+          <div className="muStorySide">
+            <div className="muPlate"><img src={STORY_ART.a.src} alt="" style={{ objectPosition: STORY_ART.a.pos }} loading="lazy" decoding="async" /></div>
+            <div className="muPlate"><img src={STORY_ART.b.src} alt="" style={{ objectPosition: STORY_ART.b.pos }} loading="lazy" decoding="async" /></div>
+          </div>
+        </Reveal>
+        <Facts items={story.facts[locale].map(([v, l]) => ({ v, l }))} />
+      </div>
+    </section>
+
+    {/* ── Exhibit ── */}
+    <section className="muSection" aria-labelledby="mu-exhibit">
+      <div className="muWrap">
+        <div className="muEyebrow">{c.exhibitEyebrow}</div>
+        <h2 className="muH2 muH2Gap" id="mu-exhibit">{c.exhibitTitleA}<i>{c.exhibitTitleB}</i></h2>
+        <Exhibit label={c.exhibitLabel} more={c.exhibitMore} note={c.exhibitNote}
+          items={EXHIBITS.map((e) => ({ where: e.where[locale], title: e.title[locale], lines: e.lines[locale], href: hrefOf(locale, e), src: e.img.src, src960: e.img.src960, pos: e.img.pos, alt: e.alt[locale] }))} />
+      </div>
+    </section>
+
+    {/* ── Interactive ── */}
+    <section className="muSection muTight" aria-labelledby="mu-acts">
+      <div className="muWrap">
+        <div className="muHead">
+          <div><div className="muEyebrow">{c.actsEyebrow}</div><h2 className="muH2" id="mu-acts">{c.actsTitle}</h2></div>
+          <p>{c.actsLead}</p>
+        </div>
+        <ul className="muActs">
+          {ACTS.map((a) => <li className="muAct" key={a.kind}>
+            <div className="muPlate muActArt"><img src={a.img.src} alt="" style={{ objectPosition: a.img.pos }} loading="lazy" decoding="async" /><span className="muBadge"><ActIcon kind={a.kind} /></span></div>
+            <div className="muCap muCapCu">{a.where[locale]}</div>
+            <h3>{a.title[locale]}</h3>
+            <p>{a.text[locale]}</p>
+          </li>)}
+        </ul>
+      </div>
+    </section>
+
+    {/* ── Routes ── */}
+    <section className="muSection muDeep" id="routes" aria-labelledby="mu-routes">
+      <div className="muWrap">
+        <div className="muHead">
+          <div><div className="muEyebrow">{c.routesEyebrow}</div><h2 className="muH2" id="mu-routes">{c.routesTitleA}<i>{c.routesTitleB}</i></h2></div>
+          <p>{c.routesLead}</p>
+        </div>
+        {ROUTES.map((r) => <Reveal className="muRoute" key={r.num}>
+          <div className="muRouteText">
+            <div className="muRouteNum">{c.route} {r.num}</div>
+            <h3>{r.title[locale]}</h3>
+            <p>{r.text[locale]}</p>
+          </div>
+          <ul className="muStops">
+            {r.stops.map((s) => <li key={s.label.en}><Link href={hrefOf(locale, s)}>
+              <span className="muPlate muStopArt"><img src={s.img.src} alt="" style={{ objectPosition: s.img.pos }} loading="lazy" decoding="async" /></span>
+              <span className="muCap muCapCu">{s.world[locale]}</span>
+              <span className="muStopLabel">{s.label[locale]}</span>
+            </Link></li>)}
+          </ul>
+        </Reveal>)}
+      </div>
+    </section>
+
+    {/* ── How ── */}
+    <section className="muSection" id="how" aria-labelledby="mu-how">
+      <div className="muWrap">
+        <div className="muEyebrow">{c.howEyebrow}</div>
+        <h2 className="muH2 muH2Gap" id="mu-how">{c.howTitle}</h2>
+        <ol className="muSteps">
+          {STEPS3[locale].map((s, i) => <li key={s.t}>
+            <div className="muPlate muStepArt"><img src={s.img.src} alt="" style={{ objectPosition: s.img.pos }} loading="lazy" decoding="async" /></div>
+            <div className="muStepNum" aria-hidden="true">{String(i + 1).padStart(2, "0")}</div>
+            <h3>{s.t}</h3>
+            <p>{s.b}</p>
+          </li>)}
+        </ol>
+      </div>
+    </section>
+
+    {/* ── Index ── */}
+    <section className="muSection muTight" aria-labelledby="mu-index">
+      <div className="muWrap">
+        <div className="muEyebrow">{c.indexEyebrow}</div>
+        <h2 className="muH2 muH2Gap" id="mu-index">{c.indexTitle}</h2>
+        <ol className="muIndex">
+          {[...LIVE_COURSES.map((cr) => ({ id: cr.id, title: cr.title[locale].split(": ")[0], kind: c.onlineCourse, href: courseBasePath(locale, cr), live: true })),
+            ...STORIES.map((st) => ({ id: st.id, title: st.title[locale], kind: c.visualStory, href: storyPath(locale, st), live: true })),
+            ...COURSES.filter((x) => x.status === "soon").map((cr) => ({ id: cr.id, title: cr.title[locale], kind: c.onlineCourse, href: "", live: false }))]
+            .sort((a, b) => Number(b.live) - Number(a.live))
+            .map((r, i) => {
+              const inner = <><span className="muIdxNum">{String(i + 1).padStart(2, "0")}</span><span className="muIdxTitle">{r.title}</span><span className="muIdxKind">{r.kind}</span><span className={"muIdxState" + (r.live ? " is-live" : "")}>{r.live ? c.live : c.soon}</span></>;
+              return <li key={r.id} className={r.live ? "" : "is-soon"}>{r.live ? <Link href={r.href}>{inner}</Link> : <div>{inner}</div>}</li>;
+            })}
+        </ol>
+      </div>
+    </section>
+
+    {/* ── Author ── */}
+    <section className="muSection muDeep" id="author" aria-labelledby="mu-author">
+      <div className="muWrap muAuthor">
+        <div className="muPlate muAuthorArt"><img src="/visuals/home/author-720.webp" alt={author.alt} width={720} height={960} loading="lazy" decoding="async" /></div>
+        <div className="muAuthorText">
+          <div className="muEyebrow">{author.eyebrow}</div>
+          <blockquote className="muAuthorQuote">{locale === "ru" ? `«${author.quote}»` : `“${author.quote}”`}</blockquote>
+          <h2 id="mu-author">{author.title}</h2>
+          <div className="muAuthorCols">{author.paragraphs.map((p) => <p key={p}>{p}</p>)}</div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Support ── */}
+    <section className="muSection muTightBottom" id="support" aria-labelledby="mu-support">
+      <div className="muWrap">
+        <div className="muSupport">
+          <div className="muPlate muSupportArt"><img src="/visuals/ossetian-headscarf/hearth-800.webp" alt="" loading="lazy" decoding="async" /></div>
+          <div className="muSupportText">
+            <div className="muEyebrow">{c.supportEyebrow}</div>
+            <h2 className="muH2" id="mu-support">{c.supportTitleA}<i>{c.supportTitleB}</i></h2>
+            <p className="muLeadText">{c.support1}</p>
+            <p>{c.support2}</p>
+            <div className="muActions">
+              <a className="muBtn" href={SUPPORT_URL} target="_blank" rel="noopener">{c.supportBtn} <span aria-hidden="true">↗</span></a>
+              <span className="muCap">{c.supportNote}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── FAQ ── */}
+    <section className="muSection" aria-labelledby="mu-faq">
+      <div className="muWrap muFaq">
+        <div><div className="muEyebrow">{c.faqEyebrow}</div><h2 className="muH2" id="mu-faq">{c.faqTitle}</h2></div>
+        <div className="muFaqList">
+          {faq.map((f, i) => <details key={f.q} open={i === 0}><summary>{f.q}<span aria-hidden="true" /></summary><p>{f.a}</p></details>)}
+        </div>
+      </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, "\\u003c") }} />
+    </section>
+
+    {/* ── Closing ── */}
+    <section className="muCta" aria-labelledby="mu-cta">
+      <img src="/visuals/home/how-learning-1200.webp" alt="" loading="lazy" decoding="async" />
+      <span className="muCtaShade" aria-hidden="true" />
+      <div className="muWrap muCtaIn">
+        <h2 className="muH2" id="mu-cta">{c.ctaTitleA}<i>{c.ctaTitleB}</i></h2>
+        <p>{c.ctaBody}</p>
+        <Link className="muBtn" href="#courses">{c.choose} <span aria-hidden="true">→</span></Link>
+      </div>
+    </section>
+  </div>;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params; if (!isLocale(locale)) return {};
+  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const { metaTitle: title, metaDesc: description } = HOME[locale];
+  return {
+    title, description,
+    alternates: { canonical: `${base}/${locale}`, languages: { en: `${base}/en`, ru: `${base}/ru`, "x-default": base } },
+    openGraph: { title, description, url: `${base}/${locale}`, siteName: "MIYU Academy", locale: locale === "ru" ? "ru_RU" : "en_US", type: "website", images: [{ url: `${base}/visuals/egypt/home/07-sunset-journey-to-egyptian-temple-1672.webp`, width: 1672, height: 941 }] },
+  };
 }
