@@ -1,16 +1,10 @@
-import { RUNE_IDS, runeById } from "@/lib/runes";
 import type { RuneName } from "@/components/Rune";
+import { drawRuneLocal } from "@/lib/progress";
 
 /**
- * Asks the server for a rune. In a deploy preview nothing is stored and the server answers `preview`,
- * so we show a stable demo rune instead. Returns null when the draw failed (the lesson goes on anyway).
+ * Draws a rune for this source and keeps it in this browser. The same source always gives the same rune,
+ * and a rune never repeats. Returns null when all 24 are already drawn (the lesson goes on anyway).
  */
-export async function drawRune(courseId: string, source: string, seed = 1): Promise<RuneName | null> {
-  try {
-    const r = await fetch("/api/rune/draw", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ courseId, source }) });
-    if (!r.ok) return null;
-    const j = await r.json();
-    if (j?.preview) return RUNE_IDS[(seed * 7) % RUNE_IDS.length];
-    return j?.rune && runeById(j.rune) ? (j.rune as RuneName) : null;
-  } catch { return null; }
+export async function drawRune(courseId: string, source: string, _seed = 1): Promise<RuneName | null> {
+  try { return drawRuneLocal(courseId, source); } catch { return null; }
 }

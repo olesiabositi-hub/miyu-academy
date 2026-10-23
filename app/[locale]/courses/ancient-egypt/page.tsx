@@ -171,7 +171,7 @@ export default async function EgyptPage({ params }: { params: Promise<{ locale: 
             ["Cartouche", "Write your name in Egyptian signs inside a royal frame."],
           ]).map(([h, b], i) => <li key={h}><span className="egHowNum">{String(i + 1).padStart(2, "0")}</span><h3>{h}</h3><p>{b}</p></li>)}
         </ul>
-        <p className="egHowNote">{ru ? "Все игры и проверки — по желанию: без баллов, без таймера. Чтобы сохранять прогресс, войдите в аккаунт — это бесплатно." : "All games and checks are optional: no points, no timer. To keep your progress, sign in: it is free."}</p>
+        <p className="egHowNote">{ru ? "Все игры и проверки — по желанию: без баллов, без таймера. Прогресс сохраняется в этом браузере, регистрация не нужна." : "All games and checks are optional: no points, no timer. Your progress is saved in this browser, no sign-up needed."}</p>
       </div>
     </section>
 

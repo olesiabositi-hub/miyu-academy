@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Locale } from "@/lib/course";
 import { PRIMARY_COURSE, courseBasePath, courseDashboardPath, courseFromPath, parseModulePath } from "@/lib/courses";
 import { t } from "@/lib/i18n";
-import { AccountLink } from "@/components/AccountLink";
 import { SUPPORT_URL } from "@/lib/links";
 
 export function Header({locale}:{locale:Locale}){
@@ -14,7 +13,7 @@ export function Header({locale}:{locale:Locale}){
   const [open,setOpen]=useState(false);
   const [scrolled,setScrolled]=useState(false);
 
-  // The course the visitor is inside (null on the academy home, account, legal pages…).
+  // The course the visitor is inside (null on the academy home, legal pages…).
   const current=courseFromPath(pathname);
   const course=current??PRIMARY_COURSE;
   const courseHref=current?courseBasePath(locale,current):`/${locale}#courses`;
@@ -61,7 +60,6 @@ export function Header({locale}:{locale:Locale}){
       <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{courseLabel}</Link>
       <Link href={progressHref} aria-current={isActive(progressHref)?"page":undefined}>{progressLabel}</Link>
       <a className="topSupport" href={SUPPORT_URL} target="_blank" rel="noopener">{t(locale,"nav.support")}</a>
-      <AccountLink locale={locale} className="topAccount"/>
     </nav>
     {inModule&&<div className="moduleHeaderProgress" role="img" aria-label={t(locale,"nav.moduleOf",{n:moduleNumber,total:moduleTotal})}><span style={{width:`${moduleNumber/moduleTotal*100}%`}}/></div>}
     <div className="lang" role="group" aria-label={t(locale,"nav.language")}>
@@ -76,7 +74,6 @@ export function Header({locale}:{locale:Locale}){
       <Link href={courseHref} aria-current={isActive(courseHref)?"page":undefined}>{courseLabel}</Link>
       <Link href={progressHref} aria-current={isActive(progressHref)?"page":undefined}>{t(locale,"nav.progress")}</Link>
       <a href={SUPPORT_URL} target="_blank" rel="noopener">{t(locale,"nav.support")}</a>
-      <AccountLink locale={locale}/>
     </nav>
   </header>
 }

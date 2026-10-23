@@ -1,6 +1,6 @@
 # Adding a course to MIYU Academy
 
-The academy home page, header, sitemap, progress API and course pages all read from one registry:
+The academy home page, header, sitemap, progress and course pages all read from one registry:
 `lib/courses.ts`. A new course needs content, one module list and one flag flip. No page code.
 
 ## 1. Content (same format as Greek Mythology)
@@ -28,10 +28,8 @@ then change `status: "soon"` to `status: "live"`.
 A live course appears in "Choose a course" on the home page, in the sitemap, and gets
 `/<locale>/courses/<slug>`, `/dashboard` and `/module-NN` pages automatically.
 
-## 4. Database (once)
-Run `supabase/migrations/0008_multi_course.sql` in Supabase → SQL Editor. It adds
-`complete_course_module(course, module)` and lets the guard trigger accept the new course ids
-(up to 12 modules per course; raise the limit in `miyu_course_module_ok` if you need more).
+## 4. Progress
+Nothing to do: progress is kept in the browser for every course automatically (see `docs/PROGRESS.md`).
 
 ## 5. Preview before launch
 While a course is `soon` but has modules, its pages open on Netlify deploy previews only,

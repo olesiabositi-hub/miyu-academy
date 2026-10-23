@@ -292,9 +292,9 @@ export const HOME_FAQ: Record<Locale, { q: string; a: string }[]> = {
     { q: "Чем визуальная история отличается от курса?", a: "Курс — это модули с проверками по желанию и сохранением прогресса. Визуальная история — одна большая иллюстрированная страница без модулей и тестов, которую читают как книгу с картинками." },
     { q: "Обязательны ли тесты?", a: "Нет. Проверки в уроках — только для себя, без оценок и таймеров. В греческом курсе есть финальный Final Myth Decoder на 15 вопросов, тоже по желанию." },
     { q: "Сколько это стоит?", a: "Курсы и визуальные истории открыты для всех. Если захочется поддержать проект, это можно сделать на Ko-fi — разово или ежемесячно, только по желанию." },
-    { q: "Нужен ли аккаунт?", a: "Аккаунт нужен, чтобы сохранять прогресс и продолжать с того же места. Войти можно через Google или по ссылке на email." },
+    { q: "Нужен ли аккаунт?", a: "Нет. Регистрации нет: прогресс сохраняется в вашем браузере, и вы продолжите с того же места на этом устройстве." },
     { q: "На каком языке курсы?", a: "На русском и на английском. Языки можно переключать в любой момент." },
-    { q: "Можно ли удалить свои данные?", a: "Да. В настройках аккаунта можно удалить аккаунт вместе с прогрессом и результатами." },
+    { q: "Можно ли удалить свои данные?", a: "Мы не храним ваших данных. Прогресс живёт только в вашем браузере, стереть его можно в настройках приватности." },
   ],
   en: [
     { q: "Do I need any background?", a: "No. Every course builds the picture gradually, chapter by chapter, and assumes no prior knowledge. The courses don't depend on each other, so you can start with any of them." },
@@ -302,8 +302,8 @@ export const HOME_FAQ: Record<Locale, { q: string; a: string }[]> = {
     { q: "How is a visual story different from a course?", a: "A course is a set of modules with optional checks and saved progress. A visual story is one large illustrated page with no modules or tests, read like a picture book." },
     { q: "Are the tests required?", a: "No. The checks in the lessons are just for you, with no grades or timers. The Greek course also has the 15-question Final Myth Decoder, which is optional too." },
     { q: "How much does it cost?", a: "The courses and visual stories are open to everyone. If you'd like to support the project, you can do so on Ko-fi, once or monthly, entirely if you wish." },
-    { q: "Do I need an account?", a: "An account is only needed to save your progress and continue where you left off. You can sign in with Google or with an email link." },
+    { q: "Do I need an account?", a: "No. There is no sign-up: progress is saved in your browser, so you continue where you left off on this device." },
     { q: "Which languages are the courses in?", a: "Russian and English. You can switch between them at any time." },
-    { q: "Can I delete my data?", a: "Yes. In your account settings you can delete your account together with your progress and results." },
+    { q: "Can I delete my data?", a: "We do not keep your data. Progress lives only in your browser, and you can erase it in Privacy settings." },
   ],
 };

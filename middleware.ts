@@ -4,8 +4,7 @@ import { isPreviewHost } from "@/lib/previewHost";
 export function middleware(request:NextRequest){
  const host0=request.headers.get("host");
  if(isPreviewHost(host0)){
-  // Deploy preview: progress calls are accepted and ignored (nothing is stored); stay on the preview host.
-  if(request.method==="POST"&&(request.nextUrl.pathname.startsWith("/api/module/")||request.nextUrl.pathname.startsWith("/api/rune/"))) return NextResponse.json({ok:true,preview:true});
+  // Deploy preview: stay on the preview host.
   return NextResponse.next();
  }
  const canonical=process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/,"");

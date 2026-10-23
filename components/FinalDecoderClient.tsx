@@ -5,6 +5,9 @@ import type { Locale } from "@/lib/course";
 import { courseBasePath, courseDashboardPath } from "@/lib/courses";
 import { track } from "@/lib/analytics";
 import { t, type UiKey } from "@/lib/i18n";
+import { COURSE_ID } from "@/lib/course";
+import { readStore, saveFinal } from "@/lib/progress";
+import { useEffect } from "react";
 
 type Q={id:string;category:string;module:number;en:{question:string;options:string[]};ru:{question:string;options:string[]}};
 type Attempt={id:string;current_question_index:number;selected_answers:Record<string,number>;option_order:number[][]};
@@ -12,21 +15,26 @@ type Attempt={id:string;current_question_index:number;selected_answers:Record<st
 const LETTERS=["A","B","C","D","E"];
 const CATEGORY_KEYS:Record<string,UiKey>={recognition:"fmd.cat.recognition",meaning:"fmd.cat.meaning",connection:"fmd.cat.connection"};
 
-async function api(url:string,body?:unknown){
-  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:body?JSON.stringify(body):undefined});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
+function shuffled(n:number){
+  const a=Array.from({length:n},(_,k)=>k);
+  for(let k=n-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}
+  return a;
 }
 
-export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:{locale:Locale;questions:Q[];initialAttempt:Attempt|null;demo?:boolean}){
+/**
+ * The optional Final Myth Decoder. The attempt is kept in this browser, so it survives a reload.
+ * Correct answers are not on this page; they are only loaded on the result page.
+ */
+export function FinalDecoderClient({locale,questions,demo=false}:{locale:Locale;questions:Q[];demo?:boolean}){
   const router=useRouter();
-  const [attempt,setAttempt]=useState<Attempt|null>(initialAttempt);
+  const [attempt,setAttemptState]=useState<Attempt|null>(null);
+  const [loaded,setLoaded]=useState(false);
+  useEffect(()=>{if(!demo) setAttemptState(readStore().courses[COURSE_ID]?.final?.attempt??null);setLoaded(true)},[demo]);
+  const setAttempt=(a:Attempt|null)=>{setAttemptState(a);if(!demo) saveFinal(COURSE_ID,{attempt:a})};
   const [review,setReview]=useState(false);
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState<UiKey|null>(null);
 
-  // Preview mode: nothing is sent to the server.
-  const call=(url:string,body?:unknown):Promise<any>=>demo?Promise.resolve({}):api(url,body);
   const total=questions.length;
   const last=total-1;
   const i=Math.min(attempt?.current_question_index??0,last);
@@ -37,7 +45,7 @@ export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:
   async function start(){
     setBusy(true);
     setError(null);
-    try{ setAttempt(demo?{id:"demo",current_question_index:0,selected_answers:{},option_order:questions.map(x=>x.ru.options.map((_,k)=>k))}:await api("/api/final/start")); }
+    try{ setAttempt({id:demo?"demo":String(Date.now()),current_question_index:0,selected_answers:{},option_order:questions.map(x=>demo?x.ru.options.map((_,k)=>k):shuffled(x.ru.options.length))}); }
     catch{ setError("fmd.submitError"); }
     finally{ setBusy(false); }
   }
@@ -46,11 +54,6 @@ export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:
     if(!attempt||!q) return;
     setAttempt({...attempt,selected_answers:{...attempt.selected_answers,[q.id]:sourceIndex}});
     setError(null);
-    try{
-      await call("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex,currentQuestionIndex:i});
-    }catch{
-      setError("fmd.saveError");
-    }
   }
 
   async function move(next:number){
@@ -58,7 +61,6 @@ export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:
     const n=Math.max(0,Math.min(last,next));
     setAttempt({...attempt,current_question_index:n});
     setReview(false);
-    await call("/api/final/save",{attemptId:attempt.id,questionId:q.id,sourceIndex:attempt.selected_answers[q.id]??null,currentQuestionIndex:n}).catch(()=>{});
   }
 
   async function submit(){
@@ -66,15 +68,16 @@ export function FinalDecoderClient({locale,questions,initialAttempt,demo=false}:
     setBusy(true);
     setError(null);
     try{
-      await call("/api/final/submit",{attemptId:attempt.id});
+      if(!demo) saveFinal(COURSE_ID,{attempt:null,submitted:attempt.selected_answers,latestScore:null});
       track("final_submit");
       router.replace(`${courseBasePath(locale)}/final-myth-decoder/result${demo?"?demo=pass":""}`);
-      router.refresh();
     }catch{
       setError("fmd.submitError");
       setBusy(false);
     }
   }
+
+  if(!loaded) return <section className="fmd fmdIntro" aria-busy="true"/>;
 
   // ---- Intro
   if(!attempt){

@@ -1,5 +1,6 @@
 "use client";
 
+import { saveCheck, startModule } from "@/lib/progress";
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
@@ -27,12 +28,6 @@ const art:Record<ArtKind,{src:string;width:number;height:number;ru:string;en:str
   hermes:{src:"/visuals/module-02/07-HERMES-messenger.webp",width:1122,height:1402,ru:"Гермес — вестник богов и бог движения.",en:"Hermes — messenger of the gods and god of movement."},
   nike:{src:"/visuals/module-02/08-NIKE-victory.webp",width:1122,height:1402,ru:"Ника — олицетворение победы.",en:"Nike — the personification of victory."},
 };
-
-async function post(url:string,body:unknown){
-  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
 
 function Art({kind,className="",eager=false,locale}:{kind:ArtKind;className?:string;eager?:boolean;locale:"ru"|"en"}){
   const a=art[kind];
@@ -140,8 +135,8 @@ export function ModuleTwoLesson({model}:{model:LessonModel}){
   const pantheonSplit=pantheonLast?splitFirstParagraph(pantheonLast.body):{first:"",rest:""};
   const pantheonItems=pantheonLast?[...s22.items.slice(0,-1),{...pantheonLast,body:pantheonSplit.first}]:s22.items;
 
-  useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
-  const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
+  useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+  const persistCheck=(checkId:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,checkId,sourceIndex);
 
   return <article className={styles.page}>
     <section className={styles.hero} aria-labelledby="m2-title">
