@@ -24,8 +24,9 @@ type CompleteBlock=Extract<LessonBlock,{type:"module-complete"}>;
 type NextBlock=Extract<LessonBlock,{type:"next-module"}>;
 
 function GenericLesson({model}:{model:LessonModel}){
-  useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
-  const persistCheck=(checkId:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,checkId,sourceIndex);
+  // The style showcase is not a course: it never writes progress.
+  useEffect(()=>{if(model.courseId!=="styleguide") startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+  const persistCheck=(checkId:string,sourceIndex:number)=>{if(model.courseId!=="styleguide") saveCheck(model.courseId,model.moduleId,checkId,sourceIndex)};
 
   const completes=model.blocks.filter((b):b is CompleteBlock=>b.type==="module-complete");
   const next=model.blocks.find((b):b is NextBlock=>b.type==="next-module");

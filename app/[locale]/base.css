@@ -122,3 +122,8 @@
  .mxActHead{grid-template-columns:1fr}
  .mxActIcon{width:50px;height:50px}
 }
+
+/* Style showcase page (app/[locale]/styleguide): theme switcher */
+.sgThemes{position:sticky;top:calc(var(--header-h) + 8px);z-index:20;display:flex;gap:8px;width:min(1180px,calc(100% - 40px));margin:16px auto 0}
+.sgThemes a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--navy);font:600 13px/1 var(--font-sans);text-decoration:none;text-transform:capitalize}
+.sgThemes a[aria-current]{background:var(--navy);color:#fff;border-color:var(--navy)}

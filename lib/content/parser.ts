@@ -235,7 +235,7 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
     const id=strict?`section-${String(Number(strict[1])).padStart(2,"0")}`:(!introAssigned?"intro":`prose-${String(blocks.length+1).padStart(2,"0")}`);
     if(!introAssigned) introAssigned=true;
     if(course.id===PRIMARY_COURSE.id) blocks.push(...greekProseBlocks(chunk,id,moduleId,locale));
-    else blocks.push({type:"prose",id,markdown:tidyProse(chunk,{leadIns:course.layout==="newspaper"})});
+    else blocks.push({type:"prose",id,markdown:tidyProse(chunk,{leadIns:true})});
     i++;
   }
 
