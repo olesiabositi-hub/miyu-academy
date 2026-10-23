@@ -228,16 +228,16 @@ export default async function NorsePage({ params }: { params: Promise<{ locale: 
               <h3>{ru ? "Что ты получишь в конце" : "What you get at the end"}</h3>
               <ul>
                 {(ru ? [
-                  "Свой мешочек рун: до 24 штук, у каждой значение и шутка. Он хранится в твоём кабинете.",
+                  "Свой мешочек рун: до 24 штук, у каждой значение и шутка. Он хранится в твоём браузере.",
                   "Уникальное предсказание, собранное из твоих рун: прошлое, настоящее и будущее. Оно открывается после всех девяти модулей, и у разных людей оно разное.",
                   "Бонусную руну за игру про Иггдрасиль.",
                 ] : [
-                  "Your own pouch of runes: up to 24, each with a meaning and a joke. It lives in your account.",
+                  "Your own pouch of runes: up to 24, each with a meaning and a joke. It lives in your browser.",
                   "A unique prophecy built from your runes: past, present and future. It opens after all nine modules, and it differs from person to person.",
                   "A bonus rune for the Yggdrasil game.",
                 ]).map((x) => <li key={x}>{x}</li>)}
               </ul>
-              <p className="nlPlayNote">{ru ? "Чтобы руны и прогресс сохранялись, войди в аккаунт: это бесплатно." : "To keep your runes and progress, sign in: it is free."}</p>
+              <p className="nlPlayNote">{ru ? "Руны и прогресс сохраняются в этом браузере, регистрация не нужна." : "Runes and progress are saved in this browser, no sign-up needed."}</p>
             </div>
           </div>
         </Reveal>

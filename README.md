@@ -11,8 +11,8 @@ This repository is the production-source implementation of the 30-step MIYU Acad
 
 - Next.js App Router with `/en` and `/ru` locale architecture.
 - Public Academy Home and Course Overview.
-- Passwordless Supabase Auth flow.
-- Authenticated Dashboard with 8-module progress.
+- No accounts: progress is kept in the browser (`docs/PROGRESS.md`).
+- Dashboard with module progress.
 - Modules 1–8 loaded from Markdown masters — no lesson copy duplicated in JSX.
 - AST-validated semantic parser with:
   - stable section IDs;
@@ -44,7 +44,6 @@ This repository is the production-source implementation of the 30-step MIYU Acad
   - dynamic name/date/ID/QR overlay;
   - accessible HTML credential data;
   - browser Print/Save-as-PDF path.
-- Supabase schema, RLS and trusted credential functions.
 - Public verification route.
 - SEO/noindex split, canonical/hreflang foundations, sitemap and robots.
 - WCAG-oriented semantic controls, keyboard/focus/reduced-motion foundations.
@@ -61,15 +60,9 @@ All other master copy remains unchanged.
 
 ### Local development
 
-1. Create a Supabase project.
-2. Copy `.env.example` to `.env.local`.
-3. Fill Supabase keys and site URL.
-4. Apply:
-   - `supabase/migrations/0001_schema.sql`
-   - `supabase/migrations/0002_rls_functions.sql`
-5. For development only keep:
+1. For development only keep:
    `NEXT_PUBLIC_VISUAL_PLACEHOLDERS=1`
-6. Run:
+2. Run:
    `npm install`
    `npm run qa`
    `npm run dev`
@@ -92,7 +85,6 @@ This is intentional: the approved architecture requires real/open-access photogr
 
 These are not code-architecture gaps; they require real deployment/business facts:
 
-- production Supabase project + environment values;
 - approved production visual assets and external-asset rights records;
 - actual controller/legal identity and final EN/RU Privacy/Terms;
 - processor/DPA/region/international-transfer review;

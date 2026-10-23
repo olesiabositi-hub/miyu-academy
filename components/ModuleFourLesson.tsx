@@ -1,5 +1,6 @@
 "use client";
 
+import { saveCheck, startModule } from "@/lib/progress";
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
@@ -77,7 +78,6 @@ const copy={
   }
 } as const;
 
-async function post(url:string,body:unknown){const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});if(!r.ok)throw new Error(await r.text());return r.json()}
 function Art({kind,className="",eager=false,locale}:{kind:ArtKind;className?:string;eager?:boolean;locale:"ru"|"en"}){const a=art[kind];return <img className={className} src={a.src} width={a.width} height={a.height} alt={a[locale]} loading={eager?"eager":"lazy"} fetchPriority={eager?"high":"auto"} decoding={eager?"sync":"async"}/>}
 function prose(model:LessonModel,n:number){const re=new RegExp(`^#\\s+${n}\\.`);const b=model.blocks.find(x=>x.type==="prose"&&re.test(x.markdown)) as ProseBlock|undefined;if(!b)throw new Error(`Module 4 missing section ${n}`);return b}
 function specialProse(model:LessonModel,re:RegExp){const b=model.blocks.find(x=>x.type==="prose"&&re.test(x.markdown)) as ProseBlock|undefined;if(!b)throw new Error(`Module 4 missing prose ${re}`);return b}
@@ -99,8 +99,8 @@ export function ModuleFourLesson({model}:{model:LessonModel}){
  const cerberus=splitHeading(specialProse(model,/^###\s+(?:Цербер|Cerberus)/m).markdown);
  const qs=[1,2,3,4,5].map(n=>quick(model,n)), self=selfCheck(model), remember=splitSubsections(rememberBlock(model).markdown), outro=parseCompletion([completion(model).markdown]), nextText=parseNext(nextBlock(model).markdown);
  const selfIntroMarkdown=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
- useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
- const persistCheck=(id:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId:id,sourceIndex}).catch(()=>{});
+ useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+ const persistCheck=(id:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,id,sourceIndex);
  const Quick=({n}:{n:number})=><div className={`${styles.quick} ${styles.reading}`}><p className={styles.marker}>{t.quick}</p><ChoiceCheck question={qs[n-1].question} locale={model.locale} onPersist={(v)=>persistCheck(qs[n-1].id,v)}/></div>;
  return <article className={styles.page}>
   <section className={styles.hero}><Art kind="hero" className={styles.heroImage} locale={model.locale} eager/><div className={styles.heroShade}/><div className={styles.heroInner}><div className={styles.heroCopy}><p className={styles.kicker}>{t.module}</p><h1>{model.title}</h1><p className={styles.duration}><span className={styles.clock}/>{model.durationLabel}</p></div></div></section>

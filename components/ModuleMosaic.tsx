@@ -1,35 +1,20 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useStagger } from "@/components/Stagger";
-import { createBrowserSupabase } from "@/lib/supabase/client";
+import { moduleRows, useProgress } from "@/lib/progress";
 import type { Locale } from "@/lib/course";
 import { PRIMARY_COURSE, getCourse, modulePath } from "@/lib/courses";
 import { t } from "@/lib/i18n";
 
-/** The eight modules as an even 4×2 grid. Status chips appear only when the visitor is signed in. */
+/** The eight modules as an even 4×2 grid. Status chips show the progress saved in this browser. */
 export function ModuleMosaic({locale,courseId}:{locale:Locale;courseId?:string}){
   const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
-  const [status,setStatus]=useState<Record<string,string>>({});
+  const store=useProgress();
+  const status:Record<string,string>={};
+  if(store) for(const r of moduleRows(store,course.id)) status[r.module_id]=r.status;
   const gridRef=useRef<HTMLDivElement>(null);
   useStagger(gridRef,60);
-
-  useEffect(()=>{
-    let alive=true;
-    (async()=>{
-      try{
-        const supabase=createBrowserSupabase();
-        const {data:{session}}=await supabase.auth.getSession();
-        if(!session) return;
-        const {data}=await supabase.from("module_progress").select("module_id,status").eq("course_id",course.id);
-        if(!alive||!data) return;
-        const map:Record<string,string>={};
-        data.forEach((r:{module_id:string;status:string})=>{map[r.module_id]=r.status});
-        setStatus(map);
-      }catch{/* chips are optional */}
-    })();
-    return ()=>{alive=false};
-  },[course.id]);
 
   return <div className="hxMosaic" ref={gridRef}>
     {course.modules.map(m=>{

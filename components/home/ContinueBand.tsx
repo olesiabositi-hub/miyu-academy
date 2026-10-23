@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { createBrowserSupabase } from "@/lib/supabase/client";
+import { moduleRows, readStore } from "@/lib/progress";
 import type { Locale } from "@/lib/course";
 import { adjacentModules, courseModule, getCourse, modulePath } from "@/lib/courses";
 
@@ -11,10 +11,10 @@ type Band = { course: string; n: number; total: number; title: string; done: num
 const fill = (s: string, v: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (_, k) => String(v[k] ?? ""));
 
 /**
- * "Welcome back" strip under the header for signed-in learners: the most recent module they
+ * "Welcome back" strip under the header for returning learners: the most recent module they
  * worked on (or the next one, if they finished it) and how far into that course they are.
- * Reads only the visitor's own progress rows (RLS); renders nothing for guests.
- * `?demo=continue` shows a sample strip so the design can be reviewed without signing in.
+ * Reads the progress kept in this browser; renders nothing for a first visit.
+ * `?demo=continue` shows a sample strip so the design can be reviewed.
  */
 export function ContinueBand({ locale, hello, cta, doneLabel, moduleOf }: { locale: Locale; hello: string; cta: string; doneLabel: string; moduleOf: string }) {
   const [band, setBand] = useState<Band | null>(null);
@@ -40,15 +40,8 @@ export function ContinueBand({ locale, hello, cta, doneLabel, moduleOf }: { loca
       setBand(build([{ course_id: "egyptian-mythology", module_id: "module-03", status: "completed", last_active_at: "2026-10-20T10:00:00Z" }, { course_id: "egyptian-mythology", module_id: "module-02", status: "completed", last_active_at: "2026-10-18T10:00:00Z" }, { course_id: "egyptian-mythology", module_id: "module-01", status: "completed", last_active_at: "2026-10-16T10:00:00Z" }]));
       return;
     }
-    (async () => {
-      try {
-        const supabase = createBrowserSupabase();
-        const { data: s } = await supabase.auth.getSession();
-        if (!s.session) return;
-        const { data } = await supabase.from("module_progress").select("course_id,module_id,status,last_active_at").eq("user_id", s.session.user.id);
-        if (alive && data) setBand(build(data as Row[]));
-      } catch { /* no strip */ }
-    })();
+    const rows = moduleRows(readStore());
+    if (alive && rows.length) setBand(build(rows));
     return () => { alive = false; };
   }, [locale]);
 

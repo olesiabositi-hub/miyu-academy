@@ -1,5 +1,6 @@
 "use client";
 
+import { saveCheck, startModule } from "@/lib/progress";
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
@@ -23,12 +24,6 @@ const art:Record<ArtKind,{src:string;width:number;height:number;ru:string;en:str
   titansWide:{src:"/visuals/module-01/06-LANDSCAPE-wide-titans-cinematic-1916.avif",width:1916,height:821,ru:"Широкий кинематографичный пейзаж с Титанами над морским побережьем.",en:"A wide cinematic landscape with the Titans above the sea coast."},
   hadesPortrait:{src:"/visuals/module-01/07-PORTRAIT-hades-editorial.avif",width:1122,height:1402,ru:"Аид как спокойный и достойный правитель подземного мира.",en:"Hades as a calm and dignified ruler of the underworld."},
 };
-
-async function post(url:string,body:unknown){
-  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
 
 function Art({kind,className="",eager=false,locale}:{kind:ArtKind;className?:string;eager?:boolean;locale:"ru"|"en"}){
   const a=art[kind];
@@ -133,8 +128,8 @@ export function ModuleOneLesson({model}:{model:LessonModel}){
   const outro=parseCompletion([complete.markdown]);
   const selfIntro=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
 
-  useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
-  const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
+  useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+  const persistCheck=(checkId:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,checkId,sourceIndex);
 
   return <article className={styles.page}>
     <section id="intro" className={styles.hero} aria-labelledby="m1-title">

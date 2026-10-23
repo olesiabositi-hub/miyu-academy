@@ -9,11 +9,12 @@ import { Markdown } from "@/components/Markdown";
 import { RuneReveal } from "@/components/RuneReveal";
 import { SupportNote } from "@/components/SupportNote";
 import { drawRune } from "@/lib/rune-client";
+import { completeModule } from "@/lib/progress";
 import type { RuneName } from "@/components/Rune";
 
 /**
  * End of every module, 1–8: what we just covered, what comes next, one Continue button.
- * Marks the module complete, then goes to the next module (or the Final Myth Decoder after module 8).
+ * Marks the module complete (in this browser), then goes to the next module (or the Final Myth Decoder after module 8).
  */
 export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,courseId}:{locale:Locale;moduleId:string;heading:string;body:string;nextHeading?:string;nextBody?:string;courseId?:string}){
   const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
@@ -52,8 +53,7 @@ export function ModuleOutro({locale,moduleId,heading,body,nextHeading,nextBody,c
     setBusy(true);
     setFailed(false);
     try{
-      const r=await fetch("/api/module/complete",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({moduleId,courseId:course.id})});
-      if(!r.ok) throw new Error(await r.text());
+      completeModule(course.id,moduleId);
       track("module_complete",{module:moduleId,course:course.id});
       if(course.runes){
         // The reward must never block the lesson: if the draw fails we simply move on.

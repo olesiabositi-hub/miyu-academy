@@ -5,7 +5,8 @@ import { buildProphecy } from "@/lib/prophecy";
 import { ragnarokLine } from "@/lib/ragnarok";
 import type { RuneName } from "@/components/Rune";
 
-export type RuneDraw = { rune: RuneName; source: string; drawn_at: string };
+export type { RuneDraw } from "@/lib/progress";
+import type { RuneDraw } from "@/lib/progress";
 
 /** Dashboard block of the Norse course: the learner's runes, the Ragnarök countdown and the final prophecy. */
 export function RunePouch({ locale, draws, completed, total }: { locale: Locale; draws: RuneDraw[]; completed: number; total: number }) {

@@ -1,5 +1,6 @@
 "use client";
 
+import { saveCheck, startModule } from "@/lib/progress";
 import { Fragment, useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
@@ -66,12 +67,6 @@ const copy={
     closingQuestion:"Can you recognise all six now?",nextLabel:"Next — heroes",continue:"Continue",
   }
 } as const;
-
-async function post(url:string,body:unknown){
-  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
 
 function Art({kind,className="",eager=false,locale}:{kind:ArtKind;className?:string;eager?:boolean;locale:"ru"|"en"}){
   const a=art[kind];
@@ -184,8 +179,8 @@ export function ModuleThreeLesson({model}:{model:LessonModel}){
   const nextText=parseNext(nextBlock(model).markdown);
   const selfIntro=self.markdown.split(/\n-{3,}\n/)[0].replace(/^#\s+(?:Self-check|Самопроверка)\s*/i,"").trim();
 
-  useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId}).catch(()=>{})},[model.moduleId]);
-  const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,checkId,sourceIndex}).catch(()=>{});
+  useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+  const persistCheck=(checkId:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,checkId,sourceIndex);
 
   return <article className={styles.page}>
     <section className={styles.hero} aria-labelledby="m3-title">

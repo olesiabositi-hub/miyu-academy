@@ -1,4 +1,5 @@
 "use client";
+import { saveCheck, startModule } from "@/lib/progress";
 import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
@@ -17,12 +18,6 @@ import { GameBlock } from "@/components/GameBlock";
 import { NewspaperChapter } from "@/components/Newspaper";
 import { getCourse } from "@/lib/courses";
 
-async function post(url:string,body:unknown){
-  const r=await fetch(url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
-
 export function LessonClient({model}:{model:LessonModel}){
   const greek=model.courseId==="greek-mythology";
   if(!greek) return <GenericLesson model={model}/>;
@@ -37,8 +32,8 @@ type CompleteBlock=Extract<LessonBlock,{type:"module-complete"}>;
 type NextBlock=Extract<LessonBlock,{type:"next-module"}>;
 
 function GenericLesson({model}:{model:LessonModel}){
-  useEffect(()=>{post("/api/module/start",{moduleId:model.moduleId,courseId:model.courseId}).catch(()=>{})},[model.moduleId]);
-  const persistCheck=(checkId:string,sourceIndex:number)=>post("/api/module/check",{moduleId:model.moduleId,courseId:model.courseId,checkId,sourceIndex}).catch(()=>{});
+  useEffect(()=>{startModule(model.courseId,model.moduleId)},[model.courseId,model.moduleId]);
+  const persistCheck=(checkId:string,sourceIndex:number)=>saveCheck(model.courseId,model.moduleId,checkId,sourceIndex);
 
   const completes=model.blocks.filter((b):b is CompleteBlock=>b.type==="module-complete");
   const next=model.blocks.find((b):b is NextBlock=>b.type==="next-module");
