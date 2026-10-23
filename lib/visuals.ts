@@ -1,8 +1,8 @@
 import type { Locale } from "@/lib/course";
+import { GREEK_ART } from "@/lib/content/greekArt";
 
 /**
- * Approved hero art per module for modules that use the shared ModuleHero (5–8).
- * Modules 1–4 keep their own editorial heroes inside their lesson components.
+ * Approved hero art per Greek module (5–8 here; 1–4 in lib/content/greekArt.ts).
  * `pos` is the CSS object-position focal point, so heads are never cropped out.
  * Files live in /public/visuals/module-0X/ as 836 px and 1672 px WebP.
  */
@@ -46,7 +46,7 @@ export const MODULE_HERO_ART: Record<string, ModuleHeroArt> = {
 };
 
 export function moduleHeroArt(moduleId: string): ModuleHeroArt | null {
-  return MODULE_HERO_ART[moduleId] ?? null;
+  return MODULE_HERO_ART[moduleId] ?? GREEK_ART[moduleId]?.hero ?? null;
 }
 
 /**

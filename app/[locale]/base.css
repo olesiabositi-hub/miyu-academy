@@ -54,13 +54,16 @@
 .mxNum{position:absolute;right:0;bottom:6px;font:400 var(--fs-num)/.8 var(--font-serif);color:var(--gold);opacity:.22;pointer-events:none}
 
 /* Sub-heading inside a chapter: small diamond + rule */
-.mxSub,.lessonFlow .chapterText h4{position:relative;margin:1.6em 0 22px;padding-top:18px;max-width:28ch;font:500 var(--fs-sub)/1.14 var(--font-serif);color:var(--navy);text-wrap:balance}
+.mxSub,.lessonFlow :is(.chapterText,.reading.prose) :is(h3,h4){position:relative;margin:1.6em 0 22px;padding-top:18px;max-width:28ch;font:500 var(--fs-sub)/1.14 var(--font-serif);color:var(--navy);text-wrap:balance}
 .npSection>.mxSub{margin-top:0}
-.mxSub:before,.lessonFlow .chapterText h4:before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border:1px solid var(--gold);transform:rotate(45deg)}
-.mxSub:after,.lessonFlow .chapterText h4:after{content:"";position:absolute;top:4px;left:20px;width:44px;height:1px;background:var(--gold);opacity:.7}
+.mxSub:before,.lessonFlow :is(.chapterText,.reading.prose) :is(h3,h4):before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border:1px solid var(--gold);transform:rotate(45deg)}
+.mxSub:after,.lessonFlow :is(.chapterText,.reading.prose) :is(h3,h4):after{content:"";position:absolute;top:4px;left:20px;width:44px;height:1px;background:var(--gold);opacity:.7}
 
-/* Drop cap on the first paragraph of a chapter */
-.mxDrop>p:first-of-type{font-size:var(--read-lead-size);line-height:1.62}
+/* Accent line: a short "# line" inside the text (Greek uses it a lot: "# 10 лет.", "# Гея") */
+.lessonFlow :is(.chapterText,.reading.prose) h2{margin:.9em 0 .55em;max-width:24ch;font:500 clamp(28px,3vw,40px)/1.12 var(--font-serif);color:var(--navy);text-wrap:balance;letter-spacing:-.005em}
+
+/* Drop cap on the first paragraph of a chapter (only when that paragraph is long enough: see LessonClient) */
+.mxDrop>p:first-of-type{display:flow-root;font-size:var(--read-lead-size);line-height:1.62}
 .mxDrop>p:first-of-type::first-letter{float:left;margin:.08em .1em 0 0;font:500 4.3em/.8 var(--font-serif);color:var(--gold)}
 
 /* Pull quote: an all-bold paragraph in the lesson text */
@@ -69,6 +72,10 @@
 .mxPull p{margin:0}
 .mxPull p,.lessonFlow :is(.chapterText,.reading.prose) p.pullLine{max-width:34ch;font:500 var(--fs-pull)/1.2 var(--font-serif);color:var(--pull-ink);text-wrap:balance}
 .mxPull strong,.lessonFlow p.pullLine strong{font-weight:500;color:inherit}
+
+/* Key line: a short all-bold line ("Гера", "Афина") — an accent, not a quote */
+.lessonFlow :is(.chapterText,.reading.prose) p.keyLine{margin:.5em 0 .7em;font:500 clamp(23px,2.2vw,28px)/1.25 var(--font-serif);color:var(--navy)}
+.lessonFlow p.keyLine strong{font-weight:500;color:inherit}
 
 /* Lead line: an all-italic paragraph */
 .lessonFlow :is(.chapterText,.reading.prose,.npChapter) p.leadLine{font:italic 400 clamp(21px,2.2vw,26px)/1.45 var(--font-serif);color:var(--ochre)}
