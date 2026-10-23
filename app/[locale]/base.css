@@ -1,0 +1,117 @@
+/* =====================================================================
+   MIYU Academy base — the part every course shares.
+   Rules: docs/DESIGN_SYSTEM.md. A course changes the look only through the theme tokens below
+   (in its own theme block), never by redefining fonts, text sizes or alignment.
+   ===================================================================== */
+
+:root{
+ /* ---- type: one pair of fonts, one reading size, one measure ---- */
+ --read-size:clamp(17.5px,1.3vw,19px);
+ --read-lh:1.7;
+ --read-measure:740px;
+ --read-lead-size:clamp(18.5px,1.45vw,20.5px);
+ --fs-chapter:clamp(34px,4.4vw,58px);
+ --fs-sub:clamp(25px,2.5vw,33px);
+ --fs-pull:clamp(25px,2.6vw,36px);
+ --fs-num:clamp(90px,11vw,170px);
+ --label-track:.24em;
+
+ /* ---- theme hooks (a course theme may set these; defaults follow the brand tokens) ---- */
+ --pull-ink:var(--navy);
+ --rule:color-mix(in srgb,var(--gold) 55%,transparent);
+ --rule-soft:color-mix(in srgb,var(--gold) 28%,transparent);
+ --frame:color-mix(in srgb,var(--gold) 50%,transparent);
+ --frame-gap:var(--ivory);
+ --surface:var(--paper);
+ --surface-2:color-mix(in srgb,var(--paper) 70%,var(--parchment));
+ --activity-dark:linear-gradient(135deg,#0A1320,#1c2b42);
+ --activity-dark-ink:#F0E6D2;
+ --activity-dark-accent:#E0A45A;
+}
+
+/* =====================================================================
+   1. Reading text — the same in every course
+   (:where keeps these rules weak, so the signature elements below can restyle a paragraph)
+   ===================================================================== */
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) p{margin:0 0 1em;font-family:var(--font-sans);font-size:var(--read-size);line-height:var(--read-lh);color:var(--ink);text-align:left;orphans:3;widows:3}
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) :is(ul,ol){margin:0 0 1em;padding-left:1.2em}
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) li{margin:0 0 .45em;font-size:var(--read-size);line-height:1.6;text-align:left}
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) li::marker{color:var(--gold)}
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) strong{color:var(--navy)}
+.lessonFlow .chapterText{max-width:var(--read-measure)}
+
+/* =====================================================================
+   2. Signature elements ("фирменные фишки")
+   ===================================================================== */
+
+/* Chapter head: label, title, big faint number, gold underline */
+.mxHead{position:relative;display:grid;grid-template-columns:minmax(0,1fr);padding-bottom:22px;margin-bottom:clamp(26px,3vw,40px);border-bottom:1px solid var(--line)}
+.mxHead:after{content:"";position:absolute;left:0;bottom:-1px;width:120px;height:3px;background:var(--gold)}
+.mxLabel{font:700 12px/1 var(--font-sans);letter-spacing:var(--label-track);text-transform:uppercase;color:var(--gold)}
+.mxTitle{margin:12px 0 0;max-width:20ch;font:500 var(--fs-chapter)/1.06 var(--font-serif);color:var(--navy);text-wrap:balance;letter-spacing:-.01em}
+.mxLabel+.mxTitle{margin-top:12px}
+.mxHead>.mxTitle:first-child{margin-top:0}
+.mxNum{position:absolute;right:0;bottom:6px;font:400 var(--fs-num)/.8 var(--font-serif);color:var(--gold);opacity:.22;pointer-events:none}
+
+/* Sub-heading inside a chapter: small diamond + rule */
+.mxSub,.lessonFlow .chapterText h4{position:relative;margin:1.6em 0 22px;padding-top:18px;max-width:28ch;font:500 var(--fs-sub)/1.14 var(--font-serif);color:var(--navy);text-wrap:balance}
+.npSection>.mxSub{margin-top:0}
+.mxSub:before,.lessonFlow .chapterText h4:before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border:1px solid var(--gold);transform:rotate(45deg)}
+.mxSub:after,.lessonFlow .chapterText h4:after{content:"";position:absolute;top:4px;left:20px;width:44px;height:1px;background:var(--gold);opacity:.7}
+
+/* Drop cap on the first paragraph of a chapter */
+.mxDrop>p:first-of-type{font-size:var(--read-lead-size);line-height:1.62}
+.mxDrop>p:first-of-type::first-letter{float:left;margin:.08em .1em 0 0;font:500 4.3em/.8 var(--font-serif);color:var(--gold)}
+
+/* Pull quote: an all-bold paragraph in the lesson text */
+.mxPull,.lessonFlow :is(.chapterText,.reading.prose) p.pullLine{position:relative;margin:clamp(22px,2.6vw,34px) 0;padding:20px 0 18px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.mxPull:before,.lessonFlow :is(.chapterText,.reading.prose) p.pullLine:before{content:"";position:absolute;top:-6px;left:0;width:10px;height:10px;background:var(--ivory);border:1px solid var(--gold);transform:rotate(45deg)}
+.mxPull p{margin:0}
+.mxPull p,.lessonFlow :is(.chapterText,.reading.prose) p.pullLine{max-width:34ch;font:500 var(--fs-pull)/1.2 var(--font-serif);color:var(--pull-ink);text-wrap:balance}
+.mxPull strong,.lessonFlow p.pullLine strong{font-weight:500;color:inherit}
+
+/* Lead line: an all-italic paragraph */
+.lessonFlow :is(.chapterText,.reading.prose,.npChapter) p.leadLine{font:italic 400 clamp(21px,2.2vw,26px)/1.45 var(--font-serif);color:var(--ochre)}
+
+/* Note: "**Label:** text" or a > quote */
+.mxNote,.lessonFlow :is(.chapterText,.reading.prose) blockquote{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:8px 32px;margin:clamp(22px,2.6vw,34px) 0;padding:22px 26px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px}
+.lessonFlow :is(.chapterText,.reading.prose) blockquote{grid-template-columns:1fr;color:var(--ink);font-style:normal}
+.mxNote:not(:has(.mxNoteLabel)){grid-template-columns:1fr}
+.mxNoteLabel{font:700 11px/1.35 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.mxNote p,.lessonFlow :is(.chapterText,.reading.prose) blockquote p{margin:0 0 .6em;font-size:clamp(16.5px,1.2vw,18px);line-height:1.62}
+.mxNote :is(.mxNoteBody,blockquote)>*:last-child,.lessonFlow blockquote>*:last-child{margin-bottom:0}
+
+/* Pictures: framed panel (double keyline in the theme's frame colour) + caption */
+.mxFig{margin:0}
+.mxFig img,.lessonFlow .lessonFigure img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 0 0 1px var(--frame),0 0 0 6px var(--frame-gap),0 0 0 7px var(--frame),0 24px 46px -24px rgba(11,22,40,.55)}
+.lessonFlow .lessonFigure figcaption,.mxCaption{margin-top:14px;text-align:left;font:italic 400 15px/1.4 var(--font-serif);letter-spacing:0;color:var(--muted)}
+
+@media (max-width:860px){
+ .mxNote,.lessonFlow :is(.chapterText,.reading.prose) blockquote{grid-template-columns:1fr;padding:18px}
+ .mxNum{font-size:86px;bottom:10px}
+ .mxHead:has(.mxNum) .mxTitle{padding-right:80px}
+}
+
+/* =====================================================================
+   3. Activities and games — one frame for every interactive
+   (components/ActivityFrame.tsx; the activity library in components/Activities.tsx)
+   ===================================================================== */
+.mxActivity{position:relative;max-width:1000px;margin-inline:auto;padding:clamp(22px,3vw,36px);background:linear-gradient(180deg,var(--surface),var(--surface-2));color:var(--ink);border:1px solid var(--line);border-radius:6px;box-shadow:0 20px 50px -34px rgba(11,22,40,.45)}
+.mxActivity:before{content:"";position:absolute;inset:6px;border:1px solid var(--rule-soft);border-radius:3px;pointer-events:none}
+.mxActivity.is-dark{background:var(--activity-dark);color:var(--activity-dark-ink);border-color:transparent;box-shadow:0 0 0 1px color-mix(in srgb,var(--activity-dark-accent) 35%,transparent),0 20px 50px -30px rgba(0,0,0,.6)}
+.mxActivity.is-dark:before{border-color:color-mix(in srgb,var(--activity-dark-accent) 22%,transparent)}
+.mxActHead{position:relative;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin-bottom:22px}
+.mxActHead:not(:has(.mxActIcon)){grid-template-columns:1fr}
+.mxActIcon{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:var(--navy);color:var(--gold-soft)}
+.mxActivity.is-dark .mxActIcon{background:rgba(255,255,255,.06);color:var(--activity-dark-accent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--activity-dark-accent) 45%,transparent)}
+.mxActEyebrow{font:700 11px/1.2 var(--font-sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.mxActivity.is-dark .mxActEyebrow{color:var(--activity-dark-accent)}
+.mxActTitle{margin:6px 0;font:500 clamp(26px,2.6vw,34px)/1.1 var(--font-serif);color:var(--navy);text-wrap:balance}
+.mxActivity.is-dark .mxActTitle{color:var(--activity-dark-ink)}
+.mxActLead{margin:0;max-width:62ch;font:400 16px/1.55 var(--font-sans);color:var(--muted)}
+.mxActivity.is-dark .mxActLead{color:color-mix(in srgb,var(--activity-dark-ink) 78%,transparent)}
+.mxActBody{position:relative}
+@media (max-width:760px){
+ .mxActHead{grid-template-columns:1fr}
+ .mxActIcon{width:50px;height:50px}
+}
