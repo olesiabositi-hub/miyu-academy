@@ -4,10 +4,6 @@ import { useEffect } from "react";
 import type { LessonBlock, LessonModel } from "@/lib/content/types";
 import { Markdown } from "@/components/Markdown";
 import { ChoiceCheck,RevealChallenge,SelfCheck } from "@/components/Checks";
-import { ModuleOneLesson } from "@/components/ModuleOneLesson";
-import { ModuleTwoLesson } from "@/components/ModuleTwoLesson";
-import { ModuleThreeLesson } from "@/components/ModuleThreeLesson";
-import { ModuleFourLesson } from "@/components/ModuleFourLesson";
 import { VisualStop } from "@/components/VisualStop";
 import { ModuleHero } from "@/components/ModuleHero";
 import { ModuleOutro } from "@/components/ModuleOutro";
@@ -19,13 +15,8 @@ import { NewspaperChapter } from "@/components/Newspaper";
 import { ChapterHead } from "@/components/ChapterHead";
 import { getCourse } from "@/lib/courses";
 
+/** Every lesson of every course: the Academy base (docs/DESIGN_SYSTEM.md). */
 export function LessonClient({model}:{model:LessonModel}){
-  const greek=model.courseId==="greek-mythology";
-  if(!greek) return <GenericLesson model={model}/>;
-  if(model.moduleId==="module-01") return <ModuleOneLesson model={model}/>;
-  if(model.moduleId==="module-02") return <ModuleTwoLesson model={model}/>;
-  if(model.moduleId==="module-03") return <ModuleThreeLesson model={model}/>;
-  if(model.moduleId==="module-04") return <ModuleFourLesson model={model}/>;
   return <GenericLesson model={model}/>;
 }
 
@@ -60,16 +51,14 @@ function GenericLesson({model}:{model:LessonModel}){
       }
       if(block.type==="next-module") return null;
       if(block.type==="game") return <Reveal key={block.id}><section id={block.id} className="reading gameWrap"><GameBlock game={block.game} locale={model.locale} courseId={model.courseId}/></section></Reveal>;
-      return <section id={block.id} className="reading prose" key={block.id}><Markdown notes={flow}>{block.markdown}</Markdown></section>;
+      return <section id={block.id} className="reading prose" key={block.id}><Markdown notes>{block.markdown}</Markdown></section>;
   };
 
-  // Lessons of other courses: a chapter heading, its picture and its text are set as one spread
-  // (picture beside the text on wide screens). Greek lessons keep their original flow.
-  const flow=model.courseId!=="greek-mythology";
-  const items=flow?groupChapters(model.blocks):model.blocks.map(block=>({kind:"block" as const,block}));
+  // A chapter heading, its picture and its text are set as one spread (picture beside the text on wide screens).
+  const items=groupChapters(model.blocks);
 
   const newspaper=getCourse(model.courseId)?.layout==="newspaper";
-  return <article className={flow?"lessonFlow"+(newspaper?" npLesson":""):undefined}>
+  return <article className={"lessonFlow"+(newspaper?" npLesson":"")}>
     <ModuleHero courseId={model.courseId} locale={model.locale} moduleId={model.moduleId} moduleNumber={model.moduleNumber} title={model.title} durationLabel={model.durationLabel}/>
     {items.map(item=>{
       if(item.kind==="block") return renderBlock(item.block);
@@ -78,7 +67,7 @@ function GenericLesson({model}:{model:LessonModel}){
         <ChapterHead heading={item.head}/>
         <div className="chapterGrid">
           {item.lead&&<div className="chapterArt"><Markdown>{item.lead}</Markdown></div>}
-          <div className="chapterText mxDrop">{item.body.map(b=><Markdown key={b.id} notes>{b.markdown}</Markdown>)}</div>
+          <div className={"chapterText"+(dropCap(item.body)?" mxDrop":"")}>{item.body.map(b=><Markdown key={b.id} notes>{b.markdown}</Markdown>)}</div>
         </div>
       </section>;
     })}
@@ -86,6 +75,13 @@ function GenericLesson({model}:{model:LessonModel}){
 }
 
 type Prose=Extract<LessonBlock,{type:"prose"}>;
+
+/** A drop cap needs a real paragraph to sit in: at least ~3 lines of plain text before anything else. */
+function dropCap(body:Prose[]):boolean{
+  const first=body[0]?.markdown.split(/\n\s*\n/)[0]?.trim()??"";
+  if(!first||/^(#|>|!\[|[-*+]\s|\d+[.)]\s|\*\*[^*]+\*\*$|_[^_]+_$|\*[^*]+\*$)/.test(first)) return false;
+  return first.replace(/[*_`]/g,"").length>=140;
+}
 type Item=
   |{kind:"block";block:LessonBlock}
   |{kind:"chapter";id:string;head:string;lead:string|null;body:Prose[];flip:boolean};

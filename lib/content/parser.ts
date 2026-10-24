@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { greekProseBlocks, hasGreekArt, stripGreekIntro } from "@/lib/content/greekDialect";
 import path from "node:path";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -164,6 +165,11 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
     chunks[0]=chunks[0].split(/\r?\n/).filter(l=>!/^#\s/.test(l)&&!/^\*\*(?:Время|Time):\*\*/.test(l)).join("\n").trim();
     if(!chunks[0]) chunks.shift();
   }
+  // Greek: the intro chunk also carries text after the duration line, so only the lines up to it are dropped.
+  if(course.id===PRIMARY_COURSE.id && chunks.length){
+    chunks[0]=stripGreekIntro(chunks[0]);
+    if(!chunks[0]) chunks.shift();
+  }
   const blocks:LessonBlock[]=[];
   let quick=0, introAssigned=false;
 
@@ -183,6 +189,9 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
 
     const visual=h.match(/^##\s+\[(?:VISUAL STOP|ВИЗУАЛЬНАЯ ОСТАНОВКА)\s+(\d+)\]\s*$/i);
     if(visual){
+      // Greek modules 3–4: the stops are design briefs ("Показываем Цербера крупно…"), not learner text.
+      // Those modules show their pictures beside the chapters instead (lib/content/greekArt.ts).
+      if(course.id===PRIMARY_COURSE.id && hasGreekArt(moduleId) && !parseChallenge(chunk,"")){i++;continue;}
       const n=Number(visual[1]);
       const anchor=`visual-stop-${String(n).padStart(2,"0")}`;
       const challenge=parseChallenge(chunk,anchor);
@@ -225,7 +234,8 @@ export function parseLesson(moduleId:string,locale:Locale,course:CourseDefinitio
     const strict=chunk.match(/^#\s+(\d+)\.[ \t]+(.+)\s*$/m);
     const id=strict?`section-${String(Number(strict[1])).padStart(2,"0")}`:(!introAssigned?"intro":`prose-${String(blocks.length+1).padStart(2,"0")}`);
     if(!introAssigned) introAssigned=true;
-    blocks.push({type:"prose",id,markdown:course.id===PRIMARY_COURSE.id?chunk:tidyProse(chunk,{leadIns:course.layout==="newspaper"})});
+    if(course.id===PRIMARY_COURSE.id) blocks.push(...greekProseBlocks(chunk,id,moduleId,locale));
+    else blocks.push({type:"prose",id,markdown:tidyProse(chunk,{leadIns:course.layout==="newspaper"})});
     i++;
   }
 
