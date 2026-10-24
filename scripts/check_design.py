@@ -9,6 +9,8 @@ It stops the build when a change breaks a shared rule from docs/DESIGN_SYSTEM.md
   3. Google fonts are loaded only in app/[locale]/layout.tsx.
   4. Every [[game:…]] / [[activity:…]] marker in a lesson exists.
   5. Every picture a lesson links to (/visuals/…) exists in public/.
+  6. Pages are built in advance: no page reads the request (headers(), cookies(), searchParams) or forces rendering
+     on each visit. Address switches such as ?demo= are read in the browser (lib/useDemo.ts).
 
 LEGACY lists files that predate the base and are migrated step by step. Remove a file from it when its course
 moves onto the base; never add a new one.
@@ -19,7 +21,8 @@ root = pathlib.Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
 LEGACY = {
-    # Ossetian headscarf story: own fonts (Forum, Literata, Manrope) until it moves onto the base (step 4).
+    # Ossetian headscarf story: own fonts (Forum, Literata, Manrope) and rendered on each visit (a stale CDN copy once
+    # outlived several deploys) until it moves onto the base.
     "app/[locale]/stories/ossetian-headscarf/story.css",
     "app/[locale]/stories/ossetian-headscarf/page.tsx",
 }
@@ -73,6 +76,17 @@ for md in lessons:
     for src in re.findall(r"!\[[^\]]*\]\((/[^)\s]+)\)", md.read_text(encoding="utf-8")):
         if not (root / "public" / src.lstrip("/")).exists():
             errors.append(f"{rel(md)}: picture {src} not found in public/")
+
+# 6: pages stay static
+for f in (root / "app").rglob("*.tsx"):
+    r = rel(f)
+    if r in LEGACY:
+        continue
+    text = f.read_text(encoding="utf-8")
+    for pat, what in ((r"\bheaders\(\)", "headers()"), (r"\bcookies\(\)", "cookies()"), (r"\bsearchParams\b", "searchParams"),
+                      (r"force-dynamic", "dynamic = \"force-dynamic\""), (r"\brevalidate\s*=\s*0\b", "revalidate = 0")):
+        if re.search(pat, text):
+            errors.append(f"{r}: uses {what} — pages are built in advance; read address switches in the browser (lib/useDemo.ts)")
 
 if errors:
     print("MIYU design check: FAIL")

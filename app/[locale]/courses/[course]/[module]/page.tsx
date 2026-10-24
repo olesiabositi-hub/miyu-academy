@@ -9,6 +9,10 @@ import { PreviewBadge } from "@/components/PreviewBadge";
 import { CourseTheme } from "@/components/CourseTheme";
 import { isModuleOpen } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
+import { courseModuleParams } from "@/lib/static-params";
+
+export const generateStaticParams=courseModuleParams;
+export const dynamicParams=false;
 
 export default async function ModulePage({params}:{params:Promise<{locale:string;course:string;module:string}>}){
  const {locale,course:slug,module}=await params;if(!isLocale(locale))notFound();

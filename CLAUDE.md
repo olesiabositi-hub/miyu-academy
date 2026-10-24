@@ -24,6 +24,9 @@ Never push to `main` directly. Never merge without the owner's "yes". One task =
 - Fonts: only `var(--font-serif)` (Cormorant Garamond) and `var(--font-sans)` (Inter), loaded once in `app/[locale]/layout.tsx`.
 - No justified text. Lesson text is left-aligned.
 - Every `[[game:…]]` / `[[activity:…]]` and every lesson picture must exist.
+- Pages are built in advance (static files, nothing rendered per visit): no `headers()`, `cookies()`, `searchParams`
+  or `force-dynamic` in pages. Address switches like `?demo=` are read in the browser (`lib/useDemo.ts`); "is this a deploy
+  preview" is decided at build time (`lib/preview.ts`). A new dynamic route lists its pages in `lib/static-params.ts`.
 - Every lesson file has its RU/EN pair and a duration line.
 
 ## Rules that are not checked by a script, but are just as strict

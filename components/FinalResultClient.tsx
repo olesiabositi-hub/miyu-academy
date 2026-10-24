@@ -10,16 +10,19 @@ import { readStore, saveFinal } from "@/lib/progress";
 import { FinalReview, type ReviewQ } from "@/components/FinalReview";
 import { SupportNote } from "@/components/SupportNote";
 import { PreviewBadge } from "@/components/PreviewBadge";
+import { useDemo } from "@/lib/useDemo";
 
 const PASS = 12;
 
 /** Result of the Final Myth Decoder, scored in the browser from the answers saved there. */
-export function FinalResultClient({ locale, questions, preview, demo }: { locale: Locale; questions: ReviewQ[]; preview: boolean; demo?: string }) {
+export function FinalResultClient({ locale, questions, preview }: { locale: Locale; questions: ReviewQ[]; preview: boolean }) {
+  const demo = useDemo();
   const router = useRouter();
   const base = courseBasePath(locale);
   const [selected, setSelected] = useState<Record<string, number> | null>(null);
 
   useEffect(() => {
+    if (demo === undefined) return; // address not read yet
     if (preview && demo) {
       // Sample answers: all right except a few, so the review can be checked.
       const wrong: Record<string, number> = demo === "fail" ? { "FMD-01": 0, "FMD-03": 2, "FMD-05": 1, "FMD-07": 1, "FMD-09": 2, "FMD-11": 1 } : { "FMD-04": 2, "FMD-12": 1 };

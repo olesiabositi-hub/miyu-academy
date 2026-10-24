@@ -9,6 +9,7 @@ import { RunePouch } from "@/components/RunePouch";
 import { moduleRows, useProgress } from "@/lib/progress";
 import type { ModRow as StoreRow, RuneDraw } from "@/lib/progress";
 import { RUNE_IDS } from "@/lib/runes";
+import { useDemo } from "@/lib/useDemo";
 
 export type ModRow = { module_id: string; status: string; last_active_at: string | null };
 
@@ -16,8 +17,9 @@ export type ModRow = { module_id: string; status: string; last_active_at: string
  * Learner's progress page for any course without a final test (module list + continue button).
  * Progress comes from this browser. On a deploy preview `?demo=sample` / `?demo=prophecy` show sample data.
  */
-export function CourseDashboard({ locale, course, preview, demo }: { locale: Locale; course: CourseDefinition; preview: boolean; demo?: string }) {
+export function CourseDashboard({ locale, course, preview }: { locale: Locale; course: CourseDefinition; preview: boolean }) {
   const store = useProgress();
+  const demo = useDemo();
   let mods: ModRow[] = store ? moduleRows(store, course.id).map((r: StoreRow) => ({ module_id: r.module_id, status: r.status, last_active_at: r.last_active_at })) : [];
   let draws: RuneDraw[] = store?.courses[course.id]?.runes ?? [];
   if (preview && demo === "sample") {

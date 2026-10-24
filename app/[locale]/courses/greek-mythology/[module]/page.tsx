@@ -7,6 +7,10 @@ import { ModuleNav } from "@/components/ModuleNav";
 import { isPreviewRequest } from "@/lib/preview";
 import { ResumeTracker } from "@/components/ResumeTracker";
 import { PreviewBadge } from "@/components/PreviewBadge";
+import { greekModuleParams } from "@/lib/static-params";
+
+export const generateStaticParams=greekModuleParams;
+export const dynamicParams=false;
 
 export default async function ModulePage({params}:{params:Promise<{locale:string;module:string}>}){
  const {locale,module}=await params;if(!isLocale(locale)||!MODULE_IDS.includes(module))notFound();
