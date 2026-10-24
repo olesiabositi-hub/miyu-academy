@@ -12,19 +12,21 @@ export function ModuleHero({locale,moduleId,moduleNumber,title,durationLabel,cou
   const course=(courseId?getCourse(courseId):undefined)??PRIMARY_COURSE;
   // Greek modules 5–8 take their art from lib/visuals.ts; other courses from the module definition.
   const art=course.id===PRIMARY_COURSE.id?moduleHeroArt(moduleId):courseModule(course,moduleId)?.hero??null;
-  // Themed courses show the picture uncropped at its own proportions, with a slow zoom (Norse: mist and snow; others: warm dust).
-  const flow=!!course.theme&&!!art;
-  return <header className={"moduleHero"+(art?"":" moduleHeroPlain")+(flow?" moduleHeroFlow":"")}>
+  // The picture is always shown whole, at its own proportions (never cropped to a band), at most 1672 px wide.
+  // Themed courses add a slow zoom and their atmosphere (Norse: mist and snow; others: warm dust).
+  const flow=!!art;
+  const fx=flow&&!!course.theme;
+  return <header className={"moduleHero"+(art?"":" moduleHeroPlain")+(flow?" moduleHeroFlow":"")+(fx?" moduleHeroFx":"")}>
     {art&&<div className="moduleHeroMedia" style={flow?{aspectRatio:`${art.width} / ${art.height}`}:undefined}>
       <picture>
         <source media="(max-width: 820px)" srcSet={art.src836}/>
         <img src={art.src} width={art.width} height={art.height} alt={art.alt[locale]} style={{objectPosition:art.pos}} fetchPriority="high" decoding="async"/>
       </picture>
-      {flow&&course.theme==="norse"&&<div className="mhFx" aria-hidden="true">
+      {fx&&course.theme==="norse"&&<div className="mhFx" aria-hidden="true">
         <span className="mhMist mhMistA"/><span className="mhMist mhMistB"/>
         {[6,14,23,31,40,49,57,66,74,83,91].map((x,i)=><i key={x} className="mhFlake" style={{left:`${x}%`,animationDelay:`${-i*2.7}s`,animationDuration:`${14+(i%4)*3}s`,width:`${3+(i%3)*2}px`,height:`${3+(i%3)*2}px`}}/>)}
       </div>}
-      {flow&&course.theme!=="norse"&&<div className="mhFx" aria-hidden="true">
+      {fx&&course.theme!=="norse"&&<div className="mhFx" aria-hidden="true">
         {[9,21,34,47,58,72,85].map((x,i)=><i key={x} className="hxMote" style={{left:`${x}%`,animationDelay:`${-i*2.9}s`,animationDuration:`${17+(i%3)*4}s`}}/>)}
       </div>}
     </div>}

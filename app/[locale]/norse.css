@@ -213,10 +213,9 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 @media (max-width:1000px){.nlPlaySteps{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.nlPlaySteps{grid-template-columns:1fr}.nlPlayEnd{grid-template-columns:1fr}.nlPlayRunes{grid-template-columns:repeat(4,auto);justify-content:start}}
 
-/* ---------- Norse module hero: uncropped picture + slow zoom, mist, snow ---------- */
-.moduleHeroFlow .moduleHeroMedia{height:auto;background:#0A1320}
-.moduleHeroFlow .moduleHeroMedia img{height:100%;object-fit:cover;transform-origin:50% 40%;animation:mhZoom 30s ease-out both}
-.moduleHeroFlow .moduleHeroMedia:after{height:16%}
+/* ---------- Module hero of themed courses: slow zoom, mist, snow (the uncropped layout itself is in base.css) ---------- */
+.moduleHeroFx .moduleHeroMedia{background:#0A1320}
+.moduleHeroFx .moduleHeroMedia img{transform-origin:50% 40%;animation:mhZoom 30s ease-out both}
 @keyframes mhZoom{from{transform:scale(1)}to{transform:scale(1.05)}}
 .mhFx{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
 .mhMist{position:absolute;left:-30%;right:-30%;filter:blur(14px);will-change:transform,opacity}
@@ -225,7 +224,7 @@ body:has(.themeMark.theme-norse) .moduleHeaderProgress span{position:relative;ba
 .mhFlake{position:absolute;top:-3%;border-radius:50%;background:#fff;box-shadow:0 0 7px 1px rgba(190,215,255,.65);opacity:0;animation:mhSnow 18s linear infinite}
 @keyframes mhSnow{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.85}80%{opacity:.6}100%{transform:translate3d(-40px,60vh,0);opacity:0}}
 @media (max-width:700px){.mhFlake:nth-child(n+8){display:none}}
-@media (prefers-reduced-motion:reduce){.moduleHeroFlow .moduleHeroMedia img,.mhMist,.mhFlake{animation:none!important}.mhFlake{display:none}}
+@media (prefers-reduced-motion:reduce){.moduleHeroFx .moduleHeroMedia img,.mhMist,.mhFlake{animation:none!important}.mhFlake{display:none}}
 
 
 /* Pinned header on the Norse course page */

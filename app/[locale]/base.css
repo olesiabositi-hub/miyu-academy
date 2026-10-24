@@ -6,10 +6,10 @@
 
 :root{
  /* ---- type: one pair of fonts, one reading size, one measure ---- */
- --read-size:clamp(17.5px,1.3vw,19px);
- --read-lh:1.7;
+ --read-size:clamp(16.5px,1.15vw,17.5px);
+ --read-lh:1.65;
  --read-measure:740px;
- --read-lead-size:clamp(18.5px,1.45vw,20.5px);
+ --read-lead-size:clamp(17.5px,1.3vw,19px);
  --fs-chapter:clamp(34px,4.4vw,58px);
  --fs-sub:clamp(25px,2.5vw,33px);
  --fs-pull:clamp(25px,2.6vw,36px);
@@ -33,7 +33,7 @@
    1. Reading text — the same in every course
    (:where keeps these rules weak, so the signature elements below can restyle a paragraph)
    ===================================================================== */
-:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) p{margin:0 0 1em;font-family:var(--font-sans);font-size:var(--read-size);line-height:var(--read-lh);color:var(--ink);text-align:left;orphans:3;widows:3}
+:where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) p{margin:0 0 .8em;font-family:var(--font-sans);font-size:var(--read-size);line-height:var(--read-lh);color:var(--ink);text-align:left;orphans:3;widows:3}
 :where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) :is(ul,ol){margin:0 0 1em;padding-left:1.2em}
 :where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) li{margin:0 0 .45em;font-size:var(--read-size);line-height:1.6;text-align:left}
 :where(.lessonFlow .chapterText,.lessonFlow .reading.prose,.npChapter) li::marker{color:var(--gold)}
@@ -98,6 +98,11 @@
  .mxNum{font-size:86px;bottom:10px}
  .mxHead:has(.mxNum) .mxTitle{padding-right:80px}
 }
+
+/* Module hero: the picture whole, at its own proportions, never cropped to a band; at most 1672 px wide */
+.moduleHeroFlow .moduleHeroMedia{height:auto;max-width:1672px;margin-inline:auto}
+.moduleHeroFlow .moduleHeroMedia img{height:100%;object-fit:cover}
+.moduleHeroFlow .moduleHeroMedia:after{height:16%}
 
 /* =====================================================================
    3. Activities and games — one frame for every interactive
