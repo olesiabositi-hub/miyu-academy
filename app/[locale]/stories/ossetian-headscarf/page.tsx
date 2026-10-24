@@ -2,7 +2,6 @@ import { SupportNote } from "@/components/SupportNote";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Forum, Literata, Manrope } from "next/font/google";
 import { isLocale, type Locale } from "@/lib/course";
 import { MEDIA, STORY_SLUG, UI } from "@/lib/content/ossetianHeadscarf";
 import { loadStory, type Chapter, type Seg } from "@/lib/content/ossetianHeadscarfStory";
@@ -11,12 +10,6 @@ import { Reveal } from "@/components/Reveal";
 import { Craft, FinaleThreads, Gallery, HeroVideo, LightScene, MotionToggle, Motifs, Pic, Scene, StoryShell, ThreadPath, Touch, Weave, Year } from "@/components/OssetianStory";
 import "./story.css";
 
-const display = Forum({ weight: "400", subsets: ["latin", "cyrillic"], variable: "--cx-display", display: "swap" });
-const body = Literata({ subsets: ["latin", "cyrillic"], variable: "--cx-body", display: "swap" });
-const ui = Manrope({ weight: ["500", "600"], subsets: ["latin", "cyrillic"], variable: "--cx-ui", display: "swap" });
-
-// Rendered on request: a stale CDN copy of the English page outlived several deploys.
-export const dynamic = "force-dynamic";
 
 const LIGHT_QUOTE: Record<Locale, string> = {
   ru: "«Это не ослепительно белый, а мягкий, чуть тёплый оттенок — от светло-бежевого до жемчужного, иногда с золотистым отливом. Он меняется в зависимости от освещения».",
@@ -146,7 +139,7 @@ export default async function OssetianHeadscarfStory({ params }: { params: Promi
   const u = UI[locale];
   const chapters = loadStory(locale);
   const fin = chapters[chapters.length - 1];
-  return <div className={`${display.variable} ${body.variable} ${ui.variable}`}>
+  return <div>
     <StoryShell>
       <section className="cxHero" aria-labelledby="cx-title">
         <picture className="cxHeroMedia" aria-hidden="true">
