@@ -7,6 +7,10 @@ import { Reveal } from "@/components/Reveal";
 import { CourseTheme } from "@/components/CourseTheme";
 import { courseDashboardPath, getCourseBySlug } from "@/lib/courses";
 import { loadCourse } from "@/lib/course-access";
+import { coursePageParams } from "@/lib/static-params";
+
+export const generateStaticParams=coursePageParams;
+export const dynamicParams=false;
 
 /** Generic course page for every course except Greek (which keeps its own editorial page). */
 export default async function CoursePage({params}:{params:Promise<{locale:string;course:string}>}){

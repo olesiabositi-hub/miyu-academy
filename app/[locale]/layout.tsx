@@ -6,12 +6,17 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { t } from "@/lib/i18n";
+import { localeParams } from "@/lib/static-params";
 import "./globals.css";
 import "./base.css";
 import "./activities.css";
 import "./norse.css";
 import "./egypt.css";
 import "./home.css";
+
+/** Every page is built in advance for both languages (lib/static-params.ts). */
+export const generateStaticParams=localeParams;
+export const dynamicParams=false;
 
 const serif=Cormorant_Garamond({subsets:["latin","cyrillic"],variable:"--font-serif"});
 const sans=Inter({subsets:["latin","cyrillic"],variable:"--font-sans"});

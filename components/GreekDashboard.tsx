@@ -7,11 +7,13 @@ import { courseBasePath, modulePath, PRIMARY_COURSE } from "@/lib/courses";
 import { PreviewBadge } from "@/components/PreviewBadge";
 import { moduleRows, useProgress } from "@/lib/progress";
 import { t } from "@/lib/i18n";
+import { useDemo } from "@/lib/useDemo";
 
 type ModRow={module_id:string;status:string;last_active_at:string|null};
 
 /** Greek Mythology progress page: eight modules and the optional Final Myth Decoder. Progress comes from this browser. */
-export function GreekDashboard({locale,preview,demo}:{locale:Locale;preview:boolean;demo?:string}){
+export function GreekDashboard({locale,preview}:{locale:Locale;preview:boolean}){
+ const demo=useDemo();
  const base=courseBasePath(locale);
  const total=PRIMARY_COURSE.moduleCount;
  const store=useProgress();
