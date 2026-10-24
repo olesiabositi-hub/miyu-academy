@@ -20,3 +20,22 @@ Registry: `lib/stories.ts` (title, blurb, facts and card picture for the home pa
   Pictures and their alt texts: `PICS`; gallery order: `GALLERY`.
 - **Media:** `public/visuals/ossetian-headscarf/` — `<name>-1448.webp` (or `-1600`) + `<name>-800.webp`, `hero.mp4`, `hero-poster-*.webp`.
 - **Motion:** respects the system reduced-motion setting; the hero has a button to switch animation off (remembered per browser).
+
+## «Золотая нить. Зæриндагхуыд» — `/ru|en/stories/ossetian-gold-embroidery`
+
+The second story, a sequel to «Цыллæ хыз». Same text conventions as above; built in advance like every page and set in the
+base fonts (Cormorant Garamond + Inter). Colours and decoration (a band of couched gold) live under `.zg` in its `story.css`.
+
+- **Text:** `content/ossetian-gold-embroidery/story.ru.md` and `story.en.md` — the approved essay, rendered verbatim.
+  Every chapter is laid out as magazine spreads (`###`, `[[fact: … | …]]`, `[[pic:…]]`, an all-bold paragraph = quote).
+  The last `##` is the finale on a dark ground: its prose, then any activity in it, then the closing bold line; the italic
+  editorial note is shown below.
+- **Markers:** `[[scene:<picture>]]` `[[pic:<picture>]]` and the activities `[[barter]]` `[[stitch]]` `[[assemble]]`
+  `[[motifs]]` `[[hat]]` `[[words]]` `[[dress]]`. The loader (`lib/content/ossetianGoldEmbroideryStory.ts`) stops the build on
+  an unknown marker or picture.
+- **Copy around the text** (RU/EN): `lib/content/ossetianGoldEmbroidery.ts` — hero, sources, picture alt texts and every
+  line inside the activities (quotes from the story; nothing new is claimed).
+- **Activities:** `components/GoldThreadActivities.tsx`, all graphics as SVG in code, each in `<ActivityFrame>`.
+- **Sources block** is required (the SOIGSI site allows use with a link). A card links back to the first story.
+- **Media:** `public/visuals/ossetian-gold-embroidery/` — `<name>-1448.webp` (scenes, 3:2) or `-1122` (side pictures, 4:5)
+  + `<name>-800.webp`, `og-ru.jpg` / `og-en.jpg` (1200×630).

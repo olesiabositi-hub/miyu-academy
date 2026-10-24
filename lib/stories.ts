@@ -31,6 +31,21 @@ export const STORIES: readonly StoryDefinition[] = [
     },
     card: { src: "/visuals/ossetian-headscarf/golden-hour-1600.webp", src960: "/visuals/ossetian-headscarf/golden-hour-800.webp", width: 1600, height: 900 },
   },
+  {
+    id: "ossetian-gold-embroidery",
+    slug: "ossetian-gold-embroidery",
+    title: { ru: "Золотая нить", en: "The Golden Thread" },
+    original: "Зæриндагхуыд",
+    blurb: {
+      ru: "Как золотая нить приходила в горные сёла, кто вышивал ею наряд невесты и почему ремесло прервалось на сто лет — и возвращается.",
+      en: "How gold thread reached mountain villages, who embroidered a bride's attire with it, and why the craft broke off for a hundred years — and is coming back.",
+    },
+    facts: {
+      ru: [["7", "глав"], ["7", "активностей"], ["RU / EN", "два языка"]],
+      en: [["7", "chapters"], ["7", "activities"], ["RU / EN", "two languages"]],
+    },
+    card: { src: "/visuals/ossetian-gold-embroidery/hat-on-head-1448.webp", src960: "/visuals/ossetian-gold-embroidery/hat-on-head-800.webp", width: 1448, height: 965 },
+  },
 ];
 
 export function storyPath(locale: Locale, story: StoryDefinition): string {
