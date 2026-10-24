@@ -18,7 +18,7 @@ export const HOME: Record<Locale, {
   strip: string[];
   whyEyebrow: string; why: [string, string, string]; pillars: { t: string; b: string }[];
   coursesEyebrow: string; coursesTitle: string; coursesLead: string;
-  newCourse: string; onlineCourse: string; visualStory: string; open: string; storyOpen: string;
+  newCourse: string; onlineCourse: string; visualStory: string; open: string; storyOpen: string; storyFirst: string;
   exhibitEyebrow: string; exhibitTitleA: string; exhibitTitleB: string; exhibitMore: string; exhibitNote: string; exhibitLabel: string;
   actsEyebrow: string; actsTitle: string; actsLead: string;
   routesEyebrow: string; routesTitleA: string; routesTitleB: string; routesLead: string; route: string;
@@ -50,13 +50,14 @@ export const HOME: Record<Locale, {
       { t: "Два языка", b: "Русский и английский переключаются в любой момент." },
     ],
     coursesEyebrow: "Курсы",
-    coursesTitle: "Четыре мира открыты",
+    coursesTitle: "Пять миров открыты",
     coursesLead: "Начните с того, что зовёт сильнее. Каждый курс самостоятельный: порядок не важен, подготовка не нужна.",
     newCourse: "Новый курс",
     onlineCourse: "Онлайн-курс",
     visualStory: "Визуальная история",
     open: "О курсе",
     storyOpen: "Смотреть историю",
+    storyFirst: "Первая история:",
     exhibitEyebrow: "Экспонат",
     exhibitTitleA: "Лучше один раз прочитать, ",
     exhibitTitleB: "чем сто раз услышать",
@@ -88,13 +89,13 @@ export const HOME: Record<Locale, {
     faqTitle: "Частые вопросы",
     ctaTitleA: "Привычный мир станет ",
     ctaTitleB: "глубже",
-    ctaBody: "Четыре мира уже открыты. Начните с любого — в своём темпе, на русском или английском. Одна глава, и смотреть на знакомые вещи по-старому уже не получится.",
+    ctaBody: "Пять миров уже открыты. Начните с любого — в своём темпе, на русском или английском. Одна глава, и смотреть на знакомые вещи по-старому уже не получится.",
     continueHello: "С возвращением",
     continueBtn: "Продолжить",
     continueDone: "{done} из {total} модулей пройдено",
     moduleOf: "модуль {n} из {total}",
     metaTitle: "MIYU Academy — мир полон историй",
-    metaDesc: "Курсы и визуальные истории о мифах, цивилизациях и ремёслах: греческая и скандинавская мифология, Древний Египет, осетинский шёлковый платок. На русском и английском, открыто для всех.",
+    metaDesc: "Курсы и визуальные истории о мифах, цивилизациях и ремёслах: греческая и скандинавская мифология, Древний Египет, осетинский шёлковый платок и золотное шитьё. На русском и английском, открыто для всех.",
   },
   en: {
     kicker: "Myths · civilisations · crafts",
@@ -116,13 +117,14 @@ export const HOME: Record<Locale, {
       { t: "Two languages", b: "Switch between Russian and English at any moment." },
     ],
     coursesEyebrow: "Courses",
-    coursesTitle: "Four worlds are open",
+    coursesTitle: "Five worlds are open",
     coursesLead: "Start with whatever calls to you most. Every course stands on its own: no set order, no background needed.",
     newCourse: "New course",
     onlineCourse: "Online course",
     visualStory: "Visual story",
     open: "About the course",
     storyOpen: "View the story",
+    storyFirst: "The first story:",
     exhibitEyebrow: "Exhibit",
     exhibitTitleA: "Better to read it once ",
     exhibitTitleB: "than hear about it a hundred times",
@@ -154,22 +156,23 @@ export const HOME: Record<Locale, {
     faqTitle: "Frequently asked questions",
     ctaTitleA: "The familiar world is about to get ",
     ctaTitleB: "deeper",
-    ctaBody: "Four worlds are already open. Start with any of them, at your own pace, in Russian or English. One chapter, and you won't see familiar things the old way again.",
+    ctaBody: "Five worlds are already open. Start with any of them, at your own pace, in Russian or English. One chapter, and you won't see familiar things the old way again.",
     continueHello: "Welcome back",
     continueBtn: "Continue",
     continueDone: "{done} of {total} modules completed",
     moduleOf: "module {n} of {total}",
     metaTitle: "MIYU Academy — The World Is Full of Stories",
-    metaDesc: "Courses and visual stories about myths, civilisations and crafts: Greek and Norse mythology, Ancient Egypt, the Ossetian silk headscarf. In Russian and English, open to everyone.",
+    metaDesc: "Courses and visual stories about myths, civilisations and crafts: Greek and Norse mythology, Ancient Egypt, the Ossetian silk headscarf and gold embroidery. In Russian and English, open to everyone.",
   },
 };
 
-/** The four worlds across the first screen. `course` links to a course id, `story` to a story id. */
+/** The worlds across the first screen. `course` links to a course id, `story` to a story id. */
 export const PANELS: { num: string; ref: { course?: string; story?: string }; title: L; meta: L; img: Img }[] = [
   { num: "01", ref: { course: "greek-mythology" }, title: { ru: "Греческая мифология", en: "Greek Mythology" }, meta: { ru: "8 модулей · ≈ 3,5 ч", en: "8 modules · ≈ 3.5 h" }, img: { src: `${V}/home/academy-arch-860.webp`, w: 860, h: 821, pos: "50% 50%" } },
   { num: "02", ref: { course: "norse-mythology" }, title: { ru: "Скандинавская мифология", en: "Norse Mythology" }, meta: { ru: "9 модулей · 3,5–4,5 ч", en: "9 modules · 3.5–4.5 h" }, img: { src: `${V}/norse/home/hero-1916.webp`, src960: `${V}/norse/home/hero-960.webp`, w: 1916, h: 821, pos: "72% 50%" } },
   { num: "03", ref: { course: "egyptian-mythology" }, title: { ru: "Древний Египет", en: "Ancient Egypt" }, meta: { ru: "Новый курс · 6 модулей", en: "New course · 6 modules" }, img: { src: `${V}/egypt/home/10-starlit-nile-beneath-the-pyramids-1672.webp`, src960: `${V}/egypt/home/10-starlit-nile-beneath-the-pyramids-960.webp`, w: 1672, h: 941, pos: "46% 50%" } },
   { num: "04", ref: { story: "ossetian-headscarf" }, title: { ru: "Осетинский шёлковый платок", en: "The Ossetian Silk Headscarf" }, meta: { ru: "Визуальная история · 8 глав", en: "Visual story · 8 chapters" }, img: { src: `${V}/ossetian-headscarf/towers-solitude-1149.webp`, src960: `${V}/ossetian-headscarf/towers-solitude-800.webp`, w: 1149, h: 1369, pos: "40% 40%" } },
+  { num: "05", ref: { story: "ossetian-gold-embroidery" }, title: { ru: "Золотая нить", en: "The Golden Thread" }, meta: { ru: "Визуальная история · 7 глав", en: "Visual story · 7 chapters" }, img: { src: `${V}/ossetian-gold-embroidery/museum-hat-1122.webp`, src960: `${V}/ossetian-gold-embroidery/museum-hat-800.webp`, w: 1122, h: 1402, pos: "50% 45%" } },
 ];
 
 /** Course spreads: the newest course first and full bleed, then two editorial spreads. */
@@ -182,10 +185,18 @@ export const SPREADS: Record<string, { num: string; img: Img; facts: { v: L; l: 
     facts: [{ v: { ru: "9", en: "9" }, l: { ru: "модулей", en: "modules" } }, { v: { ru: "3,5–4,5 ч", en: "3.5–4.5 h" }, l: { ru: "в своём темпе", en: "at your own pace" } }, { v: { ru: "✓", en: "✓" }, l: { ru: "тесты по желанию", en: "tests optional" } }] },
 };
 
-export const STORY_ART = {
-  main: { src: `${V}/ossetian-headscarf/silk-light-1448.webp`, src960: `${V}/ossetian-headscarf/silk-light-800.webp`, w: 1448, h: 1086 },
-  a: { src: `${V}/ossetian-headscarf/netting-window-800.webp`, w: 800, h: 1000, pos: "50% 35%" },
-  b: { src: `${V}/ossetian-headscarf/keepers-800.webp`, w: 800, h: 600, pos: "50% 50%" },
+/** Pictures for the "Visual story" block, per story id. The block features the newest story in lib/stories.ts. */
+export const STORY_ART: Record<string, { main: Img & { src960: string }; a: Img; b: Img }> = {
+  "ossetian-headscarf": {
+    main: { src: `${V}/ossetian-headscarf/silk-light-1448.webp`, src960: `${V}/ossetian-headscarf/silk-light-800.webp`, w: 1448, h: 1086 },
+    a: { src: `${V}/ossetian-headscarf/netting-window-800.webp`, w: 800, h: 1000, pos: "50% 35%" },
+    b: { src: `${V}/ossetian-headscarf/keepers-800.webp`, w: 800, h: 600, pos: "50% 50%" },
+  },
+  "ossetian-gold-embroidery": {
+    main: { src: `${V}/ossetian-gold-embroidery/hat-on-head-1448.webp`, src960: `${V}/ossetian-gold-embroidery/hat-on-head-800.webp`, w: 1448, h: 965 },
+    a: { src: `${V}/ossetian-gold-embroidery/tree-of-life-800.webp`, w: 800, h: 1000, pos: "50% 40%" },
+    b: { src: `${V}/ossetian-gold-embroidery/hoop-closeup-800.webp`, w: 800, h: 533, pos: "50% 50%" },
+  },
 };
 
 /** Lesson fragments, quoted verbatim. One is shown per visit. */
@@ -221,6 +232,14 @@ export const EXHIBITS: { course?: string; story?: string; module?: string; where
     lines: { ru: ["Невесомость обманчива. За ней — часы, недели, иногда месяцы человеческого времени."], en: ["Its weightlessness is deceptive. Behind it lie hours, weeks, sometimes months of a person's time."] },
     img: { src: `${V}/ossetian-headscarf/netting-window-1122.webp`, src960: `${V}/ossetian-headscarf/netting-window-800.webp`, w: 1122, h: 1402, pos: "50% 35%" },
     alt: { ru: "Женщина плетёт ажурную сетку у окна", en: "A woman netting an open-work headscarf by the window" },
+  },
+  {
+    story: "ossetian-gold-embroidery",
+    where: { ru: "Золотая нить · глава 07", en: "The Golden Thread · chapter 07" },
+    title: { ru: "Нить, которая оборвалась на сто лет", en: "The thread that broke for a hundred years" },
+    lines: { ru: ["Шёлк растили дома. Золото покупали.", "Может быть, поэтому одна нить выдержала, а другая оборвалась."], en: ["Silk was grown at home. Gold was bought.", "Perhaps that is why one thread held and the other broke."] },
+    img: { src: `${V}/ossetian-gold-embroidery/empty-hoop-1448.webp`, src960: `${V}/ossetian-gold-embroidery/empty-hoop-800.webp`, w: 1448, h: 965 },
+    alt: { ru: "Пустые пяльцы и недошитый золотой узор на бархате у сундука", en: "An empty hoop and an unfinished gold pattern on velvet by a chest" },
   },
 ];
 

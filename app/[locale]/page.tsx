@@ -36,7 +36,10 @@ function Facts({ items }: { items: { v: string; l: string }[] }) {
 export default async function AcademyHome({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params; if (!isLocale(locale)) notFound();
   const c = HOME[locale];
-  const story = STORIES[0];
+  const story = STORIES[STORIES.length - 1];
+  const firstStory = STORIES.length > 1 ? STORIES[0] : null;
+  const art = STORY_ART[story.id];
+  const storyNum = PANELS.find((p) => p.ref.story === story.id)?.num ?? "";
   const newest = LIVE_COURSES[LIVE_COURSES.length - 1];
   const others = LIVE_COURSES.filter((x) => x.id !== newest.id);
   const faq = HOME_FAQ[locale];
@@ -134,7 +137,7 @@ export default async function AcademyHome({ params }: { params: Promise<{ locale
       <div className="muWrap">
         <div className="muHead muStoryHead">
           <div className="muFeatureHead">
-            <span className="muOutline" aria-hidden="true">04</span>
+            <span className="muOutline" aria-hidden="true">{storyNum}</span>
             <div>
               <div className="muEyebrow">{c.visualStory}</div>
               {story.original && <div className="muOrig" lang="os">{story.original}</div>}
@@ -144,16 +147,17 @@ export default async function AcademyHome({ params }: { params: Promise<{ locale
           <div className="muStoryAside">
             <p>{story.blurb[locale]}</p>
             <Link className="muBtn" href={storyPath(locale, story)}>{c.storyOpen} <span aria-hidden="true">→</span></Link>
+            {firstStory && <p className="muStoryFirst">{c.storyFirst} <Link className="muLink" href={storyPath(locale, firstStory)}>{firstStory.original ? <span lang="os">{firstStory.original}</span> : firstStory.title[locale]} <span aria-hidden="true">→</span></Link></p>}
           </div>
         </div>
         <Reveal className="muStoryGrid">
           <picture className="muPlate muStoryMain">
-            <source media="(max-width: 860px)" srcSet={STORY_ART.main.src960} />
-            <img src={STORY_ART.main.src} alt="" width={STORY_ART.main.w} height={STORY_ART.main.h} loading="lazy" decoding="async" />
+            <source media="(max-width: 860px)" srcSet={art.main.src960} />
+            <img src={art.main.src} alt="" width={art.main.w} height={art.main.h} loading="lazy" decoding="async" />
           </picture>
           <div className="muStorySide">
-            <div className="muPlate"><img src={STORY_ART.a.src} alt="" style={{ objectPosition: STORY_ART.a.pos }} loading="lazy" decoding="async" /></div>
-            <div className="muPlate"><img src={STORY_ART.b.src} alt="" style={{ objectPosition: STORY_ART.b.pos }} loading="lazy" decoding="async" /></div>
+            <div className="muPlate"><img src={art.a.src} alt="" style={{ objectPosition: art.a.pos }} loading="lazy" decoding="async" /></div>
+            <div className="muPlate"><img src={art.b.src} alt="" style={{ objectPosition: art.b.pos }} loading="lazy" decoding="async" /></div>
           </div>
         </Reveal>
         <Facts items={story.facts[locale].map(([v, l]) => ({ v, l }))} />
