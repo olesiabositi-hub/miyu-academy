@@ -19,4 +19,6 @@ Registry: `lib/stories.ts` (title, blurb, facts and card picture for the home pa
 - **Copy inside the blocks** (RU/EN): `lib/content/ossetianHeadscarf.ts` (`PATH`, `WEAVE`, `TOUCH`, `YEAR`, `MOTIFS`, `CRAFT`, `UI`).
   Pictures and their alt texts: `PICS`; gallery order: `GALLERY`.
 - **Media:** `public/visuals/ossetian-headscarf/` — `<name>-1448.webp` (or `-1600`) + `<name>-800.webp`, `hero.mp4`, `hero-poster-*.webp`.
+- **Look:** on the Academy base — Cormorant Garamond + Inter, the shared reading size and left alignment (tokens from
+  `app/[locale]/base.css`); the story's own colours, scenes and panels live in `story.css`. Built in advance like every page.
 - **Motion:** respects the system reduced-motion setting; the hero has a button to switch animation off (remembered per browser).

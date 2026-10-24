@@ -20,12 +20,7 @@ import re, sys, pathlib
 root = pathlib.Path(__file__).resolve().parents[1]
 errors: list[str] = []
 
-LEGACY = {
-    # Ossetian headscarf story: own fonts (Forum, Literata, Manrope) and rendered on each visit (a stale CDN copy once
-    # outlived several deploys) until it moves onto the base.
-    "app/[locale]/stories/ossetian-headscarf/story.css",
-    "app/[locale]/stories/ossetian-headscarf/page.tsx",
-}
+LEGACY: set[str] = set()  # every course and story is on the base
 
 def rel(p: pathlib.Path) -> str:
     return p.relative_to(root).as_posix()

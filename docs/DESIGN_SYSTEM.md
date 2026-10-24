@@ -120,7 +120,7 @@ course moves onto the base. New files are never added to it.
 | Norse Mythology | lessons on the base |
 | Ancient Egypt | lessons on the base (newspaper layout variant) |
 | Greek Mythology | lessons on the base; its older Markdown habits are read by `lib/content/greekDialect.ts` (text unchanged) |
-| Ossetian headscarf (story) | own fonts — after Greek |
+| Ossetian headscarf (story) | on the base: brand fonts, reading size, left alignment; keeps its colours, scenes, magazine grid and interactive panels |
 
 ## Files
 
