@@ -1,36 +1,129 @@
-# MIYU Academy design system (stage 1)
+# MIYU Academy design system
 
-Single source of truth for how the site looks and moves. Lesson text, Final Myth Decoder
-questions and the certificate master are content and are never changed from here.
+One base for every course, a different atmosphere for each.
+The base decides how text is read; the course decides how the world around the text looks.
+`scripts/check_design.py` runs on every build and stops it when a shared rule is broken.
 
-## Where things live
+## The rule in one line
+
+A course may change **colours, background, pictures, decoration and games**.
+It may not change **fonts, reading size, line height, text alignment or the signature elements**.
+
+## What is shared (the base)
+
+| What | Rule | Where |
+| --- | --- | --- |
+| Fonts | Cormorant Garamond for headings and accents, Inter for reading text and interface. Loaded once in `app/[locale]/layout.tsx`. Always `var(--font-serif)` / `var(--font-sans)`. | `layout.tsx`, tokens in `globals.css` |
+| Reading text | `--read-size` (17.5–19 px), line height `--read-lh` 1.7, left-aligned, column up to `--read-measure` (740 px). Never centred, never justified. | `base.css` §1 |
+| Chapter head | Label («Глава 3»), title, big faint number, gold underline. Written in Markdown as `## Глава 3. Title`. | `ChapterHead.tsx`, `.mxHead` |
+| Drop cap | First paragraph of every chapter. Automatic. | `.mxDrop` |
+| Sub-heading | `###` inside a chapter: diamond + short rule. | `.mxSub` |
+| Pull quote | A paragraph that is only bold text: `**Боги Севера никогда не были одной дружной семьёй.**` | `.mxPull`, `p.pullLine` |
+| Lead line | A paragraph that is only italic text. | `p.leadLine` |
+| Note | `**Главная мысль модуля:** text` or a `>` quote: label on the left, text on the right. | `.mxNote` |
+| Pictures | Framed panel (double keyline) + italic caption from the alt text. | `.mxFig`, `.lessonFigure` |
+| Activities and games | One frame: eyebrow, title, short lead, optional icon, then the game. Light or dark. | `ActivityFrame.tsx`, `.mxActivity` |
+| Quick checks, self-check, module outro, previous/next strip, support note | Same components in every course. | `Checks.tsx`, `ModuleOutro.tsx`, `ModuleNav.tsx`, `SupportNote.tsx` |
+| Progress | Kept in the browser, the same store for every course. | `lib/progress.ts`, `docs/PROGRESS.md` |
+| Motion | Opacity and translate only; everything off with reduced motion. | `docs/visual-motion-rule.md` |
+
+## What a course makes its own (the theme)
+
+A theme is one block of tokens, switched on by `<CourseTheme/>` (the course's `theme` in `lib/courses.ts`):
+
+```css
+body:has(.themeMark.theme-egypt){
+  --navy:#152A4A;      /* headings, dark surfaces */
+  --ivory:#F5ECDC;     /* page background */
+  --paper:#FFFBF2;     /* cards, notes */
+  --parchment:#EADBC0; /* soft panels */
+  --ink:#241C13;       /* reading text colour */
+  --muted:#6F6150;     /* captions, secondary text */
+  --line:#D9C6A4;      /* hairlines, borders */
+  --gold:#A87A2C;      /* accent: labels, drop cap, rules */
+  --ochre:#7E5420;     /* small labels */
+  --gold-soft:#D9B66E; /* accent on dark */
+  --pull-ink:#1F4E8C;  /* optional: pull-quote colour */
+  --frame:#6E8398;     /* optional: picture frame colour */
+}
+```
+
+Optional hooks (defaults follow the tokens above): `--pull-ink`, `--rule`, `--rule-soft`, `--frame`, `--frame-gap`,
+`--surface`, `--surface-2`, `--activity-dark`, `--activity-dark-ink`, `--activity-dark-accent`.
+
+Besides the tokens, a course keeps its own:
+- course page (landing) with its own art, video and decoration;
+- background texture, ornaments, heading marks, progress bar style;
+- lesson layout variant (Egypt sets text in two newspaper columns: `layout: "newspaper"`);
+- games of its own.
+
+Current themes: Greek — default tokens; Norse — `theme-norse` block in `globals.css` (fog and slate);
+Ancient Egypt — `theme-egypt` in `egypt.css` (lapis and gold).
+
+## Activities and games
+
+- Every interactive sits in `<ActivityFrame>` (light by default, `tone="dark"` for night scenes).
+- Voluntary: no points, no timer, no penalty. A wrong answer nudges back to the text.
+- Every fact repeats what the lesson says; nothing new is claimed.
+- Works with keyboard and on a 320 px screen; animation stops with reduced motion.
+- Progress or rewards only through `lib/progress.ts`.
+- Two ways to add one:
+  1. **From the library** (any course): add an entry to `lib/content/activities.ts`
+     (kinds: `scales` — true or myth, `order` — put in order, `match` — pairs, `cartouche`)
+     and put `[[activity:<id>]]` in the lesson, in its own `---` chunk.
+  2. **A game of its own**: a component in `components/`, registered in `components/GameBlock.tsx`,
+     used in the lesson as `[[game:<name>]]`. It still uses `<ActivityFrame>`.
+- The build fails if a lesson uses a marker that does not exist.
+
+## Writing a lesson so the base does the design
+
+```markdown
+## Глава 2. Две семьи богов. Одна Вселенная.
+
+---
+
+![Две семьи богов. Одна Вселенная.](/visuals/norse/m02/02-two-families.webp)
+
+---
+
+Когда мы говорим о скандинавских богах…   ← gets the drop cap
+
+### Асы                                     ← sub-heading
+
+**Боги Севера никогда не были одной дружной семьёй.**   ← pull quote
+
+**Главная мысль модуля:** …                 ← note
+```
+
+Pictures must exist in `public/` (checked on build).
+
+## Not allowed (checked on build)
+
+- Any font other than the two brand fonts (the cartouche sign font is the one exception).
+- Loading a Google font anywhere except `layout.tsx`.
+- `text-align: justify`.
+- `[[game:…]]` / `[[activity:…]]` that does not exist; a picture that does not exist.
+
+Files that predate the base are listed in `LEGACY` in `scripts/check_design.py` and come off the list as their
+course moves onto the base. New files are never added to it.
+
+## Migration status
+
+| Course | Base |
+| --- | --- |
+| Norse Mythology | lessons on the base |
+| Ancient Egypt | lessons on the base (newspaper layout variant) |
+| Greek Mythology | modules 1–4 bespoke, 5–8 older layout — next step |
+| Ossetian headscarf (story) | own fonts — after Greek |
+
+## Files
 
 | What | Where |
 | --- | --- |
-| Colour, type, spacing, radius, shadow, motion tokens | `:root` blocks at the top and in the "STAGE 1" section of `app/[locale]/globals.css` |
-| Course registry (which courses exist, paths, module ids) | `lib/courses.ts` |
-| Interface strings RU / EN | `lib/i18n.ts` (`t(locale, key)`) |
-| Hero art for modules 5–8 with focal points and alt text | `lib/visuals.ts`, files in `public/visuals/module-0X/` |
-| Header (desktop + mobile menu), Footer | `components/Header.tsx`, `components/Footer.tsx` |
-| Shared module hero and previous / next strip | `components/ModuleHero.tsx`, `components/ModuleNav.tsx` |
-| Scroll-in animation | `components/Reveal.tsx` + `[data-reveal]` rules |
-
-## Tokens
-
-Brand: navy `#0D1D35`, ivory `#F7F1E7`, parchment `#F1E8D9`, gold `#B18B52`, ochre `#71542B`,
-paper `#FFFDF9`, ink `#20242B`, muted `#736C63`, line `#D8CCBC`, success `#2F5B4E`, error `#8B3E32`.
-Fonts: Cormorant Garamond (display), Inter (body).
-Scale: `--space-1…9`, `--radius-sm/md/lg/pill`, `--shadow-sm/md/lg`, `--container` 1180px, `--reading` 740px.
-
-## Motion rules
-
-- Only opacity and translate are animated. Durations: `--dur-fast` .16s, `--dur-base` .28s, `--dur-reveal` .6s; easing `--ease-out`.
-- Animation explains something (arrival, state change, progress). No carousels, no looping effects, nothing inside lesson text.
-- `prefers-reduced-motion: reduce` switches everything off (global rule plus `[data-reveal]`).
-- Content is always visible without JavaScript. `Reveal` only hides blocks that start below the fold, after hydration.
-
-## Adding things
-
-- New course: add an entry to `COURSES` in `lib/courses.ts`, content under `content/<id>/`, pages under `app/[locale]/courses/<slug>/`.
-- New interface string: add the key to `ru` in `lib/i18n.ts` first; TypeScript then requires the `en` value.
-- New module hero image: export 836 px and 1672 px WebP into `public/visuals/module-0X/`, add an entry in `lib/visuals.ts` with a focal point (`pos`) and RU/EN alt text.
+| Brand tokens, header, footer, older shared styles | `app/[locale]/globals.css` |
+| The base: reading text, signature elements, activity frame | `app/[locale]/base.css` |
+| Activity library styles | `app/[locale]/activities.css` |
+| Egypt theme, course page, newspaper layout | `app/[locale]/egypt.css` |
+| Chapter head / activity frame | `components/ChapterHead.tsx`, `components/ActivityFrame.tsx` |
+| Course registry | `lib/courses.ts` |
+| Interface strings RU / EN | `lib/i18n.ts` |

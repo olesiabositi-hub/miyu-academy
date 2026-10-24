@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "python3 scripts/validate_content.py",
+    "prebuild": "python3 scripts/validate_content.py && python3 scripts/check_design.py",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "qa": "python3 scripts/validate_content.py"
+    "qa": "python3 scripts/validate_content.py && python3 scripts/check_design.py"
   },
   "dependencies": {
     "next": "^15.5.0",

@@ -5,6 +5,7 @@ import { RuneReveal } from "@/components/RuneReveal";
 import { drawRune } from "@/lib/rune-client";
 import type { RuneName } from "@/components/Rune";
 import { track } from "@/lib/analytics";
+import { ActivityFrame } from "@/components/ActivityFrame";
 
 /**
  * "Who lives where on Yggdrasil": six clues, six answers, all taken from chapter 7 of module 1.
@@ -54,10 +55,7 @@ export function YggdrasilGame({ locale, courseId }: { locale: Locale; courseId: 
   }
   function reset() { setSolved([]); setClue(null); setMistakes(0); setNote(""); setRune(null); setRevealed(false); }
 
-  return <div className="ygGame">
-    <div className="lxEyebrow lxEyebrowGold">{c.eyebrow}</div>
-    <h3 className="ygTitle">{c.title}</h3>
-    <p className="ygLead">{c.lead}</p>
+  return <ActivityFrame tone="dark" kind="ygGame" eyebrow={c.eyebrow} title={c.title} lead={c.lead}>
     <div className="ygBoard">
       <svg className="ygTree" viewBox="0 0 300 360" role="img" aria-label={c.title}>
         <g fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" opacity=".75">
@@ -90,5 +88,5 @@ export function YggdrasilGame({ locale, courseId }: { locale: Locale; courseId: 
       </div>
     </div>
     {won && rune && !revealed && <RuneReveal locale={locale} rune={rune} bonus onNext={() => setRevealed(true)} nextLabel={c.next} />}
-  </div>;
+  </ActivityFrame>;
 }

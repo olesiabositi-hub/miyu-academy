@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import { ConsentBanner } from "@/components/ConsentBanner";
 import { t } from "@/lib/i18n";
 import "./globals.css";
+import "./base.css";
+import "./activities.css";
 import "./egypt.css";
 import "./home.css";
 

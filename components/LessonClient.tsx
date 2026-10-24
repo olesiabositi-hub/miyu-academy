@@ -16,6 +16,7 @@ import { parseCompletion, parseNext } from "@/lib/content/outro";
 import { t } from "@/lib/i18n";
 import { GameBlock } from "@/components/GameBlock";
 import { NewspaperChapter } from "@/components/Newspaper";
+import { ChapterHead } from "@/components/ChapterHead";
 import { getCourse } from "@/lib/courses";
 
 export function LessonClient({model}:{model:LessonModel}){
@@ -59,7 +60,7 @@ function GenericLesson({model}:{model:LessonModel}){
       }
       if(block.type==="next-module") return null;
       if(block.type==="game") return <Reveal key={block.id}><section id={block.id} className="reading gameWrap"><GameBlock game={block.game} locale={model.locale} courseId={model.courseId}/></section></Reveal>;
-      return <section id={block.id} className="reading prose" key={block.id}><Markdown>{block.markdown}</Markdown></section>;
+      return <section id={block.id} className="reading prose" key={block.id}><Markdown notes={flow}>{block.markdown}</Markdown></section>;
   };
 
   // Lessons of other courses: a chapter heading, its picture and its text are set as one spread
@@ -74,10 +75,10 @@ function GenericLesson({model}:{model:LessonModel}){
       if(item.kind==="block") return renderBlock(item.block);
       if(newspaper) return <NewspaperChapter key={item.id} id={item.id} head={item.head} lead={item.lead} body={item.body.map(b=>b.markdown)} flip={item.flip}/>;
       return <section className={"chapter"+(item.lead?" hasArt":"")+(item.flip?" isFlip":"")} id={item.id} key={item.id}>
-        <div className="chapterHead"><Markdown>{item.head}</Markdown></div>
+        <ChapterHead heading={item.head}/>
         <div className="chapterGrid">
           {item.lead&&<div className="chapterArt"><Markdown>{item.lead}</Markdown></div>}
-          <div className="chapterText">{item.body.map(b=><Markdown key={b.id}>{b.markdown}</Markdown>)}</div>
+          <div className="chapterText mxDrop">{item.body.map(b=><Markdown key={b.id} notes>{b.markdown}</Markdown>)}</div>
         </div>
       </section>;
     })}

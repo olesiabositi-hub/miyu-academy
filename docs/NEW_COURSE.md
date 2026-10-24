@@ -1,5 +1,9 @@
 # Adding a course to MIYU Academy
 
+Look and feel: read `docs/DESIGN_SYSTEM.md` first. A new course gets the shared reading text, chapter heads,
+drop caps, pull quotes, notes, picture frames and activity frame automatically; it only adds a theme block
+(colours) and, if it wants, its own course page and games.
+
 The academy home page, header, sitemap, progress and course pages all read from one registry:
 `lib/courses.ts`. A new course needs content, one module list and one flag flip. No page code.
 

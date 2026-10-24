@@ -1,5 +1,6 @@
 "use client";
 import { Markdown } from "@/components/Markdown";
+import { ChapterHead, splitChapterTitle } from "@/components/ChapterHead";
 
 /**
  * Newspaper layout for a lesson chapter (courses with `layout: "newspaper"`).
@@ -92,7 +93,7 @@ function takeLead(list: Part[]): { lead: Flow[]; rest: Part[] } {
 
 function Picture({ src, alt, eager }: { src: string; alt: string; eager?: boolean }) {
   const small = src.replace(/-1448\.webp$/, "-724.webp");
-  return <figure className="npFig">
+  return <figure className="mxFig">
     <picture>
       {small !== src && <source media="(max-width: 700px)" srcSet={small} />}
       <img src={src} width={1448} height={1086} alt={alt} loading={eager ? undefined : "lazy"} decoding="async" />
@@ -104,32 +105,28 @@ function Run({ items }: { items: Flow[] }) {
   return <>{items.map((p, i) => <Markdown key={i}>{p.md}</Markdown>)}</>;
 }
 
-function Blocks({ list }: { list: Block[] }) {
+function Blocks({ list, drop = false }: { list: Block[]; drop?: boolean }) {
   return <>{list.map((b, i) => {
-    if (b.kind === "pull") return <div className="npPull" key={i}><Markdown>{b.md}</Markdown></div>;
-    if (b.kind === "note") return <aside className="npNote" key={i}>{b.label && <div className="npNoteLabel">{b.label}</div>}<div className="npNoteBody"><Markdown>{b.body}</Markdown></div></aside>;
+    if (b.kind === "pull") return <div className="mxPull" key={i}><Markdown>{b.md}</Markdown></div>;
+    if (b.kind === "note") return <aside className="mxNote" key={i}>{b.label && <div className="mxNoteLabel">{b.label}</div>}<div className="mxNoteBody"><Markdown>{b.body}</Markdown></div></aside>;
     if (b.kind === "fig") return <div className="npWideFig" key={i}><Picture src={b.src} alt={b.alt} /></div>;
-    return <div className={"npCols" + (b.len < 480 ? " npCols1" : "")} key={i}><Run items={b.items} /></div>;
+    return <div className={"npCols" + (b.len < 480 ? " npCols1" : "") + (drop && i === 0 ? " mxDrop" : "")} key={i}><Run items={b.items} /></div>;
   })}</>;
 }
 
-function Spread({ fig, list, flip }: { fig: { src: string; alt: string }; list: Part[]; flip: boolean }) {
+function Spread({ fig, list, flip, drop = false }: { fig: { src: string; alt: string }; list: Part[]; flip: boolean; drop?: boolean }) {
   const { lead, rest } = takeLead(list);
   return <>
     <div className={"npSpread" + (flip ? " isFlip" : "")}>
       <div className="npSpreadArt"><Picture src={fig.src} alt={fig.alt} /></div>
-      <div className="npSpreadText"><Run items={lead} /></div>
+      <div className={"npSpreadText" + (drop ? " mxDrop" : "")}><Run items={lead} /></div>
     </div>
     <Blocks list={blocks(rest)} />
   </>;
 }
 
 export function NewspaperChapter({ id, head, lead, body, flip }: { id: string; head: string; lead: string | null; body: string[]; flip: boolean }) {
-  const title = head.replace(/^#{1,6}\s+/, "").trim();
-  const m = title.match(/^((?:Глава|Chapter)\s+(\d+)|Вступление|Introduction|Завершение|Conclusion)\.\s*(.*)$/);
-  const label = m ? m[1] : "";
-  const num = m && m[2] ? m[2].padStart(2, "0") : "";
-  const name = m ? m[3] : title;
+  const { num } = splitChapterTitle(head);
   const leadFig = lead ? lead.trim().match(FIG) : null;
 
   const all = parts(body);
@@ -145,19 +142,15 @@ export function NewspaperChapter({ id, head, lead, body, flip }: { id: string; h
   }
 
   return <section className={"npChapter" + (num ? "" : " npChapterFrame")} id={id}>
-    <header className="npHead">
-      {label && <div className="npLabel">{label}</div>}
-      <h2 className="npTitle">{name}</h2>
-      {num && <span className="npNum" aria-hidden="true">{num}</span>}
-    </header>
+    <ChapterHead heading={head} />
     {secs.map((s, i) => {
       const fig = i === 0 ? (leadFig ? { src: leadFig[2], alt: leadFig[1] } : null) : s.fig;
       if (!s.head && !s.list.length) return null;
       return <div className={"npSection" + (i === 0 ? " npOpening" : "")} key={i}>
-        {s.head && <h3 className="npSub">{s.head}</h3>}
+        {s.head && <h3 className="mxSub">{s.head}</h3>}
         {fig && s.list.length
-          ? <Spread fig={fig} list={s.list} flip={i === 0 ? flip : (i % 2 === 1) !== flip} />
-          : <>{fig && <div className="npWideFig"><Picture src={fig.src} alt={fig.alt} /></div>}<Blocks list={blocks(s.list)} /></>}
+          ? <Spread fig={fig} list={s.list} flip={i === 0 ? flip : (i % 2 === 1) !== flip} drop={i === 0} />
+          : <>{fig && <div className="npWideFig"><Picture src={fig.src} alt={fig.alt} /></div>}<Blocks list={blocks(s.list)} drop={i === 0} /></>}
       </div>;
     })}
   </section>;

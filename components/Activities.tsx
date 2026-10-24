@@ -1,4 +1,5 @@
 "use client";
+import { ActivityFrame } from "@/components/ActivityFrame";
 import { useMemo, useState } from "react";
 import type { Locale } from "@/lib/course";
 import { getActivity } from "@/lib/content/activities";
@@ -32,17 +33,7 @@ function shuffled<T>(items: readonly T[], seed: string): T[] {
 }
 
 function Frame({ kind, title, intro, locale, children }: { kind: string; title: string; intro: string; locale: Locale; children: React.ReactNode }) {
-  return <section className={"acBox ac-" + kind} aria-label={title}>
-    <div className="acHead">
-      <span className="acIcon" aria-hidden="true">{ICON[kind as keyof typeof ICON]}</span>
-      <div>
-        <div className="acEyebrow">{UI[locale].eyebrow}</div>
-        <h3 className="acTitle">{title}</h3>
-        <p className="acIntro">{intro}</p>
-      </div>
-    </div>
-    {children}
-  </section>;
+  return <ActivityFrame kind={"ac-" + kind} eyebrow={UI[locale].eyebrow} title={title} lead={intro} icon={ICON[kind as keyof typeof ICON]}>{children}</ActivityFrame>;
 }
 
 const ICON = {
