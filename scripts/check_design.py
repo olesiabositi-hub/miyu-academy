@@ -60,7 +60,7 @@ for f in list((root / "app").rglob("*.tsx")) + list((root / "components").rglob(
 # 4: games and activities used in lessons must exist
 games = set(re.findall(r'game === "([\w-]+)"', (root / "components/GameBlock.tsx").read_text(encoding="utf-8")))
 activities = set(re.findall(r'^\s*"([\w-]+)":\s*\{', (root / "lib/content/activities.ts").read_text(encoding="utf-8"), re.M))
-lessons = sorted((root / "content").glob("*/master/*.md"))
+lessons = sorted(p for p in (root / "content").glob("*/master/*.md") if not p.name.startswith("_"))  # _TEMPLATE files are examples
 for md in lessons:
     text = md.read_text(encoding="utf-8")
     for kind, name in re.findall(r"\[\[(game|activity):([^\]\s]+)\]\]", text):

@@ -7,13 +7,23 @@ drop caps, pull quotes, notes, picture frames and activity frame automatically; 
 The academy home page, header, sitemap, progress and course pages all read from one registry:
 `lib/courses.ts`. A new course needs content, one module list and one flag flip. No page code.
 
+## 0. Start with one command
+
+    npm run new-course -- kalevala --ru "Калевала: финский эпос" --en "The Kalevala: the Finnish Epic" --modules 9
+
+It creates the module templates (`content/<id>/master/_TEMPLATE.*.md`), the module list (`lib/content/<id>.ts`,
+every module "soon"), the theme stylesheet (`app/[locale]/<id>.css`) and the registry entry (status "soon"),
+or fills in an existing "soon" entry. Then follow the steps below. Pick the theme colours on the style showcase:
+`/<locale>/styleguide?theme=<id>` on a deploy preview (add the theme name to `THEMES` in
+`app/[locale]/styleguide/page.tsx`).
+
 ## 1. Content (same format as Greek Mythology)
 Put the lessons in `content/<course-id>/master/`:
 
     module-01.ru.md   module-01.en.md
     module-02.ru.md   module-02.en.md   …
 
-Every file follows the Greek format: a `**Время:** …` / `**Time:** …` line, `---` between chunks,
+Every file follows the template `_TEMPLATE.ru.md` / `_TEMPLATE.en.md` (made by `new-course`): a `**Время:** …` / `**Time:** …` line, `---` between chunks,
 `## Quick check` blocks (A/B/C + `**Ответ:** X`), `# Самопроверка` / `# Self-check`,
 `# Модуль завершён` / `# Module completed`, `# Дальше` / `# Next`.
 Tests are optional for learners; there is no final test and no certificate.

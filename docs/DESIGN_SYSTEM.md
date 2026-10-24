@@ -59,7 +59,7 @@ Besides the tokens, a course keeps its own:
 - lesson layout variant (Egypt sets text in two newspaper columns: `layout: "newspaper"`);
 - games of its own.
 
-Current themes: Greek — default tokens, module pictures in `lib/content/greekArt.ts`, dark visual-stop storyboards (modules 5–8); Norse — `theme-norse` block in `globals.css` (fog and slate);
+Current themes: Greek — default tokens, module pictures in `lib/content/greekArt.ts`, dark visual-stop storyboards (modules 5–8); Norse — `theme-norse` in `norse.css` (fog and slate);
 Ancient Egypt — `theme-egypt` in `egypt.css` (lapis and gold).
 
 ## Activities and games
@@ -99,6 +99,10 @@ Ancient Egypt — `theme-egypt` in `egypt.css` (lapis and gold).
 
 Pictures must exist in `public/` (checked on build).
 
+Lessons written one sentence per line are joined into paragraphs of about 340–780 characters
+(`lib/content/tidy.ts`; words and order never change). Headings, pictures, quotes, lists, bold/italic-only lines and
+`**Label:**` notes always stay on their own. Greek lessons are not joined.
+
 ## Not allowed (checked on build)
 
 - Any font other than the two brand fonts (the cartouche sign font is the one exception).
@@ -122,10 +126,13 @@ course moves onto the base. New files are never added to it.
 
 | What | Where |
 | --- | --- |
-| Brand tokens, header, footer, older shared styles | `app/[locale]/globals.css` |
+| Brand tokens, header, footer, home and Greek course page, checks, outro | `app/[locale]/globals.css` |
 | The base: reading text, signature elements, activity frame | `app/[locale]/base.css` |
 | Activity library styles | `app/[locale]/activities.css` |
+| Norse theme, course page, runes, Yggdrasil game | `app/[locale]/norse.css` |
 | Egypt theme, course page, newspaper layout | `app/[locale]/egypt.css` |
+| A new course's theme | `app/[locale]/<theme>.css` (made by `npm run new-course`) |
+| Style showcase: every element in every theme | `/<locale>/styleguide?theme=…` (deploy previews only), text in `content/styleguide/` |
 | Chapter head / activity frame | `components/ChapterHead.tsx`, `components/ActivityFrame.tsx` |
 | Course registry | `lib/courses.ts` |
 | Interface strings RU / EN | `lib/i18n.ts` |

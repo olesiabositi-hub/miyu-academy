@@ -9,6 +9,7 @@ import { t } from "@/lib/i18n";
 import "./globals.css";
 import "./base.css";
 import "./activities.css";
+import "./norse.css";
 import "./egypt.css";
 import "./home.css";
 
